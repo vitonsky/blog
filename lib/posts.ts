@@ -128,15 +128,13 @@ export const getPost = async (filename: string): Promise<Post> => {
 	};
 };
 
-export const getPosts = async (options?: {
+export const getPosts = async ({ tag, lang, sort = 'desc', from = 0, limit }: {
 	from?: number;
 	limit?: number;
 	tag?: string;
 	lang?: string;
 	sort?: 'asc' | 'desc'
-}) => {
-	const { tag, lang, sort = 'desc', from = 0, limit } = options || {};
-
+} = {}) => {
 	// Get all posts
 	const files = await getPostFilenamesInDir(blogPostsDir);
 	let posts: Post[] = await Promise.all(
@@ -157,7 +155,18 @@ export const getPosts = async (options?: {
 	posts = posts.sort((p1, p2) => sort === 'desc' ? p2.date - p1.date : p1.date - p2.date);
 
 	// Slice
-	posts = posts.slice(from, limit);
+	posts = posts.slice(from, limit ? from + limit : undefined);
 
 	return posts;
+};
+
+export const getPaginationInfo = async ({ itemsOnPage, tag, lang }: {
+	itemsOnPage: number;
+	tag?: string;
+	lang?: string;
+}) => {
+	const postsNumber = (await getPosts({ tag, lang })).length;
+	const pagesNumber = Math.ceil(postsNumber / itemsOnPage);
+
+	return { postsNumber, pagesNumber }
 };
