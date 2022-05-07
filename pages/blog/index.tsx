@@ -4,18 +4,7 @@ import type {
 	NextPage,
 } from "next";
 
-import { readFile, stat } from "fs/promises";
-
-import { blogPostsDir } from "../../lib/constants";
-import { getAllPostsInDir, getPostUrlByFilename, parsePost } from "../../lib/posts";
-
-type Post = {
-	url: string;
-	title: string;
-	date: number;
-	previewText: string;
-	image: string | null;
-};
+import { getPosts, Post } from "../../lib/posts";
 
 type BlogPageProps = {
 	posts: Post[];
@@ -41,27 +30,7 @@ const BlogPage: NextPage<BlogPageProps> = ({ posts }) => {
 };
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<BlogPageProps>> {
-	const files = await getAllPostsInDir(blogPostsDir);
-
-	const posts: Post[] = await Promise.all(
-		files.map(async (filename) => {
-			const url = getPostUrlByFilename(filename);
-			const mdFile = await readFile(filename);
-			const postSource = mdFile.toString();
-			const { previewText, title, image } = await parsePost(postSource);
-
-			const { birthtime } = await stat(filename);
-
-			return {
-				url,
-				title,
-				date: birthtime.getTime(),
-				previewText,
-				image,
-			};
-		})
-	).then((posts) => posts.sort((p1, p2) => p2.date - p1.date));
-
+	const posts = await getPosts();
 	return { props: { posts } };
 }
 
