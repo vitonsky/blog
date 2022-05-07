@@ -10,6 +10,9 @@ const withMDX = require('@next/mdx')({
 });
 
 module.exports = withMDX({
+	// enable to `index` pages will work with catch-all routes
+	trailingSlash: true,
+
 	reactStrictMode: true,
 	pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 	webpack: (config, options) => {
