@@ -4,8 +4,8 @@ import { MDXRemote } from "next-mdx-remote";
 
 import path from "path";
 
-import { getPost, getPosts, Post } from "../../lib/posts";
-import { blogPostsDir } from "../../lib/constants";
+import { getPost, getPostFilenameByUrl, getPosts, Post } from "../../lib/posts";
+import { blogPostsDir, blogUrlPath } from "../../lib/constants";
 
 type BlogPostProps = {
 	post: Post;
@@ -35,7 +35,7 @@ export async function getStaticProps({
 	}
 
 	const pagePath = Array.isArray(slug) ? slug.join("/") : slug;
-	const mdFilePath = path.join(blogPostsDir, pagePath + ".md");
+	const mdFilePath = getPostFilenameByUrl([blogUrlPath, pagePath].join('/'));
 	const post = await getPost(mdFilePath);
 	return { props: { post } };
 }

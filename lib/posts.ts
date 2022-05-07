@@ -10,7 +10,7 @@ import path from "path";
 import { readFile, stat } from "fs/promises";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
-import { blogPostsDir } from "./constants";
+import { blogPostsDir, blogUrlPath } from "./constants";
 
 export const getPostFilenamesInDir = (directory: string) => {
 	return glob(`${directory}/**/*.{md,mdx}`);
@@ -70,8 +70,11 @@ export const parsePost = async (text: string) => {
 };
 
 export const getPostUrlByFilename = (filePath: string) => {
+	const fileRealpath = path.resolve(filePath);
+	const postsDirRealpath = path.resolve(blogPostsDir);
+
 	// remove prefix
-	let pageUrl = filePath.slice(blogPostsDir.length);
+	let pageUrl = fileRealpath.slice(postsDirRealpath.length);
 
 	// remove extension
 	const fileExtension = path.extname(pageUrl);
@@ -79,7 +82,12 @@ export const getPostUrlByFilename = (filePath: string) => {
 		pageUrl = pageUrl.slice(0, -fileExtension.length);
 	}
 
-	return "/blog" + pageUrl;
+	return blogUrlPath + pageUrl;
+};
+
+export const getPostFilenameByUrl = (url: string) => {
+	const relativePath = path.join(blogPostsDir, url.slice(blogUrlPath.length) + ".md");
+	return path.resolve(relativePath);
 };
 
 export type Post = {
