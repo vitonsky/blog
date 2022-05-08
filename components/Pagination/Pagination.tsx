@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC, ReactNode, useCallback } from "react";
 
 export type Pagination = {
@@ -59,13 +60,13 @@ export const Pagination: FC<Pagination> = ({
 	return (
 		<div>
 			{showNavigation && prevPage ? (
-				<a href={buildLink(prevPage)}>Back</a>
+				<Link href={buildLink(prevPage)}>Back</Link>
 			) : null}
 			{pagesBefore}
 			<span>{currentPage}</span>
 			{pagesAfter}
 			{showNavigation && nextPage ? (
-				<a href={buildLink(nextPage)}>Next</a>
+				<Link href={buildLink(nextPage)}>Next</Link>
 			) : null}
 		</div>
 	);
