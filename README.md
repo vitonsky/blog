@@ -12,3 +12,4 @@ This is my blog
 Improvements
 - [ ] Improve url of posts to split date in title to path segments: `2022-01-01-title.md` -> `blog/2022/01/01/title`
 - [ ] Add styles for code block
+- [ ] Improve linters

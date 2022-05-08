@@ -1,5 +1,7 @@
-import Link from "next/link";
 import { FC, ReactNode, useCallback } from "react";
+import Link from "next/link";
+
+import styles from './Pagination.module.css';
 
 export type Pagination = {
 	currentPage: number;
@@ -8,10 +10,9 @@ export type Pagination = {
 	showNavigation?: boolean;
 };
 
-export const displayedPages = 10;
+export const displayedPages = 3;
 
 // TODO: improve layout
-// TODO: use next links
 export const Pagination: FC<Pagination> = ({
 	pagesNumber,
 	currentPage,
@@ -58,16 +59,22 @@ export const Pagination: FC<Pagination> = ({
 	const nextPage = currentPage < pagesNumber ? currentPage + 1 : null;
 
 	return (
-		<div>
-			{showNavigation && prevPage ? (
-				<Link href={buildLink(prevPage)}>Back</Link>
-			) : null}
-			{pagesBefore}
-			<span>{currentPage}</span>
-			{pagesAfter}
-			{showNavigation && nextPage ? (
-				<Link href={buildLink(nextPage)}>Next</Link>
-			) : null}
+		<div className={styles.Pagination}>
+			<span className={styles.NavigationItem}>
+				{showNavigation && prevPage ? (
+					<Link href={buildLink(prevPage)}>Previous page</Link>
+				) : null}
+			</span>
+			<span className={styles.PagesList}>
+				{pagesBefore}
+				<span>{currentPage}</span>
+				{pagesAfter}
+			</span>
+			<span className={styles.NavigationItem}>
+				{showNavigation && nextPage ? (
+					<Link href={buildLink(nextPage)}>Next page</Link>
+				) : null}
+			</span>
 		</div>
 	);
 };

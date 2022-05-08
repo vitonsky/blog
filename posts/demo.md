@@ -1,6 +1,6 @@
 ---
 title: 'Demo article'
-picture: '/cat.jpg'
+image: '/cat.jpg'
 tags:
   - cat
   - girl

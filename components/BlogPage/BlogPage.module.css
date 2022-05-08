@@ -1,0 +1,38 @@
+.BlogPage > *:not(:first-child) {
+  margin-top: 3rem;
+}
+
+.PostsList > *:not(:first-child) {
+  margin-top: 2rem;
+}
+
+.PostHead > *:not(:first-child) {
+  margin-top: 0.5rem;
+}
+
+.PostItem > *:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.PostTitle {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.PostTitle > a {
+  text-decoration: none;
+  color: #505050;
+}
+
+.PostText {
+  font-size: 1.15rem;
+  line-height: 1.7rem;
+}
+
+.PostInfo {
+  color: gray;
+  font-size: 0.9rem;
+}
+.PostInfo > *:not(:first-child) {
+  margin-left: 1rem;
+}

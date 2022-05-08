@@ -48,7 +48,9 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 				</div>
 			</div>
 
-			{children}
+			<div className={styles.Content}>
+				{children}
+			</div>
 		</div>
 	);
 };

@@ -2,10 +2,8 @@ import { useEffect } from "react";
 import { NextPage, GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { MDXRemote } from "next-mdx-remote";
 
-import path from "path";
-
 import { getPost, getPostFilenameByUrl, getPosts, Post } from "../../lib/posts";
-import { blogPostsDir, blogUrlPath } from "../../lib/constants";
+import { blogUrlPath } from "../../lib/constants";
 
 type BlogPostProps = {
 	post: Post;

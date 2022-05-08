@@ -1,0 +1,63 @@
+import { useEffect } from "react";
+import { NextPage } from "next";
+
+import { Post } from "../../lib/posts";
+import { Pagination } from "../Pagination/Pagination";
+import { blogUrlPath } from "../../lib/constants";
+
+import styles from './BlogPage.module.css';
+import Link from "next/link";
+
+export type BlogPageProps = {
+	posts: Post[];
+	pagination?: {
+		page: number;
+		pagesNumber: number;
+	};
+};
+
+export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
+	// TODO: remove
+	useEffect(() => {
+		console.log({ posts });
+	}, [posts]);
+
+	return (
+		<div className={styles.BlogPage}>
+			<div className={styles.PostsList}>
+				{posts.map((post, idx) => (
+					<div key={idx} className={styles.PostItem}>
+						<div className={styles.PostHead}>
+							<h3 className={styles.PostTitle}>
+								<Link href={post.url}>{post.title}</Link>
+							</h3>
+
+							<div className={styles.PostInfo}>
+								<span>{new Date(post.date).toDateString()}</span>
+								<span>{post.readingTime.words} words</span>
+								<span>{Math.ceil(post.readingTime.minutes)} minutes to read</span>
+							</div>
+						</div>
+
+						<div className={styles.PostText}>
+							{post.previewText}
+						</div>
+
+						{post.image && <div><img src={post.image} alt="Cover of the post" /></div>}
+
+						<div className={styles.PostText}>
+							<Link href={post.url}>Continue...</Link>
+						</div>
+					</div>
+				))}
+			</div>
+
+
+			{pagination && pagination.pagesNumber > 1 && <Pagination
+				currentPage={pagination.page}
+				pagesNumber={pagination.pagesNumber}
+				prefix={blogUrlPath + '/p/'}
+			/>}
+		</div>
+	);
+};

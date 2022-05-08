@@ -1,5 +1,7 @@
+/* TODO: use custom font family */
 body {
   margin: 0;
+  font-family: Arial;
 }
 
 h1,
@@ -17,4 +19,8 @@ p {
 
 a {
   display: inline-block;
+}
+
+img {
+  max-width: 100%;
 }

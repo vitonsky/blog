@@ -4,6 +4,7 @@
 import { promise as glob } from "glob-promise";
 import { serialize } from "next-mdx-remote/serialize";
 import { visit } from "unist-util-visit";
+import getReadingTime from "reading-time";
 
 import path from "path";
 
@@ -33,16 +34,29 @@ export const parsePost = async (text: string) => {
 		});
 	};
 
+	let pageText: string = '';
+	const extractTextPlugin = () => (node: any) => {
+		visit(node, ["text", "code"], (node) => {
+			pageText += node.value;
+		});
+	};
+
 	const mdxSource = await serialize(text, {
 		parseFrontmatter: true,
 		mdxOptions: {
-			remarkPlugins: [extractPreviewTextPlugin],
+			remarkPlugins: [
+				extractPreviewTextPlugin,
+				extractTextPlugin
+			],
 		},
 	});
 
 	if (previewText === null) {
 		throw new TypeError("Preview text are empty");
 	}
+
+	// ReadTimeResults
+	const { minutes, words } = getReadingTime(pageText);
 
 	const meta = mdxSource.frontmatter;
 	if (!meta) {
@@ -60,6 +74,7 @@ export const parsePost = async (text: string) => {
 		meta,
 		mdxSource,
 		previewText,
+		readingTime: { minutes, words },
 
 		title,
 		image: typeof meta.image === "string" ? meta.image : null,
@@ -102,6 +117,10 @@ export type Post = {
 	image: string | null;
 
 	source: MDXRemoteSerializeResult<Record<string, unknown>>;
+	readingTime: {
+		minutes: number;
+		words: number;
+	}
 };
 
 export const getPost = async (filename: string): Promise<Post> => {
@@ -109,7 +128,7 @@ export const getPost = async (filename: string): Promise<Post> => {
 
 	const mdFile = await readFile(filename);
 	const postSource = mdFile.toString();
-	const { mdxSource, previewText, title, image, tags, keywords, lang } =
+	const { mdxSource, previewText, title, image, tags, keywords, lang, readingTime } =
 		await parsePost(postSource);
 
 	const { birthtime } = await stat(filename);
@@ -125,6 +144,7 @@ export const getPost = async (filename: string): Promise<Post> => {
 		tags,
 		keywords,
 		lang,
+		readingTime
 	};
 };
 
