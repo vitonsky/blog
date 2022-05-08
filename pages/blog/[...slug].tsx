@@ -1,33 +1,21 @@
-import { useEffect } from "react";
 import { NextPage, GetStaticPropsContext, GetStaticPropsResult } from "next";
-import { MDXRemote } from "next-mdx-remote";
 
 import { getPost, getPostFilenameByUrl, getPosts, Post } from "../../lib/posts";
 import { blogUrlPath } from "../../lib/constants";
 
-type BlogPostProps = {
+import { BlogPost } from "../../components/BlogPost/BlogPost";
+
+type PostProps = {
 	post: Post;
 };
 
-const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
-	useEffect(() => {
-		console.log("post data", post);
-	}, [post]);
-
-	// TODO: implement layout
-	return (
-		<div>
-			{JSON.stringify(post.source.frontmatter)}
-			<hr />
-
-			<MDXRemote {...post.source} />
-		</div>
-	);
+const Post: NextPage<PostProps> = ({ post }) => {
+	return <BlogPost post={post} />;
 };
 
 export async function getStaticProps({
 	params: { slug } = {},
-}: GetStaticPropsContext): Promise<GetStaticPropsResult<BlogPostProps>> {
+}: GetStaticPropsContext): Promise<GetStaticPropsResult<PostProps>> {
 	if (slug === undefined) {
 		throw new Error("Empty slug");
 	}
@@ -46,4 +34,4 @@ export const getStaticPaths = async () => {
 	return { paths, fallback: false };
 };
 
-export default BlogPost;
+export default Post;

@@ -2,14 +2,17 @@
 // to cache posts instead parse all posts for each page
 
 import { promise as glob } from "glob-promise";
+
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { visit } from "unist-util-visit";
 import getReadingTime from "reading-time";
+import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
 
 import path from "path";
 
 import { readFile, stat } from "fs/promises";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 import { blogPostsDir, blogUrlPath } from "./constants";
 
@@ -46,8 +49,12 @@ export const parsePost = async (text: string) => {
 		mdxOptions: {
 			remarkPlugins: [
 				extractPreviewTextPlugin,
-				extractTextPlugin
+				extractTextPlugin,
+				remarkGfm
 			],
+			rehypePlugins: [
+				rehypeHighlight
+			]
 		},
 	});
 
