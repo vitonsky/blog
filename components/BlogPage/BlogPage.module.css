@@ -17,6 +17,7 @@
 .PostTitle {
   font-weight: bold;
   font-size: 1.8rem;
+  margin: 0;
 }
 .PostTitle > a {
   text-decoration: none;
