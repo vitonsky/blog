@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { NextPage } from "next";
 
 import { Post } from "../../lib/posts";
-import { Pagination } from "../Pagination/Pagination";
 import { blogUrlPath } from "../../lib/constants";
+import { getDateFromTimestamp } from "../../lib/utils";
+
+import { Pagination } from "../Pagination/Pagination";
 
 import styles from './BlogPage.module.css';
 import Link from "next/link";
@@ -33,7 +35,7 @@ export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
 							</h3>
 
 							<div className={styles.PostInfo}>
-								<span>{new Date(post.date).toDateString()}</span>
+								<span>{getDateFromTimestamp(post.date)}</span>
 								<span>{post.readingTime.words} words</span>
 								<span>{Math.ceil(post.readingTime.minutes)} minutes to read</span>
 							</div>

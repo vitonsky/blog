@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { MDXRemote } from "next-mdx-remote";
 
 import { Post } from "../../lib/posts";
+import { getDateFromTimestamp } from "../../lib/utils";
 
 import styles from './BlogPost.module.css';
 
@@ -22,7 +23,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				<h1 className={styles.PostTitle}>{post.title}</h1>
 
 				<div className={styles.PostInfo}>
-					<span>{new Date(post.date).toDateString()}</span>
+					<span>{getDateFromTimestamp(post.date)}</span>
 					<span>{Math.ceil(post.readingTime.minutes)} minutes to read</span>
 				</div>
 			</div>
