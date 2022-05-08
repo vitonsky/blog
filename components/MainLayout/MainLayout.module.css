@@ -1,0 +1,36 @@
+.Main {
+  margin: 1rem auto;
+  max-width: 800px;
+}
+
+.Head {
+  margin-bottom: 2rem;
+}
+.Head > *:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.HeadRow {
+  margin: 0 1rem;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.HeadRow::after {
+  content: "";
+  clear: both;
+}
+
+.HeadRow > *:not(:first-child) {
+  margin-left: 0.5rem;
+}
+
+.SearchForm {
+  display: inline;
+}
+
+@media (max-width: 500px) {
+  .SearchInput {
+    width: 100%;
+  }
+}
