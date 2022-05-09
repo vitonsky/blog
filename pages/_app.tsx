@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 
-import { siteMeta } from "../lib/constants";
+import { siteInfo } from "../lib/constants";
 
 import { MainLayout } from "../components/MainLayout/MainLayout";
 
@@ -12,7 +12,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <MainLayout>
       <Head>
-        <title>{siteMeta.title}</title>
+        <title>{siteInfo.title}</title>
       </Head>
       <Component {...pageProps} />
     </MainLayout>

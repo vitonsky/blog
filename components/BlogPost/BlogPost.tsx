@@ -5,7 +5,7 @@ import { MDXRemote } from "next-mdx-remote";
 
 import { Post } from "../../lib/posts";
 import { getDateFromTimestamp } from "../../lib/utils";
-import { siteMeta, siteURL } from "../../lib/constants";
+import { siteInfo, siteURL } from "../../lib/constants";
 
 import { ShareBlock } from "../ShareBlock/ShareBlock";
 
@@ -43,14 +43,14 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				{post.keywords.length > 0 && (
 					<meta name="keywords" content={post.keywords.join(", ")} />
 				)}
-				<meta name="author" content={siteMeta.author} />
+				<meta name="author" content={siteInfo.author} />
 				<meta
 					name="article:published_time"
 					content={new Date(post.date).toISOString()}
 				/>
 
 				{/* Open graph */}
-				<meta name="og:site_name" content={siteMeta.title} />
+				<meta name="og:site_name" content={siteInfo.title} />
 				<meta name="og:type" content="article" />
 				<meta
 					name="og:locale"
