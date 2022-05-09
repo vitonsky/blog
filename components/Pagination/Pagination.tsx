@@ -12,7 +12,6 @@ export type Pagination = {
 
 export const displayedPages = 3;
 
-// TODO: improve layout
 export const Pagination: FC<Pagination> = ({
 	pagesNumber,
 	currentPage,

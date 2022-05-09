@@ -17,6 +17,13 @@ module.exports = withMDX({
 	pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 	webpack: (config, options) => {
 		patchWebpackConfig(config, options);
+
+		// Load SVG as component
+		config.module.rules.push({
+			test: /\.svg$/,
+			use: ["@svgr/webpack"]
+		});
+
 		return config;
 	},
 })

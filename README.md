@@ -7,7 +7,7 @@ This is my blog
 	- [ ] improve meta data in layout
 	- [ ] use meta tags for social media
 	- [ ] use nofollow and external links
-	- [ ] add buttons for share
+	- [x] add buttons for share
 - [x] Implement RSS feed
 - [ ] Deploy on gh-pages
 - [ ] Bind domain

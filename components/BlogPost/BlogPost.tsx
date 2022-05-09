@@ -5,6 +5,8 @@ import { MDXRemote } from "next-mdx-remote";
 import { Post } from "../../lib/posts";
 import { getDateFromTimestamp } from "../../lib/utils";
 
+import { ShareBlock } from "../ShareBlock/ShareBlock";
+
 import styles from './BlogPost.module.css';
 
 export type BlogPostProps = {
@@ -28,9 +30,15 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				</div>
 			</div>
 
+			<div className={styles.ShareBlock}>
+				<ShareBlock url={post.url} title={post.title} />
+			</div>
+
 			<div className={styles.PostBody}>
 				<MDXRemote {...post.source} />
 			</div>
+
+
 		</div>
 	);
 };
