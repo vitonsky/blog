@@ -3,14 +3,18 @@ This is my blog
 ## Road map
 
 - [x] Implement visual design
-- [ ] Improve markup for SEO
-	- [ ] improve meta data in layout
-	- [ ] use meta tags for social media
-	- [ ] use nofollow and external links
+- [x] Improve markup for SEO
+	- [x] improve meta data in layout
+	- [x] use meta tags for social media
+	- [x] use nofollow and external links
 	- [x] add buttons for share
 - [x] Implement RSS feed
+- [ ] Improve view
+	- [ ] Add graceful font family
+	- [ ] Improve colors
 - [ ] Deploy on gh-pages
 - [ ] Bind domain
+- [ ] Check TODOs
 
 Improvements
 - [ ] Improve url of posts to split date in title to path segments: `2022-01-01-title.md` -> `blog/2022/01/01/title`

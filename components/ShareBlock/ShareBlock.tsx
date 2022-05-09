@@ -65,6 +65,7 @@ export const ShareBlock: FC<{ url: string; title: string }> = ({
 						}}
 						key={idx}
 						className={styles.Icon}
+						rel="nofollow"
 					>
 						<Icon style={{ fill: color }} />
 					</a>
