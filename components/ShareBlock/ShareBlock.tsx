@@ -1,6 +1,6 @@
 import { ComponentType, FC } from "react";
 
-import { siteURL } from "../../lib/constants";
+import { getFullUrl } from "../../lib/utils";
 
 import styles from "./ShareBlock.module.css";
 
@@ -54,7 +54,7 @@ export const ShareBlock: FC<{ url: string; title: string }> = ({
 	return (
 		<div className={styles.ShareBlock}>
 			{icons.map(({ Icon, getLink, color }, idx) => {
-				const link = getLink(siteURL + url, title);
+				const link = getLink(getFullUrl(url), title);
 
 				return (
 					<a

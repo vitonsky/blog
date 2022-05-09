@@ -1,8 +1,11 @@
 // TODO: set actual data
 export const siteInfo = {
+	url: "http://example.com",
+	blogPath: "/blog",
+
 	title: 'Blog name',
 	author: 'Author Name',
-};
+} as const;
 
 // TODO: set actual data
 // TODO: add cover image
@@ -19,10 +22,6 @@ export const metaData: {
 			content: ['blog'].join(', ')
 		}
 	];
-
-export const siteURL = "http://example.com";
-
-export const blogUrlPath = "/blog";
 
 export const contentDir = ".";
 export const blogPostsDir = contentDir + "/posts";

@@ -2,8 +2,9 @@ import { Feed } from "feed";
 
 import { writeFile } from "fs/promises";
 
-import { siteURL } from "./constants";
+import { siteInfo } from "./constants";
 import { getPosts } from "./posts";
+import { getFullUrl } from "./utils";
 
 // TODO: update links and titles
 export const generateRss = async () => {
@@ -13,7 +14,7 @@ export const generateRss = async () => {
 		language: "en", // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 		title: "Feed Title",
 		description: "This is my personal feed!",
-		id: siteURL,
+		id: siteInfo.url,
 		copyright: "All rights reserved 2013, John Doe",
 		updated: new Date(posts[0].date), // date of last post
 		// link: "http://example.com/",
@@ -35,7 +36,7 @@ export const generateRss = async () => {
 			title: post.title,
 			description: post.previewText,
 			date: new Date(post.date),
-			image: siteURL + post.image || undefined,
+			image: post.image === null ? undefined : getFullUrl(post.image),
 			category: post.tags.map((tag) => ({ name: tag })),
 
 			// TODO: insert content instead prepared source to render

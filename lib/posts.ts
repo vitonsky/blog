@@ -14,7 +14,7 @@ import path from "path";
 
 import { readFile, stat } from "fs/promises";
 
-import { blogPostsDir, blogUrlPath } from "./constants";
+import { blogPostsDir, siteInfo } from "./constants";
 
 export const getPostFilenamesInDir = (directory: string) => {
 	return glob(`${directory}/**/*.{md,mdx}`);
@@ -104,11 +104,11 @@ export const getPostUrlByFilename = (filePath: string) => {
 		pageUrl = pageUrl.slice(0, -fileExtension.length);
 	}
 
-	return blogUrlPath + pageUrl;
+	return siteInfo.blogPath + pageUrl;
 };
 
 export const getPostFilenameByUrl = (url: string) => {
-	const relativePath = path.join(blogPostsDir, url.slice(blogUrlPath.length) + ".md");
+	const relativePath = path.join(blogPostsDir, url.slice(siteInfo.blogPath.length) + ".md");
 	return path.resolve(relativePath);
 };
 

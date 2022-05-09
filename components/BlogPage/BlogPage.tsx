@@ -4,7 +4,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 import { Post } from "../../lib/posts";
-import { blogUrlPath, metaData } from "../../lib/constants";
+import { metaData, siteInfo } from "../../lib/constants";
 import { getDateFromTimestamp } from "../../lib/utils";
 
 import { Pagination } from "../Pagination/Pagination";
@@ -70,7 +70,7 @@ export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
 					<Pagination
 						currentPage={pagination.page}
 						pagesNumber={pagination.pagesNumber}
-						prefix={blogUrlPath + "/p/"}
+						prefix={siteInfo.blogPath + "/p/"}
 					/>
 				)}
 			</div>

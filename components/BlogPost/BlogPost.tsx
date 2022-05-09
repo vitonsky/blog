@@ -4,8 +4,8 @@ import Head from "next/head";
 import { MDXRemote } from "next-mdx-remote";
 
 import { Post } from "../../lib/posts";
-import { getDateFromTimestamp } from "../../lib/utils";
-import { siteInfo, siteURL } from "../../lib/constants";
+import { siteInfo } from "../../lib/constants";
+import { getDateFromTimestamp, getFullUrl } from "../../lib/utils";
 
 import { ShareBlock } from "../ShareBlock/ShareBlock";
 
@@ -20,8 +20,6 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 	useEffect(() => {
 		console.log({ post });
 	}, [post]);
-
-	const getFullUrl = (relativePath: string) => siteURL + relativePath;
 
 	// TODO: use description instead `previewText` when it possible
 	return (

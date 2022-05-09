@@ -1,7 +1,7 @@
 import { NextPage, GetStaticPropsContext, GetStaticPropsResult } from "next";
 
 import { getPost, getPostFilenameByUrl, getPosts, Post } from "../../lib/posts";
-import { blogUrlPath } from "../../lib/constants";
+import { siteInfo } from "../../lib/constants";
 
 import { BlogPost } from "../../components/BlogPost/BlogPost";
 
@@ -21,7 +21,7 @@ export async function getStaticProps({
 	}
 
 	const pagePath = Array.isArray(slug) ? slug.join("/") : slug;
-	const mdFilePath = getPostFilenameByUrl([blogUrlPath, pagePath].join('/'));
+	const mdFilePath = getPostFilenameByUrl([siteInfo.blogPath, pagePath].join('/'));
 	const post = await getPost(mdFilePath);
 	return { props: { post } };
 }

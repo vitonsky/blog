@@ -5,7 +5,7 @@ import type {
 } from "next";
 
 import { getPaginationInfo, getPosts } from "../../../lib/posts";
-import { blogUrlPath } from "../../../lib/constants";
+import { siteInfo } from "../../../lib/constants";
 
 import { BlogPage, BlogPageProps } from "../../../components/BlogPage/BlogPage";
 
@@ -35,7 +35,7 @@ export const getStaticPaths = async () => {
 
 	const paths: string[] = [];
 	for (let pageNumber = 1; pageNumber <= pagesNumber; pageNumber++) {
-		paths.push([blogUrlPath, "p", pageNumber].join("/"));
+		paths.push([siteInfo.blogPath, "p", pageNumber].join("/"));
 	}
 
 	return { paths, fallback: false };
