@@ -8,7 +8,7 @@ This is my blog
 	- [ ] use meta tags for social media
 	- [ ] use nofollow and external links
 	- [ ] add buttons for share
-- [ ] Implement RSS feed
+- [x] Implement RSS feed
 - [ ] Deploy on gh-pages
 - [ ] Bind domain
 

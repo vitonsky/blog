@@ -1,3 +1,5 @@
+export const siteURL = "http://example.com";
+
 export const blogUrlPath = "/blog";
 
 export const contentDir = ".";
