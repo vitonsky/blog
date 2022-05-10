@@ -19,6 +19,7 @@ export type BlogPageProps = {
 	};
 };
 
+// TODO: add link to fix typo
 export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
 	// TODO: remove
 	useEffect(() => {
@@ -43,7 +44,7 @@ export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
 								</h3>
 
 								<div className={styles.PostInfo}>
-									<span>{getDateFromTimestamp(post.date)}</span>
+									<span className={styles.PostDate}>{getDateFromTimestamp(post.date)}</span>
 									<span>{post.readingTime.words} words</span>
 									<span>
 										{Math.ceil(post.readingTime.minutes)} minutes to read

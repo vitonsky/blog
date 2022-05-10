@@ -6,6 +6,16 @@ body {
 
 a {
   display: inline-block;
+  color: #333;
+  text-decoration: underline;
+  text-decoration-color: #cbcbcb;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 25%;
+  transition: text-decoration ease 200ms;
+}
+a:hover,
+a:focus {
+  text-decoration-color: #333;
 }
 
 img {
@@ -14,12 +24,13 @@ img {
 
 hr {
   border: 0;
-  width: 100%;
+  width: 40%;
   height: 2px;
-  background: #f1f1f1;
+  background: #dfdfdf;
 }
 
 pre code.hljs {
+  /* font-size: 1rem; */
   background: #fafafa;
   border-radius: 6px;
 }

@@ -83,7 +83,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 					<h1 className={styles.PostTitle}>{post.title}</h1>
 
 					<div className={styles.PostInfo}>
-						<span>{getDateFromTimestamp(post.date)}</span>
+						<span className={styles.PostDate}>{getDateFromTimestamp(post.date)}</span>
 						<span>{Math.ceil(post.readingTime.minutes)} minutes to read</span>
 					</div>
 				</div>
