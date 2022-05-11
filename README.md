@@ -12,7 +12,7 @@ This is my blog
 - [ ] Improve view
 	- [ ] Add graceful font family
 	- [ ] Improve colors
-	- [ ] Add favicon
+	- [x] Add favicon
 - [ ] Deploy on gh-pages
 - [ ] Bind domain
 - [ ] Check TODOs

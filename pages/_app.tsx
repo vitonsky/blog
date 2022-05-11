@@ -13,6 +13,7 @@ function App({ Component, pageProps }: AppProps) {
     <MainLayout>
       <Head>
         <title>{siteInfo.title}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
     </MainLayout>
