@@ -36,6 +36,6 @@
 }
 
 .PostText {
-  font-size: 1.15rem;
+  font-size: var(--typo-content-size);
   line-height: 1.7rem;
 }

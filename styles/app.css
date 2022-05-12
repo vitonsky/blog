@@ -1,7 +1,11 @@
-/* TODO: use custom font family */
 body {
+  --typo-content-size: 17px;
+
   margin: 0;
-  font-family: Arial;
+
+  /* Use "Ubuntu" as alternative if necessary */
+  font-display: swap;
+  font-family: "Poppins", sans-serif;
 }
 
 a {
@@ -11,6 +15,7 @@ a {
   text-decoration-color: #cbcbcb;
   text-decoration-thickness: 0.12em;
   text-underline-offset: 25%;
+  text-underline-position: from-font;
   transition: text-decoration ease 200ms;
 }
 a:hover,
@@ -30,7 +35,6 @@ hr {
 }
 
 pre code.hljs {
-  /* font-size: 1rem; */
   background: #fafafa;
   border-radius: 6px;
 }
@@ -42,7 +46,7 @@ code {
 }
 
 blockquote {
-  background: #fafafa;
+  background: #f5f6ff;
   padding: 1rem;
   margin: 0;
   border-radius: 6px;

@@ -9,10 +9,12 @@ This is my blog
 	- [x] use nofollow and external links
 	- [x] add buttons for share
 - [x] Implement RSS feed
-- [ ] Improve view
-	- [ ] Add graceful font family
-	- [ ] Improve colors
+- [x] Improve view
+	- [x] Add graceful font family
+	- [x] Improve colors
 	- [x] Add favicon
+- [ ] Add spinner for dynamic loading page content
+- [ ] Add button "Back to top"
 - [ ] Deploy on gh-pages
 - [ ] Bind domain
 - [ ] Check TODOs
