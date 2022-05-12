@@ -1,10 +1,11 @@
 import { FC, ReactNode } from "react";
 
-import Link from "next/link";
-
 import { cnTheme } from "react-elegant-ui/theme";
 import { theme } from "react-elegant-ui/theme/presets/default";
 import { Textinput } from "react-elegant-ui/components/Textinput/Textinput.bundle/desktop";
+
+import { Link } from "../Link/Link";
+import { PageLoader } from "../PageLoader/PageLoader";
 
 import styles from "./MainLayout.module.css";
 
@@ -17,10 +18,10 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 		<div className={cnTheme(theme, [styles.Main])}>
 			<div className={styles.Head}>
 				<div className={styles.HeadRow}>
-					<Link href="/" target="_blank">
+					<Link href="/">
 						Home
 					</Link>
-					<Link href="/rss.xml" target="_blank">
+					<Link href="/rss.xml" external>
 						RSS
 					</Link>
 				</div>
@@ -51,6 +52,8 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 			<div className={styles.Content}>
 				{children}
 			</div>
+
+			<PageLoader />
 		</div>
 	);
 };

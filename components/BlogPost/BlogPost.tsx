@@ -7,9 +7,24 @@ import { Post } from "../../lib/posts";
 import { siteInfo } from "../../lib/constants";
 import { getDateFromTimestamp, getFullUrl } from "../../lib/utils";
 
+import { Link } from "../Link/Link";
+
 import { ShareBlock } from "../ShareBlock/ShareBlock";
 
 import styles from "./BlogPost.module.css";
+
+const internalLinkPrefixes = ["/blog"];
+const mdxComponents: Required<Parameters<typeof MDXRemote>[0]>["components"] = {
+	a: (props) => {
+		const isInternalLink =
+			props.href !== undefined &&
+			internalLinkPrefixes.some(
+				(prefix) => props.href!.slice(0, prefix.length) === prefix
+			);
+
+		return <Link external={!isInternalLink} {...props} />;
+	},
+};
 
 export type BlogPostProps = {
 	post: Post;
@@ -83,7 +98,9 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 					<h1 className={styles.PostTitle}>{post.title}</h1>
 
 					<div className={styles.PostInfo}>
-						<span className={styles.PostDate}>{getDateFromTimestamp(post.date)}</span>
+						<span className={styles.PostDate}>
+							{getDateFromTimestamp(post.date)}
+						</span>
 						<span>{Math.ceil(post.readingTime.minutes)} minutes to read</span>
 					</div>
 				</div>
@@ -93,7 +110,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				</div>
 
 				<div className={styles.PostBody}>
-					<MDXRemote {...post.source} />
+					<MDXRemote {...post.source} components={mdxComponents} />
 				</div>
 			</div>
 		</>

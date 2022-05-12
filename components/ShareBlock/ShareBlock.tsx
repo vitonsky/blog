@@ -2,6 +2,8 @@ import { ComponentType, FC } from "react";
 
 import { getFullUrl } from "../../lib/utils";
 
+import { Link } from "../Link/Link";
+
 import styles from "./ShareBlock.module.css";
 
 import facebook from "./icons/facebook.svg";
@@ -57,18 +59,19 @@ export const ShareBlock: FC<{ url: string; title: string }> = ({
 				const link = getLink(getFullUrl(url), title);
 
 				return (
-					<a
+					<Link
+						key={idx}
+						className={styles.Icon}
 						href={link}
 						onClick={(evt) => {
 							evt.preventDefault();
 							open(link, "", "width=640,height=270");
 						}}
-						key={idx}
-						className={styles.Icon}
 						rel="nofollow"
+						external
 					>
 						<Icon style={{ fill: color }} />
-					</a>
+					</Link>
 				);
 			})}
 		</div>

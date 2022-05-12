@@ -1,5 +1,6 @@
 import { FC, ReactNode, useCallback } from "react";
-import Link from "next/link";
+
+import { Link } from "../Link/Link";
 
 import styles from './Pagination.module.css';
 
@@ -28,9 +29,9 @@ export const Pagination: FC<Pagination> = ({
 		const pages: ReactNode[] = [];
 		for (let pageNumber = from; pageNumber <= to; pageNumber++) {
 			pages.push(
-				<a href={buildLink(pageNumber)} key={pageNumber}>
+				<Link href={buildLink(pageNumber)} key={pageNumber}>
 					{pageNumber}
-				</a>
+				</Link>
 			);
 		}
 

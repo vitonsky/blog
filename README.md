@@ -13,7 +13,7 @@ This is my blog
 	- [x] Add graceful font family
 	- [x] Improve colors
 	- [x] Add favicon
-- [ ] Add spinner for dynamic loading page content
+- [x] Add spinner for dynamic loading page content
 - [ ] Add button "Back to top"
 - [ ] Deploy on gh-pages
 - [ ] Bind domain

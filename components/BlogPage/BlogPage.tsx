@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { NextPage } from "next";
-import Link from "next/link";
 import Head from "next/head";
 
 import { Post } from "../../lib/posts";
 import { metaData, siteInfo } from "../../lib/constants";
 import { getDateFromTimestamp } from "../../lib/utils";
 
+import { Link } from "../Link/Link";
 import { Pagination } from "../Pagination/Pagination";
 
 import styles from "./BlogPage.module.css";
