@@ -1,6 +1,6 @@
 ---
 title: 'Demo article'
-image: '/cat.jpg'
+image: '/images/cat.jpg'
 tags:
   - cat
   - girl
@@ -31,4 +31,4 @@ console.log(foo);
 ```
 
 
-[catLink]: /cat.jpg "cat and girl"
+[catLink]: /images/cat.jpg "cat and girl"
