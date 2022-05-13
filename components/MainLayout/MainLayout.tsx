@@ -6,6 +6,7 @@ import { Textinput } from "react-elegant-ui/components/Textinput/Textinput.bundl
 
 import { Link } from "../Link/Link";
 import { PageLoader } from "../PageLoader/PageLoader";
+import { TopDownButton } from "../TopDownButton/TopDownButton";
 
 import styles from "./MainLayout.module.css";
 
@@ -54,6 +55,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 			</div>
 
 			<PageLoader />
+			<TopDownButton />
 		</div>
 	);
 };

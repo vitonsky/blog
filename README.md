@@ -14,7 +14,7 @@ This is my blog
 	- [x] Improve colors
 	- [x] Add favicon
 - [x] Add spinner for dynamic loading page content
-- [ ] Add button "Back to top"
+- [x] Add button "Back to top"
 - [ ] Deploy on gh-pages
 - [ ] Bind domain
 - [ ] Check TODOs
