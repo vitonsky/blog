@@ -4,6 +4,8 @@ import { cnTheme } from "react-elegant-ui/theme";
 import { theme } from "react-elegant-ui/theme/presets/default";
 import { Textinput } from "react-elegant-ui/components/Textinput/Textinput.bundle/desktop";
 
+import { siteInfo } from "../../lib/constants";
+
 import { Link } from "../Link/Link";
 import { PageLoader } from "../PageLoader/PageLoader";
 import { TopDownButton } from "../TopDownButton/TopDownButton";
@@ -19,9 +21,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 		<div className={cnTheme(theme, [styles.Main])}>
 			<div className={styles.Head}>
 				<div className={styles.HeadRow}>
-					<Link href="/">
-						Home
-					</Link>
+					<Link href="/">Home</Link>
 					<Link href="/rss.xml" external>
 						RSS
 					</Link>
@@ -39,7 +39,11 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 							itemProp="target"
 							content="https://www.google.com/search?q={q}"
 						/>
-						<input name="sitesearch" value="domain.com" type="hidden" />
+						<input
+							name="sitesearch"
+							value={new URL(siteInfo.url).hostname}
+							type="hidden"
+						/>
 						<Textinput
 							className={styles.SearchInput}
 							placeholder="Search..."
@@ -50,9 +54,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 				</div>
 			</div>
 
-			<div className={styles.Content}>
-				{children}
-			</div>
+			<div className={styles.Content}>{children}</div>
 
 			<PageLoader />
 			<TopDownButton />

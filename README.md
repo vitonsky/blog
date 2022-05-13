@@ -20,6 +20,7 @@ This is my blog
 - [ ] Check TODOs
 
 Improvements
+- [ ] use description instead `previewText`
 - [ ] Improve url of posts to split date in title to path segments: `2022-01-01-title.md` -> `blog/2022/01/01/title`
 - [x] Add styles for code block
 - [ ] Improve linters

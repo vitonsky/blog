@@ -44,7 +44,9 @@ export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
 								</h3>
 
 								<div className={styles.PostInfo}>
-									<span className={styles.PostDate}>{getDateFromTimestamp(post.date)}</span>
+									<span className={styles.PostDate}>
+										{getDateFromTimestamp(post.date)}
+									</span>
 									<span>{post.readingTime.words} words</span>
 									<span>
 										{Math.ceil(post.readingTime.minutes)} minutes to read
