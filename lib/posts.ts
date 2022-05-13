@@ -1,14 +1,15 @@
-// TODO: move this logic to HTTP server and use as API, 
+// TODO: move this logic to HTTP server and use as API,
 // to cache posts instead parse all posts for each page
 
 import { promise as glob } from "glob-promise";
 
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { } from "next/app";
 import { serialize } from "next-mdx-remote/serialize";
 import { visit } from "unist-util-visit";
 import getReadingTime from "reading-time";
-import rehypeHighlight from 'rehype-highlight';
-import remarkGfm from 'remark-gfm';
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
 
 import path from "path";
 
@@ -16,8 +17,32 @@ import { readFile, stat } from "fs/promises";
 
 import { blogPostsDir, siteInfo } from "./constants";
 
-export const getPostFilenamesInDir = (directory: string) => {
-	return glob(`${directory}/**/*.{md,mdx}`);
+export const getPostFilenamesInDir = (
+	directory: string | string[],
+	ignore: string[] = []
+) => {
+	// Don't handle draft files
+	const unlistedPaths = Boolean(process.env.SHOW_DRAFTS)
+		? []
+		: [blogPostsDir + "/_drafts/**"];
+
+	const directories = Array.isArray(directory) ? directory : [directory];
+	return Promise.all(
+		directories.map((directory) =>
+			glob(`${directory}/**/*.{md,mdx}`, {
+				ignore: [...unlistedPaths, ...ignore],
+			})
+		)
+	).then((results) => {
+		const postFilenames = new Set<string>();
+		results.forEach((filenames) => {
+			filenames.forEach((filename) => {
+				postFilenames.add(filename);
+			});
+		});
+
+		return Array.from(postFilenames);
+	});
 };
 
 export const parsePost = async (text: string) => {
@@ -37,7 +62,7 @@ export const parsePost = async (text: string) => {
 		});
 	};
 
-	let pageText: string = '';
+	let pageText: string = "";
 	const extractTextPlugin = () => (node: any) => {
 		visit(node, ["text", "code"], (node) => {
 			pageText += node.value;
@@ -47,14 +72,8 @@ export const parsePost = async (text: string) => {
 	const mdxSource = await serialize(text, {
 		parseFrontmatter: true,
 		mdxOptions: {
-			remarkPlugins: [
-				extractPreviewTextPlugin,
-				extractTextPlugin,
-				remarkGfm
-			],
-			rehypePlugins: [
-				rehypeHighlight
-			]
+			remarkPlugins: [extractPreviewTextPlugin, extractTextPlugin, remarkGfm],
+			rehypePlugins: [rehypeHighlight],
 		},
 	});
 
@@ -108,7 +127,10 @@ export const getPostUrlByFilename = (filePath: string) => {
 };
 
 export const getPostFilenameByUrl = (url: string) => {
-	const relativePath = path.join(blogPostsDir, url.slice(siteInfo.blogPath.length) + ".md");
+	const relativePath = path.join(
+		blogPostsDir,
+		url.slice(siteInfo.blogPath.length) + ".md"
+	);
 	return path.resolve(relativePath);
 };
 
@@ -127,7 +149,7 @@ export type Post = {
 	readingTime: {
 		minutes: number;
 		words: number;
-	}
+	};
 };
 
 export const getPost = async (filename: string): Promise<Post> => {
@@ -135,8 +157,16 @@ export const getPost = async (filename: string): Promise<Post> => {
 
 	const mdFile = await readFile(filename);
 	const postSource = mdFile.toString();
-	const { mdxSource, previewText, title, image, tags, keywords, lang, readingTime } =
-		await parsePost(postSource);
+	const {
+		mdxSource,
+		previewText,
+		title,
+		image,
+		tags,
+		keywords,
+		lang,
+		readingTime,
+	} = await parsePost(postSource);
 
 	const { birthtime } = await stat(filename);
 
@@ -151,16 +181,22 @@ export const getPost = async (filename: string): Promise<Post> => {
 		tags,
 		keywords,
 		lang,
-		readingTime
+		readingTime,
 	};
 };
 
-export const getPosts = async ({ tag, lang, sort = 'desc', from = 0, limit }: {
+export const getPosts = async ({
+	tag,
+	lang,
+	sort = "desc",
+	from = 0,
+	limit,
+}: {
 	from?: number;
 	limit?: number;
 	tag?: string;
 	lang?: string;
-	sort?: 'asc' | 'desc'
+	sort?: "asc" | "desc";
 } = {}) => {
 	// Get all posts
 	const files = await getPostFilenamesInDir(blogPostsDir);
@@ -179,7 +215,9 @@ export const getPosts = async ({ tag, lang, sort = 'desc', from = 0, limit }: {
 	}
 
 	// Sort
-	posts = posts.sort((p1, p2) => sort === 'desc' ? p2.date - p1.date : p1.date - p2.date);
+	posts = posts.sort((p1, p2) =>
+		sort === "desc" ? p2.date - p1.date : p1.date - p2.date
+	);
 
 	// Slice
 	posts = posts.slice(from, limit ? from + limit : undefined);
@@ -187,7 +225,11 @@ export const getPosts = async ({ tag, lang, sort = 'desc', from = 0, limit }: {
 	return posts;
 };
 
-export const getPaginationInfo = async ({ itemsOnPage, tag, lang }: {
+export const getPaginationInfo = async ({
+	itemsOnPage,
+	tag,
+	lang,
+}: {
 	itemsOnPage: number;
 	tag?: string;
 	lang?: string;
@@ -195,5 +237,5 @@ export const getPaginationInfo = async ({ itemsOnPage, tag, lang }: {
 	const postsNumber = (await getPosts({ tag, lang })).length;
 	const pagesNumber = Math.ceil(postsNumber / itemsOnPage);
 
-	return { postsNumber, pagesNumber }
+	return { postsNumber, pagesNumber };
 };

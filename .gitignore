@@ -38,3 +38,6 @@ yarn-error.log*
 
 # artefacts
 public/rss.xml
+
+# drafts
+_drafts

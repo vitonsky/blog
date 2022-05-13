@@ -23,7 +23,7 @@ Improvements
 - [ ] Improve url of posts to split date in title to path segments: `2022-01-01-title.md` -> `blog/2022/01/01/title`
 - [x] Add styles for code block
 - [ ] Improve linters
-- [ ] Add directory with drafts and subdirectory with not synced drafts. Show posts from this directory in dev mode
+- [x] Add directory with drafts and subdirectory with not synced drafts. Show posts from this directory in dev mode
 - [ ] Add anchors to sections
 - [ ] Add page with tags
 - [ ] Add analytics
