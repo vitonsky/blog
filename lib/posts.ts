@@ -4,7 +4,6 @@
 import { promise as glob } from "glob-promise";
 
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import { } from "next/app";
 import { serialize } from "next-mdx-remote/serialize";
 import { visit } from "unist-util-visit";
 import getReadingTime from "reading-time";
@@ -17,22 +16,13 @@ import { readFile, stat } from "fs/promises";
 
 import { blogPostsDir, siteInfo } from "./constants";
 
-export const getPostFilenamesInDir = (
+export const getFilenamesInDir = (
 	directory: string | string[],
 	ignore: string[] = []
 ) => {
-	// Don't handle draft files
-	const unlistedPaths = Boolean(process.env.SHOW_DRAFTS)
-		? []
-		: [blogPostsDir + "/_drafts/**"];
-
 	const directories = Array.isArray(directory) ? directory : [directory];
 	return Promise.all(
-		directories.map((directory) =>
-			glob(`${directory}/**/*.{md,mdx}`, {
-				ignore: [...unlistedPaths, ...ignore],
-			})
-		)
+		directories.map((directory) => glob(directory, { ignore }))
 	).then((results) => {
 		const postFilenames = new Set<string>();
 		results.forEach((filenames) => {
@@ -185,6 +175,35 @@ export const getPost = async (filename: string): Promise<Post> => {
 	};
 };
 
+// TODO: implement it when will setup API server to build data
+// const extractFilenames = async () => {
+// 	// Don't handle draft files
+// 	const unlistedPaths = Boolean(process.env.SHOW_DRAFTS)
+// 		? []
+// 		: [blogPostsDir + "/_drafts/**"];
+
+// 	// Get all posts
+// 	const files = await getFilenamesInDir(
+// 		blogPostsDir + "/**/*.!(md|mdx)",
+// 		unlistedPaths
+// 	);
+
+// 	const filenames: Record<string, string> = {};
+
+// 	await Promise.all(files.map(async (filename) => {
+// 		const absolutePath = path.resolve(filename);
+// 		const extension = path.extname(filename);
+
+// 		const fd = await readFile(filename);
+// 		const hash = createHash('sha256').update(fd).digest('hex');
+
+// 		filenames[absolutePath] = hash + extension;
+// 	}))
+
+
+// 	return filenames;
+// }
+
 export const getPosts = async ({
 	tag,
 	lang,
@@ -198,8 +217,16 @@ export const getPosts = async ({
 	lang?: string;
 	sort?: "asc" | "desc";
 } = {}) => {
+	// Don't handle draft files
+	const unlistedPaths = Boolean(process.env.SHOW_DRAFTS)
+		? []
+		: [blogPostsDir + "/_drafts/**"];
+
 	// Get all posts
-	const files = await getPostFilenamesInDir(blogPostsDir);
+	const files = await getFilenamesInDir(
+		blogPostsDir + "/**/*.{md,mdx}",
+		unlistedPaths
+	);
 	let posts: Post[] = await Promise.all(
 		files.map((filename) => getPost(filename))
 	);
