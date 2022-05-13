@@ -15,11 +15,15 @@ This is my blog
 	- [x] Add favicon
 - [x] Add spinner for dynamic loading page content
 - [x] Add button "Back to top"
+- [ ] Try to implement auto extracting files
+- [ ] Set 15 items per page
 - [ ] Deploy on gh-pages
 - [ ] Bind domain
 - [ ] Check TODOs
+- [ ] Write about blog
 
 Improvements
+- [ ] Implement auto extracting local resources of articles to directory `/public/files`. It allow to keep attachments in post directory
 - [ ] use description instead `previewText`
 - [ ] Improve url of posts to split date in title to path segments: `2022-01-01-title.md` -> `blog/2022/01/01/title`
 - [x] Add styles for code block
