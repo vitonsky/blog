@@ -15,7 +15,9 @@ This is my blog
 	- [x] Add favicon
 - [x] Add spinner for dynamic loading page content
 - [x] Add button "Back to top"
-- [ ] Try to implement auto extracting files
+- [x] Move processing logic to API server
+	- [ ] Implement caching of data
+	- [ ] Try to implement auto extracting files
 - [ ] Set 15 items per page
 - [ ] Deploy on gh-pages
 - [ ] Bind domain

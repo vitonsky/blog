@@ -4,8 +4,10 @@ import type {
 	NextPage,
 } from "next";
 
-import { getPaginationInfo, getPosts } from "../../../lib/posts";
 import { siteInfo } from "../../../lib/constants";
+
+import { getPaginationInfo } from "../../../server/api/getPaginationInfo";
+import { getPosts } from "../../../server/api/getPosts";
 
 import { BlogPage, BlogPageProps } from "../../../components/BlogPage/BlogPage";
 

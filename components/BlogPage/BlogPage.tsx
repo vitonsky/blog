@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 
-import { Post } from "../../lib/posts";
+import { Post } from "../../server/lib/posts";
 import { metaData, siteInfo } from "../../lib/constants";
 import { getDateFromTimestamp } from "../../lib/utils";
 

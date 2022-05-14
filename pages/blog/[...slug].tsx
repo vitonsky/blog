@@ -1,7 +1,10 @@
 import { NextPage, GetStaticPropsContext, GetStaticPropsResult } from "next";
 
-import { getPost, getPostFilenameByUrl, getPosts, Post } from "../../lib/posts";
+import { Post } from "../../server/lib/posts";
 import { siteInfo } from "../../lib/constants";
+
+import { getPost } from "../../server/api/getPost";
+import { getPostUrls } from "../../server/api/getPostUrls";
 
 import { BlogPost } from "../../components/BlogPost/BlogPost";
 
@@ -21,14 +24,14 @@ export async function getStaticProps({
 	}
 
 	const pagePath = Array.isArray(slug) ? slug.join("/") : slug;
-	const mdFilePath = getPostFilenameByUrl([siteInfo.blogPath, pagePath].join('/'));
-	const post = await getPost(mdFilePath);
+	const url = [siteInfo.blogPath, pagePath].join('/');
+
+	const post = await getPost({ url });
 	return { props: { post } };
 }
 
 export const getStaticPaths = async () => {
-	const posts = await getPosts();
-	const paths = posts.map((post) => post.url);
+	const paths = await getPostUrls();
 
 	console.log("Blog pages", paths);
 	return { paths, fallback: false };

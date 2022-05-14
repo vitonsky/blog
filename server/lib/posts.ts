@@ -9,12 +9,31 @@ import { visit } from "unist-util-visit";
 import getReadingTime from "reading-time";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
+// import watch from 'node-watch';
 
 import path from "path";
 
 import { readFile, stat } from "fs/promises";
 
-import { blogPostsDir, siteInfo } from "./constants";
+import { blogPostsDir, siteInfo } from "../../lib/constants";
+
+
+// export const filesCache: Record<string, undefined | any> = {};
+
+// // Update files
+// watch(blogPostsDir, { recursive: true }, (_, file) => {
+// 	console.log('CHANGE FILE', file);
+// 	handleFile(file);
+// });
+
+// const handleFile = async (file: string) => {
+// 	const post = await getPost(file);
+
+// 	// Cache
+// 	filesCache[file] = post;
+
+// 	return post;
+// }
 
 export const getFilenamesInDir = (
 	directory: string | string[],
@@ -266,3 +285,18 @@ export const getPaginationInfo = async ({
 
 	return { postsNumber, pagesNumber };
 };
+
+export const getPostUrls = async () => {
+	// Don't handle draft files
+	const unlistedPaths = Boolean(process.env.SHOW_DRAFTS)
+		? []
+		: [blogPostsDir + "/_drafts/**"];
+
+	// Get all posts
+	const files = await getFilenamesInDir(
+		blogPostsDir + "/**/*.{md,mdx}",
+		unlistedPaths
+	);
+
+	return files.map((file) => getPostUrlByFilename(file));
+}

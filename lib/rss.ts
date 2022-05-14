@@ -2,8 +2,9 @@ import { Feed } from "feed";
 
 import { writeFile } from "fs/promises";
 
+import { getPosts } from "../server/api/getPosts";
+
 import { siteInfo } from "./constants";
-import { getPosts } from "./posts";
 import { getFullUrl } from "./utils";
 
 // TODO: update links and titles
