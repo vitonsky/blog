@@ -8,7 +8,7 @@ import colors from "colors";
 
 import { readFile, stat } from "fs/promises";
 
-import { getPostUrlByFilename } from "./files";
+import { extractTimestampFromName, getPostUrlByFilename } from "./files";
 import path from "path";
 
 export type Post = {
@@ -167,6 +167,12 @@ export const getPostData = async (
 ): Promise<Post> => {
 	const url = getPostUrlByFilename(filename);
 
+	let date = extractTimestampFromName(path.basename(filename));
+	if (date === null) {
+		const { birthtime } = await stat(filename);
+		date = birthtime.getTime();
+	}
+
 	const mdFile = await readFile(filename);
 	const postSource = mdFile.toString();
 	const {
@@ -180,11 +186,9 @@ export const getPostData = async (
 		readingTime,
 	} = await parsePost(postSource, { filename, attachments });
 
-	const { birthtime } = await stat(filename);
-
 	return {
 		url,
-		date: birthtime.getTime(),
+		date,
 
 		title,
 		previewText,

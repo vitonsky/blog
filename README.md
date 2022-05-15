@@ -18,7 +18,7 @@ This is my blog
 - [x] Move processing logic to API server
 	- [x] Implement caching of data
 	- [x] Try to implement auto extracting files
-- [ ] Prefer to data from name instead of file info
+- [x] Prefer to data from name instead of file info
 - [ ] Set 15 items per page
 - [ ] Deploy on gh-pages
 - [ ] Bind domain

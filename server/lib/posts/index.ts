@@ -1,5 +1,3 @@
-import path from "path";
-
 import { parsedPosts, initPostsHandlePromise } from "./cache";
 import { getPostFilenames, getPostUrlByFilename } from "./files";
 import { Post } from "./post";

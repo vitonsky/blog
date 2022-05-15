@@ -1,8 +1,18 @@
 import { promise as glob } from "glob-promise";
+import colors from "colors";
 
 import path from "path";
 
 import { blogPostsDir, siteInfo } from "../../../lib/constants";
+
+export const extractTimestampFromName = (filename: string) => {
+	const matchResult = filename.match(/^\d{4}-\d{1,2}-\d{1,2}/);
+	if (matchResult === null) return null;
+
+	const date = new Date(matchResult[0]);
+	const timestamp = date.getTime();
+	return isNaN(timestamp) ? null : timestamp;
+};
 
 export const getPostUrlByFilename = (filePath: string) => {
 	let pageUrl = path.basename(filePath);
@@ -14,7 +24,8 @@ export const getPostUrlByFilename = (filePath: string) => {
 	}
 
 	// TODO: split data in filename to URL segments
-	return siteInfo.blogPath + '/' + pageUrl;
+	// TODO: set consistent data format
+	return siteInfo.blogPath + "/" + pageUrl;
 };
 
 export const getFilenamesInDir = (
@@ -36,7 +47,6 @@ export const getFilenamesInDir = (
 	});
 };
 
-// TODO: exclude and warn filenames not by pattern `year-month-day-title`
 // TODO: exclude and warn filenames with same urls from names
 export const getPostFilenames = async () => {
 	// Don't handle draft files
@@ -44,11 +54,24 @@ export const getPostFilenames = async () => {
 		? []
 		: [blogPostsDir + "/_drafts/**"];
 
-	return getFilenamesInDir(
-		blogPostsDir + "/**/*.{md,mdx}",
-		unlistedPaths
+	return getFilenamesInDir(blogPostsDir + "/**/*.{md,mdx}", unlistedPaths).then(
+		(filenames) =>
+			filenames.filter((filename) => {
+				const isValidFilename =
+					extractTimestampFromName(path.basename(filename)) !== null;
+
+				if (!isValidFilename) {
+					console.warn(
+						colors.yellow(
+							`[skip post]: file "${filename}" is not contain date in name`
+						)
+					);
+				}
+
+				return isValidFilename;
+			})
 	);
-}
+};
 
 export const getAttachmentFilenames = async () => {
 	// Don't handle draft files
@@ -56,9 +79,5 @@ export const getAttachmentFilenames = async () => {
 		? []
 		: [blogPostsDir + "/_drafts/**"];
 
-	return getFilenamesInDir(
-		blogPostsDir + "/**/*.!(md|mdx)",
-		unlistedPaths
-	);
-}
-
+	return getFilenamesInDir(blogPostsDir + "/**/*.!(md|mdx)", unlistedPaths);
+};
