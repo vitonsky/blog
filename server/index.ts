@@ -16,7 +16,14 @@ export const runServer = () => {
 	initCache();
 
 	const app = express()
-	app.listen(port);
+	const server = app.listen(port);
+
+	// Graceful shutdown
+	process.on('SIGTERM', function () {
+		server.close(function () {
+			process.exit(0);
+		});
+	});
 
 	app.get('/', function (_, res) {
 		res.send('This is API server to handle files for blog');
