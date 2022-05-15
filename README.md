@@ -19,10 +19,10 @@ This is my blog
 	- [x] Implement caching of data
 	- [x] Try to implement auto extracting files
 - [x] Prefer to data from name instead of file info
-- [ ] Set 15 items per page
+- [x] Set 15 items per page
 - [ ] Deploy on gh-pages
 - [ ] Bind domain
-- [ ] Check TODOs
+- [x] Check TODOs
 - [ ] Write about blog
 
 Improvements

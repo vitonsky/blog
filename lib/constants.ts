@@ -19,7 +19,7 @@ export const metaData: {
 		},
 		{
 			name: 'keywords',
-			content: ['blog'].join(', ')
+			content: ['blog', 'computers', 'programming'].join(', ')
 		}
 	];
 

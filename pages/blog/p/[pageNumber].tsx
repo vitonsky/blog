@@ -13,8 +13,7 @@ import { BlogPage, BlogPageProps } from "../../../components/BlogPage/BlogPage";
 
 type PostsPageProps = Required<BlogPageProps>;
 
-// TODO: set 15
-const postsOnPage = 3;
+const postsOnPage = 15;
 
 const PostsPage: NextPage<PostsPageProps> = (props) => {
 	return <BlogPage {...props} />;
