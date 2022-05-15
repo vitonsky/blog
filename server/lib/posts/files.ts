@@ -23,8 +23,20 @@ export const getPostUrlByFilename = (filePath: string) => {
 		pageUrl = pageUrl.slice(0, -fileExtension.length);
 	}
 
-	// TODO: split data in filename to URL segments
-	// TODO: set consistent data format
+	// split to segments by date
+	const timestamp = extractTimestampFromName(pageUrl);
+	if (timestamp !== null) {
+		const urlWithRemovedPrefix = pageUrl.replace(/^\d{4}-\d{1,2}-\d{1,2}-*/, "");
+
+		const date = new Date(timestamp);
+		const year = date.getFullYear();
+		const month = date.getMonth();
+		const day = date.getDate();
+
+		const fillZero = (number: number) => String(number < 10 ? "0" + number : number);
+		pageUrl = [year, fillZero(month), fillZero(day), urlWithRemovedPrefix].join("/");
+	}
+
 	return siteInfo.blogPath + "/" + pageUrl;
 };
 
