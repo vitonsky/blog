@@ -47,7 +47,6 @@ export const getFilenamesInDir = (
 	});
 };
 
-// TODO: exclude and warn filenames with same urls from names
 export const getPostFilenames = async () => {
 	// Don't handle draft files
 	const unlistedPaths = Boolean(process.env.SHOW_DRAFTS)

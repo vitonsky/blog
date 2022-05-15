@@ -1,19 +1,18 @@
 import { parsedPosts, initPostsHandlePromise } from "./cache";
-import { getPostFilenames, getPostUrlByFilename } from "./files";
 import { Post } from "./post";
 
 export * from './post';
 
 export const getPostUrls = async () => {
-	const files = await getPostFilenames();
-	return files.map((file) => getPostUrlByFilename(file));
+	await initPostsHandlePromise;
+	return Object.keys(parsedPosts);
 };
 
-export const getPost = async (url: string): Promise<Post> => {
-	// const filename = getPostFilenameByUrl(url);
-	// const absolutePath = path.resolve(filename);
+export const getPost = async (url: string): Promise<Post | null> => {
+	await initPostsHandlePromise;
 
-	return parsedPosts[url].data;
+	const post = parsedPosts[url];
+	return post === undefined ? null : post.data;
 }
 
 export const getPosts = async ({
