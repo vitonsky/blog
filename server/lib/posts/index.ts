@@ -1,7 +1,7 @@
 import path from "path";
 
 import { parsedPosts, initPostsHandlePromise } from "./cache";
-import { getPostFilenameByUrl, getPostFilenames, getPostUrlByFilename } from "./files";
+import { getPostFilenames, getPostUrlByFilename } from "./files";
 import { Post } from "./post";
 
 export * from './post';
@@ -12,10 +12,10 @@ export const getPostUrls = async () => {
 };
 
 export const getPost = async (url: string): Promise<Post> => {
-	const filename = getPostFilenameByUrl(url);
-	const absolutePath = path.resolve(filename);
+	// const filename = getPostFilenameByUrl(url);
+	// const absolutePath = path.resolve(filename);
 
-	return parsedPosts[absolutePath];
+	return parsedPosts[url].data;
 }
 
 export const getPosts = async ({
@@ -32,7 +32,7 @@ export const getPosts = async ({
 	sort?: "asc" | "desc";
 } = {}) => {
 	await initPostsHandlePromise;
-	let posts: Post[] = Object.values(parsedPosts);
+	let posts: Post[] = Object.values(parsedPosts).map(({ data }) => data);
 
 	// Apply filter
 	if (tag !== undefined || lang !== undefined) {

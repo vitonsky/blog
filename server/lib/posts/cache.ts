@@ -1,38 +1,57 @@
-import watch from 'node-watch';
+import watch from "node-watch";
 
-import path from 'path';
-import { createHash } from 'crypto';
-import { readFile, rm } from 'fs/promises';
+import path from "path";
+import { createHash } from "crypto";
+import { readFile, rm } from "fs/promises";
 
-import { attachmentsPath, blogPostsDir, publicDir } from '../../../lib/constants';
-import { cp, isExistFile } from '../files';
+import {
+	attachmentsPath,
+	blogPostsDir,
+	publicDir,
+} from "../../../lib/constants";
+import { cp, isExistFile } from "../files";
 
-import { getAttachmentFilenames, getPostFilenames } from './files';
-import { Post, getPostData } from './post';
+import {
+	getAttachmentFilenames,
+	getPostFilenames,
+	getPostUrlByFilename,
+} from "./files";
+import { Post, getPostData } from "./post";
 
-export const parsedPosts: Record<string, Post> = {};
+export const parsedPosts: Record<
+	string,
+	{
+		file: string;
+		data: Post;
+	}
+> = {};
 const handleFile = async (file: string) => {
+	const url = getPostUrlByFilename(file);
 	const absolutePath = path.resolve(file);
 
-	if (!await isExistFile(file)) {
-		delete parsedPosts[absolutePath];
+	if (!(await isExistFile(file))) {
+		delete parsedPosts[url];
 		return;
 	}
 
 	// Update cache
 	const post = await getPostData(file, extractedAttachments);
 
-	parsedPosts[absolutePath] = post;
-}
+	parsedPosts[url] = {
+		file: absolutePath,
+		data: post,
+	};
+};
 
 export const extractedAttachments: Record<string, string> = {};
 export const handleAttachment = async (filename: string) => {
 	const absolutePath = path.resolve(filename);
 	const extension = path.extname(filename);
 
-	const updatePosts = () => Promise.all(Object.keys(parsedPosts).map(handleFile));
+	const updatePosts = () =>
+		Promise.all(Object.values(parsedPosts).map(({ file }) => handleFile(file)));
 
-	if (!await isExistFile(filename)) {
+	if (!(await isExistFile(filename))) {
 		const filePath = extractedAttachments[absolutePath];
 
 		if (filePath !== undefined) {
@@ -47,7 +66,7 @@ export const handleAttachment = async (filename: string) => {
 	}
 
 	const fd = await readFile(filename);
-	const hash = createHash('sha256').update(fd).digest('hex');
+	const hash = createHash("sha256").update(fd).digest("hex");
 	const filePath = path.join(attachmentsPath, hash + extension);
 
 	// TODO: don't upload files which not used in posts
@@ -59,7 +78,7 @@ export const handleAttachment = async (filename: string) => {
 	extractedAttachments[absolutePath] = filePath;
 
 	await updatePosts();
-}
+};
 
 // Hack to await data extracting and to prevent data extracting while export objects by nextjs
 let initEnd: () => void;
@@ -70,14 +89,18 @@ export const initPostsHandlePromise = new Promise<void>(async (done) => {
 // Handle all files
 export const initCache = async () => {
 	// Update files
-	watch(blogPostsDir, { recursive: true, persistent: false }, async (_, file) => {
-		const extension = path.extname(file);
-		if (['.md', '.mdx'].indexOf(extension) !== -1) {
-			handleFile(file);
-		} else {
-			handleAttachment(file);
+	watch(
+		blogPostsDir,
+		{ recursive: true, persistent: false },
+		async (_, file) => {
+			const extension = path.extname(file);
+			if ([".md", ".mdx"].indexOf(extension) !== -1) {
+				handleFile(file);
+			} else {
+				handleAttachment(file);
+			}
 		}
-	});
+	);
 
 	// Clear dir to remove unnecessary files
 	const attachmentsDir = path.join(publicDir, attachmentsPath);
@@ -89,4 +112,4 @@ export const initCache = async () => {
 	const posts = await getPostFilenames();
 	await Promise.all(posts.map((file) => handleFile(file)));
 	initEnd();
-}
+};

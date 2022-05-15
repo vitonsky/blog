@@ -4,13 +4,8 @@ import path from "path";
 
 import { blogPostsDir, siteInfo } from "../../../lib/constants";
 
-// TODO: use only filename, but not path segments
 export const getPostUrlByFilename = (filePath: string) => {
-	const fileRealpath = path.resolve(filePath);
-	const postsDirRealpath = path.resolve(blogPostsDir);
-
-	// remove prefix
-	let pageUrl = fileRealpath.slice(postsDirRealpath.length);
+	let pageUrl = path.basename(filePath);
 
 	// remove extension
 	const fileExtension = path.extname(pageUrl);
@@ -18,15 +13,8 @@ export const getPostUrlByFilename = (filePath: string) => {
 		pageUrl = pageUrl.slice(0, -fileExtension.length);
 	}
 
-	return siteInfo.blogPath + pageUrl;
-};
-
-export const getPostFilenameByUrl = (url: string) => {
-	const relativePath = path.join(
-		blogPostsDir,
-		url.slice(siteInfo.blogPath.length) + ".md"
-	);
-	return path.resolve(relativePath);
+	// TODO: split data in filename to URL segments
+	return siteInfo.blogPath + '/' + pageUrl;
 };
 
 export const getFilenamesInDir = (
