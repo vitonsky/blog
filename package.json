@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npx concurrently \"npm run api:dev\" \"npm run next:dev\"",
-    "build": "npm run api:build && npx concurrently -ks first \"sleep 3 && npm run next:build\" \"npm run api:start\"",
+    "build": "npm run api:build && npx concurrently -ks first \"sleep 3 && npm run next:build\" \"npm run api:start\" && echo '_next' > out/.nojekyll",
     "next:dev": "next dev",
     "next:build": "next build && next export",
     "api:dev": "npx concurrently \"webpack -wc ./webpack-server.config.js\" \"sleep 3 && SHOW_DRAFTS=1 nodemon ./server/dist/server.js start\"",
