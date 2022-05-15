@@ -3,13 +3,18 @@ import { Feed } from "feed";
 import { writeFile } from "fs/promises";
 
 import { getPosts } from "../server/api/getPosts";
+import { getPostWithAdditionalData } from "../server/api/getPostWithAdditionalData";
 
 import { siteInfo } from "./constants";
 import { getFullUrl } from "./utils";
 
 // TODO: update links and titles
 export const generateRss = async () => {
-	const posts = await getPosts({ limit: 15 });
+	const posts = await getPosts({ limit: 15 }).then((posts) =>
+		Promise.all(
+			posts.map((post) => getPostWithAdditionalData({ url: post.url }))
+		)
+	);
 
 	const feed = new Feed({
 		language: "en", // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
@@ -29,19 +34,18 @@ export const generateRss = async () => {
 		// generator: "awesome", // optional, default = 'Feed for Node.js'
 	});
 
-	posts.forEach(post => {
+	posts.forEach((post) => {
 		feed.addItem({
 			id: post.url,
 			link: post.url,
 
 			title: post.title,
 			description: post.description || post.previewText,
-			date: new Date(post.date),
 			image: post.image === null ? undefined : getFullUrl(post.image),
-			category: post.tags.map((tag) => ({ name: tag })),
+			content: post.additionalData.html,
 
-			// TODO: insert content instead prepared source to render
-			content: post.previewText,
+			date: new Date(post.date),
+			category: post.tags.map((tag) => ({ name: tag })),
 
 			// author: [
 			// 	{
@@ -64,5 +68,5 @@ export const generateRss = async () => {
 	// 	link: "https://example.com/johancruyff"
 	// });
 
-	await writeFile('./public/rss.xml', feed.rss2());
+	await writeFile("./public/rss.xml", feed.rss2());
 };

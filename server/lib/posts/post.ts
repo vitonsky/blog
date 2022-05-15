@@ -5,6 +5,9 @@ import getReadingTime from "reading-time";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 import colors from "colors";
+import remarkRehype from 'remark-rehype';
+import { remark } from 'remark';
+import rehypeStringify from 'rehype-stringify';
 
 import { readFile, stat } from "fs/promises";
 
@@ -29,6 +32,12 @@ export type Post = {
 		words: number;
 	};
 };
+
+export type PostWithAdditionalData = Post & {
+	additionalData: {
+		html: string;
+	}
+}
 
 const isUrl = (filename: string) => /^[a-z]*:\/\//i.test(filename);
 const isRelativePath = (filename: string) => /^[^\/]/.test(filename);
@@ -77,6 +86,11 @@ export const parsePost = async (
 		});
 	};
 
+	let mdast: any;
+	const extractTree = () => (node: any) => {
+		mdast = node;
+	};
+
 	const replaceAttachmentsLinks = () => (node: any) => {
 		visit(node, (node) => {
 			if (!("url" in node) || typeof node.url !== "string") return;
@@ -104,10 +118,19 @@ export const parsePost = async (
 				extractTextPlugin,
 				replaceAttachmentsLinks,
 				remarkGfm,
+				extractTree
 			],
 			rehypePlugins: [rehypeHighlight],
 		},
 	});
+
+	const mdastToHTML = async (node: any) => {
+		const mdast = await remark().use(remarkRehype).use(rehypeStringify).run(node);
+		const result = await remark().use(remarkRehype).use(rehypeStringify).stringify(mdast);
+		return result;
+	}
+
+	const html = await mdastToHTML(mdast);
 
 	if (previewText === null) {
 		throw new TypeError("Preview text are empty");
@@ -158,13 +181,17 @@ export const parsePost = async (
 		lang: typeof meta.lang === "string" ? meta.lang : null,
 		tags: Array.isArray(meta.tags) ? (meta.tags as string[]) : [],
 		keywords: Array.isArray(meta.keywords) ? (meta.keywords as string[]) : [],
+
+		additionalData: {
+			html
+		}
 	};
 };
 
 export const getPostData = async (
 	filename: string,
 	attachments: Record<string, string>
-): Promise<Post> => {
+): Promise<PostWithAdditionalData> => {
 	const url = getPostUrlByFilename(filename);
 
 	let date = extractTimestampFromName(path.basename(filename));
@@ -182,7 +209,7 @@ export const getPostData = async (
 
 	// Prevent unnecessary props forwarding
 	type StrictProps<X, Y> = { [K in keyof X]: K extends keyof Y ? (X)[K] : never };
-	const exactPostData: StrictProps<typeof postData, Post> = postData;
+	const exactPostData: StrictProps<typeof postData, PostWithAdditionalData> = postData;
 
 	return {
 		url,

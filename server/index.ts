@@ -9,6 +9,7 @@ import { getPostUrlsFabric } from './api/getPostUrls';
 import { getPostsFabric } from './api/getPosts';
 import { getPostFabric } from './api/getPost';
 import { getPaginationInfoFabric } from './api/getPaginationInfo';
+import { getPostWithAdditionalDataFabric } from './api/getPostWithAdditionalData';
 
 export const runServer = () => {
 	console.log('Run API server: ' + apiPath);
@@ -36,7 +37,8 @@ export const runServer = () => {
 		getPostUrlsFabric,
 		getPostsFabric,
 		getPostFabric,
-		getPaginationInfoFabric
+		getPaginationInfoFabric,
+		getPostWithAdditionalDataFabric
 	].forEach((fabric) => {
 		fabric(app);
 	})

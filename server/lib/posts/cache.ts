@@ -1,3 +1,5 @@
+// TODO: use SQLite instead of own implementation of storage
+
 import watch from "node-watch";
 
 import path from "path";
@@ -16,13 +18,13 @@ import {
 	getPostFilenames,
 	getPostUrlByFilename,
 } from "./files";
-import { Post, getPostData } from "./post";
+import { PostWithAdditionalData, getPostData } from "./post";
 
 export const parsedPosts: Record<
 	string,
 	{
 		file: string;
-		data: Post;
+		data: PostWithAdditionalData;
 	}
 > = {};
 const handleFile = async (file: string) => {

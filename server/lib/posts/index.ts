@@ -1,5 +1,5 @@
 import { parsedPosts, initPostsHandlePromise } from "./cache";
-import { Post } from "./post";
+import { Post, PostWithAdditionalData } from "./post";
 
 export * from './post';
 
@@ -8,11 +8,20 @@ export const getPostUrls = async () => {
 	return Object.keys(parsedPosts);
 };
 
-export const getPost = async (url: string): Promise<Post | null> => {
+export const getPostWithAdditionalData = async (url: string): Promise<PostWithAdditionalData | null> => {
 	await initPostsHandlePromise;
 
 	const post = parsedPosts[url];
 	return post === undefined ? null : post.data;
+}
+
+export const getPost = async (url: string): Promise<Post | null> => {
+	const post = await getPostWithAdditionalData(url);
+
+	if (post === null) return null;
+
+	const { additionalData, ...postData } = post;
+	return postData;
 }
 
 export const getPosts = async ({

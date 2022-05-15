@@ -34,8 +34,10 @@
     "react-elegant-ui": "^0.3.0",
     "reading-time": "^1.5.0",
     "rehype-highlight": "^5.0.2",
+    "rehype-stringify": "^9.0.3",
     "remark": "^14.0.2",
     "remark-gfm": "^3.0.1",
+    "remark-rehype": "^10.1.0",
     "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
