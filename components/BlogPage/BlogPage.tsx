@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 
@@ -21,11 +20,6 @@ export type BlogPageProps = {
 
 // TODO: add link to fix typo
 export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
-	// TODO: remove
-	useEffect(() => {
-		console.log({ posts });
-	}, [posts]);
-
 	return (
 		<>
 			<Head>

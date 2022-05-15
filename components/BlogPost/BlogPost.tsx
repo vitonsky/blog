@@ -31,11 +31,6 @@ export type BlogPostProps = {
 };
 
 export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
-	// TODO: remove
-	useEffect(() => {
-		console.log({ post });
-	}, [post]);
-
 	// TODO: use description instead `previewText` when it possible
 	return (
 		<>

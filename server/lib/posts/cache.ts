@@ -21,11 +21,8 @@ export const initPostsHandlePromise = new Promise<void>(async (done) => {
 
 // Handle all files
 export const initCache = async () => {
-	console.log('INIT CACHE');
-
 	// Update files
 	watch(blogPostsDir, { recursive: true, persistent: false }, (_, file) => {
-		console.log('CHANGE FILE', file);
 		handleFile(file);
 	});
 

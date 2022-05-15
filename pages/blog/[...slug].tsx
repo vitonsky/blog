@@ -32,8 +32,6 @@ export async function getStaticProps({
 
 export const getStaticPaths = async () => {
 	const paths = await getPostUrls();
-
-	console.log("Blog pages", paths);
 	return { paths, fallback: false };
 };
 
