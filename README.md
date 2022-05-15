@@ -27,8 +27,8 @@ This is my blog
 
 Improvements
 - [x] Implement auto extracting local resources of articles to directory `/public/files`. It allow to keep attachments in post directory
-- [ ] use description instead `previewText`
-- [ ] Improve url of posts to split date in title to path segments: `2022-01-01-title.md` -> `blog/2022/01/01/title`
+- [x] use description instead `previewText`
+- [x] Improve url of posts to split date in title to path segments: `2022-01-01-title.md` -> `blog/2022/01/01/title`
 - [x] Add styles for code block
 - [ ] Improve linters
 - [x] Add directory with drafts and subdirectory with not synced drafts. Show posts from this directory in dev mode

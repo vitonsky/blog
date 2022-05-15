@@ -16,7 +16,7 @@ export type Post = {
 	date: number;
 
 	title: string;
-	// TODO: add `description` property
+	description: string | null;
 	previewText: string;
 	tags: string[];
 	keywords: string[];
@@ -153,8 +153,8 @@ export const parsePost = async (
 		readingTime: { minutes, words },
 
 		title,
-		// TODO: handle relative urls
 		image,
+		description: typeof meta.description === "string" ? meta.description : null,
 		lang: typeof meta.lang === "string" ? meta.lang : null,
 		tags: Array.isArray(meta.tags) ? (meta.tags as string[]) : [],
 		keywords: Array.isArray(meta.keywords) ? (meta.keywords as string[]) : [],
@@ -175,28 +175,19 @@ export const getPostData = async (
 
 	const mdFile = await readFile(filename);
 	const postSource = mdFile.toString();
-	const {
-		mdxSource,
-		previewText,
-		title,
-		image,
-		tags,
-		keywords,
-		lang,
-		readingTime,
-	} = await parsePost(postSource, { filename, attachments });
+	const { meta, mdxSource: source, ...postData } = await parsePost(postSource, { filename, attachments });
+
+	// Delete meta
+	delete source.frontmatter;
+
+	// Prevent unnecessary props forwarding
+	type StrictProps<X, Y> = { [K in keyof X]: K extends keyof Y ? (X)[K] : never };
+	const exactPostData: StrictProps<typeof postData, Post> = postData;
 
 	return {
 		url,
 		date,
-
-		title,
-		previewText,
-		image,
-		source: mdxSource,
-		tags,
-		keywords,
-		lang,
-		readingTime,
+		source,
+		...exactPostData,
 	};
 };

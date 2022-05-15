@@ -31,7 +31,6 @@ export type BlogPostProps = {
 };
 
 export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
-	// TODO: use description instead `previewText` when it possible
 	return (
 		<>
 			<Head>
@@ -47,7 +46,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				></meta>
 
 				{/* Common metadata */}
-				<meta name="description" content={post.previewText} />
+				<meta name="description" content={post.description || post.previewText} />
 				{post.keywords.length > 0 && (
 					<meta name="keywords" content={post.keywords.join(", ")} />
 				)}
@@ -75,7 +74,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				<meta
 					name="twitter:description"
 					property="og:description"
-					content={post.previewText}
+					content={post.description || post.previewText}
 				/>
 				<meta name="twitter:card" content="summary" />
 				<meta

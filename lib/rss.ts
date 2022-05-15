@@ -35,7 +35,7 @@ export const generateRss = async () => {
 			link: post.url,
 
 			title: post.title,
-			description: post.previewText,
+			description: post.description || post.previewText,
 			date: new Date(post.date),
 			image: post.image === null ? undefined : getFullUrl(post.image),
 			category: post.tags.map((tag) => ({ name: tag })),
