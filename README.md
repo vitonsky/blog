@@ -26,7 +26,7 @@ This is my blog
 - [ ] Write about blog
 
 Improvements
-- [ ] Implement auto extracting local resources of articles to directory `/public/files`. It allow to keep attachments in post directory
+- [x] Implement auto extracting local resources of articles to directory `/public/files`. It allow to keep attachments in post directory
 - [ ] use description instead `previewText`
 - [ ] Improve url of posts to split date in title to path segments: `2022-01-01-title.md` -> `blog/2022/01/01/title`
 - [x] Add styles for code block

@@ -2,7 +2,6 @@ import { ApiKnob } from "../types";
 import { buildApiRequest } from "../lib/api";
 
 import { getPost as getPostFn, Post } from "../lib/posts";
-import { getPostFilenameByUrl } from "../lib/posts/files";
 
 export type Params = { url: string };
 
