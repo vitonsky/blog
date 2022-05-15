@@ -5,10 +5,10 @@ module.exports = {
 	devtool: 'inline-source-map',
 	mode: 'development',
 	target: 'node',
-	cache: {
-		type: 'filesystem',
-		allowCollectingMemory: true,
-	},
+	// cache: {
+	// 	type: 'filesystem',
+	// 	allowCollectingMemory: true,
+	// },
 	output: {
 		path: path.join(__dirname, 'server/dist'),
 		filename: 'server.js',

@@ -4,6 +4,7 @@ import path from "path";
 
 import { blogPostsDir, siteInfo } from "../../../lib/constants";
 
+// TODO: use only filename, but not path segments
 export const getPostUrlByFilename = (filePath: string) => {
 	const fileRealpath = path.resolve(filePath);
 	const postsDirRealpath = path.resolve(blogPostsDir);
@@ -47,15 +48,28 @@ export const getFilenamesInDir = (
 	});
 };
 
+// TODO: exclude and warn filenames not by pattern `year-month-day-title`
+// TODO: exclude and warn filenames with same urls from names
 export const getPostFilenames = async () => {
 	// Don't handle draft files
 	const unlistedPaths = Boolean(process.env.SHOW_DRAFTS)
 		? []
 		: [blogPostsDir + "/_drafts/**"];
 
-	// Get all posts
 	return getFilenamesInDir(
 		blogPostsDir + "/**/*.{md,mdx}",
+		unlistedPaths
+	);
+}
+
+export const getAttachmentFilenames = async () => {
+	// Don't handle draft files
+	const unlistedPaths = Boolean(process.env.SHOW_DRAFTS)
+		? []
+		: [blogPostsDir + "/_drafts/**"];
+
+	return getFilenamesInDir(
+		blogPostsDir + "/**/*.!(md|mdx)",
 		unlistedPaths
 	);
 }

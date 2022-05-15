@@ -4,16 +4,19 @@ import { visit } from "unist-util-visit";
 import getReadingTime from "reading-time";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
+import colors from "colors";
 
 import { readFile, stat } from "fs/promises";
 
 import { getPostUrlByFilename } from "./files";
+import path from "path";
 
 export type Post = {
 	url: string;
 	date: number;
 
 	title: string;
+	// TODO: add `description` property
 	previewText: string;
 	tags: string[];
 	keywords: string[];
@@ -27,7 +30,30 @@ export type Post = {
 	};
 };
 
-export const parsePost = async (text: string) => {
+const isUrl = (filename: string) => /^[a-z]*:\/\//i.test(filename);
+const isRelativePath = (filename: string) => /^[^\/]/.test(filename);
+const isLocalAttachmentUrl = (filename: string) => !isUrl(filename) && isRelativePath(filename);
+
+const getAttachment = (filename: string, attachments: Record<string, string>) => {
+	try {
+		const absolutePath = path.resolve(filename);
+		const fileUrl = attachments[absolutePath];
+		return fileUrl ?? null;
+	} catch (error) {
+		// Ignore
+	}
+
+	return null;
+};
+
+
+export const parsePost = async (
+	text: string,
+	{
+		filename,
+		attachments,
+	}: { filename: string; attachments: Record<string, string> }
+) => {
 	let previewText: string | null = null;
 	const extractPreviewTextPlugin = () => (node: any) => {
 		visit(node, "paragraph", (paragraph) => {
@@ -51,10 +77,34 @@ export const parsePost = async (text: string) => {
 		});
 	};
 
+	const replaceAttachmentsLinks = () => (node: any) => {
+		visit(node, (node) => {
+			if (!("url" in node) || typeof node.url !== "string") return;
+			if (!isLocalAttachmentUrl(node.url)) return;
+
+			const fullPath = path.join(path.dirname(filename), node.url);
+			const fileUrl = getAttachment(fullPath, attachments);
+			if (fileUrl !== null) {
+				node.url = fileUrl;
+			} else {
+				console.log(
+					colors.yellow(
+						`Invalid relative URL "${node.url}" in post "${filename}"`
+					)
+				);
+			}
+		});
+	};
+
 	const mdxSource = await serialize(text, {
 		parseFrontmatter: true,
 		mdxOptions: {
-			remarkPlugins: [extractPreviewTextPlugin, extractTextPlugin, remarkGfm],
+			remarkPlugins: [
+				extractPreviewTextPlugin,
+				extractTextPlugin,
+				replaceAttachmentsLinks,
+				remarkGfm,
+			],
 			rehypePlugins: [rehypeHighlight],
 		},
 	});
@@ -78,6 +128,24 @@ export const parsePost = async (text: string) => {
 		throw new TypeError("Title are empty");
 	}
 
+	// Resolve image URL
+	let image = typeof meta.image === "string" ? meta.image : null;
+	if (image !== null && isLocalAttachmentUrl(image)) {
+		const fullPath = path.join(path.dirname(filename), image);
+		const url = getAttachment(fullPath, attachments);
+
+		if (url === null) {
+			console.log(
+				colors.yellow(
+					`Invalid cover image URL "${image}" in post "${filename}"`
+				)
+			);
+		}
+
+		// Set correct URL or null
+		image = url;
+	}
+
 	return {
 		meta,
 		mdxSource,
@@ -85,14 +153,18 @@ export const parsePost = async (text: string) => {
 		readingTime: { minutes, words },
 
 		title,
-		image: typeof meta.image === "string" ? meta.image : null,
+		// TODO: handle relative urls
+		image,
 		lang: typeof meta.lang === "string" ? meta.lang : null,
 		tags: Array.isArray(meta.tags) ? (meta.tags as string[]) : [],
 		keywords: Array.isArray(meta.keywords) ? (meta.keywords as string[]) : [],
 	};
 };
 
-export const getPostData = async (filename: string): Promise<Post> => {
+export const getPostData = async (
+	filename: string,
+	attachments: Record<string, string>
+): Promise<Post> => {
 	const url = getPostUrlByFilename(filename);
 
 	const mdFile = await readFile(filename);
@@ -106,7 +178,7 @@ export const getPostData = async (filename: string): Promise<Post> => {
 		keywords,
 		lang,
 		readingTime,
-	} = await parsePost(postSource);
+	} = await parsePost(postSource, { filename, attachments });
 
 	const { birthtime } = await stat(filename);
 
@@ -124,32 +196,3 @@ export const getPostData = async (filename: string): Promise<Post> => {
 		readingTime,
 	};
 };
-
-// TODO: implement it when will setup API server to build data
-// const extractFilenames = async () => {
-// 	// Don't handle draft files
-// 	const unlistedPaths = Boolean(process.env.SHOW_DRAFTS)
-// 		? []
-// 		: [blogPostsDir + "/_drafts/**"];
-
-// 	// Get all posts
-// 	const files = await getFilenamesInDir(
-// 		blogPostsDir + "/**/*.!(md|mdx)",
-// 		unlistedPaths
-// 	);
-
-// 	const filenames: Record<string, string> = {};
-
-// 	await Promise.all(files.map(async (filename) => {
-// 		const absolutePath = path.resolve(filename);
-// 		const extension = path.extname(filename);
-
-// 		const fd = await readFile(filename);
-// 		const hash = createHash('sha256').update(fd).digest('hex');
-
-// 		filenames[absolutePath] = hash + extension;
-// 	}))
-
-
-// 	return filenames;
-// }

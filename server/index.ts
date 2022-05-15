@@ -19,11 +19,13 @@ export const runServer = () => {
 	const server = app.listen(port);
 
 	// Graceful shutdown
-	process.on('SIGTERM', function () {
+	const closeApp = function () {
 		server.close(function () {
 			process.exit(0);
 		});
-	});
+	};
+	process.on('SIGTERM', closeApp);
+	process.on('beforeExit', closeApp)
 
 	app.get('/', function (_, res) {
 		res.send('This is API server to handle files for blog');
