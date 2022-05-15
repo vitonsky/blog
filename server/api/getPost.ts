@@ -1,7 +1,8 @@
 import { ApiKnob } from "../types";
 import { buildApiRequest } from "../lib/api";
 
-import { getPost as getPostFn, getPostFilenameByUrl, Post } from "../lib/posts";
+import { getPost as getPostFn, Post } from "../lib/posts";
+import { getPostFilenameByUrl } from "../lib/posts/files";
 
 export type Params = { url: string };
 
@@ -11,8 +12,7 @@ export const getPostFabric: ApiKnob = (app) => {
 	app.get('/getPost', async function (req, res) {
 		const { url } = req.query as Params;
 
-		const path = getPostFilenameByUrl(url as string);
-		const post = await getPostFn(path);
+		const post = await getPostFn(url);
 
 		res.send(post);
 	});

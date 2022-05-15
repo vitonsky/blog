@@ -16,7 +16,7 @@ This is my blog
 - [x] Add spinner for dynamic loading page content
 - [x] Add button "Back to top"
 - [x] Move processing logic to API server
-	- [ ] Implement caching of data
+	- [x] Implement caching of data
 	- [ ] Try to implement auto extracting files
 - [ ] Set 15 items per page
 - [ ] Deploy on gh-pages

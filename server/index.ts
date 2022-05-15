@@ -1,29 +1,40 @@
 import express from 'express';
+import minimist from 'minimist';
 
-import { port } from './constants';
+import { apiPath, port } from './constants';
+
+import { initCache } from './lib/posts/cache';
 
 import { getPostUrlsFabric } from './api/getPostUrls';
 import { getPostsFabric } from './api/getPosts';
 import { getPostFabric } from './api/getPost';
 import { getPaginationInfoFabric } from './api/getPaginationInfo';
 
-// TODO: set up a light API server to return posts
-// it should have watcher of files and cache to avoid useless calculations
-const app = express()
-const server = app.listen(port);
+export const runServer = () => {
+	console.log('Run API server: ' + apiPath);
 
-app.get('/', function (_, res) {
-	res.send('This is API server to handle files for blog');
-});
+	initCache();
 
-// Apply API knobs
-[
-	getPostUrlsFabric,
-	getPostsFabric,
-	getPostFabric,
-	getPaginationInfoFabric
-].forEach((fabric) => {
-	fabric(app);
-})
+	const app = express()
+	app.listen(port);
 
-export default server;
+	app.get('/', function (_, res) {
+		res.send('This is API server to handle files for blog');
+	});
+
+	// Apply API knobs
+	[
+		getPostUrlsFabric,
+		getPostsFabric,
+		getPostFabric,
+		getPaginationInfoFabric
+	].forEach((fabric) => {
+		fabric(app);
+	})
+}
+
+// Run server
+const argv = minimist(process.argv.slice(2));
+if (argv._[0] === 'start') {
+	runServer();
+}
