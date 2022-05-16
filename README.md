@@ -20,8 +20,8 @@ This is my blog
 	- [x] Try to implement auto extracting files
 - [x] Prefer to data from name instead of file info
 - [x] Set 15 items per page
-- [ ] Deploy on gh-pages
-- [ ] Bind domain
+- [x] Deploy on gh-pages
+- [x] Bind domain
 - [x] Check TODOs
 - [ ] Write about blog
 
@@ -38,4 +38,4 @@ Improvements
 - [ ] Add comments
 - [ ] Add components to embedded video, tweets and other iframes
 - [ ] Move styles to tokens
-- [ ] Use HTTP server which handle all posts only once to optimize building and avoid parse all posts for each page generation
+- [x] Use HTTP server which handle all posts only once to optimize building and avoid parse all posts for each page generation
