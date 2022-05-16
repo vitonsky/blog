@@ -1,0 +1,5 @@
+- [ ] Add analytics
+- [ ] Add anchors to sections
+- [ ] Add page with tags
+- [ ] Add comments
+- [ ] Add components to embedded video, tweets and other iframes
