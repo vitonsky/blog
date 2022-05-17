@@ -1,9 +1,19 @@
 # dependencies
 node_modules
+.pnp
+.pnp.js
+yarn.lock
 package-lock.json
 
 # testing
 coverage
+
+# next.js
+.next/
+out/
+
+# production
+/build
 
 # misc
 .DS_Store
@@ -19,8 +29,12 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# vercel
+.vercel
+
 # typescript
 *.tsbuildinfo
 
-# drafts
-_drafts
+# artefacts
+public/rss.xml
+public/files

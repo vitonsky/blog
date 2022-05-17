@@ -8,10 +8,11 @@ import { readFile, rm } from "fs/promises";
 
 import {
 	attachmentsPath,
-	blogPostsDir,
 	publicDir,
-} from "../../../lib/constants";
+} from "../../constants";
+
 import { cp, isExistFile } from "../files";
+import { blogPostsDir } from "../../constants";
 
 import {
 	getAttachmentFilenames,

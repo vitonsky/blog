@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-	entry: './server/index',
+	entry: './index',
 	devtool: 'inline-source-map',
 	mode: 'development',
 	target: 'node',
@@ -10,7 +10,7 @@ module.exports = {
 	// 	allowCollectingMemory: true,
 	// },
 	output: {
-		path: path.join(__dirname, 'server/dist'),
+		path: path.join(__dirname, 'dist'),
 		filename: 'server.js',
 	},
 	module: {

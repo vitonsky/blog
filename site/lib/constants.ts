@@ -23,8 +23,5 @@ export const metaData: {
 		}
 	];
 
-export const contentDir = ".";
-export const blogPostsDir = contentDir + "/posts";
-
 export const publicDir = "./public";
 export const attachmentsPath = "/files";
