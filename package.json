@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "npx concurrently \"cd server && npm run api:dev\" \"cd site && npm run next:dev\"",
     "build": "npx concurrently \"cd server && npm run api:build\" && npx concurrently -ks first \"sleep 3 && cd site && npm run next:build\" \"cd server && npm run api:start\"",
-    "install-packages": "npm i && npx concurrently \"cd server && npm i\" \"cd site && npm i\""
+    "install-all": "npm i && npx concurrently \"cd server && npm i\" \"cd site && npm i\""
   },
   "dependencies": {
     "concurrently": "^7.1.0"
