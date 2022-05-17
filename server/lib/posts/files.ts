@@ -3,7 +3,8 @@ import colors from "colors";
 
 import path from "path";
 
-import { blogPostsDir, siteInfo } from "../../../lib/constants";
+import { blogPostsDir } from "../../constants";
+import { siteInfo } from "../../../site/lib/constants";
 
 export const extractTimestampFromName = (filename: string) => {
 	const matchResult = filename.match(/^\d{4}-\d{1,2}-\d{1,2}/);

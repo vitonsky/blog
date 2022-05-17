@@ -10,6 +10,10 @@ const withMDX = require('@next/mdx')({
 });
 
 module.exports = withMDX({
+	experimental: {
+		externalDir: true,
+	},
+
 	// enable to `index` pages will work with catch-all routes
 	trailingSlash: true,
 

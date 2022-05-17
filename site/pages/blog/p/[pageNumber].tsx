@@ -6,8 +6,8 @@ import type {
 
 import { siteInfo } from "../../../lib/constants";
 
-import { getPaginationInfo } from "../../../server/api/getPaginationInfo";
-import { getPosts } from "../../../server/api/getPosts";
+import { getPaginationInfo } from "../../../../server/api/getPaginationInfo";
+import { getPosts } from "../../../../server/api/getPosts";
 
 import { BlogPage, BlogPageProps } from "../../../components/BlogPage/BlogPage";
 
