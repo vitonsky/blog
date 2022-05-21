@@ -1,12 +1,12 @@
-import { NextPage, GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { NextPage, GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
-import { Post } from "../../../server/lib/posts";
-import { siteInfo } from "../../lib/constants";
+import { Post } from '../../../server/lib/posts';
+import { siteInfo } from '../../lib/constants';
 
-import { getPost } from "../../../server/api/getPost";
-import { getPostUrls } from "../../../server/api/getPostUrls";
+import { getPost } from '../../../server/api/getPost';
+import { getPostUrls } from '../../../server/api/getPostUrls';
 
-import { BlogPost } from "../../components/BlogPost/BlogPost";
+import { BlogPost } from '../../components/BlogPost/BlogPost';
 
 type PostProps = {
 	post: Post;
@@ -20,10 +20,10 @@ export async function getStaticProps({
 	params: { slug } = {},
 }: GetStaticPropsContext): Promise<GetStaticPropsResult<PostProps>> {
 	if (slug === undefined) {
-		throw new Error("Empty slug");
+		throw new Error('Empty slug');
 	}
 
-	const pagePath = Array.isArray(slug) ? slug.join("/") : slug;
+	const pagePath = Array.isArray(slug) ? slug.join('/') : slug;
 	const url = [siteInfo.blogPath, pagePath].join('/');
 
 	const post = await getPost({ url });

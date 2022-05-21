@@ -1,5 +1,5 @@
-import { parsedPosts, initPostsHandlePromise } from "./cache";
-import { Post, PostWithAdditionalData } from "./post";
+import { parsedPosts, initPostsHandlePromise } from './cache';
+import { Post, PostWithAdditionalData } from './post';
 
 export * from './post';
 
@@ -8,12 +8,14 @@ export const getPostUrls = async () => {
 	return Object.keys(parsedPosts);
 };
 
-export const getPostWithAdditionalData = async (url: string): Promise<PostWithAdditionalData | null> => {
+export const getPostWithAdditionalData = async (
+	url: string,
+): Promise<PostWithAdditionalData | null> => {
 	await initPostsHandlePromise;
 
 	const post = parsedPosts[url];
 	return post === undefined ? null : post.data;
-}
+};
 
 export const getPost = async (url: string): Promise<Post | null> => {
 	const post = await getPostWithAdditionalData(url);
@@ -22,12 +24,12 @@ export const getPost = async (url: string): Promise<Post | null> => {
 
 	const { additionalData, ...postData } = post;
 	return postData;
-}
+};
 
 export const getPosts = async ({
 	tag,
 	lang,
-	sort = "desc",
+	sort = 'desc',
 	from = 0,
 	limit,
 }: {
@@ -35,7 +37,7 @@ export const getPosts = async ({
 	limit?: number;
 	tag?: string;
 	lang?: string;
-	sort?: "asc" | "desc";
+	sort?: 'asc' | 'desc';
 } = {}) => {
 	await initPostsHandlePromise;
 	let posts: Post[] = Object.values(parsedPosts).map(({ data }) => data);
@@ -52,7 +54,7 @@ export const getPosts = async ({
 
 	// Sort
 	posts = posts.sort((p1, p2) =>
-		sort === "desc" ? p2.date - p1.date : p1.date - p2.date
+		sort === 'desc' ? p2.date - p1.date : p1.date - p2.date,
 	);
 
 	// Slice
@@ -75,4 +77,3 @@ export const getPaginationInfo = async ({
 
 	return { postsNumber, pagesNumber };
 };
-

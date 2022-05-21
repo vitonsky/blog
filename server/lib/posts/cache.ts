@@ -1,25 +1,18 @@
 // TODO: use SQLite instead of own implementation of storage
 
-import watch from "node-watch";
+import watch from 'node-watch';
 
-import path from "path";
-import { createHash } from "crypto";
-import { readFile, rm } from "fs/promises";
+import path from 'path';
+import { createHash } from 'crypto';
+import { readFile, rm } from 'fs/promises';
 
-import {
-	attachmentsPath,
-	publicDir,
-} from "../../constants";
+import { attachmentsPath, publicDir } from '../../constants';
 
-import { cp, isExistFile } from "../files";
-import { blogPostsDir } from "../../constants";
+import { cp, isExistFile } from '../files';
+import { blogPostsDir } from '../../constants';
 
-import {
-	getAttachmentFilenames,
-	getPostFilenames,
-	getPostUrlByFilename,
-} from "./files";
-import { PostWithAdditionalData, getPostData } from "./post";
+import { getAttachmentFilenames, getPostFilenames, getPostUrlByFilename } from './files';
+import { PostWithAdditionalData, getPostData } from './post';
 
 export const parsedPosts: Record<
 	string,
@@ -38,6 +31,7 @@ const handleFile = async (file: string) => {
 	}
 
 	// Update cache
+	// eslint-disable-next-line @typescript-eslint/no-use-before-define
 	const post = await getPostData(file, extractedAttachments);
 
 	parsedPosts[url] = {
@@ -69,7 +63,7 @@ export const handleAttachment = async (filename: string) => {
 	}
 
 	const fd = await readFile(filename);
-	const hash = createHash("sha256").update(fd).digest("hex");
+	const hash = createHash('sha256').update(fd).digest('hex');
 	const filePath = path.join(attachmentsPath, hash + extension);
 
 	// TODO: don't upload files which not used in posts
@@ -92,18 +86,14 @@ export const initPostsHandlePromise = new Promise<void>(async (done) => {
 // Handle all files
 export const initCache = async () => {
 	// Update files
-	watch(
-		blogPostsDir,
-		{ recursive: true, persistent: false },
-		async (_, file) => {
-			const extension = path.extname(file);
-			if ([".md", ".mdx"].indexOf(extension) !== -1) {
-				handleFile(file);
-			} else {
-				handleAttachment(file);
-			}
+	watch(blogPostsDir, { recursive: true, persistent: false }, async (_, file) => {
+		const extension = path.extname(file);
+		if (['.md', '.mdx'].indexOf(extension) !== -1) {
+			handleFile(file);
+		} else {
+			handleAttachment(file);
 		}
-	);
+	});
 
 	// Clear dir to remove unnecessary files
 	const attachmentsDir = path.join(publicDir, attachmentsPath);

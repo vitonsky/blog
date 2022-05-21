@@ -1,0 +1,7 @@
+# thirdparty
+node_modules
+.next
+
+# artifacts
+out
+dist

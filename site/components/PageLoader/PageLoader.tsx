@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from "react";
-import { useRouter } from 'next/router'
-import { Spinner } from 'react-elegant-ui/components/Spinner/Spinner.bundle/desktop'
+import { FC, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { Spinner } from 'react-elegant-ui/components/Spinner/Spinner.bundle/desktop';
 
 import styles from './PageLoader.module.css';
 
@@ -27,16 +27,18 @@ const useIsRouterLoading = () => {
 			router.events.off('routeChangeStart', startLoading);
 			router.events.off('routeChangeComplete', completeLoading);
 			router.events.off('routeChangeError', completeLoading);
-		}
+		};
 	}, [loadingPath, router]);
 
 	return loadingPath !== null;
-}
+};
 
 export const PageLoader: FC = () => {
 	const isRouterLoading = useIsRouterLoading();
 
-	return <div className={styles.Loader}>
-		<Spinner view="primitive" progress={isRouterLoading} />
-	</div>;
-}
+	return (
+		<div className={styles.Loader}>
+			<Spinner view="primitive" progress={isRouterLoading} />
+		</div>
+	);
+};

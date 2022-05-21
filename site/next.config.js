@@ -25,9 +25,9 @@ module.exports = withMDX({
 		// Load SVG as component
 		config.module.rules.push({
 			test: /\.svg$/,
-			use: ["@svgr/webpack"]
+			use: ['@svgr/webpack'],
 		});
 
 		return config;
 	},
-})
+});

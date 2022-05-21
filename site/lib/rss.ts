@@ -1,27 +1,25 @@
-import { Feed } from "feed";
+import { Feed } from 'feed';
 
-import { writeFile } from "fs/promises";
+import { writeFile } from 'fs/promises';
 
-import { getPosts } from "../../server/api/getPosts";
-import { getPostWithAdditionalData } from "../../server/api/getPostWithAdditionalData";
+import { getPosts } from '../../server/api/getPosts';
+import { getPostWithAdditionalData } from '../../server/api/getPostWithAdditionalData';
 
-import { siteInfo } from "./constants";
-import { getFullUrl } from "./utils";
+import { siteInfo } from './constants';
+import { getFullUrl } from './utils';
 
 // TODO: update links and titles
 export const generateRss = async () => {
 	const posts = await getPosts({ limit: 15 }).then((posts) =>
-		Promise.all(
-			posts.map((post) => getPostWithAdditionalData({ url: post.url }))
-		)
+		Promise.all(posts.map((post) => getPostWithAdditionalData({ url: post.url }))),
 	);
 
 	const feed = new Feed({
-		language: "en", // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
-		title: "Feed Title",
-		description: "This is my personal feed!",
+		language: 'en', // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
+		title: 'Feed Title',
+		description: 'This is my personal feed!',
 		id: siteInfo.url,
-		copyright: "All rights reserved 2013, John Doe",
+		copyright: 'All rights reserved 2013, John Doe',
 		updated: new Date(posts[0].date), // date of last post
 		// link: "http://example.com/",
 		// image: "http://example.com/image.png",
@@ -68,5 +66,5 @@ export const generateRss = async () => {
 	// 	link: "https://example.com/johancruyff"
 	// });
 
-	await writeFile("./public/rss.xml", feed.rss2());
+	await writeFile('./public/rss.xml', feed.rss2());
 };

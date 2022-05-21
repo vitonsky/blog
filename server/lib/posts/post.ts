@@ -1,18 +1,18 @@
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import { serialize } from "next-mdx-remote/serialize";
-import { visit } from "unist-util-visit";
-import getReadingTime from "reading-time";
-import rehypeHighlight from "rehype-highlight";
-import remarkGfm from "remark-gfm";
-import colors from "colors";
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
+import { visit } from 'unist-util-visit';
+import getReadingTime from 'reading-time';
+import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
+import colors from 'colors';
 import remarkRehype from 'remark-rehype';
 import { remark } from 'remark';
 import rehypeStringify from 'rehype-stringify';
 
-import { readFile, stat } from "fs/promises";
+import { readFile, stat } from 'fs/promises';
 
-import { extractTimestampFromName, getPostUrlByFilename } from "./files";
-import path from "path";
+import { extractTimestampFromName, getPostUrlByFilename } from './files';
+import path from 'path';
 
 export type Post = {
 	url: string;
@@ -36,12 +36,13 @@ export type Post = {
 export type PostWithAdditionalData = Post & {
 	additionalData: {
 		html: string;
-	}
-}
+	};
+};
 
 const isUrl = (filename: string) => /^[a-z]*:\/\//i.test(filename);
 const isRelativePath = (filename: string) => /^[^\/]/.test(filename);
-const isLocalAttachmentUrl = (filename: string) => !isUrl(filename) && isRelativePath(filename);
+const isLocalAttachmentUrl = (filename: string) =>
+	!isUrl(filename) && isRelativePath(filename);
 
 const getAttachment = (filename: string, attachments: Record<string, string>) => {
 	try {
@@ -55,33 +56,29 @@ const getAttachment = (filename: string, attachments: Record<string, string>) =>
 	return null;
 };
 
-
 export const parsePost = async (
 	text: string,
-	{
-		filename,
-		attachments,
-	}: { filename: string; attachments: Record<string, string> }
+	{ filename, attachments }: { filename: string; attachments: Record<string, string> },
 ) => {
 	let previewText: string | null = null;
 	const extractPreviewTextPlugin = () => (node: any) => {
-		visit(node, "paragraph", (paragraph) => {
+		visit(node, 'paragraph', (paragraph) => {
 			if (previewText !== null) return;
 
-			let texts: string[] = [];
-			visit(paragraph, "text", (node) => {
+			const texts: string[] = [];
+			visit(paragraph, 'text', (node) => {
 				texts.push(node.value);
 			});
 
 			if (texts.length > 0) {
-				previewText = texts.join("\n\n");
+				previewText = texts.join('\n\n');
 			}
 		});
 	};
 
-	let pageText: string = "";
+	let pageText: string = '';
 	const extractTextPlugin = () => (node: any) => {
-		visit(node, ["text", "code"], (node) => {
+		visit(node, ['text', 'code'], (node) => {
 			pageText += node.value;
 		});
 	};
@@ -93,7 +90,7 @@ export const parsePost = async (
 
 	const replaceAttachmentsLinks = () => (node: any) => {
 		visit(node, (node) => {
-			if (!("url" in node) || typeof node.url !== "string") return;
+			if (!('url' in node) || typeof node.url !== 'string') return;
 			if (!isLocalAttachmentUrl(node.url)) return;
 
 			const fullPath = path.join(path.dirname(filename), node.url);
@@ -103,8 +100,8 @@ export const parsePost = async (
 			} else {
 				console.log(
 					colors.yellow(
-						`Invalid relative URL "${node.url}" in post "${filename}"`
-					)
+						`Invalid relative URL "${node.url}" in post "${filename}"`,
+					),
 				);
 			}
 		});
@@ -118,7 +115,7 @@ export const parsePost = async (
 				extractTextPlugin,
 				replaceAttachmentsLinks,
 				remarkGfm,
-				extractTree
+				extractTree,
 			],
 			rehypePlugins: [rehypeHighlight],
 		},
@@ -126,14 +123,17 @@ export const parsePost = async (
 
 	const mdastToHTML = async (node: any) => {
 		const mdast = await remark().use(remarkRehype).use(rehypeStringify).run(node);
-		const result = await remark().use(remarkRehype).use(rehypeStringify).stringify(mdast);
+		const result = await remark()
+			.use(remarkRehype)
+			.use(rehypeStringify)
+			.stringify(mdast);
 		return result;
-	}
+	};
 
 	const html = await mdastToHTML(mdast);
 
 	if (previewText === null) {
-		throw new TypeError("Preview text are empty");
+		throw new TypeError('Preview text are empty');
 	}
 
 	// ReadTimeResults
@@ -141,27 +141,25 @@ export const parsePost = async (
 
 	const meta = mdxSource.frontmatter;
 	if (!meta) {
-		throw new Error("Metadata are empty");
-	} else if (typeof meta !== "object" || Array.isArray(meta)) {
-		throw new TypeError("Metadata is have unexpected type");
+		throw new Error('Metadata are empty');
+	} else if (typeof meta !== 'object' || Array.isArray(meta)) {
+		throw new TypeError('Metadata is have unexpected type');
 	}
 
 	const title = meta.title;
-	if (!title || typeof title !== "string") {
-		throw new TypeError("Title are empty");
+	if (!title || typeof title !== 'string') {
+		throw new TypeError('Title are empty');
 	}
 
 	// Resolve image URL
-	let image = typeof meta.image === "string" ? meta.image : null;
+	let image = typeof meta.image === 'string' ? meta.image : null;
 	if (image !== null && isLocalAttachmentUrl(image)) {
 		const fullPath = path.join(path.dirname(filename), image);
 		const url = getAttachment(fullPath, attachments);
 
 		if (url === null) {
 			console.log(
-				colors.yellow(
-					`Invalid cover image URL "${image}" in post "${filename}"`
-				)
+				colors.yellow(`Invalid cover image URL "${image}" in post "${filename}"`),
 			);
 		}
 
@@ -177,20 +175,20 @@ export const parsePost = async (
 
 		title,
 		image,
-		description: typeof meta.description === "string" ? meta.description : null,
-		lang: typeof meta.lang === "string" ? meta.lang : null,
+		description: typeof meta.description === 'string' ? meta.description : null,
+		lang: typeof meta.lang === 'string' ? meta.lang : null,
 		tags: Array.isArray(meta.tags) ? (meta.tags as string[]) : [],
 		keywords: Array.isArray(meta.keywords) ? (meta.keywords as string[]) : [],
 
 		additionalData: {
-			html
-		}
+			html,
+		},
 	};
 };
 
 export const getPostData = async (
 	filename: string,
-	attachments: Record<string, string>
+	attachments: Record<string, string>,
 ): Promise<PostWithAdditionalData> => {
 	const url = getPostUrlByFilename(filename);
 
@@ -202,13 +200,17 @@ export const getPostData = async (
 
 	const mdFile = await readFile(filename);
 	const postSource = mdFile.toString();
-	const { meta, mdxSource: source, ...postData } = await parsePost(postSource, { filename, attachments });
+	const {
+		meta,
+		mdxSource: source,
+		...postData
+	} = await parsePost(postSource, { filename, attachments });
 
 	// Delete meta
 	delete source.frontmatter;
 
 	// Prevent unnecessary props forwarding
-	type StrictProps<X, Y> = { [K in keyof X]: K extends keyof Y ? (X)[K] : never };
+	type StrictProps<X, Y> = { [K in keyof X]: K extends keyof Y ? X[K] : never };
 	const exactPostData: StrictProps<typeof postData, PostWithAdditionalData> = postData;
 
 	return {

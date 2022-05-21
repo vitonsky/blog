@@ -1,6 +1,6 @@
-import { FC, ReactNode, useCallback } from "react";
+import { FC, ReactNode, useCallback } from 'react';
 
-import { Link } from "../Link/Link";
+import { Link } from '../Link/Link';
 
 import styles from './Pagination.module.css';
 
@@ -20,9 +20,8 @@ export const Pagination: FC<Pagination> = ({
 	showNavigation = true,
 }) => {
 	const buildLink = useCallback(
-		(page: number) =>
-			typeof prefix === "string" ? prefix + page : prefix(page),
-		[prefix]
+		(page: number) => (typeof prefix === 'string' ? prefix + page : prefix(page)),
+		[prefix],
 	);
 
 	const drawRange = (from: number, to: number) => {
@@ -31,7 +30,7 @@ export const Pagination: FC<Pagination> = ({
 			pages.push(
 				<Link href={buildLink(pageNumber)} key={pageNumber}>
 					{pageNumber}
-				</Link>
+				</Link>,
 			);
 		}
 
@@ -46,8 +45,7 @@ export const Pagination: FC<Pagination> = ({
 		pagesBefore = drawRange(currentPage - pagesNumber, currentPage - 1);
 	}
 
-	const pagesAfterNum =
-		currentPage < pagesNumber ? pagesNumber - currentPage : 0;
+	const pagesAfterNum = currentPage < pagesNumber ? pagesNumber - currentPage : 0;
 	let pagesAfter: ReactNode = null;
 	if (pagesAfterNum > 0) {
 		const pagesNumber =

@@ -1,0 +1,21 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-no-unsupported-browser-features"
+  ],
+  "rules": {
+    "indentation": "tab",
+    "max-empty-lines": 2,
+    "plugin/no-unsupported-browser-features": [
+      true,
+      {
+        "ignore": []
+      }
+    ]
+  },
+  "ignoreFiles": [
+    "**/*.ts",
+    "**/*.tsx",
+    "dist/**",
+  ]
+}

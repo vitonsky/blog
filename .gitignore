@@ -1,26 +1,32 @@
-# dependencies
+# packages
 node_modules
 package-lock.json
-
-# testing
-coverage
-
-# misc
-.DS_Store
-*.pem
-.vscode
+.npmrc
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.tsbuildinfo
+
+# testing
+coverage
+
+# editors
+.idea
+.vscode
+debug.log
+
+# misc
+.DS_Store
+*.pem
 
 # local env files
 .env*.local
 
-# typescript
-*.tsbuildinfo
+# artefacts
+dist
 
 # drafts
 _drafts
