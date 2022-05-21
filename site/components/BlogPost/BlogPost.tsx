@@ -1,25 +1,25 @@
-import { useEffect } from "react";
-import { NextPage } from "next";
-import Head from "next/head";
-import { MDXRemote } from "next-mdx-remote";
+import { useEffect } from 'react';
+import { NextPage } from 'next';
+import Head from 'next/head';
+import { MDXRemote } from 'next-mdx-remote';
 
-import { Post } from "../../../server/lib/posts";
-import { siteInfo } from "../../lib/constants";
-import { getDateFromTimestamp, getFullUrl } from "../../lib/utils";
+import { Post } from '../../../server/lib/posts';
+import { siteInfo } from '../../lib/constants';
+import { getDateFromTimestamp, getFullUrl } from '../../lib/utils';
 
-import { Link } from "../Link/Link";
+import { Link } from '../Link/Link';
 
-import { ShareBlock } from "../ShareBlock/ShareBlock";
+import { ShareBlock } from '../ShareBlock/ShareBlock';
 
-import styles from "./BlogPost.module.css";
+import styles from './BlogPost.module.css';
 
-const internalLinkPrefixes = ["/blog"];
-const mdxComponents: Required<Parameters<typeof MDXRemote>[0]>["components"] = {
+const internalLinkPrefixes = ['/blog'];
+const mdxComponents: Required<Parameters<typeof MDXRemote>[0]>['components'] = {
 	a: (props) => {
 		const isInternalLink =
 			props.href !== undefined &&
 			internalLinkPrefixes.some(
-				(prefix) => props.href!.slice(0, prefix.length) === prefix
+				(prefix) => props.href!.slice(0, prefix.length) === prefix,
 			);
 
 		return <Link external={!isInternalLink} {...props} />;
@@ -48,7 +48,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				{/* Common metadata */}
 				<meta name="description" content={post.description || post.previewText} />
 				{post.keywords.length > 0 && (
-					<meta name="keywords" content={post.keywords.join(", ")} />
+					<meta name="keywords" content={post.keywords.join(', ')} />
 				)}
 				<meta name="author" content={siteInfo.author} />
 				<meta
@@ -62,7 +62,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				<meta
 					name="og:locale"
 					content={
-						post.lang === null || post.lang === "en" ? "en_US" : post.lang
+						post.lang === null || post.lang === 'en' ? 'en_US' : post.lang
 					}
 				/>
 				{post.image !== null && (

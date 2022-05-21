@@ -1,18 +1,17 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 
-import { recordClassNameManager } from "../../lib/components";
+import { recordClassNameManager } from '../../lib/components';
 
-import styles from "./TopDownButton.module.css";
+import styles from './TopDownButton.module.css';
 
-import IconUp from "../../assets/icons/chevron-up.svg";
+import IconUp from '../../assets/icons/chevron-up.svg';
 
 const cnTopDownButton = recordClassNameManager(styles);
 
 const MIN_SCROLL_TO_SHOW_BUTTON = 200;
 const SCROLL_TO_IGNORE_RESET = 200;
 
-export interface TopDownButtonProps { }
-
+export interface TopDownButtonProps {}
 
 export const TopDownButton: FC<TopDownButtonProps> = () => {
 	const ignoreScrollRef = useRef(false);
@@ -49,10 +48,10 @@ export const TopDownButton: FC<TopDownButtonProps> = () => {
 			setLastPosition(null);
 		};
 
-		document.addEventListener("scroll", scrollHandler);
+		document.addEventListener('scroll', scrollHandler);
 		return () => {
-			document.removeEventListener("scroll", scrollHandler);
-		}
+			document.removeEventListener('scroll', scrollHandler);
+		};
 	}, []);
 
 	const isShowButton = scroll > MIN_SCROLL_TO_SHOW_BUTTON || lastPosition !== null;
@@ -63,7 +62,7 @@ export const TopDownButton: FC<TopDownButtonProps> = () => {
 				{
 					ButtonHide: !isShowButton,
 				},
-				[styles.Button]
+				[styles.Button],
 			)}
 			onClick={onPress}
 		>
@@ -72,7 +71,7 @@ export const TopDownButton: FC<TopDownButtonProps> = () => {
 					{
 						IconInvert: lastPosition !== null,
 					},
-					[styles.Icon]
+					[styles.Icon],
 				)}
 				viewBox="0 0 24 24"
 			/>

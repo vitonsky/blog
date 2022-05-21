@@ -1,7 +1,7 @@
 // TODO: set actual data
 export const siteInfo = {
-	url: "http://example.com",
-	blogPath: "/blog",
+	url: 'http://example.com',
+	blogPath: '/blog',
 
 	title: 'Blog name',
 	author: 'Author Name',
@@ -13,15 +13,15 @@ export const metaData: {
 	name: string;
 	content: string;
 }[] = [
-		{
-			name: 'description',
-			content: 'Some description about blog'
-		},
-		{
-			name: 'keywords',
-			content: ['blog', 'computers', 'programming'].join(', ')
-		}
-	];
+	{
+		name: 'description',
+		content: 'Some description about blog',
+	},
+	{
+		name: 'keywords',
+		content: ['blog', 'computers', 'programming'].join(', '),
+	},
+];
 
-export const publicDir = "./public";
-export const attachmentsPath = "/files";
+export const publicDir = './public';
+export const attachmentsPath = '/files';

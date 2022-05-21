@@ -1,7 +1,7 @@
-import { FC, HTMLProps, useCallback } from "react";
-import { useRouter } from "next/router";
+import { FC, HTMLProps, useCallback } from 'react';
+import { useRouter } from 'next/router';
 
-import styles from "./Link.module.css";
+import styles from './Link.module.css';
 
 export interface LinkProps extends HTMLProps<HTMLAnchorElement> {
 	external?: boolean;
@@ -10,7 +10,7 @@ export interface LinkProps extends HTMLProps<HTMLAnchorElement> {
 export const Link: FC<LinkProps> = ({ external, ...props }) => {
 	const router = useRouter();
 
-	const onClick = useCallback<Required<LinkProps>["onClick"]>(
+	const onClick = useCallback<Required<LinkProps>['onClick']>(
 		(evt) => {
 			if (props.onClick !== undefined) {
 				props.onClick(evt);
@@ -20,7 +20,7 @@ export const Link: FC<LinkProps> = ({ external, ...props }) => {
 
 			const url = props.href;
 			if (url !== undefined) {
-				const isContainsProtocol = (/^[a-z]*:\/\//).test(url);
+				const isContainsProtocol = /^[a-z]*:\/\//.test(url);
 
 				if (!isContainsProtocol) {
 					evt.preventDefault();
@@ -28,13 +28,13 @@ export const Link: FC<LinkProps> = ({ external, ...props }) => {
 				}
 			}
 		},
-		[external, props, router]
+		[external, props, router],
 	);
 
 	return (
 		<a
 			{...props}
-			className={[styles.Link, props.className].join(" ")}
+			className={[styles.Link, props.className].join(' ')}
 			onClick={onClick}
 		>
 			{props.children}

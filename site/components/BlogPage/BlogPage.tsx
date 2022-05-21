@@ -1,14 +1,14 @@
-import { NextPage } from "next";
-import Head from "next/head";
+import { NextPage } from 'next';
+import Head from 'next/head';
 
-import { Post } from "../../../server/lib/posts";
-import { metaData, siteInfo } from "../../lib/constants";
-import { getDateFromTimestamp } from "../../lib/utils";
+import { Post } from '../../../server/lib/posts';
+import { metaData, siteInfo } from '../../lib/constants';
+import { getDateFromTimestamp } from '../../lib/utils';
 
-import { Link } from "../Link/Link";
-import { Pagination } from "../Pagination/Pagination";
+import { Link } from '../Link/Link';
+import { Pagination } from '../Pagination/Pagination';
 
-import styles from "./BlogPage.module.css";
+import styles from './BlogPage.module.css';
 
 export type BlogPageProps = {
 	posts: Post[];
@@ -43,7 +43,8 @@ export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
 									</span>
 									<span>{post.readingTime.words} words</span>
 									<span>
-										{Math.ceil(post.readingTime.minutes)} minutes to read
+										{Math.ceil(post.readingTime.minutes)} minutes to
+										read
 									</span>
 								</div>
 							</div>
@@ -67,7 +68,7 @@ export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
 					<Pagination
 						currentPage={pagination.page}
 						pagesNumber={pagination.pagesNumber}
-						prefix={siteInfo.blogPath + "/p/"}
+						prefix={siteInfo.blogPath + '/p/'}
 					/>
 				)}
 			</div>

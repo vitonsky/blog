@@ -16,19 +16,19 @@ export const runServer = () => {
 
 	initCache();
 
-	const app = express()
+	const app = express();
 	const server = app.listen(port);
 
 	// Graceful shutdown
-	const closeApp = function () {
-		server.close(function () {
+	const closeApp = function() {
+		server.close(function() {
 			process.exit(0);
 		});
 	};
 	process.on('SIGTERM', closeApp);
-	process.on('beforeExit', closeApp)
+	process.on('beforeExit', closeApp);
 
-	app.get('/', function (_, res) {
+	app.get('/', function(_, res) {
 		res.send('This is API server to handle files for blog');
 	});
 
@@ -38,11 +38,11 @@ export const runServer = () => {
 		getPostsFabric,
 		getPostFabric,
 		getPaginationInfoFabric,
-		getPostWithAdditionalDataFabric
+		getPostWithAdditionalDataFabric,
 	].forEach((fabric) => {
 		fabric(app);
-	})
-}
+	});
+};
 
 // Run server
 const argv = minimist(process.argv.slice(2));
