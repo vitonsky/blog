@@ -10,8 +10,7 @@
 		"lint:text": "npx textlint \"{*,**/*}.md\"",
 		"browserslist:update": "npx browserslist@latest --update-db",
 		"packages:upgrade": "npx npm-check-updates -u",
-		"configure": "husky install && npm run browserslist:update",
-		"prepare": "npm run configure"
+		"configure": "husky install && npm run browserslist:update"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.0",
