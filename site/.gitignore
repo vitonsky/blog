@@ -37,4 +37,5 @@ yarn-error.log*
 
 # artefacts
 public/rss.xml
+public/sitemap.xml
 public/files
