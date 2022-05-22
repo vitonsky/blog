@@ -1,13 +1,13 @@
 .ShareBlock > *:not(:first-child) {
-  margin-left: 0.5rem;
+	margin-left: 0.5rem;
 }
 
 .Icon {
-  width: 1.8rem;
-  height: 1.8rem;
+	width: 1.8rem;
+	height: 1.8rem;
 }
 
 .Icon:hover svg,
 .Icon:focus svg {
-  filter: brightness(0.7);
+	filter: brightness(0.7);
 }

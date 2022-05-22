@@ -1,45 +1,47 @@
 .PostHead {
-  margin-bottom: 2rem;
+	margin-bottom: 2rem;
 }
 
-.PostHead > *:not(:first-child) {
-  margin-top: 0.5rem;
+.PostHead > :not(:first-child) {
+	margin-top: 0.5rem;
 }
 
 .PostTitle {
-  font-weight: bold;
-  font-size: 1.8rem;
-  color: #505050;
-  margin: 0;
+	font-weight: bold;
+	font-size: 1.8rem;
+	color: #505050;
+	margin: 0;
 }
 
 .PostInfo {
-  color: gray;
-  font-size: 0.9rem;
+	color: gray;
+	font-size: 0.9rem;
 }
+
 .PostInfo > * {
-  display: inline-block;
+	display: inline-block;
 }
-.PostInfo > *:not(:first-child) {
-  margin-left: 1rem;
+
+.PostInfo > :not(:first-child) {
+	margin-left: 1rem;
 }
 
 .ShareBlock {
-  margin-bottom: 2rem;
+	margin-bottom: 2rem;
 }
 
 /* Hide on mobiles */
 @media (max-width: 600px) {
-  .ShareBlock {
-    display: none;
-  }
+	.ShareBlock {
+		display: none;
+	}
 }
 
 .PostBody {
-  font-size: var(--typo-content-size);
-  line-height: 1.7rem;
+	font-size: var(--typo-content-size);
+	line-height: 1.7rem;
 }
 
 .PostBody p {
-  margin: 1rem 0;
+	margin: 1rem 0;
 }

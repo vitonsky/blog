@@ -1,19 +1,19 @@
 .Pagination {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .PagesList {
-  width: 100%;
-  text-align: center;
+	width: 100%;
+	text-align: center;
 }
 
 .PagesList > *:not(:first-child) {
-  margin-left: 0.5rem;
+	margin-left: 0.5rem;
 }
 
 .NavigationItem {
-  min-width: max-content;
-  width: 100%;
-  text-align: center;
+	min-width: max-content;
+	width: 100%;
+	text-align: center;
 }

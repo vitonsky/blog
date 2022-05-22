@@ -6,7 +6,7 @@
 		"build": "npx concurrently \"cd server && npm run api:build\" && npx concurrently -ks first \"sleep 3 && cd site && npm run next:build\" \"cd server && npm run api:start\"",
 		"install-all": "npm i && npx concurrently \"cd server && npm i\" \"cd site && npm i\"",
 		"test": "jest",
-		"prettify": "prettier --write \"{*,**/*}.{ts,tsx,js,jsx}\" && eslint --fix \"{*,**/*}.{ts,tsx,js,jsx}\"",
+		"prettify": "prettier --write \"{*,**/*}.{ts,tsx,js,jsx}\" && eslint --fix \"{*,**/*}.{ts,tsx,js,jsx}\" && stylelint --fix \"{*,**/*}.css\"",
 		"lint:text": "npx textlint \"{*,**/*}.md\"",
 		"browserslist:update": "npx browserslist@latest --update-db",
 		"packages:upgrade": "npx npm-check-updates -u",

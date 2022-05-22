@@ -11,7 +11,10 @@
     "plugin/no-unsupported-browser-features": [
       true,
       {
-        "ignore": []
+        "ignore": [
+          "intrinsic-width",
+          "text-decoration"
+        ]
       }
     ]
   },

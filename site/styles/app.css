@@ -1,53 +1,54 @@
 body {
-  --typo-content-size: 17px;
+	--typo-content-size: 17px;
 
-  margin: 0;
+	margin: 0;
 
-  /* Use "Ubuntu" as alternative if necessary */
-  font-display: swap;
-  font-family: "Poppins", sans-serif;
+	/* Use "Ubuntu" as alternative if necessary */
+	font-display: swap;
+	font-family: Poppins, sans-serif;
 }
 
 a {
-  display: inline-block;
-  color: #333;
-  text-decoration: underline;
-  text-decoration-color: #cbcbcb;
-  text-decoration-thickness: 0.12em;
-  text-underline-offset: 25%;
-  text-underline-position: from-font;
-  transition: text-decoration ease 200ms;
+	display: inline-block;
+	color: #333;
+	text-decoration: underline;
+	text-decoration-color: #cbcbcb;
+	text-decoration-thickness: 0.12em;
+	text-underline-offset: 25%;
+	text-underline-position: from-font;
+	transition: text-decoration ease 200ms;
 }
+
 a:hover,
 a:focus {
-  text-decoration-color: #333;
+	text-decoration-color: #333;
 }
 
 img {
-  max-width: 100%;
+	max-width: 100%;
 }
 
 hr {
-  border: 0;
-  width: 40%;
-  height: 2px;
-  background: #dfdfdf;
+	border: 0;
+	width: 40%;
+	height: 2px;
+	background: #dfdfdf;
 }
 
 pre code.hljs {
-  background: #fafafa;
-  border-radius: 6px;
+	background: #fafafa;
+	border-radius: 6px;
 }
 
 code {
-  background: #f1f1f1;
-  border-radius: 6px;
-  padding: 2px 5px;
+	background: #f1f1f1;
+	border-radius: 6px;
+	padding: 2px 5px;
 }
 
 blockquote {
-  background: #f5f6ff;
-  padding: 1rem;
-  margin: 0;
-  border-radius: 6px;
+	background: #f5f6ff;
+	padding: 1rem;
+	margin: 0;
+	border-radius: 6px;
 }
