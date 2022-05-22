@@ -2,12 +2,12 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import { visit } from 'unist-util-visit';
 import getReadingTime from 'reading-time';
-import rehypeHighlight from 'rehype-highlight';
-import remarkGfm from 'remark-gfm';
 import colors from 'colors';
-import remarkRehype from 'remark-rehype';
 import { remark } from 'remark';
+import remarkGfm from 'remark-gfm';
+import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
+import rehypeHighlight from 'rehype-highlight';
 
 import { readFile, stat } from 'fs/promises';
 

@@ -44,6 +44,7 @@ code {
 	background: #f1f1f1;
 	border-radius: 6px;
 	padding: 2px 5px;
+	tab-size: 2em;
 }
 
 blockquote {
