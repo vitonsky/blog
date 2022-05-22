@@ -24,7 +24,17 @@ export type Post = {
 	tags: string[];
 	keywords: string[];
 	lang: string | null;
-	image: string | null;
+
+	/**
+	 * Image extracted from post to insert in meta tags
+	 * Prefer to `previewImage` if specified
+	 */
+	coverImage: string | null;
+
+	/**
+	 * Image specified manually in metadata
+	 */
+	previewImage: string | null;
 
 	source: MDXRemoteSerializeResult<Record<string, unknown>>;
 	readingTime: {
@@ -39,9 +49,9 @@ export type PostWithAdditionalData = Post & {
 	};
 };
 
-const isUrl = (filename: string) => /^[a-z]*:\/\//i.test(filename);
-const isRelativePath = (filename: string) => /^[^\/]/.test(filename);
-const isLocalAttachmentUrl = (filename: string) =>
+export const isUrl = (filename: string) => /^[a-z]*:\/\//i.test(filename);
+export const isRelativePath = (filename: string) => /^[^\/]/.test(filename);
+export const isLocalAttachmentUrl = (filename: string) =>
 	!isUrl(filename) && isRelativePath(filename);
 
 const getAttachment = (filename: string, attachments: Record<string, string>) => {
@@ -78,8 +88,17 @@ export const parsePost = async (
 
 	let pageText: string = '';
 	const extractTextPlugin = () => (node: any) => {
-		visit(node, ['text', 'code'], (node) => {
+		visit(node, ['text'], (node) => {
 			pageText += node.value;
+		});
+	};
+
+	let coverImage: string | null = null;
+	const extractImagePlugin = () => (node: any) => {
+		visit(node, 'image', (node) => {
+			const { url } = node;
+			if (!url || coverImage !== null) return;
+			coverImage = url;
 		});
 	};
 
@@ -111,9 +130,10 @@ export const parsePost = async (
 		parseFrontmatter: true,
 		mdxOptions: {
 			remarkPlugins: [
+				replaceAttachmentsLinks,
 				extractPreviewTextPlugin,
 				extractTextPlugin,
-				replaceAttachmentsLinks,
+				extractImagePlugin,
 				remarkGfm,
 				extractTree,
 			],
@@ -152,19 +172,25 @@ export const parsePost = async (
 	}
 
 	// Resolve image URL
-	let image = typeof meta.image === 'string' ? meta.image : null;
-	if (image !== null && isLocalAttachmentUrl(image)) {
-		const fullPath = path.join(path.dirname(filename), image);
+	let previewImage = typeof meta.image === 'string' ? meta.image : null;
+	if (previewImage !== null && isLocalAttachmentUrl(previewImage)) {
+		const fullPath = path.join(path.dirname(filename), previewImage);
 		const url = getAttachment(fullPath, attachments);
 
 		if (url === null) {
 			console.log(
-				colors.yellow(`Invalid cover image URL "${image}" in post "${filename}"`),
+				colors.yellow(
+					`Invalid cover image URL "${previewImage}" in post "${filename}"`,
+				),
 			);
 		}
 
 		// Set correct URL or null
-		image = url;
+		previewImage = url;
+	}
+
+	if (previewImage !== null) {
+		coverImage = previewImage;
 	}
 
 	return {
@@ -174,7 +200,8 @@ export const parsePost = async (
 		readingTime: { minutes, words },
 
 		title,
-		image,
+		previewImage,
+		coverImage,
 		description: typeof meta.description === 'string' ? meta.description : null,
 		lang: typeof meta.lang === 'string' ? meta.lang : null,
 		tags: Array.isArray(meta.tags) ? (meta.tags as string[]) : [],

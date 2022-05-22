@@ -39,7 +39,7 @@ export const generateRss = async () => {
 
 			title: post.title,
 			description: post.description || post.previewText,
-			image: post.image === null ? undefined : getFullUrl(post.image),
+			image: post.coverImage === null ? undefined : getFullUrl(post.coverImage),
 			content: post.additionalData.html,
 
 			date: new Date(post.date),

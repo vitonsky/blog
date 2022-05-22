@@ -65,8 +65,8 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 						post.lang === null || post.lang === 'en' ? 'en_US' : post.lang
 					}
 				/>
-				{post.image !== null && (
-					<meta name="og:image" content={getFullUrl(post.image)} />
+				{post.coverImage !== null && (
+					<meta name="og:image" content={getFullUrl(post.coverImage)} />
 				)}
 
 				{/* Social media */}
@@ -82,8 +82,8 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 					property="og:url"
 					content={getFullUrl(post.url)}
 				/>
-				{post.image !== null && (
-					<meta name="twitter:image" content={getFullUrl(post.image)} />
+				{post.coverImage !== null && (
+					<meta name="twitter:image" content={getFullUrl(post.coverImage)} />
 				)}
 			</Head>
 

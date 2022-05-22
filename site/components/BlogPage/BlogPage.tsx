@@ -51,9 +51,12 @@ export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
 
 							<div className={styles.PostText}>{post.previewText}</div>
 
-							{post.image && (
+							{post.previewImage && (
 								<div>
-									<img src={post.image} alt="Cover of the post" />
+									<img
+										src={post.previewImage}
+										alt="Cover of the post"
+									/>
 								</div>
 							)}
 
