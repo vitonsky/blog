@@ -1,6 +1,8 @@
 {
 	"rules": {
         "write-good": {
+            "weasel": false,
+            "adverb": false,
             "passive": false,
             "thereIs": false
         },
