@@ -1,13 +1,13 @@
-// TODO: set actual data
 export const siteInfo = {
-	url: 'http://example.com',
+	url: 'http://vitonsky.net',
 	blogPath: '/blog',
 
-	title: 'Blog name',
-	author: 'Author Name',
+	title: 'Blog about computers',
+	author: 'Robert Vitonsky',
+
+	description: 'Personal blog about computers and technologies',
 } as const;
 
-// TODO: set actual data
 // TODO: add cover image
 export const metaData: {
 	name: string;
@@ -15,7 +15,7 @@ export const metaData: {
 }[] = [
 	{
 		name: 'description',
-		content: 'Some description about blog',
+		content: siteInfo.description,
 	},
 	{
 		name: 'keywords',

@@ -16,19 +16,19 @@ export const generateRss = async () => {
 
 	const feed = new Feed({
 		language: 'en', // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
-		title: 'Feed Title',
-		description: 'This is my personal feed!',
+		title: siteInfo.title,
+		description: siteInfo.description,
 		id: siteInfo.url,
-		copyright: 'All rights reserved 2013, John Doe',
+		copyright: `All rights reserved ${new Date().getFullYear()}, ${siteInfo.author}`,
 		updated: new Date(posts[0].date), // date of last post
-		// link: "http://example.com/",
+		link: siteInfo.url,
 		// image: "http://example.com/image.png",
-		// favicon: "http://example.com/favicon.ico",
-		// author: {
-		// 	name: "John Doe",
-		// 	email: "johndoe@example.com",
-		// 	link: "https://example.com/johndoe"
-		// }
+		favicon: `${siteInfo.url}/favicon.ico`,
+		author: {
+			name: siteInfo.author,
+			// email: "johndoe@example.com",
+			// link: "https://example.com/johndoe"
+		},
 		// generator: "awesome", // optional, default = 'Feed for Node.js'
 	});
 
