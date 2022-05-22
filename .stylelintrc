@@ -4,6 +4,8 @@
     "stylelint-no-unsupported-browser-features"
   ],
   "rules": {
+    "string-quotes": "single",
+    "selector-class-pattern": ".+",
     "indentation": "tab",
     "max-empty-lines": 2,
     "plugin/no-unsupported-browser-features": [
@@ -16,6 +18,6 @@
   "ignoreFiles": [
     "**/*.ts",
     "**/*.tsx",
-    "dist/**",
+    "dist/**"
   ]
 }

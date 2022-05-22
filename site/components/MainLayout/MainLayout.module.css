@@ -1,41 +1,42 @@
 .Main {
-  margin: 1rem auto 2rem;
-  max-width: 800px;
+	margin: 1rem auto 2rem;
+	max-width: 800px;
 }
 
 .Head {
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
+	margin-bottom: 2rem;
+	font-size: 1.1rem;
 }
+
 .Head > *:not(:first-child) {
-  margin-top: 1rem;
+	margin-top: 1.5rem;
 }
 
 .HeadRow {
-  margin: 0 1rem;
-  text-align: center;
-  word-wrap: break-word;
+	margin: 0 1rem;
+	text-align: center;
+	word-wrap: break-word;
 }
 
 .HeadRow::after {
-  content: "";
-  clear: both;
+	content: '';
+	clear: both;
 }
 
 .HeadRow > *:not(:first-child) {
-  margin-left: 0.5rem;
+	margin-left: 0.5rem;
 }
 
 .SearchForm {
-  display: inline;
+	display: inline;
 }
 
 @media (max-width: 500px) {
-  .SearchInput {
-    width: 100%;
-  }
+	.SearchInput {
+		width: 100%;
+	}
 }
 
 .Content {
-  margin: 0 1rem;
+	margin: 0 1rem;
 }

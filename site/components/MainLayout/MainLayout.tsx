@@ -27,6 +27,24 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 					</Link>
 				</div>
 				<div className={styles.HeadRow}>
+					<Link href="https://twitter.com/rob_vitonsky" target="_blank">
+						Twitter
+					</Link>
+					<Link href="https://github.com/vitonsky" target="_blank">
+						Github
+					</Link>
+					<Link
+						href="https://stackoverflow.com/users/18680275/vitonsky"
+						target="_blank"
+					>
+						StackOverflow
+					</Link>
+					{/* <Link href="#" target="_blank">LinkedIn</Link> */}
+					<Link href="mailto:rob@vitonsky.net" target="_blank">
+						Email
+					</Link>
+				</div>
+				<div className={styles.HeadRow}>
 					<form
 						method="get"
 						action="https://www.google.com/search"
