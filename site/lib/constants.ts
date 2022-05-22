@@ -1,5 +1,5 @@
 export const siteInfo = {
-	url: 'http://vitonsky.net',
+	url: 'https://vitonsky.net',
 	blogPath: '/blog',
 
 	title: 'Blog about computers',
