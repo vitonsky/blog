@@ -1,0 +1,12 @@
+.ErrorPage {
+	text-align: center;
+}
+
+.ErrorCode {
+	font-size: 5rem;
+	font-weight: bold;
+}
+
+.ErrorText {
+	font-size: 2rem;
+}
