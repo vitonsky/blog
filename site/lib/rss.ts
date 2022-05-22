@@ -14,6 +14,8 @@ export const generateRss = async () => {
 		Promise.all(posts.map((post) => getPostWithAdditionalData({ url: post.url }))),
 	);
 
+	if (posts.length === 0) return;
+
 	const feed = new Feed({
 		language: 'en', // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 		title: siteInfo.title,

@@ -30,6 +30,9 @@ export const BlogPage: NextPage<BlogPageProps> = ({ posts, pagination }) => {
 
 			<div className={styles.BlogPage}>
 				<div className={styles.PostsList}>
+					{posts.length === 0 && (
+						<div className={styles.EmptyPosts}>Posts did not added yet</div>
+					)}
 					{posts.map((post, idx) => (
 						<div key={idx} className={styles.PostItem}>
 							<div className={styles.PostHead}>

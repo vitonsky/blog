@@ -1,5 +1,6 @@
 ---
 title: 'First post'
+time: '02:30'
 ---
 
 Welcome to my blog. I've create it to expressing my opinion, primarily about programming.

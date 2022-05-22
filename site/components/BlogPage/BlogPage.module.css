@@ -6,6 +6,13 @@
 	margin-top: 2rem;
 }
 
+.EmptyPosts {
+	padding: 3rem;
+	text-align: center;
+	font-weight: bold;
+	font-size: 2rem;
+}
+
 .PostItem > :not(:first-child) {
 	margin-top: 1rem;
 }

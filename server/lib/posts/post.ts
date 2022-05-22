@@ -66,6 +66,8 @@ const getAttachment = (filename: string, attachments: Record<string, string>) =>
 	return null;
 };
 
+// TODO: refactor data extraction
+// TODO: refactor metadata extraction
 export const parsePost = async (
 	text: string,
 	{ filename, attachments }: { filename: string; attachments: Record<string, string> },
@@ -171,6 +173,32 @@ export const parsePost = async (
 		throw new TypeError('Title are empty');
 	}
 
+	let date = extractTimestampFromName(path.basename(filename));
+	if (date === null) {
+		throw new Error('Post filename must contain publish data in format Y-m-d');
+	}
+
+	const { time } = meta;
+	if (!time || typeof time !== 'string') {
+		throw new TypeError('Time are empty. Specify in in format hh:mm');
+	} else {
+		const parsedTime = time.match(/(\d{1,2}):(\d{1,2})/);
+		if (parsedTime === null || parsedTime.length !== 3) {
+			throw new TypeError('Cannot parse time. Specify in in format hh:mm');
+		}
+
+		const hours = parseInt(parsedTime[1]);
+		const minutes = parseInt(parsedTime[2]);
+
+		if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+			throw new TypeError('Cannot parse time. Specify in in format hh:mm');
+		}
+
+		const dateObject = new Date(date);
+		dateObject.setHours(hours, minutes);
+		date = dateObject.getTime();
+	}
+
 	// Resolve image URL
 	let previewImage = typeof meta.image === 'string' ? meta.image : null;
 	if (previewImage !== null && isLocalAttachmentUrl(previewImage)) {
@@ -198,6 +226,7 @@ export const parsePost = async (
 		mdxSource,
 		previewText,
 		readingTime: { minutes, words },
+		date,
 
 		title,
 		previewImage,
@@ -219,12 +248,6 @@ export const getPostData = async (
 ): Promise<PostWithAdditionalData> => {
 	const url = getPostUrlByFilename(filename);
 
-	let date = extractTimestampFromName(path.basename(filename));
-	if (date === null) {
-		const { birthtime } = await stat(filename);
-		date = birthtime.getTime();
-	}
-
 	const mdFile = await readFile(filename);
 	const postSource = mdFile.toString();
 	const {
@@ -242,7 +265,6 @@ export const getPostData = async (
 
 	return {
 		url,
-		date,
 		source,
 		...exactPostData,
 	};
