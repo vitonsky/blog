@@ -31,6 +31,10 @@ export type BlogPostProps = {
 };
 
 export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
+	const keywords = [...(post.keywords ?? []), ...(post.tags ?? [])].filter(
+		(keyword, idx, arr) => arr.indexOf(keyword) === idx,
+	);
+
 	return (
 		<>
 			<Head>
@@ -47,8 +51,8 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 
 				{/* Common metadata */}
 				<meta name="description" content={post.description || post.previewText} />
-				{post.keywords.length > 0 && (
-					<meta name="keywords" content={post.keywords.join(', ')} />
+				{keywords.length > 0 && (
+					<meta name="keywords" content={keywords.join(', ')} />
 				)}
 				<meta name="author" content={siteInfo.author} />
 				<meta
