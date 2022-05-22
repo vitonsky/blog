@@ -34,8 +34,8 @@ export const generateRss = async () => {
 
 	posts.forEach((post) => {
 		feed.addItem({
-			id: post.url,
-			link: post.url,
+			id: getFullUrl(post.url),
+			link: getFullUrl(post.url),
 
 			title: post.title,
 			description: post.description || post.previewText,
