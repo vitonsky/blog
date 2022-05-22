@@ -20,12 +20,6 @@ module.exports = withMDX({
 	reactStrictMode: true,
 	pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 
-	// use static build id to prevent cache reset for each site build
-	// we should update it only to force reset cache for users
-	generateBuildId: async () => {
-		return 'build';
-	},
-
 	webpack: (config, options) => {
 		patchWebpackConfig(config, options);
 
