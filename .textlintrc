@@ -2,6 +2,7 @@
 	"rules": {
         "write-good": {
             "weasel": false,
+            "tooWordy": false,
             "adverb": false,
             "passive": false,
             "thereIs": false
