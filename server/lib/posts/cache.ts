@@ -30,14 +30,19 @@ const handleFile = async (file: string) => {
 		return;
 	}
 
-	// Update cache
-	// eslint-disable-next-line @typescript-eslint/no-use-before-define
-	const post = await getPostData(file, extractedAttachments);
+	try {
+		// Update cache
+		// eslint-disable-next-line @typescript-eslint/no-use-before-define
+		const post = await getPostData(file, extractedAttachments);
 
-	parsedPosts[url] = {
-		file: absolutePath,
-		data: post,
-	};
+		parsedPosts[url] = {
+			file: absolutePath,
+			data: post,
+		};
+	} catch (error) {
+		delete parsedPosts[url];
+		console.error(error);
+	}
 };
 
 export const extractedAttachments: Record<string, string> = {};
