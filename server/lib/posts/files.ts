@@ -31,7 +31,7 @@ export const getPostUrlByFilename = (filePath: string) => {
 
 		const date = new Date(timestamp);
 		const year = date.getFullYear();
-		const month = date.getMonth();
+		const month = date.getMonth() + 1;
 		const day = date.getDate();
 
 		const fillZero = (number: number) => String(number < 10 ? '0' + number : number);
