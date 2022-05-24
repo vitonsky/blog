@@ -16,6 +16,24 @@ function App({ Component, pageProps }: AppProps) {
 			<Head>
 				<title>{siteInfo.title}</title>
 				<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+				<script
+					async
+					src="https://www.googletagmanager.com/gtag/js?id=G-9C2XWNMW56"
+				></script>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+						<!-- Global site tag (gtag.js) - Google Analytics -->
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+
+						gtag('config', 'G-9C2XWNMW56');
+					`
+							.replace(/\t/g, '')
+							.trim(),
+					}}
+				/>
 			</Head>
 			<Component {...pageProps} />
 		</MainLayout>
