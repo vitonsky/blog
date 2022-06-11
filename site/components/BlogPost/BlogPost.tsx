@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { MDXRemote } from 'next-mdx-remote';
@@ -10,6 +9,7 @@ import { getDateFromTimestamp, getFullUrl } from '../../lib/utils';
 import { Link } from '../Link/Link';
 
 import { ShareBlock } from '../ShareBlock/ShareBlock';
+import { Comments } from '../Comments/Comments';
 
 import styles from './BlogPost.module.css';
 
@@ -110,6 +110,8 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				<div className={styles.PostBody}>
 					<MDXRemote {...post.source} components={mdxComponents} />
 				</div>
+
+				<Comments location={post.url} />
 			</div>
 		</>
 	);
