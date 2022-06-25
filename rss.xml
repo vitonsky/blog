@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Blog about computers</title>
+        <link>https://vitonsky.net</link>
+        <description>Personal blog about computers and technologies</description>
+        <lastBuildDate>Sat, 25 Jun 2022 04:26:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <copyright>All rights reserved 2022, Robert Vitonsky</copyright>
+        <item>
+            <title><![CDATA[Skeptical thinking]]></title>
+            <link>https://vitonsky.net/blog/2022/06/25/skeptical-thinking</link>
+            <guid>https://vitonsky.net/blog/2022/06/25/skeptical-thinking</guid>
+            <pubDate>Sat, 25 Jun 2022 04:26:00 GMT</pubDate>
+            <description><![CDATA[To make good code and think sensibly, you have to practice and improve your skills always. To improve skills, you have to explore the world, meet with exists ideas and be ready to admit that your approach been wrong.]]></description>
+            <content:encoded><![CDATA[<p>To make good code and think sensibly, you have to practice and improve your skills always. To improve skills, you have to explore the world, meet with exists ideas and be ready to admit that your approach been wrong.</p>
+<p><img src="/files/0a1050b146ac5922720a40119ad6ce6bc90f639d3aca3f1aff18cea19afe8ef0.jpeg" alt="Ol&#x27; Dirty Bastard photo"></p>
+<blockquote>
+<p>I never put doubt in my mind, cause i know when i touch the mic there's the rhyme</p>
+<p><a href="https://www.youtube.com/watch?v=bPxXe8LCvI8">ODB - raw hide</a></p>
+</blockquote>
+<p>I like this song, but you will never be a good programmer if you will apply that mindset for development software.</p>
+<p>The only way to be a good software engineer is be skeptic and always doubt about all.</p>
+<p>It's not mean that you must be a man who can't make decision, but you should keep in mind that any your solution may be wrong. And you have to be ready to admit it and reject your solution which you applied last few years.</p>
+<p>You should give up your pride and authority when you develop a software, especially when you work in team. Instead, you have to concentrate on results. If you sure that some your approach is work, but other guys from your team isn't, try to measure to find the truth.</p>
+<p>Analyze how many bugs generate your approach, how many time your team spend when do that and how many otherwise, track performance, compare your methodology with alternatives.</p>
+<p>This is true of others. Don't trust other people just because of authority or popularity, they may wrong too. And vice versa, listen the new ideas of not popular and not authority people to be inspires, think deep about it and discuss it. Split the statement out of the person.</p>
+<p>Argue always versus your takes, even if you agree. Question your ideas and try to break them, to find better solutions.</p>
+<p>The goal of skeptical thinking is find the most true way - the idea which very hard to refute, the solution which work most quite to ideal.</p>
+<p>All this especially important when you lead a team, when you are team/business owner. You have to kill your authority and authority of all developers in your team for all technical discussions, listen all suggestions in details and never make decisions which you can't justify, without explaining, just because of you think it's right. If you don't, probably you are micro manager and you will suppress initiative of your developers and will make all decisions yourself and will force your team to agree with you, keep silence when they not agree and make bad product which not enriched by ideas of other people.</p>]]></content:encoded>
+            <enclosure url="https://vitonsky.net/files/0a1050b146ac5922720a40119ad6ce6bc90f639d3aca3f1aff18cea19afe8ef0.jpeg" length="0" type="image/jpeg"/>
+        </item>
+        <item>
+            <title><![CDATA[Complicated software is required to evolution]]></title>
+            <link>https://vitonsky.net/blog/2022/06/08/complicated-software</link>
+            <guid>https://vitonsky.net/blog/2022/06/08/complicated-software</guid>
+            <pubDate>Wed, 08 Jun 2022 00:20:00 GMT</pubDate>
+            <description><![CDATA[Last time i often hear point about "modern software is unjustified complicated compared to software of 20-30 years ago, modern development approach is wrong and we must focus on performance and energy efficient" and i completely against of this point. Complicated software is move us to the future.]]></description>
+            <content:encoded><![CDATA[<p>Last time i often hear point about "modern software is unjustified complicated compared to software of 20-30 years ago, modern development approach is wrong and we must focus on performance and energy efficient" and i completely against of this point. Complicated software is move us to the future.</p>
+<p><img src="/files/5da3d55086d3bcb988e3a2b04add4eb4dd1217263a1444da468a21c36ff6f2f5.jpg" alt="" title="The matrix movie"></p>
+<p>I think we should focus on features and user experience. Actually doesn't matter how many memory your program use if its fine do user goals.</p>
+<p>How often you heard that electron applications is suck because each application it's standalone instance of chromium browser which run javascript with hundreds packages from NPM (which <a href="https://arstechnica.com/information-technology/2022/03/sabotage-code-added-to-popular-npm-package-wiped-files-in-russia-and-belarus/">may contain malware</a> btw)?</p>
+<p>Or the statement "guys, stop make your blogs on react, just use HTML + CSS".</p>
+<p>Maybe something like "20 years ago the programs did work so fast on hardware with very low specs and today, when your smartphone have power of super computer those years, our software not work faster"?</p>
+<p>I not buy it.</p>
+<p>Of course, the faster performance and the energy efficient the better, but what about other resources?</p>
+<p>What's better, the program which solve your problem fine right now, right here, but use all your RAM and CPU or to the program just not exist? For me, the first.</p>
+<p>The higher abstraction level the simply create software. The modern developer tools is have a very high level abstraction and this is allow us to fast prototyping and make software with a reach functional and a quite high quality for short time. Yes, quality may be not so good, but enough to use and to solve the problems.</p>
+<p>We can make really many software which just work and simplify our life, include a software development. This give us a time to make good a really important things. This way to the progress.</p>
+<p>We can improve performance later, when it will be really problem, if people will use our software and will show interest. Don't do this advance if it require significant time and it's not key feature of your software.</p>
+<p>Your lifetime is limited. Do another useful things for yourself or for the people, instead of spend time to optimize your software.</p>
+<h2>Be everywhere</h2>
+<p>The <a href="https://www.electronjs.org/">electron</a> as platform is really have big potential to improvements, but this platform is allow us to make an applications which will work somehow on all desktop platforms, even if developer is can't program on C++, C#, Objective-C, Java and other languages a native to another OS.</p>
+<p>Besides, on the low level abstractions like Qt or even native code which allow to achieve the better performance, a harder to maintanance the similar functionality and change the code as fast as on high level abstractions. For example, a program on the Qt may be faster than a program on the Electron, but implementation of creative ideas in UI may be complicated due to limitations a native UI on the platform. Or may harder to implement a features like powerful plugins system, to extends a program functionality. Or, eventually, a plugins making for this program may be complicated due to platform limitations and nobody will create plugins.</p>
+<p>Today, the small team and even one developer may maintain a mobile application for the both Android and iOS, because we have dev tools like <a href="https://reactnative.dev/">react native</a> and analogs. Yes, sometime the applications is looks and feel not so native and works not so good, but its usually do key work.</p>
+<p>The development of native application for iOS and Android is very expensive and required many time and few implementations of the same functional and eventually your work may be just banned by Apple or Google, by any reason. Is you are ready to investment your time and resources on this conditions? If not so, the react native is good solution to make an application for both platforms and to decrease required resources and to save years of your life. Does not matter that your application will not perfect for some cases.</p>
+<h2>Reuse your code</h2>
+<p>Sometimes i see people write "you should not use react for your blog, because it's overengineering, just use HTML + CSS". It's not only about blog, about software too, but it's good example why performance and lightweight is not key parameters in the product.</p>
+<p>When user will load my blog page, if the javascript enabled its will re-render page, but user even don't see it, because it will take half second and page even don't blink, so whatever?</p>
+<p>It's solves my problem - i have a blog, it works fine, i have control over content and i use for this a tools which i use every day, so i can go and make other projects.</p>
+<p>When i make a blog on react, i can use all javascript infrastructure to build site as i want, as on production. I can use my favorite react components and reuse my own code which i use in other projects on react. I can keep files in markdown and process it as i want and then render HTML pages while generate site.</p>
+<h2>Focus on design</h2>
+<p>The design of software is primary, not a performance.</p>
+<p>20 years ago a computers do things with lower resources fine.</p>
+<p>But which things computers did? And how accessible computers been?</p>
+<p>So, computers really solved useful tasks, like fly to the moon, some financial and medical tasks, but isn't solve your personal daily problems. Today you can write your thinks to the favorite app, search any information and communicate with people in the internet, use reminder applications, find good music suggested by artificial intelligence and other things.</p>
+<p>All its possible due to multiple factors, one smart people develop the technologies which allow to implement ideas to another people.</p>
+<p>I think that most important step in this evolution is standards and splitting a responsibility areas.</p>
+<p>In the real world it's when few mans who makes a guns from start to end without standards been replaced to few mans each of them make only one detail for the gun by one standard and then builds a gun from details. This make each gun repairable and even modifiable.</p>
+<p>In the programming it's when we make maintainable code design. In this case, even if our code is not performant right now, we may improve it later. Even if we can't improve performance by self, we may pay somebody who can. Our challenge is develop a design which allow those improvements.</p>
+<p>Today we may write high level code which solve our problems and think about performance later, if it will important.</p>
+<h2>Optimize performance when it really necessary</h2>
+<p>The evolution is a natural selection. The bad software will replaced the better.</p>
+<p>For example, the <a href="https://atom.io/">Atom editor</a> have been a good editor on electron (first good editor on electron which i know), but its not focused on performance and its architecture did not been enough flexible to allow performance optimizations in the future, so now all users moved to the <a href="https://code.visualstudio.com/">VSCode</a> which on electron too, but works fast. Atom shown that software on electron may be very useful and it's fine that atom had a bad performance, its did enough to work. But when atom did famous its can't improve performance for acceptable time and other product won.</p>
+<p>Thus, we should always prefer a good architecture to performance if we want to make software with good quality and prevent useless spend time.</p>]]></content:encoded>
+            <category>software</category>
+            <enclosure url="https://vitonsky.net/files/5da3d55086d3bcb988e3a2b04add4eb4dd1217263a1444da468a21c36ff6f2f5.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[The most big problem of UI kits]]></title>
+            <link>https://vitonsky.net/blog/2022/05/23/ui-kit-design</link>
+            <guid>https://vitonsky.net/blog/2022/05/23/ui-kit-design</guid>
+            <pubDate>Mon, 23 May 2022 02:30:00 GMT</pubDate>
+            <description><![CDATA[UI kits are became popular and today exists really many UI libraries, but almost whole its a have one fundamental architecture problem which make this libraries not much good for wide use. The problem is a not modular design.]]></description>
+            <content:encoded><![CDATA[<p>UI kits are became popular and today exists really many UI libraries, but almost whole its a have one fundamental architecture problem which make this libraries not much good for wide use. The problem is a not modular design.</p>
+<p><img src="/files/4c1bdc2aeac987d0bfe57c92455f27463c6faff785028daceb5cd4c93512acf6.jpg" alt="" title="Lego blocks"></p>
+<p>When developers search a UI library, they want to it contains a specific components and features which implement UX requirements. Components like buttons, menu, calendar, checkbox, popups and others with behavior from specification. A developers of UI libraries usually try to cover all use cases and consumer requirements, so they develop as many components and its features as they can.</p>
+<p>But when consumers start to use UI kits, they often got some problems like this:</p>
+<ul>
+<li>UI kit is have unnecessary features</li>
+<li>features work a bit different than need and not possible to change behavior</li>
+<li>UI kit is have very big size, even if don't use unnecessary features and components</li>
+</ul>
+<p>At the same time, independent of developers team size and time invested to development, any UI kit is cannot cover absolutely all use cases, so users have to implement some components itself.</p>
+<p>This is how works most popular UI kits today.</p>
+<h2>Modular architecture</h2>
+<p>The way to solve the problems is modular architecture.</p>
+<p>Instead of one <code>Button</code> component which include all features, we should make basic <code>Button</code> component which have most basic features and mostly are interface of button which you can rely on, and then make wrappers to implement additional features.</p>
+<pre><code class="language-js">/**
+ * Basic button
+ */
+export const Button = (props) => {
+	return &#x3C;button {...props} />;
+};
+
+/**
+ * Feature to implement button toggle
+ */
+export const withButtonToggle = (Button) => {
+	return ({ toggleable, isPressed, onToggle, ...props }) => {
+		const className = [props.className, isPressed ? 'pressed' : undefined]
+			.filter(Boolean)
+			.join(' ');
+
+		const onClick = (event) => {
+			if (props.onClick) {
+				props.onClick(event);
+			}
+
+			if (toggleable &#x26;&#x26; onToggle) {
+				onToggle();
+			}
+		};
+
+		return &#x3C;Button {...props} className={className} onClick={onClick} />;
+	};
+};
+
+/**
+ * Feature to implement button loading
+ */
+export const withButtonLoading = (Button) => {
+	return ({ loading = false, ...props }) => {
+		const className = [props.className, loading ? 'loading' : undefined]
+			.filter(Boolean)
+			.join(' ');
+
+		return &#x3C;Button {...props} className={className} disabled={loading} />;
+	};
+};
+</code></pre>
+<p>Then, to use button, we can just compose basic button and features which we really need.</p>
+<pre><code class="language-js">import { useState } from 'react';
+
+export const MyButton = withButtonLoading(withButtonToggle(Button));
+
+const App = () => {
+	const [isLoading, setIsLoading] = useState(false);
+	const toggle = () => setIsLoading((state) => !state);
+
+	return (
+		&#x3C;div>
+			&#x3C;MyButton toggleable onToggle={toggle} isPressed={isLoading}>
+				{isLoading ? 'Stop loading' : 'Start loading'}
+			&#x3C;/MyButton>
+			&#x3C;br />
+			&#x3C;MyButton loading={isLoading} onClick={() => console.log('Pressed')}>
+				{isLoading ? 'Loading...' : 'Press me'}
+			&#x3C;/MyButton>
+		&#x3C;/div>
+	);
+};
+
+export default App;
+</code></pre>
+<p><a href="https://codesandbox.io/embed/ecstatic-monad-x9m75c?fontsize=14&#x26;hidenavigation=1&#x26;theme=dark&#x26;view=preview">CodeSandbox</a></p>
+<p>This way is allow us to implement or replace any additional features for components, enable only necessary features and even replace basic button to other component which implement interface of button.</p>
+<h2>Implementations</h2>
+<p>Today, most popular UI kits still use "all in one" architecture, hovewer some libraries try to split components to features.</p>
+<p>The <a href="https://github.com/adobe/react-spectrum">react-spectrum</a> library maden by adobe is provide a react hooks which implement primitive behavior like "toggleable", "pressable", abstract keyboard navigation and etc. This hooks is allow you to create components with any markup and use only necessary hooks to implement component features.</p>
+<p>The <a href="https://github.com/vitonsky/react-elegant-ui">react-elegant-ui</a> is provide a components implemented by <a href="https://en.bem.info/methodology/quick-start/">BEM methodology</a>. The component split to "block" which is basic interface of component, "elements" which is sub-components and "modifiers" which define behavior of component.</p>
+<p>You just <a href="https://vitonsky.github.io/react-elegant-ui/docs/Introduction/GettingStarted/#build">compose necessary features</a> to use component:</p>
+<pre><code class="language-js">// Compose function will apply features to basic component
+export const Button = compose(
+	// Every feature after this can use this registry
+	withRegistry(ButtonDesktopRegistry),
+
+	// Apply only one HOC in list by props match
+	composeU(withModButtonViewDefault, withModButtonViewAction),
+	composeU(withModButtonSizeS, withModButtonSizeM, withModButtonSizeL),
+)(DesktopButton);
+
+// Set default properties for composed component
+Button.defaultProps = { size: 'm', view: 'default' };
+
+const App = () => {
+	return (
+		&#x3C;div>
+			&#x3C;Button>Default button&#x3C;/Button>
+			&#x3C;Button size="l" view="action">
+				Big action button
+			&#x3C;/Button>
+		&#x3C;/div>
+	);
+};
+</code></pre>]]></content:encoded>
+            <category>frontend</category>
+            <category>architecture</category>
+            <category>UI kit</category>
+            <enclosure url="https://vitonsky.net/files/4c1bdc2aeac987d0bfe57c92455f27463c6faff785028daceb5cd4c93512acf6.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[First post]]></title>
+            <link>https://vitonsky.net/blog/2022/05/22/first-post</link>
+            <guid>https://vitonsky.net/blog/2022/05/22/first-post</guid>
+            <pubDate>Sun, 22 May 2022 02:30:00 GMT</pubDate>
+            <description><![CDATA[Welcome to my blog. I've create it to expressing my opinion, primarily about programming.]]></description>
+            <content:encoded><![CDATA[<p>Welcome to my blog. I've create it to expressing my opinion, primarily about programming.</p>
+<p>My plan are writing ideas to my blog and refer other people here later, to avoid repeating my point many times.</p>
+<p>Today, social media are hide posts of people with undesirable points of view and even remove all their content. Users is not have control on own posts. This is why i create my blog instead of account on popular site.</p>]]></content:encoded>
+        </item>
+    </channel>
+</rss>
