@@ -1,0 +1,27 @@
+---
+title: 'Write detailed description for each pull request'
+time: '12:40'
+tags:
+  - quality
+  - management
+---
+
+How often you start code review and can't understand how this changes fix the problem and even don't understand is reliable this changes or not? If it periodically happens, you should start write detailed description for each pull request.
+
+![The Room (2003) - Tommy Wiseau](the-room-2003-tommy-wiseau.png)
+
+Sometimes to solve problems a programmers write another yet hack instead of dig to the root of the problem and solve it on the place and prevent similar problems in future.
+
+This approach make code less expressive and decrease maintainability, because now you have to keep in mind a new special case that may broke your code in future.
+
+**We have to be aimed to reject such code and require a code that fix the truth cause of a bug**.
+
+But when you support a production code, you not the only person who write code, so you cannot keep in mind a whole context of code, especially if you work on more than one project. Thus, when you read pull request, you may not understand what's exact problem solve this code and how it do, is this code solve only one problem or not.
+
+To solve this problem, you have to set a new rule - write a detailed description about problem and solution for each pull request.
+
+_The main rule is comment must be short (1-2 paragraph) and must not repeat task description or steps, instead comment must contain information about root cause of this bug and how this code fix this problem_.
+
+Such comment add more information about problem for another programmers, they can compare statement from description with code and catch cases when code wrote is not optimal to solve the problem or the code is not solve root cause and even get that the stated root cause is wrong.
+
+If your programmer even can't understand the real problem or explain in short how code solve the problem, it means this pull request is not solve the problem and contain only defective code, because you can't fix the problem if you don't even understand the problem or how your code works.
