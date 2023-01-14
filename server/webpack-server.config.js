@@ -1,9 +1,11 @@
 const path = require('path');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
 	entry: './index',
 	devtool: 'inline-source-map',
-	mode: 'development',
+	mode: isProduction ? 'production' : 'development',
 	target: 'node',
 	// cache: {
 	// 	type: 'filesystem',

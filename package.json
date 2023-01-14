@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"scripts": {
 		"dev": "npx concurrently \"cd server && npm run api:dev\" \"cd site && npm run next:dev\"",
-		"build": "npx concurrently \"cd server && npm run api:build\" && npx concurrently -ks first \"sleep 3 && cd site && npm run next:build\" \"cd server && npm run api:start\"",
+		"build": "npx concurrently \"cd server && NODE_ENV=production npm run api:build\" && npx concurrently -ks first \"sleep 3 && cd site && npm run next:build\" \"cd server && npm run api:start\"",
 		"install-all": "npm i && npx concurrently \"cd server && npm i\" \"cd site && npm i\"",
 		"test": "jest",
 		"prettify": "prettier --write \"{*,**/*}.{ts,tsx,js,jsx}\" && eslint --fix \"{*,**/*}.{ts,tsx,js,jsx}\" && stylelint --fix \"{*,**/*}.css\"",
