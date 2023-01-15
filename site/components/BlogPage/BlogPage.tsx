@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 
-import { Post } from '../../../server/lib/posts';
+import { Post } from '../../../common/Post';
 import { metaData, siteInfo } from '../../lib/constants';
 import { getDateFromTimestamp } from '../../lib/utils';
 

@@ -1,5 +1,5 @@
 import { parsedPosts, initPostsHandlePromise } from './cache';
-import { Post, PostWithAdditionalData } from './post';
+import { Post, PostWithAdditionalData } from '../../../common/Post';
 
 export * from './post';
 

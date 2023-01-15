@@ -1,25 +1,11 @@
 import { ApiKnob } from '../types';
-import { buildApiRequest } from '../lib/api';
 
 import { getPaginationInfo as getPaginationInfoFn } from '../lib/posts';
-
-export type Params = {
-	itemsOnPage: number;
-	tag?: string;
-	lang?: string;
-};
-
-export const getPaginationInfo = buildApiRequest<
-	Params,
-	{
-		postsNumber: number;
-		pagesNumber: number;
-	}
->('/getPaginationInfo');
+import { GetPaginationInfoRequest } from '../../common/api/GetPaginationInfo';
 
 export const getPaginationInfoFabric: ApiKnob = (app) => {
 	app.get('/getPaginationInfo', async function(req, res) {
-		const options = req.query as unknown as Params;
+		const options = req.query as unknown as GetPaginationInfoRequest;
 
 		const paginationInfo = await getPaginationInfoFn(options);
 

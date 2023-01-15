@@ -6,13 +6,14 @@ import path from 'path';
 import { createHash } from 'crypto';
 import { readFile, rm } from 'fs/promises';
 
+import { PostWithAdditionalData } from '../../../common/Post';
 import { attachmentsPath, publicDir } from '../../constants';
 
 import { cp, isExistFile } from '../files';
 import { blogPostsDir } from '../../constants';
 
 import { getAttachmentFilenames, getPostFilenames, getPostUrlByFilename } from './files';
-import { PostWithAdditionalData, getPostData } from './post';
+import { getPostData } from './post';
 
 export const parsedPosts: Record<
 	string,

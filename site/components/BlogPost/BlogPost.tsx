@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { MDXRemote } from 'next-mdx-remote';
 
-import { Post } from '../../../server/lib/posts';
+import { Post } from '../../../common/Post';
 import { siteInfo } from '../../lib/constants';
 import { getDateFromTimestamp, getFullUrl } from '../../lib/utils';
 

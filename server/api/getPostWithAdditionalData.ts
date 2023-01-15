@@ -1,20 +1,11 @@
 import { ApiKnob } from '../types';
-import { buildApiRequest } from '../lib/api';
 
-import {
-	getPostWithAdditionalData as getPostFn,
-	PostWithAdditionalData,
-} from '../lib/posts';
-
-export type Params = { url: string };
-
-export const getPostWithAdditionalData = buildApiRequest<Params, PostWithAdditionalData>(
-	'/getPostWithAdditionalData',
-);
+import { getPostWithAdditionalData as getPostFn } from '../lib/posts';
+import { GetPostWithAdditionalDataRequest } from '../../common/api/GetPostWithAdditionalData';
 
 export const getPostWithAdditionalDataFabric: ApiKnob = (app) => {
 	app.get('/getPostWithAdditionalData', async function(req, res) {
-		const { url } = req.query as Params;
+		const { url } = req.query as GetPostWithAdditionalDataRequest;
 
 		const post = await getPostFn(url);
 
