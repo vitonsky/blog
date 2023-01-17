@@ -125,7 +125,7 @@ export const handleAttachment = async (filename: string) => {
 	// TODO: ensure that not rewrite files while hash collisions
 	// Copy and write
 	const pathToCopy = path.join(publicDir, filePath);
-	await copyFile(absolutePath, path.resolve(pathToCopy));
+	await copyFile(absolutePath, pathToCopy);
 
 	extractedAttachments[absolutePath] = filePath;
 
