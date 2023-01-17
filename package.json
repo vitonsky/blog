@@ -36,6 +36,8 @@
 		"textlint-rule-common-misspellings": "^1.0.1",
 		"textlint-rule-write-good": "^2.0.0",
 		"ts-jest": "^28.0.2",
-		"typescript": "^4.6.4"
+		"typescript": "^4.6.4",
+		"next-mdx-remote": "^4.2.1",
+		"query-string": "^8.1.0"
 	}
 }

@@ -2,8 +2,8 @@ import { Feed } from 'feed';
 
 import { writeFile } from 'fs/promises';
 
-import { getPosts } from '../../server/api/getPosts';
-import { getPostWithAdditionalData } from '../../server/api/getPostWithAdditionalData';
+import { getPosts } from '../api/requests/getPosts';
+import { getPostWithAdditionalData } from '../api/requests/getPostWithAdditionalData';
 
 import { siteInfo } from './constants';
 import { getFullUrl } from './utils';

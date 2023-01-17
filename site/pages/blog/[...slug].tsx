@@ -1,12 +1,11 @@
 import { NextPage, GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
-import { Post } from '../../../server/lib/posts';
+import { Post } from '../../../common/Post';
 import { siteInfo } from '../../lib/constants';
 
-import { getPost } from '../../../server/api/getPost';
-import { getPostUrls } from '../../../server/api/getPostUrls';
-
 import { BlogPost } from '../../components/BlogPost/BlogPost';
+import { getPost } from '../../api/requests/getPost';
+import { getPostUrls } from '../../api/requests/getPostUrls';
 
 type PostProps = {
 	post: Post;
