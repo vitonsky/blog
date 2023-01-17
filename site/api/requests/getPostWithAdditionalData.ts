@@ -1,4 +1,4 @@
-import { buildApiRequest } from '../api';
+import { buildApiRequest } from '../utils';
 import { PostWithAdditionalData } from '../../../common/Post';
 import { GetPostWithAdditionalDataRequest } from '../../../common/api/GetPostWithAdditionalData';
 
