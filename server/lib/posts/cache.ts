@@ -1,5 +1,6 @@
 // TODO: use SQLite instead of own implementation of storage
 
+import sharp from 'sharp';
 import watch from 'node-watch';
 
 import path from 'path';
@@ -9,11 +10,59 @@ import { readFile, rm } from 'fs/promises';
 import { PostWithAdditionalData } from '../../../common/Post';
 import { attachmentsPath, publicDir } from '../../constants';
 
-import { cp, isExistFile } from '../files';
+import { cp, ensureDirectoryExistence, isExistFile } from '../files';
 import { blogPostsDir } from '../../constants';
 
 import { getAttachmentFilenames, getPostFilenames, getPostUrlByFilename } from './files';
 import { getPostData } from './post';
+
+const getImageExtension = (filePath: string) => {
+	const extensionsMap = {
+		png: /\.(png)$/i,
+		jpg: /\.(jpg|jpeg)$/i,
+	} as const;
+
+	let imageExtension: null | keyof typeof extensionsMap = null;
+	for (const extension in extensionsMap) {
+		const regex = extensionsMap[extension as keyof typeof extensionsMap];
+		const isExtensionMatch = regex.test(filePath);
+		if (isExtensionMatch) {
+			imageExtension = extension as keyof typeof extensionsMap;
+			break;
+		}
+	}
+
+	return imageExtension;
+};
+
+async function copyFile(filePath: string, pathToCopy: string) {
+	ensureDirectoryExistence(pathToCopy);
+
+	// Optimize images
+	const imageExtension = getImageExtension(filePath);
+	if (imageExtension !== null) {
+		console.log('Optimize image', filePath);
+
+		const fileBuffer = await readFile(filePath);
+		switch (imageExtension) {
+		case 'png':
+			await sharp(fileBuffer)
+				.png({ compressionLevel: 9, quality: 100 })
+				.toFile(pathToCopy);
+			break;
+		case 'jpg':
+			await sharp(fileBuffer)
+				.jpeg({ progressive: true, quality: 80, mozjpeg: true })
+				.toFile(pathToCopy);
+			break;
+		}
+
+		return;
+	}
+
+	// Just copy another files
+	return await cp(filePath, pathToCopy);
+}
 
 export const parsedPosts: Record<
 	string,
@@ -76,7 +125,7 @@ export const handleAttachment = async (filename: string) => {
 	// TODO: ensure that not rewrite files while hash collisions
 	// Copy and write
 	const pathToCopy = path.join(publicDir, filePath);
-	await cp(absolutePath, pathToCopy);
+	await copyFile(absolutePath, pathToCopy);
 
 	extractedAttachments[absolutePath] = filePath;
 

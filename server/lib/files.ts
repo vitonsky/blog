@@ -7,16 +7,17 @@ export const isExistFile = (file: string) =>
 		.then(() => true)
 		.catch(() => false);
 
-export const cp = async (source: string, destination: string) => {
-	function ensureDirectoryExistence(filePath: string) {
-		const dirname = path.dirname(filePath);
-		if (existsSync(dirname)) {
-			return true;
-		}
-		ensureDirectoryExistence(dirname);
-		mkdirSync(dirname);
+export function ensureDirectoryExistence(filePath: string) {
+	const dirname = path.dirname(filePath);
+	if (existsSync(dirname)) {
+		return;
 	}
 
+	ensureDirectoryExistence(dirname);
+	mkdirSync(dirname);
+}
+
+export const cp = async (source: string, destination: string) => {
 	ensureDirectoryExistence(destination);
 
 	const originalFile = await readFile(source);

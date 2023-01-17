@@ -31,4 +31,7 @@ module.exports = {
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js', '.jsx'],
 	},
+	externals: {
+		sharp: 'commonjs sharp',
+	},
 };
