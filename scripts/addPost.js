@@ -10,7 +10,7 @@ const postDate = {
 
 const template = `
 ---
-title: Title
+title: "Draft: Title"
 time: '${date.toLocaleString('en-GB', { minute: '2-digit', hour: '2-digit' })}'
 tags:
 keywords:
@@ -24,7 +24,7 @@ Text
 
 const postUrlTitleSegment = String(date.getTime());
 
-const postsDir = path.resolve(__dirname, '../posts');
+const postsDir = path.resolve(__dirname, '../posts/_drafts');
 const postDir = path.join(
 	postsDir,
 	String(postDate.year),
@@ -42,3 +42,5 @@ if (!fs.existsSync(postDir)) {
 
 const postFilePath = path.resolve(postDir, postFilename);
 fs.writeFileSync(postFilePath, template);
+
+console.log('Post draft created', postFilePath);
