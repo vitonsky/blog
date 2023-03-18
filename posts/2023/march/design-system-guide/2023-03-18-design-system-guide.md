@@ -26,9 +26,9 @@ Even if you have one project and one team, but do not have a design system, with
 
 ## Design system structure
 
-A design system is a documentation that contains a key principles and guides with how to apply a principles to a specific technologies.
+A design system is documentation that contains key principles and guides on how to apply principles to specific technologies.
 
-Most important sections to explain
+The most important sections to explain are:
 
 - Color system
   - How to work with a colors
@@ -56,19 +56,19 @@ Most important sections to explain
   - Where to find an assets (icons, fonts, images, videos)
   - What tools used on projects to work with a design system
 
-Don't worry, you can start from writing a few most important sections for your project, to share principles with your team or with another team and enrich your design system with a new docs later, when you feel the powerful.
+Don't worry, you can start by writing a few of the most important sections for your project, to share principles with your team or with another team, and enrich your design system with new documentation later, as needed.
 
-It is possible that you actually have a system in your mind, but you didn't share the principles with your team. Try to discuss the rules with a teams who works on UI, to find out a features of product and to prevent conflicts and rules collisions.
+It is possible that you actually have a system in your mind, but you didn't share the principles with your team. Try to discuss the rules with teams who work on UI to find out the features of the product and prevent conflicts and rule collisions.
 
 ## How to use
 
-It is important not just create a design system, but make it a source of truth for a development.
+It is important not just to create a design system, but to make it a source of truth for development.
 
-A people who work on user interface must consider these principles to reach uniform style on the product level.
+People who work on the user interface must consider these principles to achieve a uniform style on the product level.
 
-Tell about your design system to your design people before they will start to create a new design.
+Tell your design team about your design system before they start creating a new design.
 
-Require developers to obey a design system principles. When you review a pull request and you see violations with a design system - reject the PR with links to a related sections.
+Require developers to adhere to the design system principles. When you review a pull request and you see violations of the design system, reject the PR with links to the related sections.
 
 ## Examples
 
