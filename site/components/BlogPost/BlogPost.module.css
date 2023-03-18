@@ -45,3 +45,7 @@
 .PostBody p {
 	margin: 1rem 0;
 }
+
+.PostBody img {
+	display: block;
+}
