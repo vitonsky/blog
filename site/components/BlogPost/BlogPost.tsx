@@ -20,11 +20,15 @@ const mdxComponents: Required<Parameters<typeof MDXRemote>[0]>['components'] = {
 	a: (props) => {
 		const isInternalLink =
 			props.href !== undefined &&
-			internalLinkPrefixes.some(
-				(prefix) => props.href!.slice(0, prefix.length) === prefix,
-			);
+			internalLinkPrefixes.some((prefix) => props.href!.startsWith(prefix));
 
-		return <Link external={!isInternalLink} {...props} />;
+		return (
+			<Link
+				external={!isInternalLink}
+				target={isInternalLink ? undefined : '__blank'}
+				{...props}
+			/>
+		);
 	},
 	ul: List,
 	li: ListItem,
