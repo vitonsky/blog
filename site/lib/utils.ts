@@ -1,7 +1,12 @@
 import { siteInfo } from './constants';
 
 export const getDateFromTimestamp = (timestamp: number) => {
-	const options = { year: 'numeric', month: 'long', day: 'numeric' } as const;
+	const options: Intl.DateTimeFormatOptions = {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		timeZone: 'UTC',
+	};
 	return new Date(timestamp).toLocaleDateString('en-US', options);
 };
 

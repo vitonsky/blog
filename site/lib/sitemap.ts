@@ -15,7 +15,7 @@ export const generateSitemap = async () => {
 	const sitemap = new SitemapStream({ hostname: siteInfo.url });
 	posts.forEach((post) => {
 		const date = new Date(post.date);
-		sitemap.write({ url: getFullUrl(post.url), lastmod: date.toISOString() });
+		sitemap.write({ url: getFullUrl(post.url), lastmod: date.toUTCString() });
 	});
 	sitemap.end();
 

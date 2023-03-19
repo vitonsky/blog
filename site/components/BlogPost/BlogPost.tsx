@@ -61,7 +61,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				<meta name="author" content={siteInfo.author} />
 				<meta
 					name="article:published_time"
-					content={new Date(post.date).toISOString()}
+					content={new Date(post.date).toUTCString()}
 				/>
 
 				{/* Open graph */}
