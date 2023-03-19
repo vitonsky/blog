@@ -51,5 +51,6 @@
 }
 
 .PostBody :is(h1, h2, h3) {
-	margin-top: 5rem;
+	margin-top: 4rem;
+	margin-bottom: 1.3rem;
 }
