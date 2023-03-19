@@ -10,6 +10,8 @@ import { Link } from '../Link/Link';
 
 import { ShareBlock } from '../ShareBlock/ShareBlock';
 import { Comments } from '../Comments/Comments';
+import { List } from '../List/List';
+import { ListItem } from '../List/ListItem';
 
 import styles from './BlogPost.module.css';
 
@@ -24,6 +26,8 @@ const mdxComponents: Required<Parameters<typeof MDXRemote>[0]>['components'] = {
 
 		return <Link external={!isInternalLink} {...props} />;
 	},
+	ul: List,
+	li: ListItem,
 };
 
 export type BlogPostProps = {
