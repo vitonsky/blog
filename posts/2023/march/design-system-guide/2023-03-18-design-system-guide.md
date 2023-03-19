@@ -6,6 +6,7 @@ keywords:
   - ui
   - design system
   - design tokens
+  - research guide
 description:
 image:
 lang:
@@ -56,6 +57,8 @@ The most important sections to explain are:
   - Where to find an assets (icons, fonts, images, videos)
   - What tools used on projects to work with a design system
 
+In addition, a design system usually encourages reusability, so you should describe how to make components atomic and reusable. It would allow you to implement new components by composing other components, for example, making a select component from a button, popup, and menu.
+
 Don't worry, you can start by writing a few of the most important sections for your project, to share principles with your team or with another team, and enrich your design system with new documentation later, as needed.
 
 It is possible that you actually have a system in your mind, but you didn't share the principles with your team. Try to discuss the rules with teams who work on UI to find out the features of the product and prevent conflicts and rule collisions.
@@ -70,11 +73,19 @@ Tell your design team about your design system before they start creating a new 
 
 Require developers to adhere to the design system principles. When you review a pull request and you see violations of the design system, reject the PR with links to the related sections.
 
-## Examples
+## Links
 
 Some examples of popular design systems
 
 - [Spectrum](https://spectrum.adobe.com/)
-- [Material Design](https://m2.material.io/design/introduction)
+- [Material Design](https://m2.material.io/design/introduction), [Material 3](https://m3.material.io/)
 - [Kontur guides](https://guides.kontur.ru/)
+- [W3C design system](https://design-system.w3.org/)
+- [Ant Design](https://ant.design/docs/spec/introduce)
+- [Carbon Design System](https://carbondesignsystem.com/)
+- [Atlassian Design System Foundations](https://atlassian.design/foundations)
+- [GOV.UK Design System](https://design-system.service.gov.uk/)
+- [Apple design guides](https://developer.apple.com/design/)
 - [Yandex design systems list](http://designsystemsclub.ru/)
+
+See also guide [How to Design System](http://how-to-design-system.com/) with a useful links.
