@@ -1,11 +1,9 @@
 body {
-	--typo-content-size: 17px;
+	--typo-content-size: 20px;
 
 	margin: 0;
-
-	/* Use "Ubuntu" as alternative if necessary */
-	font-display: swap;
-	font-family: Poppins, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+		Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 a {

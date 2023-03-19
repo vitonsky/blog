@@ -5,7 +5,6 @@ import { siteInfo } from '../lib/constants';
 
 import { MainLayout } from '../components/MainLayout/MainLayout';
 
-import '../styles/fonts.css';
 import '../styles/app.css';
 
 import 'highlight.js/styles/github.css';
