@@ -57,7 +57,9 @@ The most important sections to explain are:
   - Where to find an assets (icons, fonts, images, videos)
   - What tools used on projects to work with a design system
 
-In addition, a design system usually encourages reusability, so you should describe how to make components atomic and reusable. It would allow you to implement new components by composing other components, for example, making a select component from a button, popup, and menu.
+You can see by the structure that a design system is not about a specific technology like Figma components or UI kit on React, etc. It is a foundation principles how to create a user interface for your product. Any technology must implement the principles described in the design system.
+
+A design system encourages reusability, so you should describe how to make components atomic and reusable. It would allow you to implement new components by composing other components, for example, making a select component from a button, popup, and menu.
 
 Don't worry, you can start by writing a few of the most important sections for your project, to share principles with your team or with another team, and enrich your design system with new documentation later, as needed.
 
