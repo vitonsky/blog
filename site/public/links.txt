@@ -1,0 +1,4 @@
+Public backups for blog posts
+
+https://ewr1.vultrobjects.com/vcloud/backups/public/
+https://vcloud.ap-south-1.linodeobjects.com/backups/public/
