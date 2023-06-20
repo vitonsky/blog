@@ -2,8 +2,9 @@ body {
 	--typo-content-size: 20px;
 
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-		Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	/* stylelint-disable-next-line declaration-colon-newline-after */
+	/* stylelint-disable-next-line max-line-length */
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 a {
@@ -12,7 +13,7 @@ a {
 	text-decoration: underline;
 	text-decoration-color: #cbcbcb;
 	text-decoration-thickness: 0.12em;
-	text-underline-offset: 25%;
+	text-underline-offset: 20%;
 	text-underline-position: from-font;
 	transition: text-decoration ease 200ms;
 }
