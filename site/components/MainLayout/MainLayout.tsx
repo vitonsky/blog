@@ -39,6 +39,9 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 					>
 						StackOverflow
 					</Link>
+					<Link href="https://www.linkedin.com/in/vitonsky" target="_blank">
+						LinkedIn
+					</Link>
 					{/* <Link href="#" target="_blank">LinkedIn</Link> */}
 					<Link href="mailto:rob@vitonsky.net" target="_blank">
 						Email
