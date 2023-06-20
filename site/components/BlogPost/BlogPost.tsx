@@ -9,7 +9,6 @@ import { getDateFromTimestamp, getFullUrl } from '../../lib/utils';
 import { Link } from '../Link/Link';
 
 import { ShareBlock } from '../ShareBlock/ShareBlock';
-import { Comments } from '../Comments/Comments';
 import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
 
@@ -118,8 +117,6 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 				<div className={styles.PostBody}>
 					<MDXRemote {...post.source} components={mdxComponents} />
 				</div>
-
-				<Comments location={post.url} />
 			</div>
 		</>
 	);
