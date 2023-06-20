@@ -24,7 +24,11 @@
 }
 
 .HeadRow > *:not(:first-child) {
-	margin-left: 0.5rem;
+	margin-left: 0.8rem;
+}
+
+.HeadRow > a:not(:last-child) {
+	margin-bottom: 0.5rem;
 }
 
 .SearchForm {

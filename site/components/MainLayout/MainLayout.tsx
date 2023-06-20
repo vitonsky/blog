@@ -22,6 +22,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 			<div className={styles.Head}>
 				<div className={styles.HeadRow}>
 					<Link href="/">Home</Link>
+					<Link href="https://latexonline.cc/compile?git=https://github.com/vitonsky/resume&target=resume.tex&command=pdflatex">About me</Link>
 					<Link href="/rss.xml" external>
 						RSS
 					</Link>
@@ -38,6 +39,9 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 						target="_blank"
 					>
 						StackOverflow
+					</Link>
+					<Link href="https://www.linkedin.com/in/vitonsky" target="_blank">
+						LinkedIn
 					</Link>
 					{/* <Link href="#" target="_blank">LinkedIn</Link> */}
 					<Link href="mailto:rob@vitonsky.net" target="_blank">
