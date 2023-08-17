@@ -1,6 +1,6 @@
 ---
 title: "BEM methodology is not about CSS"
-time: '22:55'
+time: '14:28'
 tags:
 keywords:
   - BEM methodology
@@ -19,9 +19,31 @@ First of all, let's see BEM definition from an [official docs site](https://en.b
 
 > BEM (Block, Element, Modifier) is a component-based approach to web development. The idea behind it is to divide the user interface into independent blocks. This makes interface development easy and fast even with a complex UI, and it allows reuse of existing code without copying and pasting.
 
-No single word about CSS as you see.
+No one single word about CSS as you see, because a [naming convention](https://en.bem.info/methodology/naming-convention/) is not a whole BEM, it just one of tools the methodology offers you.
 
-BEM is methodology to develop high extensible modular components with low code coupling.
+BEM is a methodology to develop a high extensible modular components with low code coupling.
+
+## Best practices to create a robust software
+
+BEM gives you a methods to improve a code maintainability, its based on most popular best practices like a code decoupling and dependency inversion principles and focused on front end problems.
+
+For example, look at [external geometry principle](https://en.bem.info/methodology/css/#external-geometry-and-positioning), the essence which is that blocks must never set their own position and external indents. This allows to reuse a block at any place and to set position by another element as needed with no problems about overriding CSS specificity.
+
+Example for block `search-form`
+```html
+<!-- `header` block -->
+<div class="header">
+    <!--
+        The `search-form` block is mixed with the `search-form` element
+        from the `header` block
+    -->
+    <div class="search-form header__search-form"></div>
+</div>
+```
+
+A `search-form` does not have margin, a block `header` is responsible to set position for a block `search-form` inside, it uses an element `header__search-form` to implement positioning, so block `search-form` may be re-used in other blocks.
+
+BEM defines a responsibility model for entities.
 
 ## Code composition
 
@@ -86,11 +108,11 @@ This approach makes components really atomic and independent.
 
 Of course, BEM also useful for naming CSS entities, but it is not main feature of BEM, it's just a result of methodology use.
 
-Methodology lays a proper software desing ideas appliable not only for CSS and even not only for front-end.
+Methodology lays a proper software design ideas applicable not only for CSS and even not only for front-end.
 
 This is why advanced tools that improve development experience will not take out a BEM methodology, but enhance each other.
 
-If you are interesting a BEM now, [read more about on their site](https://en.bem.info/methodology/quick-start/).
+If you are interesting a BEM now - read the [BEM methodology docs](https://en.bem.info/methodology/quick-start/).
 
 ## Related links
 
