@@ -11,7 +11,7 @@ image:
 lang:
 ---
 
-Sometimes i see people who are sure that BEM is just a way to make class names in CSS are unique, and since a modern tools allow us to make names unique automatically we should not to use BEM. This is a big mistake, BEM is about atomic code design and give you standards and guides how to simplify code maintaining.
+Some developers are sure that BEM is just a way to make class names in CSS are unique and, since a modern tools allow to make names unique automatically they have no reasons to use BEM. This is a mistake with a bad consequences, BEM is are methodology about atomic code design, it gives you a standards and guides how to simplify code maintaining.
 
 ![The Pusher movie (1996)](the-pusher-movie.jpg)
 
@@ -19,7 +19,7 @@ First of all, let's see BEM definition from an [official docs site](https://en.b
 
 > BEM (Block, Element, Modifier) is a component-based approach to web development. The idea behind it is to divide the user interface into independent blocks. This makes interface development easy and fast even with a complex UI, and it allows reuse of existing code without copying and pasting.
 
-No single word about CSS, do you see?
+No single word about CSS as you see.
 
 BEM is methodology to develop high extensible modular components with low code coupling.
 
@@ -44,7 +44,7 @@ const BaseList: IList<IListProps> = ({items, ...props}) => {
 and then add feature to enable keyboard navigation over items by modifier
 
 ```tsx
-const withListKeyboardNavigationOn = (List: IList): IList<IListProps & { keyboardNavigation: boolean }> => {
+const withListKeyboardNavigation = (List: IList): IList<IListProps & { keyboardNavigation: boolean }> => {
 	return ({ keyboardNavigation, ...props }) => {
 		const onKeyDown = // navigation implementation ...
 		return <List {...props} onKeyDown={onKeyDown}/>
@@ -57,26 +57,28 @@ now you can enable features you needs
 ```tsx
 const List = withListTypeCheckbox(
 	withListTypeRadio(
-		withListKeyboardNavigationOn(BaseList)
+		withListKeyboardNavigation(BaseList)
 	)
 );
 
 // You can now enable keyboard navigation by set modifier
 <List keyboardNavigation items={listItems}/>
 
-// Or not use feature
+// Or not to use feature
 <List items={listItems}/>
 ```
 
-Unlike most popular UI kits who give you not flexible monolith components that includes all features out of box and not have a way to override features behavior, with BEM you can use block, elements and modifiers as you needs, you can replace any feature to your implementation and re-compose the component. This is benefits of [elements](https://en.bem.info/methodology/key-concepts/#element) and [modifiers](https://en.bem.info/methodology/key-concepts/#modifier) in BEM.
+Unlike most popular UI kits who give you not flexible monolith components that includes all features out of box and not have a way to override features behavior, a BEM methodology force to decompose a complex component to block, elements and modifiers to allow you replace any feature with your implementation and to include in bundle only features you needs. This is benefits of [elements](https://en.bem.info/methodology/key-concepts/#element) and [modifiers](https://en.bem.info/methodology/key-concepts/#modifier) in BEM.
+
+With this approach you can reuse components and its features between projects and even use code in BEM community that rely on interface, not on implementation.
 
 ## Files structure standard
 
-You may know about [Feature-Sliced Design](https://feature-sliced.design/), an methodology for frontend projects that trying to eliminate chaos and to make standard how to organize files on project, to simplify find a files between projects. Maybe your framework or your company have their own rules and guidelines how to place files.
+You may know about [Feature-Sliced Design](https://feature-sliced.design/), an methodology for a frontend projects to eliminate chaos and to make standard how to organize files on project, to simplify find a files between projects. Maybe your framework or your company have their own rules and guidelines how to place files.
 
 BEM methodology offers [a way to organize a file structure](https://en.bem.info/methodology/filestructure/#files-are-grouped-by-meaning-not-by-type) by meaning, not by type.
 
-When you have a button component, you should place all files of the button to one directory, file type are not matter - javascript, CSS, HTML, images and other assets, docs, tests, all things in one place.
+When you have a button component, you should place all files of the button to one directory, file type are not matter - javascript, CSS, HTML, images and other resources, docs, tests, all things in one place.
 
 This approach makes components really atomic and independent.
 
