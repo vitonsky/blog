@@ -15,7 +15,7 @@ function App({ Component, pageProps }: AppProps) {
 			<Head>
 				<title>{siteInfo.title}</title>
 				<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-				<script defer data-domain="vitonsky.net" src="https://analytics.vitonsky.net/js/script.js"></script>
+				<script async src="https://pulse2.vitonsky.net/js/script.js"></script>
 				<script
 					async
 					src="https://www.googletagmanager.com/gtag/js?id=G-9C2XWNMW56"
