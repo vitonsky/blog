@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
@@ -10,6 +11,23 @@ import '../styles/app.css';
 import 'highlight.js/styles/github.css';
 
 function App({ Component, pageProps }: AppProps) {
+	useLayoutEffect(() => {
+		if (!('plausible' in window) || typeof window.plausible !== 'function') return;
+
+		const trackEvent = window.plausible as (
+			eventName: string,
+			options: { props: Record<string, string> },
+		) => void;
+
+		document.body.addEventListener('click', ({ target }) => {
+			if (!(target instanceof HTMLAnchorElement)) return;
+
+			trackEvent('linkClick', {
+				props: { url: target.href, text: target.innerText },
+			});
+		});
+	}, []);
+
 	return (
 		<MainLayout>
 			<Head>
