@@ -12,12 +12,11 @@ import 'highlight.js/styles/github.css';
 
 function App({ Component, pageProps }: AppProps) {
 	useLayoutEffect(() => {
-		if (!('plausible' in window) || typeof window.plausible !== 'function') return;
+		const trackEvent = (window as any).plausible as
+			| undefined
+			| ((eventName: string, options: { props: Record<string, string> }) => void);
 
-		const trackEvent = window.plausible as (
-			eventName: string,
-			options: { props: Record<string, string> },
-		) => void;
+		if (typeof trackEvent !== 'function') return;
 
 		document.body.addEventListener('click', ({ target }) => {
 			if (!(target instanceof HTMLAnchorElement)) return;
