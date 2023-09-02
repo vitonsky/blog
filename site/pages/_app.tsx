@@ -22,7 +22,12 @@ function App({ Component, pageProps }: AppProps) {
 			if (!(target instanceof HTMLAnchorElement)) return;
 
 			trackEvent('linkClick', {
-				props: { url: target.href, text: target.innerText },
+				props: {
+					// Current location
+					location: location.toString(),
+					url: target.href,
+					text: target.innerText,
+				},
 			});
 		});
 	}, []);
@@ -31,7 +36,8 @@ function App({ Component, pageProps }: AppProps) {
 
 	// Enable analytics in runtime on prod only
 	useEffect(() => {
-		const shouldIgnoreAnalytics = location.hostname === 'localhost' || localStorage.disableAnalytics === 'true';
+		const shouldIgnoreAnalytics =
+			location.hostname === 'localhost' || localStorage.disableAnalytics === 'true';
 		if (shouldIgnoreAnalytics) return;
 
 		setIsAnalyticsEnabled(true);
