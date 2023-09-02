@@ -23,7 +23,7 @@
 }
 
 .PostInfo > :not(:first-child) {
-	margin-left: 1rem;
+	margin-left: .7rem;
 }
 
 .ShareBlock {
@@ -54,4 +54,29 @@
 	margin-top: 4rem;
 	margin-bottom: 1.3rem;
 	line-height: 3rem;
+}
+
+.RelatedPosts {
+	margin-top: 3rem;
+	padding: 1rem;
+	border-radius: 8px;
+	border: 10px solid #f5f6ff;
+}
+
+.RelatedPostsTitle {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 1rem;
+}
+
+.RelatedPostsList {
+	margin: 0;
+	padding: 0;
+	list-style: square;
+	font-size: 1.2rem;
+	margin-left: 1rem;
+}
+
+.RelatedPostsList > *:not(:last-child) {
+	margin-bottom: .8rem;
 }

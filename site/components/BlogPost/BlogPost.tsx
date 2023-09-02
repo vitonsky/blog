@@ -35,9 +35,10 @@ const mdxComponents: Required<Parameters<typeof MDXRemote>[0]>['components'] = {
 
 export type BlogPostProps = {
 	post: Post;
+	relatedPosts?: Pick<Post, 'url' | 'title'>[];
 };
 
-export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
+export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 	const keywords = [...(post.keywords ?? []), ...(post.tags ?? [])].filter(
 		(keyword, idx, arr) => arr.indexOf(keyword) === idx,
 	);
@@ -118,6 +119,17 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
 					<MDXRemote {...post.source} components={mdxComponents} />
 				</div>
 			</div>
+
+			{relatedPosts && <div className={styles.RelatedPosts}>
+				<h1 className={styles.RelatedPostsTitle}>Related posts</h1>
+
+				<ul className={styles.RelatedPostsList}>
+					{relatedPosts.map((post) => <li key={post.url} className={styles.RelatedPostsListItem}>
+						<a href={post.url} className={styles.RelatedPost}>{post.title}</a>
+					</li>)}
+				</ul>
+
+			</div>}
 		</>
 	);
 };
