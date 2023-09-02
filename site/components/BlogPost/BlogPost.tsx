@@ -125,7 +125,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 
 				<ul className={styles.RelatedPostsList}>
 					{relatedPosts.map((post) => <li key={post.url} className={styles.RelatedPostsListItem}>
-						<a href={post.url} className={styles.RelatedPost}>{post.title}</a>
+						<Link href={post.url} className={styles.RelatedPost}>{post.title}</Link>
 					</li>)}
 				</ul>
 
