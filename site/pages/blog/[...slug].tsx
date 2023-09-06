@@ -6,13 +6,15 @@ import { siteInfo } from '../../lib/constants';
 import { BlogPost } from '../../components/BlogPost/BlogPost';
 import { getPost } from '../../api/requests/getPost';
 import { getPostUrls } from '../../api/requests/getPostUrls';
+import { getPosts } from '../../api/requests/getPosts';
 
 type PostProps = {
 	post: Post;
+	relatedPosts?: Pick<Post, 'url' | 'title'>[];
 };
 
-const Post: NextPage<PostProps> = ({ post }) => {
-	return <BlogPost post={post} />;
+const Post: NextPage<PostProps> = ({ post, relatedPosts }) => {
+	return <BlogPost post={post} relatedPosts={relatedPosts} />;
 };
 
 export async function getStaticProps({
@@ -26,7 +28,25 @@ export async function getStaticProps({
 	const url = [siteInfo.blogPath, pagePath].join('/');
 
 	const post = await getPost({ url });
-	return { props: { post } };
+
+	const posts = await getPosts();
+
+	const getRandomSortMove = () => Math.random() > 0.5 ? 1 : -1;
+	const relatedPosts = posts
+		.filter(({ url, tags }) => url !== post.url && tags.length > 0)
+		.sort(getRandomSortMove)
+		.sort((a, b) => {
+			const aMatchedTags = a.tags.filter((tag) => post.tags.includes(tag)).length;
+			const bMatchedTags = b.tags.filter((tag) => post.tags.includes(tag)).length;
+
+			if (aMatchedTags === bMatchedTags) return getRandomSortMove();
+			return aMatchedTags > bMatchedTags ? -1 : 1;
+		})
+		.slice(0, 5)
+		// Pick only few props to minimize stringified data in post
+		.map(({ title, url }) => ({ title, url }));
+
+	return { props: { post, relatedPosts } };
 }
 
 export const getStaticPaths = async () => {

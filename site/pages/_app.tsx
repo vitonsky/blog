@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
@@ -22,7 +22,12 @@ function App({ Component, pageProps }: AppProps) {
 			if (!(target instanceof HTMLAnchorElement)) return;
 
 			trackEvent('linkClick', {
-				props: { url: target.href, text: target.innerText },
+				props: {
+					// Current location
+					location: location.toString(),
+					url: target.href,
+					text: target.innerText,
+				},
 			});
 		});
 	}, []);
@@ -32,7 +37,10 @@ function App({ Component, pageProps }: AppProps) {
 			<Head>
 				<title>{siteInfo.title}</title>
 				<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-				<script async src="https://pulse2.vitonsky.net/js/script.js"></script>
+				<script
+					async
+					src="https://pulse2.vitonsky.net/js/script.js"
+				></script>
 				<script
 					async
 					src="https://www.googletagmanager.com/gtag/js?id=G-9C2XWNMW56"

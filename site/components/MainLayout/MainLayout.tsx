@@ -28,7 +28,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 					</Link>
 				</div>
 				<div className={styles.HeadRow}>
-					<Link href="https://twitter.com/rob_vitonsky" target="_blank">
+					<Link href="https://twitter.com/rvitonsky" target="_blank">
 						Twitter
 					</Link>
 					<Link href="https://github.com/vitonsky" target="_blank">

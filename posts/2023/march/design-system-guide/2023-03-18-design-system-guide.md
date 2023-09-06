@@ -7,6 +7,7 @@ keywords:
   - design system
   - design tokens
   - research guide
+  - frontend
 description:
 image:
 lang:
