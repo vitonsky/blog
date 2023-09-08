@@ -2,7 +2,9 @@
 title: "Refusing TypeScript is a signal that you don't care about code quality"
 time: '18:55'
 tags:
-  - code quality
+  - quality
+  - frontend
+  - software design
 keywords:
 description:
 image:
