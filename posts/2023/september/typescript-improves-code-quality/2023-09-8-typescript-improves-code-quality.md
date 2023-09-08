@@ -9,19 +9,19 @@ image:
 lang:
 ---
 
-Few days ago the David Heinemeier Hansson [announced](https://world.hey.com/dhh/turbo-8-is-dropping-typescript-70165c01) a Turbo 8 [is dropping TypeScript](https://github.com/hotwired/turbo/pull/971). I'm ok with that, because i even don't know what Turbo 8 is, but few last years some frontend programmers tried to sell me idea the "TypeScript are useless, just use tests". I think the people with such opinion don't care about code quality or just don't know what TypeScript is. Here i'm explain why you should use a TypeScript.
+A few days ago, David Heinemeier Hansson [announced](https://world.hey.com/dhh/turbo-8-is-dropping-typescript-70165c01) that Turbo 8 [is dropping TypeScript](https://github.com/hotwired/turbo/pull/971). I'm okay with that because I don't even know what Turbo 8 is. However, over the past few years, some frontend programmers have tried to sell me the idea that "TypeScript is useless, just use tests". I think people with such opinions either don't care about code quality or simply don't know what TypeScript is. Here, I will explain why you should use TypeScript.
 
 ![The Star Wars: Revenge of the Sith movie](Anakin-Skywalker.png)
 
-The code quality control is a complex process to keep the code maintainable. You can't just cover code with tests on 100% or review each pull request and be sure your code is not a garbage and someone except you can figure out in this mess.
+The code quality control is a complex process to keep the code maintainable. You can't just cover code with tests at 100% or review each pull request and be sure your code are maintainable, and someone other than you can figure it out in this mess.
 
-You can't ensure at all your code is not have bugs and have perfect maintainability. You can only increase defensive structures on your repository to make hard to push a bad code with bugs. The much barriers for a bad code you have the better your code quality.
+You can't ensure at all that your code doesn't have bugs and has perfect maintainability. You can only increase defensive structures in your repository to make it hard to push bad code with bugs. The more barriers you have for bad code, the better your code quality.
 
-It means you should to use all methods together to protect code in your repository - a unit/e2e/integration tests, a code review, a code analysis tools, maintain a clear documentation, etc.
+It means you should use all methods together to protect code in your repository: unit/e2e/integration tests, code review, code analysis tools, and maintain clear documentation, etc.
 
-TypeScript is a powerful code analysis tool, it can detect a lot of defective code. A TypeScript compiller forces programmers to proof the code are correct on types level. The value of static typing is totally underestimated by David's and many others.
+TypeScript is a powerful code analysis tool; it can detect many defects in code. A TypeScript compiler forces programmers to ensure the code is correct on the types level. The value of static typing is underestimated by David and many others.
 
-Let's see what benefits for code quality the TypeScript gives.
+Let's see what benefits TypeScript gives for code quality.
 
 # The contracts
 
@@ -39,41 +39,41 @@ function sayHi(participant: Participant) {
 }
 ```
 
-Function `sayHi` requires an object with exact properties with exact types, and don't care what user of this function will do to meet the requirements.
+The `sayHi` function requires an object with exact properties and exact types, and it doesn't care what the user of this function will do to meet the requirements.
 
-User may provide object that does not meet requirements and cast type to any, but it is not a problem of function sayHi. This is a **responsibility delegation**, a important concept that developer must understand, to use TypeScript proper and takes it benefits.
+A user may provide an object that doesn't meet the requirements and cast the type to any, but it is not a problem of the `sayHi` function. This is a **responsibility delegation**, an important concept that developers must understand to use TypeScript properly and reap its benefits.
 
-Programmer must have to validate any untrusted data like user input and other IO data or result of inter op with JavaScript, and then, after validation and set types, may give the data to a TypeScript code and just trust the contracts will be honored, because TypeScript compiller has checked the code. In case a programmer cast a type, they must ensure the code are correct in a runtime.
+Programmers must validate any untrusted data, such as user input and other IO data, or the results of interoperation with JavaScript. After validation and setting types, they can then pass the data to TypeScript code and trust that the contracts will be honored because the TypeScript compiler has checked the code. If a programmer casts a type, they must ensure the code is correct at runtime.
 
-If you can cast not intersected types on your project to any types except `unknown` with no runtime verification, you probably have problems with code quality on your project.
+If you can cast non-intersected types in your project to any types except `unknown` with no runtime verification, you probably have problems with code quality on your project.
 
-Contracts allows to not write validation for each function to ensure correct data. It great both for performance and for clean of code, the code become stupid and simple.
+Contracts allow you to avoid writing validation for each function to ensure correct data. This is great for both performance and code cleanliness, the code becomes stupid and simple.
 
 # Developer experience and development costs
 
-Sometimes i write the code on pure JavaScript, mostly in browser console to calculate something fast or to parse a data on the page. Few months ago i has write [the script](https://github.com/translate-tools/linguist/tree/master/scripts/locales) for NodeJS to translate locale files with a ChatGPT. Files with text been long and ChatGPT have limits, so it takes some time to slice texts, translate it, find errors in ChatGPT result and translate again, then join slices back. Maybe 3-5 minutes depends on locale file size.
+Sometimes I write code in pure JavaScript, mostly in the browser console for quick calculations or data parsing on a web page. A few months ago, I wrote [a script](https://github.com/translate-tools/linguist/tree/master/scripts/locales) for Node.js to translate locale files using ChatGPT. These files contained long texts, and ChatGPT had limits, so it took some time to slice the texts, translate them, find errors in ChatGPT's results, retranslate as needed, and then join the slices back together. This process took around 3-5 minutes depending on the size of the locale file.
 
-I wasted some time while this process, just because a trivial type errors, like "okay, i had forget about `await`, so variable contains `Promise`, so i write text "[object Promise]" into file instead of translated text" or "oh, i provided wrong object to a function arguments".
+I wasted some time during this process due to trivial type errors, like forgetting to use `await`, which resulted in a variable containing a `Promise` and writing "[object Promise]" into the file instead of the translated text, or providing the wrong object as a function argument.
 
-Typescript eliminates a type of errors like that.
+TypeScript eliminates errors like these.
 
 # Investments to the future
 
-A TypeScript gives your code a potential for analyzing by other tools, because adds a context.
+TypeScript provides your code with the potential for analysis by other tools because it adds context.
 
-With IDE you can rename property in interface and all entities who implement the interface will automatically rename the property on the place.
+With IDE you can rename a property in an interface, and all entities that implement the interface will automatically update the property's name in their respective places.
 
-AI tools like ChatGPT and Copilot have more meta information, it may potentially improve results of code analysis and code generation. Tools for the analyzing may identify potentially dangerous code better.
+AI tools like ChatGPT and Copilot benefit from the additional meta information TypeScript provides, potentially improving code analysis and code generation. Analyzing tools can better identify potentially risky code.
 
-Static typing and tests are great completes each other. Frontend code are highly asynchronous, it is hard to cover all possible test cases and consider all possible states of the code. A TypeScript forces programmers to handle all possible cases a state may have.
+Static typing and tests complement each other nicely. Frontend code is highly asynchronous, making it challenging to cover all possible test cases and consider all potential code states. TypeScript forces programmers to handle all possible cases a state may have, enhancing code reliability.
 
 # The complexity of types
 
 David's says
 > TypeScript just gets in the way of that for me. Not just because it requires an explicit compile step, but because it pollutes the code with type gymnastics that add ever so little joy to my development experience, and quite frequently considerable grief. Things that should be easy become hard, and things that are hard become `any`. No thanks!
 
-I quote it because i heard the point a lot of times.
+I quote it because I've heard this point many times.
 
-It is true, sometimes you have to write not trivial type to proof the compiler your data are correct.
+It's true that sometimes you have to write non-trivial types to convince the compiler that your data is correct.
 
-It's ok. To create a maintainable code with high quality, you sometimes do hard work.
+That's okay. Creating maintainable code with high quality often requires putting in the hard work.
