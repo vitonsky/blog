@@ -41,9 +41,9 @@ function sayHi(participant: Participant) {
 }
 ```
 
-The `sayHi` function requires an object with exact properties and exact types, and it doesn't care what the user of this function will do to meet the requirements.
+The `sayHi` function requires an object with exact properties and exact types, and it doesn't care what the user of this function will do to meet the requirements. The compiler ensures that the type will be correct.
 
-A user may provide an object that doesn't meet the requirements and cast the type to any, but it is not a problem of the `sayHi` function. This is a **responsibility delegation**, an important concept that developers must understand to use TypeScript properly and reap its benefits.
+A user may provide an object that doesn't meet the requirements and cast the type to `any`, but it is not a problem of the `sayHi` function. This is a **responsibility delegation**, an important concept that developers must understand to use TypeScript properly and reap its benefits.
 
 Programmers must validate any untrusted data, such as user input and other IO data, or the results of interoperation with JavaScript. After validation and setting types, they can then pass the data to TypeScript code and trust that the contracts will be honored because the TypeScript compiler has checked the code. If a programmer casts a type, they must ensure the code is correct at runtime.
 
