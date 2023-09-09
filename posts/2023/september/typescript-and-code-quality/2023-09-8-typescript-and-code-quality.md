@@ -79,3 +79,11 @@ I quote it because I've heard this point many times.
 It's true that sometimes you have to write non-trivial types to convince the compiler that your data is correct.
 
 That's okay. Creating maintainable code with high quality often requires putting in the hard work.
+
+# Conclusion
+
+TypeScript is just a tool, it will not automatically improve code quality if you simply enable it. Your project must have rules in place for using the tool properly, and an architect who enforces those rules. The stricter the rules, the better.
+
+When you disable static types in your project, you lose many capabilities for controlling code quality.
+
+[JSDoc](https://jsdoc.app/) and `.d.ts` [type declaration files](https://www.typescriptlang.org/docs/handbook/2/type-declarations.html) cannot replace static typing of the code. They are simply ways to declare the external API of entities, but they do not allow for the analysis of code within entities (functions, classes, and other code blocks).
