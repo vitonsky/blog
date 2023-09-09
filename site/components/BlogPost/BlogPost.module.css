@@ -80,3 +80,11 @@
 .RelatedPostsList > *:not(:last-child) {
 	margin-bottom: .8rem;
 }
+
+.FollowMeContainer {
+	margin-top: 3rem;
+	text-align: center;
+	border-radius: 8px;
+	font-size: 1.1em;
+	line-height: 150%;
+}

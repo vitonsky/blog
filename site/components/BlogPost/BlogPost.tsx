@@ -130,6 +130,10 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 				</ul>
 
 			</div>}
+
+			<div className={styles.FollowMeContainer}>
+				<a href='https://mastodon.social/@vitonsky'>Follow me on Mastodon</a> for discussions, stay tuned!
+			</div>
 		</>
 	);
 };
