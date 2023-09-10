@@ -121,19 +121,24 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 				</div>
 			</div>
 
-			{relatedPosts && <div className={styles.RelatedPosts}>
-				<h1 className={styles.RelatedPostsTitle}>Related posts</h1>
+			{relatedPosts && (
+				<div className={styles.RelatedPosts}>
+					<h1 className={styles.RelatedPostsTitle}>Related posts</h1>
 
-				<ul className={styles.RelatedPostsList}>
-					{relatedPosts.map((post) => <li key={post.url} className={styles.RelatedPostsListItem}>
-						<Link href={post.url} className={styles.RelatedPost}>{post.title}</Link>
-					</li>)}
-				</ul>
-
-			</div>}
+					<ul className={styles.RelatedPostsList}>
+						{relatedPosts.map((post) => (
+							<li key={post.url} className={styles.RelatedPostsListItem}>
+								<Link href={post.url} className={styles.RelatedPost}>
+									{post.title}
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+			)}
 
 			<div className={styles.FollowMeContainer}>
-				Stay tuned, follow on <a href={socialMedia.mastodon}>Mastodon</a> or <a href={socialMedia.twitter}>Twitter</a>
+				Stay tuned, follow in <Link href={socialMedia.mastodon} target='_blank'>Mastodon</Link> or <Link href={socialMedia.twitter} target='_blank'>Twitter</Link>
 			</div>
 		</>
 	);
