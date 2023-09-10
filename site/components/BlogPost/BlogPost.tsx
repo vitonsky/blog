@@ -132,7 +132,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 			</div>}
 
 			<div className={styles.FollowMeContainer}>
-				<a href='https://mastodon.social/@vitonsky'>Follow me on Mastodon</a> for discussions, stay tuned!
+				Stay tuned, follow on <a href='https://mastodon.social/@vitonsky'>Mastodon</a> or <a href='https://mastodon.social/@vitonsky'>Twitter</a>
 			</div>
 		</>
 	);
