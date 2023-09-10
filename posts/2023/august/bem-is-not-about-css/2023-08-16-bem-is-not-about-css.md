@@ -2,10 +2,12 @@
 title: "BEM methodology is not about CSS"
 time: '14:28'
 tags:
+  - frontend
+  - bem
+  - architecture
 keywords:
   - BEM methodology
   - software design
-  - frontend
 description:
 image:
 lang:
