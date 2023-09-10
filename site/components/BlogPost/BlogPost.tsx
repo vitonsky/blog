@@ -5,6 +5,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import { Post } from '../../../common/Post';
 import { siteInfo } from '../../lib/constants';
 import { getDateFromTimestamp, getFullUrl } from '../../lib/utils';
+import { socialMedia } from '../../links';
 
 import { Link } from '../Link/Link';
 
@@ -132,7 +133,7 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 			</div>}
 
 			<div className={styles.FollowMeContainer}>
-				Stay tuned, follow on <a href='https://mastodon.social/@vitonsky'>Mastodon</a> or <a href='https://mastodon.social/@vitonsky'>Twitter</a>
+				Stay tuned, follow on <a href={socialMedia.mastodon}>Mastodon</a> or <a href={socialMedia.twitter}>Twitter</a>
 			</div>
 		</>
 	);

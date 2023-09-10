@@ -11,6 +11,7 @@ import { PageLoader } from '../PageLoader/PageLoader';
 import { TopDownButton } from '../TopDownButton/TopDownButton';
 
 import styles from './MainLayout.module.css';
+import { publicEmail, socialMedia } from '../../links';
 
 export type MainLayoutProps = {
 	children: ReactNode;
@@ -28,23 +29,23 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 					</Link>
 				</div>
 				<div className={styles.HeadRow}>
-					<Link href="https://twitter.com/rvitonsky" target="_blank">
+					<Link href={socialMedia.twitter} target="_blank">
 						Twitter
 					</Link>
-					<Link href="https://github.com/vitonsky" target="_blank">
+					<Link href={socialMedia.github} target="_blank">
 						Github
 					</Link>
 					<Link
-						href="https://stackoverflow.com/users/18680275/vitonsky"
+						href={socialMedia.stackoverflow}
 						target="_blank"
 					>
 						StackOverflow
 					</Link>
-					<Link href="https://www.linkedin.com/in/vitonsky" target="_blank">
+					<Link href={socialMedia.linkedin} target="_blank">
 						LinkedIn
 					</Link>
 					{/* <Link href="#" target="_blank">LinkedIn</Link> */}
-					<Link href="mailto:rob@vitonsky.net" target="_blank">
+					<Link href={`mailto:${publicEmail}`} target="_blank">
 						Email
 					</Link>
 				</div>
