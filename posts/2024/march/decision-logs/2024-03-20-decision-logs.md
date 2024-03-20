@@ -24,18 +24,19 @@ The both problems are result of lack a decision logs. You may eliminate such pro
 
 Don't make calls with your team to make decision if you no have consensus. You will just waste your time and time of your team, and then team will be forced to make sub optimal decision under pressure.
 
-Technical conversations must be in writing. This format are better at least because it asynchronous, all people have enough time to think about problem, to research and to present their arguments effectively.
+Technical discussions should be conducted in writing. This format is preferable because it is asynchronous, allowing everyone ample time to consider the problem, conduct research, and present their arguments effectively.
 
-If someone in your team can't argue their position in text discussion, it is not a reason to make a team call, because it will not help nobody. Such people usually just no have arguments and resort to social manipulations, to sell their solution. It is a problem for a project, when decisions not makes based on facts and its analysis.
+If someone in your team cannot articulate their position in a text-based discussion, this is not a reason to convene a team call. Such individuals may lack substantive arguments and may resort to social manipulation to push their solution. This poses a problem for the project, as decisions should be based on facts and thorough analysis.
 
 ## Write your decisions
 
-When you making decision on your project, log it into some place available for everyone in team, like a github issues or discussions, wiki pages, notion, etc.
+When making decisions for your project, log them in a place accessible to everyone on the team, such as GitHub issues or discussions, wiki pages, Notion, etc.
 
-The mandatory sections is
-- potential solutions list with pros and cons for every solution
-- chosen solution and explanation about the reasons why this one, but not another
-- potential problems with choses solution if any
+Include the following mandatory sections:
+
+- Potential solutions list with pros and cons for each solution.
+- Chosen solution and an explanation of why this option was selected over others.
+- Any potential problems associated with the chosen solution, if applicable.
 
 You may add more sections if you want, like involved people or links on related decisions that make current solution are consistent or something else that will be useful in future, to understand why this solution been accepted and what context we had.
 
@@ -43,4 +44,4 @@ You may add more sections if you want, like involved people or links on related 
 
 Before make a final decision, review the summary you formed. This step are trivial, but you may found the problems in your research process just by read the summary. If your summary have only 1-2 solution for general problem, or the arguments looks not as facts, but as opinions, it may mean that you need more research before make final decision.
 
-If you have decision log and current solution does not work for you, you may just try an alternative solution in a list. Keep in mind that information may be deprecated, in that case you should start new research.
+If you have a decision log and find that the current solution is not effective, you can simply try an alternative solution from the list. However, keep in mind that information may become deprecated over time. In such cases, it's important to initiate new research to ensure you have the most up-to-date and relevant information.
