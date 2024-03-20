@@ -14,10 +14,11 @@ import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
 
 import styles from './BlogPost.module.css';
+import { HTMLAttributes } from 'react';
 
 const internalLinkPrefixes = ['/blog'];
 const mdxComponents: Required<Parameters<typeof MDXRemote>[0]>['components'] = {
-	a: (props) => {
+	a: (props: HTMLAttributes<HTMLAnchorElement> & { href?: string }) => {
 		const isInternalLink =
 			props.href !== undefined &&
 			internalLinkPrefixes.some((prefix) => props.href!.startsWith(prefix));
