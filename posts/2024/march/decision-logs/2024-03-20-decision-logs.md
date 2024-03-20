@@ -16,9 +16,9 @@ Let's say you need to choose some technology for your project, or you already ha
 ![The Gangs of New York movie (2002)](<gangs of new york.jpg>)
 
 
-Did you have faced with a case when you have problems with some technologies and nobody can explain why we use this solution but not another. Or, maybe decision takes a lot of time because your team no have a consensus?
+Did you have faced with a case when you have problems with some technologies and nobody can explain why we use this solution but not another. Or, maybe decision takes a lot of time on your project, because a team no have a consensus?
 
-The both problems are result of lack a decision logs in your project. You may eliminate such problems with a simple rules below.
+The both problems are result of lack a decision logs. You may eliminate such problems with a simple rules below.
 
 ## Converse a solutions in writing
 
