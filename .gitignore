@@ -1,6 +1,9 @@
 # packages
 node_modules
 .npmrc
+.pnp.cjs
+.pnp.loader.mjs
+
 
 # debug
 npm-debug.log*

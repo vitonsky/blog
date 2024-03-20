@@ -1,6 +1,6 @@
 import { NextPage, GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
-import { Post } from '../../../common/Post';
+import type { Post } from '../../../common/Post';
 import { siteInfo } from '../../lib/constants';
 
 import { BlogPost } from '../../components/BlogPost/BlogPost';
