@@ -104,7 +104,7 @@ export const parsePost = async (
 				remarkGfm,
 				extractTree,
 			],
-			rehypePlugins: [rehypeHighlight],
+			rehypePlugins: [rehypeHighlight()],
 		},
 	});
 
@@ -222,7 +222,7 @@ export const getPostData = async (
 	} = await parsePost(postSource, { filename, attachments });
 
 	// Delete meta
-	delete source.frontmatter;
+	delete (source as Partial<typeof source>).frontmatter;
 
 	// Prevent unnecessary props forwarding
 	type StrictProps<X, Y> = { [K in keyof X]: K extends keyof Y ? X[K] : never };
