@@ -17,7 +17,7 @@ Let's say you need to choose some technology for your project, or you already ha
 
 The typical problems for a project with no decision logs are that decisions take a long time, decisions are random and suboptimal, team are unhappy, and nobody can explain why we use one solution but not another, even with its tradeoffs.
 
-The root cause here is a wrong decision-making process that is based on anything but facts and their analysis
+The root cause here is a wrong decision-making process that is based on anything but facts and their analysis.
 
 The correct decision-making process must start by defining the problem we need to solve, conducting thorough research on possible solutions, presenting facts with both positive and negative aspects of each solution, and then choosing the solution that is good enough to solve the claimed problem.
 
