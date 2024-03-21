@@ -11,14 +11,17 @@ image:
 lang:
 ---
 
-Let's say you need to choose some technology for your project, or you already have problem with some technologies, so you want to replace those to another ones. If you no have a decision log then you have a high risk to make bad decisions that are biased, based on authority and takes too long.
+Let's say you need to choose some technology for your project, or you already have problems with some technologies, so you want to replace them with others. If you do not maintain a decision log, you have a high risk of making bad decisions that are biased, based on authority, and take too long.
 
 ![The Gangs of New York movie (2002)](<gangs of new york.jpg>)
 
+The typical problems for project with no decision logs is that decisions takes a long time, decisions are random and sub optimal, team are unhappy, and nobody can explain why we use the one solution, but not another even with its tradeoffs.
 
-Did you have faced with a case when you have problems with some technologies and nobody can explain why we use this solution but not another. Or, maybe decision takes a lot of time on your project, because a team no have a consensus?
+The root cause here is wrong decision making process that based on anything, but not on facts and its analysis.
 
-The both problems are result of lack a decision logs. You may eliminate such problems with a simple rules below.
+The correct decision making process must start from define the problem we need to solve, a deep research of possible solutions, present a facts with positive and negative aspects of each solution, and then choose the solution that enough good to solve a claimed problem.
+
+If your process looks not like that and you just make a team call where you make decision on the fly because somebody push hard, or your team use arguments like "let's use X, because Microsoft use it too", "let's do X, because all people do" or "I used it in my previous project and it worked well, let's use it here too", then your decisions probably are sub optimal on long term. To fix this problem, you may introduce a decision log.
 
 ## Converse a solutions in writing
 
