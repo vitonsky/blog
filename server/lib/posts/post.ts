@@ -104,7 +104,7 @@ export const parsePost = async (
 				remarkGfm,
 				extractTree,
 			],
-			rehypePlugins: [rehypeHighlight()],
+			rehypePlugins: [rehypeHighlight as any],
 		},
 	});
 

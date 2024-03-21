@@ -3577,12 +3577,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/sharp@npm:^0.31.1":
-  version: 0.31.1
-  resolution: "@types/sharp@npm:0.31.1"
+"@types/sharp@npm:^0.32.0":
+  version: 0.32.0
+  resolution: "@types/sharp@npm:0.32.0"
   dependencies:
-    "@types/node": "npm:*"
-  checksum: 10c0/62de067f3ab5e29bbc649178540d2eb9bda061481d56a30970e04d503434319d0ae288e3680c8ad359f344db2ef310a63a4222254954b70945372eb5305045ad
+    sharp: "npm:*"
+  checksum: 10c0/a101c5bf17220b51e339164fabf779993e1757fcae1610f2647d36a24d7f15bf857fd747ec559b8fef667c9ea38caab09dc3ba4d49095fef2a06e5ae1819e639
   languageName: node
   linkType: hard
 
@@ -12844,7 +12844,7 @@ __metadata:
     "@types/express": "npm:^4.17.21"
     "@types/minimist": "npm:^1.2.5"
     "@types/node": "npm:20.11.30"
-    "@types/sharp": "npm:^0.31.1"
+    "@types/sharp": "npm:^0.32.0"
     "@types/watch": "npm:^1.0.6"
     colors: "npm:^1.4.0"
     concurrently: "npm:^8.2.2"
@@ -12913,7 +12913,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sharp@npm:^0.33.2":
+"sharp@npm:*, sharp@npm:^0.33.2":
   version: 0.33.2
   resolution: "sharp@npm:0.33.2"
   dependencies:
