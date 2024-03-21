@@ -1,11 +1,11 @@
 ---
-title: "Decision logs"
+title: 'Decision logs'
 time: '18:20'
 tags:
   - management
 keywords:
-  - "decision making"
-  - "decision logs"
+  - 'decision making'
+  - 'decision logs'
 description:
 image:
 lang:
@@ -15,13 +15,13 @@ Let's say you need to choose some technology for your project, or you already ha
 
 ![The Gangs of New York movie (2002)](<gangs of new york.jpg>)
 
-The typical problems for project with no decision logs is that decisions takes a long time, decisions are random and sub optimal, team are unhappy, and nobody can explain why we use the one solution, but not another even with its tradeoffs.
+The typical problems for a project with no decision logs are that decisions take a long time, decisions are random and suboptimal, team are unhappy, and nobody can explain why we use one solution but not another, even with its tradeoffs.
 
-The root cause here is wrong decision making process that based on anything, but not on facts and its analysis.
+The root cause here is a wrong decision-making process that is based on anything but facts and their analysis.
 
-The correct decision making process must start from define the problem we need to solve, a deep research of possible solutions, present a facts with positive and negative aspects of each solution, and then choose the solution that enough good to solve a claimed problem.
+The correct decision-making process must start by defining the problem we need to solve, conducting thorough research on possible solutions, presenting facts with both positive and negative aspects of each solution, and then choosing the solution that is good enough to solve the claimed problem.
 
-If your process looks not like that and you just make a team call where you make decision on the fly because somebody push hard, or your team use arguments like "let's use X, because Microsoft use it too", "let's do X, because all people do" or "I used it in my previous project and it worked well, let's use it here too", then your decisions probably are sub optimal on long term. To fix this problem, you may introduce a decision log.
+If your process does not resemble this and you simply make decisions on the fly during team calls because someone pushes hard, or if your team uses arguments such as "let's use X because Microsoft uses it too", "let's do X because everyone else does", or "I used it in my previous project and it worked well, so let's use it here too" then your decisions are likely suboptimal in the long term. To fix this problem, you may introduce a decision log.
 
 ## Converse a solutions in writing
 
