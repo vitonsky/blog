@@ -3,6 +3,7 @@ node_modules
 .npmrc
 .pnp.cjs
 .pnp.loader.mjs
+.yarn/install-state.gz
 
 
 # debug
