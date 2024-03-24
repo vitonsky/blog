@@ -43,8 +43,14 @@ Include the following mandatory sections:
 
 You may add more sections if you want, like involved people or links on related decisions that make current solution are consistent or something else that will be useful in future, to understand why this solution been accepted and what context we had.
 
+Decision logs force one to declare information in writing and assist in analyzing information. When all information about a problem and possible solutions is placed in one document, you and your team can see all known facts and related information, ensuring that everyone has had equal opportunities to speak and present their arguments. Decision logs help to gather as much useful information as your team can provide.
+
+Without a decision log, you may lose some important arguments and make the wrong decision. This can happen for many reasons, such as insufficient expertise in some areas, not documenting all arguments, hidden motivations, or personal bias. However, with a decision log, you have a better chance of finding criticism based on facts and selecting only the best solutions.
+
 ## Analyze your decisions and consequences
 
-Before make a final decision, review the summary you formed. This step are trivial, but you may found the problems in your research process just by read the summary. If your summary have only 1-2 solution for general problem, or the arguments looks not as facts, but as opinions, it may mean that you need more research before make final decision.
+Use decision log as pull request that must be reviewed before merge.
+
+Before make a final decision, review the summary you formed. You may found the problems in your research process just by read the summary. If your summary have only 1-2 solution for general problem, or the arguments looks not as facts, but as opinions, it may mean that you need more research before make final decision.
 
 If you have a decision log and find that the current solution is not effective, you can simply try an alternative solution from the list. However, keep in mind that information may become deprecated over time. In such cases, it's important to initiate new research to ensure you have the most up-to-date and relevant information.
