@@ -2,6 +2,7 @@ import { HTMLAttributes } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { MDXRemote } from 'next-mdx-remote';
+import { NextSeo } from 'next-seo';
 
 import { Post } from '../../../common/Post';
 import { siteInfo } from '../../lib/constants';
@@ -46,8 +47,32 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 
 	return (
 		<>
+			<NextSeo
+				title={post.title}
+				description={post.description || post.previewText}
+				openGraph={{
+					siteName: siteInfo.title,
+					type: 'article',
+					locale:
+						post.lang === null || post.lang === 'en' ? 'en_US' : post.lang,
+					images:
+						post.coverImage !== null
+							? [{ url: getFullUrl(post.coverImage) }]
+							: [],
+					article: {
+						section: 'Technology',
+						authors: [siteInfo.author],
+						tags: post.tags,
+						publishedTime: new Date(post.date).toUTCString(),
+					},
+				}}
+				twitter={{
+					cardType: 'summary_large_image',
+					handle: '@rvitonsky',
+					site: '@rvitonsky',
+				}}
+			/>
 			<Head>
-				<title>{post.title}</title>
 				<meta
 					name="viewport"
 					content="width=device-width,minimum-scale=1,initial-scale=1"
@@ -59,45 +84,14 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 				></meta>
 
 				{/* Common metadata */}
-				<meta name="description" content={post.description || post.previewText} />
 				{keywords.length > 0 && (
 					<meta name="keywords" content={keywords.join(', ')} />
 				)}
-				<meta name="author" content={siteInfo.author} />
-				<meta
-					name="article:published_time"
-					content={new Date(post.date).toUTCString()}
-				/>
-
-				{/* Open graph */}
-				<meta name="og:site_name" content={siteInfo.title} />
-				<meta name="og:type" content="article" />
-				<meta
-					name="og:locale"
-					content={
-						post.lang === null || post.lang === 'en' ? 'en_US' : post.lang
-					}
-				/>
-				{post.coverImage !== null && (
-					<meta name="og:image" content={getFullUrl(post.coverImage)} />
-				)}
-
-				{/* Social media */}
-				<meta name="twitter:title" property="og:title" content={post.title} />
-				<meta
-					name="twitter:description"
-					property="og:description"
-					content={post.description || post.previewText}
-				/>
-				<meta name="twitter:card" content="summary" />
 				<meta
 					name="twitter:url"
 					property="og:url"
 					content={getFullUrl(post.url)}
 				/>
-				{post.coverImage !== null && (
-					<meta name="twitter:image" content={getFullUrl(post.coverImage)} />
-				)}
 			</Head>
 
 			<div className={styles.BlogPost}>
