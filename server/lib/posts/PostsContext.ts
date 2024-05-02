@@ -1,14 +1,12 @@
-import sharp from 'sharp';
-
-import path from 'path';
 import { createHash } from 'crypto';
-import { readFile, rm } from 'fs/promises';
+import path from 'path';
+import sharp from 'sharp';
 
 import { PostWithAdditionalData } from '../../../common/Post';
 import { attachmentsPath, publicDir } from '../../constants';
 
 import { cp, ensureDirectoryExistence, isExistFile } from '../files';
-
+import { readFile, rm } from 'fs/promises';
 import { getPostUrlByFilename } from './files';
 import { getPostData } from './post';
 
@@ -41,16 +39,16 @@ async function copyFile(filePath: string, pathToCopy: string) {
 
 		const fileBuffer = await readFile(filePath);
 		switch (imageExtension) {
-		case 'png':
-			await sharp(fileBuffer)
-				.png({ compressionLevel: 9, quality: 100 })
-				.toFile(pathToCopy);
-			break;
-		case 'jpg':
-			await sharp(fileBuffer)
-				.jpeg({ progressive: true, quality: 80, mozjpeg: true })
-				.toFile(pathToCopy);
-			break;
+			case 'png':
+				await sharp(fileBuffer)
+					.png({ compressionLevel: 9, quality: 100 })
+					.toFile(pathToCopy);
+				break;
+			case 'jpg':
+				await sharp(fileBuffer)
+					.jpeg({ progressive: true, quality: 80, mozjpeg: true })
+					.toFile(pathToCopy);
+				break;
 		}
 
 		return;

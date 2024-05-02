@@ -3,14 +3,13 @@ import { ComponentType, FC } from 'react';
 import { getFullUrl } from '../../lib/utils';
 
 import { Link } from '../Link/Link';
-
-import styles from './ShareBlock.module.css';
-
 import facebook from './icons/facebook.svg';
 import linkedin from './icons/linkedin.svg';
 import reddit from './icons/reddit.svg';
 import twitter from './icons/twitter.svg';
 import ycombinator from './icons/ycombinator.svg';
+
+import styles from './ShareBlock.module.css';
 
 const icons: {
 	Icon: ComponentType<any>;

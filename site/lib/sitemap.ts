@@ -1,9 +1,7 @@
 import { SitemapStream, streamToPromise } from 'sitemap';
 
-import { writeFile } from 'fs/promises';
-
 import { getPosts } from '../api/requests/getPosts';
-
+import { writeFile } from 'fs/promises';
 import { siteInfo } from './constants';
 import { getFullUrl } from './utils';
 

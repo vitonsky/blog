@@ -1,3 +1,4 @@
+import { HTMLAttributes } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { MDXRemote } from 'next-mdx-remote';
@@ -8,13 +9,11 @@ import { getDateFromTimestamp, getFullUrl } from '../../lib/utils';
 import { socialMedia } from '../../links';
 
 import { Link } from '../Link/Link';
-
-import { ShareBlock } from '../ShareBlock/ShareBlock';
 import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
+import { ShareBlock } from '../ShareBlock/ShareBlock';
 
 import styles from './BlogPost.module.css';
-import { HTMLAttributes } from 'react';
 
 const internalLinkPrefixes = ['/blog'];
 const mdxComponents: Required<Parameters<typeof MDXRemote>[0]>['components'] = {
@@ -139,7 +138,14 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 			)}
 
 			<div className={styles.FollowMeContainer}>
-				Stay tuned, follow in <Link href={socialMedia.mastodon} target='_blank'>Mastodon</Link> or <Link href={socialMedia.twitter} target='_blank'>Twitter</Link>
+				Stay tuned, follow in{' '}
+				<Link href={socialMedia.mastodon} target="_blank">
+					Mastodon
+				</Link>{' '}
+				or{' '}
+				<Link href={socialMedia.twitter} target="_blank">
+					Twitter
+				</Link>
 			</div>
 		</>
 	);

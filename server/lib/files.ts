@@ -1,6 +1,7 @@
-import path from 'path';
 import { existsSync, mkdirSync } from 'fs';
-import { readFile, access, writeFile } from 'fs/promises';
+import path from 'path';
+
+import { access, readFile, writeFile } from 'fs/promises';
 
 export const isExistFile = (file: string) =>
 	access(file)

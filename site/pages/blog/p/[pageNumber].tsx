@@ -1,10 +1,9 @@
 import type { GetStaticPropsContext, GetStaticPropsResult, NextPage } from 'next';
 
-import { siteInfo } from '../../../lib/constants';
-
-import { BlogPage, BlogPageProps } from '../../../components/BlogPage/BlogPage';
 import { getPaginationInfo } from '../../../api/requests/getPaginationInfo';
 import { getPosts } from '../../../api/requests/getPosts';
+import { BlogPage, BlogPageProps } from '../../../components/BlogPage/BlogPage';
+import { siteInfo } from '../../../lib/constants';
 
 type PostsPageProps = Required<BlogPageProps>;
 

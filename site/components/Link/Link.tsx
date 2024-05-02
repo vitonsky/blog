@@ -11,7 +11,7 @@ const whiteListedExternalResources = [
 	'https://github.com/vitonsky',
 	'https://github.com/translate-tools',
 	'https://chrome.google.com/webstore/detail/gbefmodhlophhakmoecijeppjblibmie',
-	'https://addons.mozilla.org/addon/linguist-translator'
+	'https://addons.mozilla.org/addon/linguist-translator',
 ];
 
 export const Link: FC<LinkProps> = ({ external, ...props }) => {
@@ -41,7 +41,9 @@ export const Link: FC<LinkProps> = ({ external, ...props }) => {
 	const rel = useMemo(() => {
 		if (!external) return undefined;
 
-		const isWhiteListedUrl = props.href && whiteListedExternalResources.some((prefix) => props.href!.startsWith(prefix));
+		const isWhiteListedUrl =
+			props.href &&
+			whiteListedExternalResources.some((prefix) => props.href!.startsWith(prefix));
 		if (isWhiteListedUrl) return undefined;
 
 		return 'nofollow ugc';

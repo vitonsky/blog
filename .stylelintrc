@@ -4,15 +4,14 @@
     "stylelint-no-unsupported-browser-features"
   ],
   "rules": {
-    "string-quotes": "single",
     "selector-class-pattern": ".+",
-    "indentation": "tab",
-    "max-empty-lines": 2,
+    "media-feature-range-notation": "prefix",
     "plugin/no-unsupported-browser-features": [
       true,
       {
         "ignore": [
           "intrinsic-width",
+          "css-matches-pseudo",
           "text-decoration"
         ]
       }

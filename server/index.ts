@@ -1,11 +1,11 @@
-import express from 'express';
-import minimist from 'minimist';
 import 'express-async-errors';
 
-import { apiPath, port } from './constants';
+import express from 'express';
+import minimist from 'minimist';
 
-import { createPostsRouter } from './services/createPostsRouter';
+import { apiPath, port } from './constants';
 import { errorHandlerMiddleware } from './middleware/handleErrors';
+import { createPostsRouter } from './services/createPostsRouter';
 
 export const runServer = () => {
 	console.log('Run API server: ' + apiPath);
@@ -13,7 +13,7 @@ export const runServer = () => {
 	const app = express();
 	app.use(express.json());
 
-	app.get('/', function(_, res) {
+	app.get('/', function (_, res) {
 		res.send('This is API server to handle files for blog');
 	});
 
@@ -28,8 +28,8 @@ export const runServer = () => {
 	const server = app.listen(port);
 
 	// Graceful shutdown
-	const closeApp = function() {
-		server.close(function() {
+	const closeApp = function () {
+		server.close(function () {
 			process.exit(0);
 		});
 	};

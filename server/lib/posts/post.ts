@@ -1,17 +1,17 @@
-import { serialize } from 'next-mdx-remote/serialize';
-import { visit } from 'unist-util-visit';
-import getReadingTime from 'reading-time';
 import colors from 'colors';
+import { serialize } from 'next-mdx-remote/serialize';
+import path from 'path';
+import getReadingTime from 'reading-time';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeStringify from 'rehype-stringify';
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
-import rehypeStringify from 'rehype-stringify';
-import rehypeHighlight from 'rehype-highlight';
-
-import path from 'path';
-import { readFile } from 'fs/promises';
+import { visit } from 'unist-util-visit';
 
 import { PostWithAdditionalData } from '../../../common/Post';
+
+import { readFile } from 'fs/promises';
 import { extractTimestampFromName, getPostUrlByFilename } from './files';
 
 export const isUrl = (filename: string) => /^[a-z]*:\/\//i.test(filename);

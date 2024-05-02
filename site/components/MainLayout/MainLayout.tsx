@@ -1,17 +1,16 @@
 import { FC, ReactNode } from 'react';
-
+import { Textinput } from 'react-elegant-ui/components/Textinput/Textinput.bundle/desktop';
 import { cnTheme } from 'react-elegant-ui/theme';
 import { theme } from 'react-elegant-ui/theme/presets/default';
-import { Textinput } from 'react-elegant-ui/components/Textinput/Textinput.bundle/desktop';
 
 import { siteInfo } from '../../lib/constants';
+import { publicEmail, socialMedia } from '../../links';
 
 import { Link } from '../Link/Link';
 import { PageLoader } from '../PageLoader/PageLoader';
 import { TopDownButton } from '../TopDownButton/TopDownButton';
 
 import styles from './MainLayout.module.css';
-import { publicEmail, socialMedia } from '../../links';
 
 export type MainLayoutProps = {
 	children: ReactNode;
@@ -23,7 +22,9 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 			<div className={styles.Head}>
 				<div className={styles.HeadRow}>
 					<Link href="/">Home</Link>
-					<Link href="https://latexonline.cc/compile?git=https://github.com/vitonsky/resume&target=resume.tex&command=pdflatex">About me</Link>
+					<Link href="https://latexonline.cc/compile?git=https://github.com/vitonsky/resume&target=resume.tex&command=pdflatex">
+						About me
+					</Link>
 					<Link href="/rss.xml" external>
 						RSS
 					</Link>
@@ -35,10 +36,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 					<Link href={socialMedia.github} target="_blank">
 						Github
 					</Link>
-					<Link
-						href={socialMedia.stackoverflow}
-						target="_blank"
-					>
+					<Link href={socialMedia.stackoverflow} target="_blank">
 						StackOverflow
 					</Link>
 					<Link href={socialMedia.linkedin} target="_blank">
