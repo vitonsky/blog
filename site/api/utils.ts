@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 
-import { OptionalKeys } from 'react-elegant-ui/types/utility-types';
+import { OptionalKeys } from '../../common/types';
 import { apiPath } from '../../server/constants';
 
 export const buildApiRequest =
