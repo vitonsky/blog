@@ -10,7 +10,7 @@ image:
 lang:
 ---
 
-Like a code maintainability important than a performance of a code for programmers and business both, a logs in a project is important than code at all.
+Development logs are an important part of any project because they allow us to track progress, detect problems, and investigate incidents. Remember the value and advantages of development logs, and preserve as many logs as possible.
 
 ![The Better Call Saul TV series](<Better call Saul - Gustavo Fring.png>)
 
