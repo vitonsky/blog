@@ -1,5 +1,4 @@
 ---
-# title: "The more logs you have the better"
 title: 'Create as much logs as possible'
 time: '11:40'
 tags:
@@ -13,22 +12,20 @@ Like a code maintainability important than a performance of a code for programme
 
 ![The Better Call Saul TV series](<better call saul smoking scene.jpg>)
 
-Time of time I see a typical problem on a projects - a managers want to optimize development costs and decide to decrease development logs in services like Sentry/Rollbar, where we collect an errors that occurs on clients in production. They usually say something like "let's remove an old data that takes disk space and force us to use expensive plans".
+Time after time, I see a typical problem on projects - managers want to optimize development costs and decide to decrease development logs in services like Sentry/Rollbar, where we collect errors that occur on clients in production. They usually say something like "Let's remove old data that takes up disk space and forces us to use expensive plans".
 
-When I ask them "why you want to delete an collected data that may help us to analyze our problems and debug them" they respond with something like "this data is not actual, so we may delete it with no problems and save money".
+When I ask them, "Why do you want to delete collected data that may help us analyze our problems and debug them?" they respond with something like, "This data is useless, so we can delete it without any problems and save money."
 
-It looks this guys just don't understand what is assets of project and what things in project makes it valuable. Because they just want to burn a money, time and expertise accumulated in a project.
+The data, in general, is as much a project asset as the code and the people involved. The manager who wants to "optimize costs" on logs is essentially just burning money, time, and expertise accumulated in the project.
 
-The data in general is a project assets the same as a code and people.
+The data from event tracking services like Sentry/Rollbar or Mixpanel is absolutely necessary to track project regressions. We need historical information about errors and event occurrences to detect anomalies and trends.
 
-A data from event tracking services like Sentry/Rollbar or Mixpanel is absolutely necessary to track a project regressions. We need an historical information about errors and events occurrence to detect anomalies and trends.
+Retrospective analysis of historic data may detect problems in the development process. You may find that you have the same errors time after time, which means your approach to bug fixing is not working.
 
-Retrospective analysis against a historic data may detect a problems in development process. You may found that you have the same errors time of time, that means your approach about bugs fixing does not work.
+One more another story. Management decided to purge our GitLab repository where our code is stored. The proposed "solution" was to delete numerous closed pull requests and completed branches containing extensive git history. This move probably saved a couple of thousand dollars, but we lost significant historical data, and the time required for bug investigations has increased considerably.
 
-Another case in real life, the management decided to purge an GitLab where placed our code. The proposed "solution" is to delete a lot of closed pull requests and completed branches with a lot of git history. Well, they did it and probably saved a couple thousands dollars, but we loose some historic data and time to bugs investigations been increased significant for some type of cases.
+I tried to explain that the cost of disk space is very low, and the price for a couple of additional terabytes is nothing compared to the impact on sustainability, but I feel like my points were missed.
 
-I tried to explain that a disk space cost is very low and price for couple additional terabytes is nothing compared to affect on sustainability, but i feel my points been missed.
+In a timeline where artificial intelligence is advancing rapidly, data is more important than ever before. If your company hosts a extensively used git service and you care about disk space cost, but not how to set up a code analysis to detect defects and vulnerabilities based on development history, then you're likely missing out on potential profit.
 
-Now, in timeline where artificial intelligence grow fast, the data important as never before. If your company have a slefhosted git service with a lot of activity and you care about disk space cost, but not how to setup a code analysis to detect a defects and vulnerabilities based on development history, then you probably miss a profit.
-
-This point about any logs, not only git or analytics events.
+This point about any logs, not only about analytics events and git.
