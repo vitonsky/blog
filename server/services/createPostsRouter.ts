@@ -21,34 +21,34 @@ export const createPostsRouter: Service = () => {
 		const { url } = req.query as GetPostRequest;
 		const post = await postsDb.getPost(url);
 
-		res.send(post);
+		res.json(post);
 	});
 
 	router.get('/getPosts', async (req, res) => {
 		const options = req.query as GetPostsRequest;
 		const posts = await postsDb.getPosts(options);
 
-		res.send(posts);
+		res.json(posts);
 	});
 
 	router.get('/getPaginationInfo', async (req, res) => {
 		const options = req.query as unknown as GetPaginationInfoRequest;
 		const paginationInfo = await postsDb.getPaginationInfo(options);
 
-		res.send(paginationInfo);
+		res.json(paginationInfo);
 	});
 
 	router.get('/getPostUrls', async (_, res) => {
 		const urls = await postsDb.getPostUrls();
 
-		res.send(urls);
+		res.json(urls);
 	});
 
 	router.get('/getPostWithAdditionalData', async (req, res) => {
 		const { url } = req.query as GetPostWithAdditionalDataRequest;
 		const post = await postsDb.getPostWithAdditionalData(url);
 
-		res.send(post);
+		res.json(post);
 	});
 
 	return router;
