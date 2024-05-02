@@ -1,14 +1,12 @@
-import sharp from 'sharp';
-
-import path from 'path';
 import { createHash } from 'crypto';
-import { readFile, rm } from 'fs/promises';
+import path from 'path';
+import sharp from 'sharp';
 
 import { PostWithAdditionalData } from '../../../common/Post';
 import { attachmentsPath, publicDir } from '../../constants';
 
 import { cp, ensureDirectoryExistence, isExistFile } from '../files';
-
+import { readFile, rm } from 'fs/promises';
 import { getPostUrlByFilename } from './files';
 import { getPostData } from './post';
 

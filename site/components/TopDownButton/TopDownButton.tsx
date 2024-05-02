@@ -1,10 +1,9 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 
+import IconUp from '../../assets/icons/chevron-up.svg';
 import { recordClassNameManager } from '../../lib/components';
 
 import styles from './TopDownButton.module.css';
-
-import IconUp from '../../assets/icons/chevron-up.svg';
 
 const cnTopDownButton = recordClassNameManager(styles);
 

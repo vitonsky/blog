@@ -1,14 +1,15 @@
-import { Service } from '../types';
-
-import { Posts } from '../lib/posts';
-import { GetPostRequest } from '../../common/api/GetPost';
 import { Router } from 'express';
-import { GetPostsRequest } from '../../common/api/GetPosts';
-import { GetPaginationInfoRequest } from '../../common/api/GetPaginationInfo';
-import { GetPostWithAdditionalDataRequest } from '../../common/api/GetPostWithAdditionalData';
-import { attachmentsPath, publicDir } from '../constants';
-import { RawPosts } from '../lib/posts/RawPosts';
 import path from 'path';
+
+import { GetPaginationInfoRequest } from '../../common/api/GetPaginationInfo';
+import { GetPostRequest } from '../../common/api/GetPost';
+import { GetPostsRequest } from '../../common/api/GetPosts';
+import { GetPostWithAdditionalDataRequest } from '../../common/api/GetPostWithAdditionalData';
+
+import { attachmentsPath, publicDir } from '../constants';
+import { Posts } from '../lib/posts';
+import { RawPosts } from '../lib/posts/RawPosts';
+import { Service } from '../types';
 
 export const createPostsRouter: Service = () => {
 	const postsDb = new Posts(

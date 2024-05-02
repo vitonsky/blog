@@ -1,6 +1,6 @@
-import { getStaticProps as getStaticPropsForBlog } from './blog/index';
 import { generateRss } from '../lib/rss';
 import { generateSitemap } from '../lib/sitemap';
+import { getStaticProps as getStaticPropsForBlog } from './blog/index';
 
 export { default } from './blog/index';
 

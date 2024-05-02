@@ -2,12 +2,10 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
+import { MainLayout } from '../components/MainLayout/MainLayout';
 import { siteInfo } from '../lib/constants';
 
-import { MainLayout } from '../components/MainLayout/MainLayout';
-
 import '../styles/app.css';
-
 import 'highlight.js/styles/github.css';
 
 function App({ Component, pageProps }: AppProps) {
@@ -37,10 +35,7 @@ function App({ Component, pageProps }: AppProps) {
 			<Head>
 				<title>{siteInfo.title}</title>
 				<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-				<script
-					async
-					src="https://pulse2.vitonsky.net/js/script.js"
-				></script>
+				<script async src="https://pulse2.vitonsky.net/js/script.js"></script>
 				<script
 					async
 					src="https://www.googletagmanager.com/gtag/js?id=G-9C2XWNMW56"

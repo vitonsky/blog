@@ -10,7 +10,7 @@ const withMDX = require('@next/mdx')({
 });
 
 module.exports = withMDX({
-	output: "export",
+	output: 'export',
 	experimental: {
 		externalDir: true,
 	},

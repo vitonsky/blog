@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { Spinner } from 'react-elegant-ui/components/Spinner/Spinner.bundle/desktop';
+import { useRouter } from 'next/router';
 
 import styles from './PageLoader.module.css';
 

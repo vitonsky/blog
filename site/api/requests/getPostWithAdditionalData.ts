@@ -1,6 +1,7 @@
-import { buildApiRequest } from '../utils';
-import { PostWithAdditionalData } from '../../../common/Post';
 import { GetPostWithAdditionalDataRequest } from '../../../common/api/GetPostWithAdditionalData';
+import { PostWithAdditionalData } from '../../../common/Post';
+
+import { buildApiRequest } from '../utils';
 
 export const getPostWithAdditionalData = buildApiRequest<
 	GetPostWithAdditionalDataRequest,

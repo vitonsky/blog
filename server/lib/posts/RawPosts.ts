@@ -1,12 +1,11 @@
 // TODO: use SQLite instead of own implementation of storage
 
 import watch, { Watcher } from 'node-watch';
-
 import path from 'path';
-import { rm } from 'fs/promises';
 
 import { blogPostsDir } from '../../constants';
 
+import { rm } from 'fs/promises';
 import { getAttachmentFilenames, getPostFilenames } from './files';
 import { PostsContext } from './PostsContext';
 

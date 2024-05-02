@@ -1,10 +1,9 @@
-import { promise as glob } from 'glob-promise';
 import colors from 'colors';
-
+import { promise as glob } from 'glob-promise';
 import path from 'path';
 
-import { blogPostsDir } from '../../constants';
 import { siteInfo } from '../../../site/lib/constants';
+import { blogPostsDir } from '../../constants';
 
 export const extractTimestampFromName = (filename: string) => {
 	const matchResult = filename.match(/^\d{4}-\d{1,2}-\d{1,2}/);

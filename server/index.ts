@@ -1,11 +1,11 @@
-import express from 'express';
-import minimist from 'minimist';
 import 'express-async-errors';
 
-import { apiPath, port } from './constants';
+import express from 'express';
+import minimist from 'minimist';
 
-import { createPostsRouter } from './services/createPostsRouter';
+import { apiPath, port } from './constants';
 import { errorHandlerMiddleware } from './middleware/handleErrors';
+import { createPostsRouter } from './services/createPostsRouter';
 
 export const runServer = () => {
 	console.log('Run API server: ' + apiPath);
