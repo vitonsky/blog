@@ -13,7 +13,7 @@ export const runServer = () => {
 	const app = express();
 	app.use(express.json());
 
-	app.get('/', function(_, res) {
+	app.get('/', function (_, res) {
 		res.send('This is API server to handle files for blog');
 	});
 
@@ -28,8 +28,8 @@ export const runServer = () => {
 	const server = app.listen(port);
 
 	// Graceful shutdown
-	const closeApp = function() {
-		server.close(function() {
+	const closeApp = function () {
+		server.close(function () {
 			process.exit(0);
 		});
 	};

@@ -39,16 +39,16 @@ async function copyFile(filePath: string, pathToCopy: string) {
 
 		const fileBuffer = await readFile(filePath);
 		switch (imageExtension) {
-		case 'png':
-			await sharp(fileBuffer)
-				.png({ compressionLevel: 9, quality: 100 })
-				.toFile(pathToCopy);
-			break;
-		case 'jpg':
-			await sharp(fileBuffer)
-				.jpeg({ progressive: true, quality: 80, mozjpeg: true })
-				.toFile(pathToCopy);
-			break;
+			case 'png':
+				await sharp(fileBuffer)
+					.png({ compressionLevel: 9, quality: 100 })
+					.toFile(pathToCopy);
+				break;
+			case 'jpg':
+				await sharp(fileBuffer)
+					.jpeg({ progressive: true, quality: 80, mozjpeg: true })
+					.toFile(pathToCopy);
+				break;
 		}
 
 		return;
