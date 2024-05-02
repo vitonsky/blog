@@ -69,27 +69,25 @@ export class PostsContext {
 		}
 	> = {};
 	public handleFile = async (file: string) => {
-		const url = getPostUrlByFilename(file);
 		const absolutePath = path.resolve(file);
+
+		console.log('Process file', absolutePath);
+
+		const url = getPostUrlByFilename(file);
 
 		if (!(await isExistFile(file))) {
 			delete this.parsedPosts[url];
 			return;
 		}
 
-		try {
-			// Update cache
-			// eslint-disable-next-line @typescript-eslint/no-use-before-define
-			const post = await getPostData(file, this.extractedAttachments);
+		// Update cache
+		// eslint-disable-next-line @typescript-eslint/no-use-before-define
+		const post = await getPostData(file, this.extractedAttachments);
 
-			this.parsedPosts[url] = {
-				file: absolutePath,
-				data: post,
-			};
-		} catch (error) {
-			delete this.parsedPosts[url];
-			console.error(error);
-		}
+		this.parsedPosts[url] = {
+			file: absolutePath,
+			data: post,
+		};
 	};
 
 	public readonly extractedAttachments: Record<string, string> = {};
