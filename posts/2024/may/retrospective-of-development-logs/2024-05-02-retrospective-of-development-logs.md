@@ -16,7 +16,7 @@ Development logs are an important part of any project because they allow us to t
 
 Time after time, I see a typical problem on projects - managers want to optimize development costs and decide to decrease development logs in services like Sentry/Rollbar, where we collect errors that occur on clients in production. They usually say something like "Let's remove old data that takes up disk space and forces us to use expensive plans".
 
-When I ask them, "Why do you want to delete collected data that may help us analyze our problems and debug them?" they respond with something like, "This data is useless, so we can delete it without any problems and save money."
+When I ask them, "Why do you want to delete collected data that may help us analyze our problems and debug them?" they typically respond with something like, "This data is useless, so we can delete it without any problems and save money."
 
 The data, in general, is as much a project asset as the code and the people involved. The manager who wants to "optimize costs" on logs is essentially just burning money, time, and expertise accumulated in the project.
 
