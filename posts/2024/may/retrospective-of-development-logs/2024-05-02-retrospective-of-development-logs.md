@@ -3,7 +3,7 @@ title: 'Preserve a development logs for retrospective analysis'
 time: '11:40'
 tags:
   - management
-  - quality
+  - code quality
 keywords:
 description:
 image:

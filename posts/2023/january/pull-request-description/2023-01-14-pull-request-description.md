@@ -2,7 +2,7 @@
 title: 'Write detailed description for each pull request'
 time: '12:40'
 tags:
-  - quality
+  - code quality
   - management
 ---
 

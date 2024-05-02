@@ -2,7 +2,7 @@
 title: "Refusing TypeScript is a signal that you don't care about code quality"
 time: '18:55'
 tags:
-  - quality
+  - code quality
   - frontend
   - software design
 keywords:
@@ -72,6 +72,7 @@ Static typing and tests complement each other nicely. Frontend code is highly as
 # The complexity of types
 
 David's says
+
 > TypeScript just gets in the way of that for me. Not just because it requires an explicit compile step, but because it pollutes the code with type gymnastics that add ever so little joy to my development experience, and quite frequently considerable grief. Things that should be easy become hard, and things that are hard become `any`. No thanks!
 
 I quote it because I've heard this point many times.
