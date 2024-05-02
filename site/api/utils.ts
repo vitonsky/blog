@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 
-import { OptionalKeys } from '../../server/types';
+import { OptionalKeys } from '../../common/types';
 import { apiPath } from '../../server/constants';
 
 export const buildApiRequest =

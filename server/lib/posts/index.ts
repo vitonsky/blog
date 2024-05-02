@@ -1,79 +1,86 @@
-import { parsedPosts, initPostsHandlePromise } from './cache';
 import { Post, PostWithAdditionalData } from '../../../common/Post';
+import { RawPosts } from './RawPosts';
 
 export * from './post';
 
-export const getPostUrls = async () => {
-	await initPostsHandlePromise;
-	return Object.keys(parsedPosts);
-};
-
-export const getPostWithAdditionalData = async (
-	url: string,
-): Promise<PostWithAdditionalData | null> => {
-	await initPostsHandlePromise;
-
-	const post = parsedPosts[url];
-	return post === undefined ? null : post.data;
-};
-
-export const getPost = async (url: string): Promise<Post | null> => {
-	const post = await getPostWithAdditionalData(url);
-
-	if (post === null) return null;
-
-	const { additionalData, ...postData } = post;
-	return postData;
-};
-
-export const getPosts = async ({
-	tag,
-	lang,
-	sort = 'desc',
-	from = 0,
-	limit,
-}: {
-	from?: number;
-	limit?: number;
-	tag?: string;
-	lang?: string;
-	sort?: 'asc' | 'desc';
-} = {}) => {
-	await initPostsHandlePromise;
-	let posts: Post[] = Object.values(parsedPosts).map(({ data }) => data);
-
-	// Apply filter
-	if (tag !== undefined || lang !== undefined) {
-		posts = posts.filter((post) => {
-			if (tag !== undefined && post.tags.indexOf(tag) === -1) return false;
-			if (lang !== undefined && post.lang !== lang) return false;
-
-			return true;
-		});
+export class Posts {
+	private readonly rawPosts: RawPosts;
+	constructor(rawPosts: RawPosts) {
+		this.rawPosts = rawPosts;
 	}
 
-	// Sort
-	posts = posts.sort((p1, p2) =>
-		sort === 'desc' ? p2.date - p1.date : p1.date - p2.date,
-	);
+	public getPostUrls = async () => {
+		const posts = await this.rawPosts.getPosts();
+		return Object.keys(posts);
+	};
 
-	// Slice
-	posts = posts.slice(from, limit ? from + limit : undefined);
+	public getPostWithAdditionalData = async (
+		url: string,
+	): Promise<PostWithAdditionalData | null> => {
+		const posts = await this.rawPosts.getPosts();
 
-	return posts;
-};
+		const post = posts[url];
+		return post === undefined ? null : post.data;
+	};
 
-export const getPaginationInfo = async ({
-	itemsOnPage,
-	tag,
-	lang,
-}: {
-	itemsOnPage: number;
-	tag?: string;
-	lang?: string;
-}) => {
-	const postsNumber = (await getPosts({ tag, lang })).length;
-	const pagesNumber = Math.ceil(postsNumber / itemsOnPage);
+	public getPost = async (url: string): Promise<Post | null> => {
+		const post = await this.getPostWithAdditionalData(url);
 
-	return { postsNumber, pagesNumber };
-};
+		if (post === null) return null;
+
+		const { additionalData, ...postData } = post;
+		return postData;
+	};
+
+	public getPosts = async ({
+		tag,
+		lang,
+		sort = 'desc',
+		from = 0,
+		limit,
+	}: {
+		from?: number;
+		limit?: number;
+		tag?: string;
+		lang?: string;
+		sort?: 'asc' | 'desc';
+	} = {}) => {
+		const parsedPosts = await this.rawPosts.getPosts();
+		let posts: Post[] = Object.values(parsedPosts).map(({ data }) => data);
+
+		// Apply filter
+		if (tag !== undefined || lang !== undefined) {
+			posts = posts.filter((post) => {
+				if (tag !== undefined && post.tags.indexOf(tag) === -1) return false;
+				if (lang !== undefined && post.lang !== lang) return false;
+
+				return true;
+			});
+		}
+
+		// Sort
+		posts = posts.sort((p1, p2) =>
+			sort === 'desc' ? p2.date - p1.date : p1.date - p2.date,
+		);
+
+		// Slice
+		posts = posts.slice(from, limit ? from + limit : undefined);
+
+		return posts;
+	};
+
+	public getPaginationInfo = async ({
+		itemsOnPage,
+		tag,
+		lang,
+	}: {
+		itemsOnPage: number;
+		tag?: string;
+		lang?: string;
+	}) => {
+		const postsNumber = (await this.getPosts({ tag, lang })).length;
+		const pagesNumber = Math.ceil(postsNumber / itemsOnPage);
+
+		return { postsNumber, pagesNumber };
+	};
+}

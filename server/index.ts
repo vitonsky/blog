@@ -1,22 +1,30 @@
 import express from 'express';
 import minimist from 'minimist';
+import 'express-async-errors';
 
 import { apiPath, port } from './constants';
 
-import { initCache } from './lib/posts/cache';
-
-import { getPostUrlsFabric } from './api/getPostUrls';
-import { getPostsFabric } from './api/getPosts';
-import { getPostFabric } from './api/getPost';
-import { getPaginationInfoFabric } from './api/getPaginationInfo';
-import { getPostWithAdditionalDataFabric } from './api/getPostWithAdditionalData';
+import { createPostsRouter } from './services/createPostsRouter';
+import { errorHandlerMiddleware } from './middleware/handleErrors';
 
 export const runServer = () => {
 	console.log('Run API server: ' + apiPath);
 
-	initCache();
-
 	const app = express();
+	app.use(express.json());
+
+	app.get('/', function(_, res) {
+		res.send('This is API server to handle files for blog');
+	});
+
+	// Up services
+	[createPostsRouter].forEach((fabric) => {
+		const router = fabric(app);
+		app.use(router);
+	});
+
+	// Up server
+	app.use(errorHandlerMiddleware);
 	const server = app.listen(port);
 
 	// Graceful shutdown
@@ -27,21 +35,6 @@ export const runServer = () => {
 	};
 	process.on('SIGTERM', closeApp);
 	process.on('beforeExit', closeApp);
-
-	app.get('/', function(_, res) {
-		res.send('This is API server to handle files for blog');
-	});
-
-	// Apply API knobs
-	[
-		getPostUrlsFabric,
-		getPostsFabric,
-		getPostFabric,
-		getPaginationInfoFabric,
-		getPostWithAdditionalDataFabric,
-	].forEach((fabric) => {
-		fabric(app);
-	});
 };
 
 // Run server
