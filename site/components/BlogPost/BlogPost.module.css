@@ -23,7 +23,7 @@
 }
 
 .PostInfo > :not(:first-child) {
-	margin-left: .7rem;
+	margin-left: 0.7rem;
 }
 
 .ShareBlock {
@@ -56,11 +56,15 @@
 	line-height: 3rem;
 }
 
+.Divider {
+	background-color: #d5d5d5;
+	height: 2px;
+	margin: 3rem auto;
+	width: 100%;
+}
+
 .RelatedPosts {
 	margin-top: 3rem;
-	padding: 1rem;
-	border-radius: 8px;
-	border: 10px solid #f5f6ff;
 }
 
 .RelatedPostsTitle {
@@ -78,7 +82,7 @@
 }
 
 .RelatedPostsList > *:not(:last-child) {
-	margin-bottom: .8rem;
+	margin-bottom: 0.8rem;
 }
 
 .FollowMeContainer {

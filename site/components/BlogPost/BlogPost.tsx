@@ -122,19 +122,25 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 			</div>
 
 			{relatedPosts && (
-				<div className={styles.RelatedPosts}>
-					<h1 className={styles.RelatedPostsTitle}>Related posts</h1>
+				<>
+					<div className={styles.Divider}></div>
+					<div className={styles.RelatedPosts}>
+						<h1 className={styles.RelatedPostsTitle}>Related posts</h1>
 
-					<ul className={styles.RelatedPostsList}>
-						{relatedPosts.map((post) => (
-							<li key={post.url} className={styles.RelatedPostsListItem}>
-								<Link href={post.url} className={styles.RelatedPost}>
-									{post.title}
-								</Link>
-							</li>
-						))}
-					</ul>
-				</div>
+						<ul className={styles.RelatedPostsList}>
+							{relatedPosts.map((post) => (
+								<li
+									key={post.url}
+									className={styles.RelatedPostsListItem}
+								>
+									<Link href={post.url} className={styles.RelatedPost}>
+										{post.title}
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
+				</>
 			)}
 
 			<div className={styles.FollowMeContainer}>
