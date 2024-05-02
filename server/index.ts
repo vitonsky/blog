@@ -5,11 +5,7 @@ import { apiPath, port } from './constants';
 
 import { initCache } from './lib/posts/cache';
 
-import { getPostUrlsFabric } from './api/getPostUrls';
-import { getPostsFabric } from './api/getPosts';
-import { getPostFabric } from './api/getPost';
-import { getPaginationInfoFabric } from './api/getPaginationInfo';
-import { getPostWithAdditionalDataFabric } from './api/getPostWithAdditionalData';
+import { createPostsRouter } from './services/createPostsRouter';
 
 export const runServer = () => {
 	console.log('Run API server: ' + apiPath);
@@ -32,15 +28,10 @@ export const runServer = () => {
 		res.send('This is API server to handle files for blog');
 	});
 
-	// Apply API knobs
-	[
-		getPostUrlsFabric,
-		getPostsFabric,
-		getPostFabric,
-		getPaginationInfoFabric,
-		getPostWithAdditionalDataFabric,
-	].forEach((fabric) => {
-		fabric(app);
+	// Up services
+	[createPostsRouter].forEach((fabric) => {
+		const router = fabric(app);
+		app.use(router);
 	});
 };
 
