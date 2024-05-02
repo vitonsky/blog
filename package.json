@@ -9,7 +9,7 @@
 		"test": "jest",
 		"prettify": "prettier --write \"{*,**/*}.{ts,tsx,js,jsx}\" && eslint --fix \"{*,**/*}.{ts,tsx,js,jsx}\" && stylelint --fix \"{*,**/*}.css\"",
 		"lint": "prettier \"{*,**/*}.{ts,tsx,js,jsx}\" --check && eslint --max-warnings 0 \"{*,**/*}.{ts,tsx,js,jsx}\" && stylelint \"{*,**/*}.css\"",
-		"browserslist:update": "yarn browserslist@latest --update-db",
+		"browserslist:update": "yarn dlx browserslist@latest --update-db",
 		"packages:upgrade": "yarn yarn-check-updates -u",
 		"configure": "husky install && yarn run browserslist:update"
 	},
