@@ -144,11 +144,11 @@ export const BlogPost: NextPage<BlogPostProps> = ({ post, relatedPosts }) => {
 			)}
 
 			<div className={styles.FollowMeContainer}>
-				Stay tuned, follow in{' '}
+				Let's network. I'm in{' '}
 				<Link href={socialMedia.mastodon} target="_blank">
 					Mastodon
 				</Link>{' '}
-				or{' '}
+				and{' '}
 				<Link href={socialMedia.twitter} target="_blank">
 					Twitter
 				</Link>
