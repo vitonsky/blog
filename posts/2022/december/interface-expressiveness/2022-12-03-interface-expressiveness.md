@@ -3,7 +3,7 @@ title: 'Fundamental delusion about interface purposes'
 time: '23:35'
 tags:
   - architecture
-  - quality
+  - code quality
   - typescript
 ---
 
