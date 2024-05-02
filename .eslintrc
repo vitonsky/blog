@@ -17,7 +17,8 @@
     "@typescript-eslint"
   ],
   "extends": [
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "function-call-argument-newline": [
@@ -39,10 +40,6 @@
     ],
     "valid-jsdoc": "off",
     // Codestyle
-    "indent": [
-      "error",
-      "tab"
-    ],
     "camelcase": [
       "error",
       {
@@ -64,14 +61,6 @@
           "?": "before",
           ":": "before"
         }
-      }
-    ],
-    "space-before-function-paren": [
-      "error",
-      {
-        "asyncArrow": "always",
-        "anonymous": "never",
-        "named": "never"
       }
     ],
     "simple-import-sort/imports": [
