@@ -3,14 +3,10 @@ import minimist from 'minimist';
 
 import { apiPath, port } from './constants';
 
-import { initCache } from './lib/posts/cache';
-
 import { createPostsRouter } from './services/createPostsRouter';
 
 export const runServer = () => {
 	console.log('Run API server: ' + apiPath);
-
-	initCache();
 
 	const app = express();
 	const server = app.listen(port);
