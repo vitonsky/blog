@@ -27,6 +27,12 @@
 	margin-left: 0.8rem;
 }
 
+.HeadRow a {
+	text-decoration: underline;
+	font-size: 1.2rem;
+	color: #000;
+}
+
 .HeadRow > a:not(:last-child) {
 	margin-bottom: 0.5rem;
 }
