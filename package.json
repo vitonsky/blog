@@ -14,10 +14,7 @@
 		"packages:upgrade": "yarn yarn-check-updates -u",
 		"configure": "husky install && yarn run browserslist:update"
 	},
-	"workspaces": [
-		"server",
-		"site"
-	],
+	"workspaces": ["server", "site"],
 	"devDependencies": {
 		"@commitlint/cli": "^19.2.1",
 		"@commitlint/config-conventional": "^19.1.0",
@@ -29,13 +26,14 @@
 		"eslint": "^8.57.0",
 		"eslint-plugin-react": "^7.34.1",
 		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-simple-import-sort": "^12.1.0",
 		"husky": "^9.0.11",
 		"jest": "^29.7.0",
 		"lint-staged": "^15.2.2",
 		"prettier": "^3.2.5",
 		"query-string": "^9.0.0",
 		"sitemap": "^7.1.1",
-		"stylelint": "^16.2.1",
+		"stylelint": "^16.5.0",
 		"stylelint-config-standard": "^36.0.0",
 		"stylelint-no-unsupported-browser-features": "^8.0.1",
 		"textlint": "^14.0.4",
