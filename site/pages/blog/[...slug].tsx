@@ -29,9 +29,9 @@ export async function getStaticProps({
 
 	const post = await getPost({ url });
 
-	const posts = await getPosts();
+	const posts = await getPosts({});
 
-	const getRandomSortMove = () => Math.random() > 0.5 ? 1 : -1;
+	const getRandomSortMove = () => (Math.random() > 0.5 ? 1 : -1);
 	const relatedPosts = posts
 		.filter(({ url, tags }) => url !== post.url && tags.length > 0)
 		.sort(getRandomSortMove)

@@ -8,7 +8,7 @@ import { siteInfo } from './constants';
 import { getFullUrl } from './utils';
 
 export const generateSitemap = async () => {
-	const posts = await getPosts();
+	const posts = await getPosts({});
 
 	if (posts.length === 0) return;
 
