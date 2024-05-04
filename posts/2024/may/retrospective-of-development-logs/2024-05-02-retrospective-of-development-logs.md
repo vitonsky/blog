@@ -1,5 +1,5 @@
 ---
-title: 'Preserve a development logs for retrospective analysis'
+title: 'Keep the logs for retrospective analysis'
 time: '11:40'
 tags:
   - management
