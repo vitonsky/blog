@@ -31,19 +31,19 @@ hr {
 }
 
 pre code.hljs {
-	background: rgba(33, 172, 232, 0.04);
+	background: rgb(33 172 232 / 4%);
 	border-radius: 12px;
 }
 
 code {
-	background: rgba(33, 172, 232, 0.12);
+	background: rgb(33 172 232 / 12%);
 	border-radius: 4px;
 	padding: 2px 5px;
 	tab-size: 2em;
 }
 
 blockquote {
-	background: rgba(33, 172, 232, 0.12);
+	background: rgb(33 172 232 / 12%);
 	padding: 1rem;
 	margin: 0;
 	border-radius: 12px;
