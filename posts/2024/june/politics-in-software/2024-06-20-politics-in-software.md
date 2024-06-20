@@ -1,14 +1,19 @@
 ---
-title: 'Software with politic opinion implies high security threats'
+title: 'Software with politic opinion is are security threat'
 time: '18:20'
 tags:
+  - software
+  - security
+  - privacy
+  - opinion
+  - facts
 keywords:
 description:
 image:
 lang:
 ---
 
-The software who have a politic opinion, implies a bias and high risk of security threats. Avoid a software with a "position" today, to you not be hacked tomorrow.
+The software who have a politic opinion, implies a bias and high risk for security. Avoid a software with a "position" today, to you not be hacked tomorrow.
 
 ![The movie Dr. Strangelove, or How I Learned to Stop Worrying and Love the Bomb (1964)](dr-strangelove.png)
 
