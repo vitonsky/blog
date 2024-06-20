@@ -27,7 +27,7 @@ A lot of NPM packages contains malware, usually they use typo squatting or masqu
 
 Cloud services have this problem too, in 30 May 2024 [Docker Hub blocked access for users from Russia](https://therecord.media/docker-hub-suspends-services-russia) by political reasons, GitHub suspends accounts in Russia, Iran, and another countries [[1]](https://www.pcmag.com/news/github-reportedly-suspends-accounts-related-to-sanctioned-russian-orgs), [[2]](https://techthelead.com/russian-developers-get-their-github-accounts-suspended-lose-work-without-warning/), [[3]](https://techcrunch.com/2019/07/29/github-ban-sanctioned-countries/).
 
-Browser extensions, mobile and desktop apps also implements the logic to attack users by regions and based on their political view. Nowadays there are lot teams who buy a popular apps and browser extensions to inject malware. I have [blog post](../../../2023/september/malware-in-browser-extensions/2023-09-1-malware-in-browser-extensions.md) about it.
+Browser extensions, mobile and desktop apps also implements the logic to attack users by regions and based on their political view. Nowadays there are lot teams who buy a popular apps and browser extensions to inject malware. I have [blog post](/blog/2023/09/01/malware-in-browser-extensions) about it.
 
 As you can see, the "opinion" or "political view" for the company is not only a way to hype on sanctions and to curry favor with the investors, government and consumers, but it is a clear signal about potential threats. A signal that your sensitive data may be hijacked, sold or wiped anytime if political compass will spin tomorrow and recognize you as enemy.
 
