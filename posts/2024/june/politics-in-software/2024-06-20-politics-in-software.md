@@ -10,9 +10,11 @@ lang:
 
 The software who have a politic opinion, implies a bias and high risk of security threats. Avoid a software with a "position" today, to you not be hacked tomorrow.
 
-![banned twitter account](twitter-ban.png)
+![The movie Dr. Strangelove, or How I Learned to Stop Worrying and Love the Bomb (1964)](dr-strangelove.png)
 
 On this week i've found [twitter post](https://x.com/kozlovzxc/status/1802726956665905234/photo/1) in my feed, with a screenshot "[@pnpmjs](https://x.com/pnpmjs) blocked you", and my reaction been kinda «wow, it's good did not start to use PNPM still, and getted known about they have "opinion" that prompted them to block someone in twitter and which may be a motivation to inject malware on my PC in next time. I've been close to start use it in next months».
+
+![banned twitter account](twitter-ban.png)
 
 There are reasons to consider such threats as real. In fact, we've had too much cases lately that prove over and over that software with any "opinion" or "political views" are dangerous.
 
