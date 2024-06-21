@@ -32,3 +32,16 @@ Browser extensions, mobile, and desktop apps also implement logic to attack user
 As you can see, the "opinion" or "political view" of a company is not only a way to hype on sanctions and curry favor with investors, the government, and consumers, but it is also a clear signal about potential threats. It signals that your sensitive data may be hijacked, sold, or wiped anytime if the political compass spins tomorrow and recognizes you as an enemy.
 
 There is no way to completely protect ourselves from cyber attacks, but at least we can avoid software with an "opinion." Good software does not care about how to ban someone on Twitter, how to limit access from some regions, or how to inject malware based on region, religion, or skin color.
+
+To minimize security risks, we have to check software for red flags. Any publicly claimed "position" of software is a red flag if it is not directly related to software development.
+
+Some of the red flags I actively use to reject software:
+
+- Direct political opinions in a product's blog, like "we support X" or "we are against X"
+- Blocking people on social media and in chats/groups
+- Any aggressive behavior of maintainers in public discussions
+- Too persistent requests for donations
+
+It is not possible to list all factors in one post, but the key point is that good software must be neutral and independent.
+
+Any software may become malware at any time, but software with an "opinion" ensures it will. One more way to keep software neutral and independent is your support. Donate to them and help with promotion - share it with your team, friends, and contribute to their code.
