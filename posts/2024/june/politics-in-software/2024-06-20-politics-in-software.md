@@ -1,5 +1,5 @@
 ---
-title: 'Software with politic opinion is are security threat'
+title: 'Software with politic opinion is a security threat'
 time: '18:20'
 tags:
   - software
