@@ -13,7 +13,10 @@
 		"packages:upgrade": "yarn yarn-check-updates -u",
 		"configure": "husky install && yarn run browserslist:update"
 	},
-	"workspaces": ["server", "site"],
+	"workspaces": [
+		"server",
+		"site"
+	],
 	"devDependencies": {
 		"@commitlint/cli": "^19.2.1",
 		"@commitlint/config-conventional": "^19.1.0",
