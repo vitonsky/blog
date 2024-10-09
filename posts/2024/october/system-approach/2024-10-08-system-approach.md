@@ -10,11 +10,11 @@ image:
 lang:
 ---
 
-Enterprise programming is the management of system complexity. The main goals on most of enterprise projects is to minimize bugs, be scalable, and release as soon as possible. This goals is unreachable if you rely on individual skills rather on system.
+Enterprise programming is the management of system complexity. The main goals on most of enterprise projects is to minimize bugs, be scalable, and release as soon as possible. This goals is unreachable in project where people rely on individual skills rather on system approach.
 
-![There Will Be Blood (2007)](./There%20Will%20Be%20Blood.jpg)
+![There Will Be Blood (2007)](<There Will Be Blood.jpg>)
 
-Maybe you have seen a videos where some one [worker do they work exceptionally good](https://www.youtube.com/watch?v=YmkPoiEcgJM) on [assembly line](https://www.youtube.com/watch?v=kUFdnMUb0rY), [oil rig](https://www.youtube.com/shorts/CSgEkjrGlbs?feature=share) or on construction site? That is ideal demonstration of individual skills over system approach. That looks cool, but the problem that in case this workers will be under bus tomorrow - the same work will never be done as efficient as before.
+Maybe you have seen a videos where some one worker [do they work exceptionally good](https://www.youtube.com/watch?v=YmkPoiEcgJM) on [assembly line](https://www.youtube.com/watch?v=kUFdnMUb0rY), [oil rig](https://www.youtube.com/shorts/CSgEkjrGlbs?feature=share) or on construction site? That is ideal demonstration of individual skills over system approach. That looks cool, but the problem that in case this workers will be under bus tomorrow - the same work will never be done as efficient as before.
 
 The system is more than rules and people who obey this rules. The system based on idea that individuals are weak and vulnerable to human factors (like [bus factor](https://en.wikipedia.org/wiki/Bus_factor), [fundamental attribution error](https://en.wikipedia.org/wiki/Fundamental_attribution_error), etc.), but the problem may be minimized with set of rules that everyone must follow.
 
