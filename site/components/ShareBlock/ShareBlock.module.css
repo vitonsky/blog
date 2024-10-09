@@ -3,6 +3,7 @@
 }
 
 .Icon {
+	display: inline-block;
 	width: 1.8rem;
 	height: 1.8rem;
 }
