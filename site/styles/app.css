@@ -9,7 +9,7 @@ body {
 }
 
 a {
-	display: inline-block;
+	display: inline;
 	color: #0070f3;
 	text-decoration: none;
 }
