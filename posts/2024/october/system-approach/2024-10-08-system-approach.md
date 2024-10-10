@@ -14,17 +14,19 @@ Enterprise programming is the management of system complexity. The main goals on
 
 ![There Will Be Blood (2007)](<There Will Be Blood.jpg>)
 
-Maybe you have seen a videos where some one worker [do they work exceptionally good](https://www.youtube.com/watch?v=YmkPoiEcgJM) on [assembly line](https://www.youtube.com/watch?v=kUFdnMUb0rY), [oil rig](https://www.youtube.com/shorts/CSgEkjrGlbs?feature=share) or on construction site? That is ideal demonstration of individual skills over system approach. That looks cool, but the problem that in case this workers will be under bus tomorrow - the same work will never be done as efficient as before.
+Maybe you have seen a videos where some one worker [do they work exceptionally good](https://www.youtube.com/watch?v=YmkPoiEcgJM) on [assembly line](https://www.youtube.com/watch?v=kUFdnMUb0rY), [oil rig](https://www.youtube.com/shorts/CSgEkjrGlbs?feature=share) or on construction site? That is ideal demonstration of individual skills. That looks cool, but the problem that in case this workers will be under bus tomorrow - the same work will never be done as efficient as before. Because the workflow is not efficient, and only single individuals works great there.
+
+On this videos with "super efficient" individuals probably no any problems from business perspective, since this workers probably paid as low as other workers, but they work N times better than others, so it's great investment. But it becomes a problem if project tries to scale or if manager will promise to partners some output based on current estimations, and then "super efficient" worker will leave them.
 
 The system is more than rules and people who obey this rules. The system based on idea that individuals are weak and vulnerable to human factors (like [bus factor](https://en.wikipedia.org/wiki/Bus_factor), [fundamental attribution error](https://en.wikipedia.org/wiki/Fundamental_attribution_error), etc.), but the problem may be minimized with set of rules that everyone must follow.
 
-For example, instead of believe in programmers will not push to master branch, repository owner may enable auto rejection for any attempts push to master branch except through pull request. Programmers may not want push to master, but do it accidentally, since they are just humans, and I personally sometimes catch myself on it. This is a great example of popular decision, that prevents potential problems.
+For example, instead of believe in programmers will not push to master branch, repository owner may enable auto rejection for any attempts push to master branch except through pull request. This is a great example of popular decision, that prevents potential problems. Programmers may not want push to master, but do it accidentally, since they are just humans, and I personally sometimes catch myself on it.
 
-To be efficient in reach the goals, team must always rely on system, but not individuals. Individual efficiency is important though, and shall be encouraged, but must not be expected. Otherwise you will have random quality and estimations, absolute no sustainability, and your business will be done once your top programmer leave to another job. This is why a business must have interest in system approach over trust to individuals.
+To be efficient in reach the goals, team must always rely on system, but not individuals. Individual efficiency is important though, and shall be encouraged, but must not be expected. Otherwise you will have random quality, false expectations, absolute no sustainability, and your business will be done once your top programmer leave to another job. This is why a business must have interest in system approach over trust to individuals.
 
-On videos above with "super efficient" individuals probably no any problems from business perspective, since this workers probably paid as low as other workers, but they work N times better than others, so it's great investment. But it becomes a problem if project tries to scale or if manager will promise to partners some output based on current estimations, and then "super efficient" worker will leave them.
-
-So, how to think in system terms? Operate on high level! Find a problems that occurs systematically, introduce a processes to resolve the problem, and **make process over people**!
+So, how to think in system terms? Operate on high level!
+- Improve a workflows, not an individuals. Make workflow the lever to apply effort.
+- Find a problems that occurs systematically, introduce a processes to resolve the problem, and **make process over people**.
 
 Processes works like tests in programming. When you found a bug, it is not enough to just fix this bug, since the same bug may occurs on next week, once somebody other will make changes in code. To fix bug, programmer must add test to ensure a problem will be found if bug will reproduces again.
 
