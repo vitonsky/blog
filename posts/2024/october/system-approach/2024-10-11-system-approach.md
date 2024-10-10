@@ -1,6 +1,6 @@
 ---
-title: 'Rely on the system approach, not on individuals'
-time: '19:05'
+title: 'Build Systems, Not Heroes'
+time: '13:21'
 tags:
   - management
   - code quality
