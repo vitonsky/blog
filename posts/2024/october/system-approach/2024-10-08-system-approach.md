@@ -25,7 +25,7 @@ For example, instead of believe in programmers will not push to master branch, r
 To be efficient in reach the goals, team must always rely on system, but not individuals. Individual efficiency is important though, and shall be encouraged, but must not be expected. Otherwise you will have random quality, false expectations, absolute no sustainability, and your business will be done once your top programmer leave to another job. This is why a business must have interest in system approach over trust to individuals.
 
 So, how to think in system terms? Operate on high level!
-- Improve a workflows, not an individuals. Make workflow the lever to apply effort.
+- Improve a workflows, not an individuals. Make process the lever to apply effort.
 - Find a problems that occurs systematically, introduce a processes to resolve the problem, and **make process over people**.
 
 Processes works like tests in programming. When you found a bug, it is not enough to just fix this bug, since the same bug may occurs on next week, once somebody other will make changes in code. To fix bug, programmer must add test to ensure a problem will be found if bug will reproduces again.
@@ -39,3 +39,14 @@ Some examples of typical system solutions in programming:
 - Use programming languages with static types and aggressive configured code analysis tools
 - Setup strict rules for linters to ban most of dangerous language features, and to force programmers write boring and obvious code
 - Setup a lot of testing and analysis jobs in pull request pipelines, to detect and reject bad code as frequent as possible
+- Make mandatory a code review process and make responsible for quality the people who approves the pull requests, not the changes author
+- Require programmers to add tests for any code changes
+- Require programmers to use only immutable values
+
+The idea in all this rules is to automate a dodging of problems. Instead of believe that programmers on your projects are strong disciplined specialists who do not make a bugs, you can just force them to write code the way that make hard to merge pull request with bugs.
+
+If you have enough strong rules, you may don't care about programmers skills. If they can run over your barriers, then code are fine, or the rules is not enough strong and need to be improved.
+
+You may faced with resistance in your team, when you introduce processes that let you rely on system rather of individuals. Some programmers want to be an experts on the project, because it's hard to fire an expert without which the project will not work. So the system approach is an existential threat for them.
+
+Once we had a problem with performance due to unnecessary re-renders in complex react project. Our investigation figured out the problems with memoization that is pretty typical problem. One of the solutions has been idea to introduce a rule to memoize all the things returned by hooks, to automatically avoid any potential problems with memoization in future. This idea is pretty straightforward, simple and stupid. But we had a long discussion about it with one of programmers, who had insist it's bad because "premature optimization", react docs does not have recommendations about it and "nobody do like that". In my opinion it is good case where programmer resists the system approach just because he wants to spent time to fix the same things over and over and pretend to work hard.
