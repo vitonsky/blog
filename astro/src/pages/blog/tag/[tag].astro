@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPostsList from '../../../components/BlogPostsList.astro';
+import { getBlogPosts, type BlogPost } from '../../../utils/getPosts';
+
+export async function getStaticPaths() {
+	const posts = await getBlogPosts();
+
+	const tagToPostsMap: Record<string, BlogPost[]> = {};
+	posts.forEach((post) => {
+		for (const tag of post.data.tags ?? []) {
+			if (!tagToPostsMap[tag]) {
+				tagToPostsMap[tag] = [];
+			}
+
+			tagToPostsMap[tag].push(post);
+		}
+	})
+
+	return Object.entries(tagToPostsMap).map(([tag]) => ({
+		params: { tag },
+	}));
+}
+
+const {tag} = Astro.params;
+
+const posts = await getBlogPosts({tag});
+---
+
+<BaseLayout>
+	<BlogPostsList posts={posts} tag={{name: tag}}/>
+</BaseLayout>

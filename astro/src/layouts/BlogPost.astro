@@ -9,7 +9,8 @@ type Props = CollectionEntry<'blog'>['data'] & {
 	readingTime: { minutes: number; words: number };
 };
 
-const { title, description, pubDate, updatedDate, heroImage, readingTime } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, readingTime, tags } =
+	Astro.props;
 ---
 
 <BaseLayout meta={{ title, description }}>
@@ -39,6 +40,26 @@ const { title, description, pubDate, updatedDate, heroImage, readingTime } = Ast
 				<div class="body">
 					<slot />
 				</div>
+
+				{
+					tags && (
+						<>
+							<hr />
+							<div class="body">
+								Tags: 
+								{tags.map((tag, index) => (
+									<>
+										{index > 0 && ", "} 
+										{<a href={`/blog/tag/${tag}`} class="tag">
+											<Icon name="fa6-solid:hashtag" />
+											<span>{tag}</span>
+										</a>}
+									</>
+								))}
+							</div>
+						</>
+					)
+				}
 			</article>
 		</main>
 	</body>
@@ -70,6 +91,12 @@ const { title, description, pubDate, updatedDate, heroImage, readingTime } = Ast
 		display: inline-flex;
 		gap: 0.5em;
 		align-items: baseline;
+	}
+
+	.tag {
+		display: inline-flex;
+		gap: 0.2em;
+		align-items: center;
 	}
 
 	.body > p:first-child {
