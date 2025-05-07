@@ -1,0 +1,1 @@
+export const getBlogPostLink = (id: string) => `/blog/${id}/`;

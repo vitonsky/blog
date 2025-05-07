@@ -30,6 +30,12 @@ export type BlogPost = (CollectionEntry<'blog'> & {
 	readingTime: ReadTimeResults;
 });
 
+const enrichPostData = (post: CollectionEntry<'blog'>) => ({
+	...post,
+	previewText: post.body ? getPostPreviewText(post.body) : null,
+	readingTime: getReadingTime(post.body ?? '', {}),
+});
+
 export const getBlogPosts = async ({ tag }: { tag?: string } = {}): Promise<BlogPost[]> => {
 	const collection = await getCollection(
 		'blog',
@@ -39,9 +45,25 @@ export const getBlogPosts = async ({ tag }: { tag?: string } = {}): Promise<Blog
 	)
 
 	return collection.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-		.map((post) => ({
-			...post,
-			previewText: post.body ? getPostPreviewText(post.body) : null,
-			readingTime: getReadingTime(post.body ?? '', {}),
-		}));
+		.map(enrichPostData);
+}
+
+// TODO: infer text embeddings and consider similarity search score
+export const getRelatedBlogPosts = async (sourcePost: CollectionEntry<'blog'>, limit = 10): Promise<BlogPost[]> => {
+	const { tags } = sourcePost.data;
+
+	const collection = await getCollection('blog').then((collection) => collection.filter((item) => item.id !== sourcePost.id && item.data.heroImage));
+
+	if (!tags || tags.length === 0) {
+		// Sort in random order if can't found related
+		collection.sort(() => Math.random() > 0.5 ? -1 : 1);
+	} else {
+		// Ranking by most matched attributes
+		const tagsSet = new Set(tags);
+		const countMatchedTags = (tags: string[] = []) => tags.reduce((counter, tag) => counter + (tagsSet.has(tag) ? 1 : 0), 0);
+		collection.sort((a, b) => countMatchedTags(b.data.tags) - countMatchedTags(a.data.tags));
+	}
+
+
+	return collection.slice(0, limit).map(enrichPostData);
 }

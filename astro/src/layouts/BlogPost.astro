@@ -1,16 +1,17 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
+import { type BlogPost } from '../utils/getPosts';
 import FormattedDate from '../components/FormattedDate.astro';
 import { Icon } from 'astro-icon/components';
 import BaseLayout from './BaseLayout.astro';
+import { getBlogPostLink } from '../utils/links';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	readingTime: { minutes: number; words: number };
+	related: BlogPost[];
 };
 
-const { title, description, pubDate, updatedDate, heroImage, readingTime, tags } =
-	Astro.props;
+const { title, description, pubDate, related, readingTime, tags } = Astro.props;
 ---
 
 <BaseLayout meta={{ title, description }}>
@@ -49,11 +50,13 @@ const { title, description, pubDate, updatedDate, heroImage, readingTime, tags }
 								<span>Tags: </span>
 								{tags.map((tag, index) => (
 									<>
-										{index > 0 && ", "} 
-										{<a href={`/blog/tag/${tag}`} class="tag">
-											<Icon name="fa6-solid:hashtag" />
-											<span>{tag}</span>
-										</a>}
+										{index > 0 && ', '}
+										{
+											<a href={`/blog/tag/${tag}`} class="tag">
+												<Icon name="fa6-solid:hashtag" />
+												<span>{tag}</span>
+											</a>
+										}
 									</>
 								))}
 							</div>
@@ -61,6 +64,40 @@ const { title, description, pubDate, updatedDate, heroImage, readingTime, tags }
 					)
 				}
 			</article>
+
+			{
+				related.length > 0 && (
+					<div class="related">
+						<h3>Continue reading</h3>
+
+						<ul>
+							{/* {related.map((post) => (
+								<li>
+									<a href={getBlogPostLink(post.id)}>
+										{post.data.title}
+									</a>
+								</li>
+							))} */}
+							{related.map((post) => (
+								<li>
+									<a
+										href={getBlogPostLink(post.id)}
+										class="related-post"
+									>
+										{post.data.heroImage && (
+											<img {...post.data.heroImage} />
+										)}
+										<div class="related-postBody">
+											<h4>{post.data.title}</h4>
+											<div>{post.previewText}</div>
+										</div>
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				)
+			}
 		</main>
 	</body>
 </BaseLayout>
@@ -102,5 +139,68 @@ const { title, description, pubDate, updatedDate, heroImage, readingTime, tags }
 
 	.body > p:first-child {
 		margin-top: 0;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	ul > li {
+		list-style: none;
+	}
+
+	main {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	.related {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.related-post {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		border: 1px solid;
+		border-radius: 8px;
+		padding: 0.8rem;
+		background-color: #ece6ee;
+		border: 1px solid #bcb5d7;
+		font-size: 16px;
+		color: #000;
+
+		@media (max-width: 600px) {
+			flex-direction: column;
+		}
+	}
+	.related-post img {
+		/*   display: none; */
+		width: 200px;
+		height: fit-content;
+		border-radius: 4px;
+		aspect-ratio: 5/3;
+		object-fit: cover;
+		order: 1;
+		flex-shrink: 0;
+		background: #000;
+
+		@media (max-width: 600px) {
+			width: 100%;
+			order: unset;
+		}
+	}
+	ul {
+		gap: 12px;
+		display: flex;
+		flex-direction: column;
+	}
+	.related-post,
+	.related-post h4 {
+		text-decoration: none;
 	}
 </style>

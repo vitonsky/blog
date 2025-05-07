@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 import { render } from 'astro:content';
 import getReadingTime from 'reading-time';
+import { getRelatedBlogPosts } from '../../utils/getPosts';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -17,8 +18,10 @@ const post = Astro.props;
 const { Content } = await render(post);
 
 const readingTime = getReadingTime(post.body ?? '', {});
+
+const related = await getRelatedBlogPosts(post, 3);
 ---
 
-<BlogPost {...post.data} readingTime={readingTime}>
+<BlogPost {...post.data} readingTime={readingTime} related={related}>
 	<Content />
 </BlogPost>
