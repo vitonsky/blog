@@ -46,7 +46,7 @@ const { title, description, pubDate, updatedDate, heroImage, readingTime, tags }
 						<>
 							<hr />
 							<div class="body">
-								Tags: 
+								<span>Tags: </span>
 								{tags.map((tag, index) => (
 									<>
 										{index > 0 && ", "} 
@@ -97,6 +97,7 @@ const { title, description, pubDate, updatedDate, heroImage, readingTime, tags }
 		display: inline-flex;
 		gap: 0.2em;
 		align-items: center;
+		vertical-align: bottom;
 	}
 
 	.body > p:first-child {
