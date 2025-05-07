@@ -1,0 +1,21 @@
+---
+import BaseHead, {type Props as HeadProps} from '../components/BaseHead.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+type Props = {
+	meta?: HeadProps;
+};
+
+const { meta } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} {...meta} />
+	</head>
+
+	<body>
+		<slot/>
+	</body>
+</html>

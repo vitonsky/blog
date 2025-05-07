@@ -1,12 +1,11 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { visit } from 'unist-util-visit';
 import { Icon } from 'astro-icon/components';
 import getReadingTime from 'reading-time';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const getPostPreviewText = (text: string) => {
 	const tree = fromMarkdown(text);
@@ -35,66 +34,16 @@ const posts = (await getCollection('blog'))
 		previewText: post.body ? getPostPreviewText(post.body) : null,
 		readingTime: getReadingTime(post.body ?? '', {}),
 	}));
-
-console.log(posts);
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			ul {
-				display: flex;
-				flex-direction: column;
-				gap: 3rem;
-			}
-
-			li {
-				list-style: none;
-				display: flex;
-				flex-direction: column;
-				gap: 1rem;
-			}
-
-			.head {
-				list-style: none;
-				display: flex;
-				flex-direction: column;
-				gap: 0.2rem;
-			}
-
-			.meta {
-				display: flex;
-				flex-direction: row;
-				gap: 1rem;
-				
-				font-size: 0.9em;
-				color: #626262;
-			}
-
-			.body {
-				display: flex;
-				flex-direction: row;
-				gap: 1rem;
-			}
-
-			.body img {
-				max-width: 200px;
-				border-radius: 0;
-				height: fit-content;
-				object-fit: cover;
-			}
-		</style>
-	</head>
-	<body>
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<div class="head">
+<BaseLayout>
+	<main>
+		<section>
+			<ul>
+				{
+					posts.map((post) => (
+						<li>
+							<div class="head">
 								<h4 class="title">
 									<a href={`/blog/${post.id}/`}>{post.data.title}</a>
 								</h4>
@@ -109,28 +58,71 @@ console.log(posts);
 										<Icon name="fa6-solid:stopwatch" />
 										<span>
 											{Math.round(post.readingTime.minutes)} minutes
-											to read
+											to read ({post.readingTime.words} words)
 										</span>
 									</span>
 								</div>
-								</div>
+							</div>
 
-								<div class="body">
-									{/* <img
-										width={720}
-										height={360}
-										src={post.data.heroImage.src}
-										alt=""
-									/> */}
-									<span class="description">{post.previewText}</span>
-								</div>
+							<div class="body">
+								{/* <img
+									width={720}
+									height={360}
+									src={post.data.heroImage.src}
+									alt=""
+								/> */}
+								<span class="description">{post.previewText}</span>
+							</div>
 
-								<a href={`/blog/${post.id}/`}>Read post</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-	</body>
-</html>
+							<a href={`/blog/${post.id}/`}>Read post</a>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+	</main>
+</BaseLayout>
+
+<style>
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 5rem;
+	}
+
+	li {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.head {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+
+	.meta {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+
+		font-size: 0.9em;
+		color: #626262;
+	}
+
+	.body {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+	}
+
+	.body img {
+		max-width: 200px;
+		border-radius: 0;
+		height: fit-content;
+		object-fit: cover;
+	}
+</style>
