@@ -32,11 +32,6 @@ body {
 	word-break: keep-all;
   overflow-wrap: normal;
 }
-main {
-	max-width: 900px;
-	margin: auto;
-	padding: 3em 1em;
-}
 h1,
 h2,
 h3,
@@ -133,9 +128,6 @@ hr {
 @media (max-width: 720px) {
 	body {
 		font-size: 18px;
-	}
-	main {
-		padding: 1em;
 	}
 }
 

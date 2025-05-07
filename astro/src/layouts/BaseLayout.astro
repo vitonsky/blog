@@ -1,6 +1,7 @@
 ---
-import BaseHead, {type Props as HeadProps} from '../components/BaseHead.astro';
+import BaseHead, { type Props as HeadProps } from '../components/BaseHead.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import {socialMedia, publicEmail} from '../links';
 
 type Props = {
 	meta?: HeadProps;
@@ -13,9 +14,66 @@ const { meta } = Astro.props;
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} {...meta} />
+
+		<style>
+			.main {
+				max-width: 900px;
+				min-height: 100vh;
+				margin: auto;
+
+				display: flex;
+				flex-direction: column;
+				gap: 3rem;
+			}
+
+			.head {
+				padding: 1em;
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.footer {
+				margin-top: auto;
+			}
+
+			.head-row {
+				display: flex;
+				flex-direction: row;
+				gap: 1rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.body {
+				padding: 1em;
+			}
+		</style>
 	</head>
 
 	<body>
-		<slot/>
+		<div class="main">
+			<div class="head">
+				<div class="head-row">
+					<a href="/">Home</a>
+					<a href="https://latexonline.cc/compile?git=https://github.com/vitonsky/resume&target=resume.tex&command=pdflatex">About me</a>
+					<a href="/rss.xml">RSS</a>
+				</div>
+			</div>
+
+			<div class="body">
+				<slot />
+			</div>
+
+			<div class="head footer">
+				<div class="head-row">
+					<a href={socialMedia.twitter}>Twitter</a>
+					<a href={socialMedia.github}>Github</a>
+					<a href={socialMedia.stackoverflow}>StackOverflow</a>
+					<a href={socialMedia.linkedin}>LinkedIn</a>
+					<a href={publicEmail}>Email</a>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
