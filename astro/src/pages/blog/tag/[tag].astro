@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BlogPostsList from '../../../components/BlogPostsList.astro';
+import BaseLayout from '../../../components/BaseLayout/BaseLayout.astro';
+import BlogPostsList from '../../../features/BlogPostsList/BlogPostsList.astro';
 import { getBlogPosts, type BlogPost } from '../../../utils/getPosts';
 
 export async function getStaticPaths() {

@@ -1,10 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { type BlogPost } from '../utils/getPosts';
-import FormattedDate from '../components/FormattedDate.astro';
+import { type BlogPost } from '../../utils/getPosts';
+import FormattedDate from '../../components/FormattedDate.astro';
 import { Icon } from 'astro-icon/components';
-import BaseLayout from './BaseLayout.astro';
-import { getBlogPostLink } from '../utils/links';
+import BaseLayout from '../../components/BaseLayout/BaseLayout.astro';
+import { getBlogPostLink } from '../../utils/links';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	readingTime: { minutes: number; words: number };
