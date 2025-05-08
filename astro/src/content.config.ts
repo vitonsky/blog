@@ -7,9 +7,7 @@ const blog = defineCollection({
 	loader: glob({ base: '../posts/', pattern: '**/*.mdx' }),
 	// Type-check frontmatter using a schema
 	schema: ({ image }) => z.object({
-		// TODO: use actual scheme
 		title: z.string(),
-		description: z.string().optional().default(""),
 		// Transform string to Date object
 		date: z.string().transform((rawDate) => {
 			const date = parseCustomDate(rawDate);
@@ -17,9 +15,10 @@ const blog = defineCollection({
 
 			return date;
 		}),
-		updatedDate: z.coerce.date().optional(),
+		description: z.string().optional(),
 		heroImage: image().optional(),
-		tags: z.string().array().optional(),
+		tags: z.string().array().nullish().transform((list) => list ?? []),
+		keywords: z.string().array().nullish().transform((list) => list ?? []),
 	}),
 });
 
