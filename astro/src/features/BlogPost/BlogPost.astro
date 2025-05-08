@@ -6,12 +6,13 @@ import { Icon } from 'astro-icon/components';
 import BaseLayout from '../../components/BaseLayout/BaseLayout.astro';
 import { getBlogPostLink } from '../../utils/links';
 
-type Props = CollectionEntry<'blog'>['data'] & {
-	readingTime: { minutes: number; words: number };
+type Props = {
+	post: BlogPost;
 	related: BlogPost[];
 };
 
-const { title, description, date, related, readingTime, tags } = Astro.props;
+const { related } = Astro.props;
+const { readingTime, data: { title, description, date, tags }} = Astro.props.post;
 ---
 
 <BaseLayout meta={{ title, description }}>
