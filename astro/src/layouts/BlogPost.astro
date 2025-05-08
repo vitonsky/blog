@@ -89,7 +89,7 @@ const { title, description, date, related, readingTime, tags } = Astro.props;
 										)}
 										<div class="related-postBody">
 											<h4>{post.data.title}</h4>
-											<div>{post.previewText}</div>
+											<div class="related-postText">{post.previewText}</div>
 										</div>
 									</a>
 								</li>
@@ -208,7 +208,12 @@ const { title, description, date, related, readingTime, tags } = Astro.props;
 		flex-direction: column;
 	}
 	.related-post,
+	.related-post:hover,
 	.related-post h4 {
 		text-decoration: none;
+	}
+
+	.related-post:hover h4 {
+		text-decoration: underline solid;
 	}
 </style>
