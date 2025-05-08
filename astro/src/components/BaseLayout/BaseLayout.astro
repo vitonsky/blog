@@ -2,6 +2,7 @@
 import BaseHead, { type Props as HeadProps } from './BaseHead.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import {socialMedia, publicEmail} from '../../links';
+import { getTagLink } from '../../utils/links';
 
 type Props = {
 	meta?: HeadProps;
@@ -56,6 +57,7 @@ const { meta } = Astro.props;
 			<div class="head">
 				<div class="head-row">
 					<a href="/">Home</a>
+					<a href={getTagLink('project')}>Projects</a>
 					<a href="https://latexonline.cc/compile?git=https://github.com/vitonsky/resume&target=resume.tex&command=pdflatex">About me</a>
 					<a href="/rss.xml">RSS</a>
 				</div>
