@@ -103,6 +103,8 @@ img {
 	max-width: 100%;
 	height: auto;
 	border-radius: 8px;
+	display: inline-block;
+	background: #f7f7f7;
 }
 code {
 	padding: 2px 5px;
