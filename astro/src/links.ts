@@ -46,8 +46,8 @@ export default {
 			]
 		},
 		{
-			title: 'My feeds',
-			description: "Not all things goes to my blog. I share findings in my feeds, so let's be in touch",
+			title: 'Feeds',
+			description: "Not all things goes to my blog. I share findings on my feeds, let's be in touch",
 			links: [
 				{ text: "Twitter", url: 'https://twitter.com/rvitonsky', target: '_blank' },
 				{ text: "Mastodon", url: 'https://mastodon.social/@vitonsky', target: '_blank' },
