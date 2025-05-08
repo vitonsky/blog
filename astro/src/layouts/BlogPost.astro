@@ -42,10 +42,11 @@ const { title, description, pubDate, related, readingTime, tags } = Astro.props;
 					<slot />
 				</div>
 
+				<hr />
+				
 				{
 					tags && (
 						<>
-							<hr />
 							<div class="body">
 								<span>Tags: </span>
 								{tags.map((tag, index) => (
