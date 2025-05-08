@@ -3,6 +3,7 @@ import { type BlogPost } from '../../utils/getPosts';
 import BaseLayout from '../../components/BaseLayout/BaseLayout.astro';
 import { getBlogPostLink } from '../../utils/links';
 import PostInfo from './PostInfo.astro';
+import RelatedPosts from './RelatedPosts.astro';
 
 type Props = {
 	post: BlogPost;
@@ -58,37 +59,7 @@ const {
 			</article>
 
 			{
-				related.length > 0 && (
-					<div class="related">
-						<h3>Continue reading</h3>
-
-						<ul>
-							{/* {related.map((post) => (
-								<li>
-									<a href={getBlogPostLink(post.id)}>
-										{post.data.title}
-									</a>
-								</li>
-							))} */}
-							{related.map((post) => (
-								<li>
-									<a
-										href={getBlogPostLink(post.id)}
-										class="related-post"
-									>
-										{post.data.image && <img {...post.data.image} />}
-										<div class="related-postBody">
-											<h4>{post.data.title}</h4>
-											<div class="related-postText">
-												{post.previewText}
-											</div>
-										</div>
-									</a>
-								</li>
-							))}
-						</ul>
-					</div>
-				)
+				related.length > 0 && <RelatedPosts posts={related}/>
 			}
 		</main>
 	</body>
@@ -127,75 +98,9 @@ const {
 		margin-top: 0;
 	}
 
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-
-	ul > li {
-		list-style: none;
-	}
-
 	main {
 		display: flex;
 		flex-direction: column;
 		gap: 3rem;
-	}
-
-	.related {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	.related-post {
-		display: flex;
-		flex-direction: row;
-		gap: 1rem;
-		border: 1px solid;
-		border-radius: 8px;
-		padding: 1rem;
-		background-color: #e6f9ff;
-		border: 1px solid #b8e4ff;
-
-		background-color: #f3fdff;
-		border: 1px solid #d4efff;
-
-		font-size: 16px;
-		color: #000;
-
-		@media (max-width: 600px) {
-			flex-direction: column;
-		}
-	}
-	.related-post img {
-		/*   display: none; */
-		width: 200px;
-		height: fit-content;
-		border-radius: 4px;
-		aspect-ratio: 5/3;
-		object-fit: cover;
-		order: 1;
-		flex-shrink: 0;
-		background: #000;
-
-		@media (max-width: 600px) {
-			width: 100%;
-			order: unset;
-		}
-	}
-	ul {
-		gap: 12px;
-		display: flex;
-		flex-direction: column;
-	}
-	.related-post,
-	.related-post:hover,
-	.related-post h4 {
-		text-decoration: none;
-	}
-
-	.related-post:hover h4 {
-		text-decoration: underline solid;
 	}
 </style>
