@@ -1,6 +1,5 @@
 ---
 import { type BlogPost } from '../../utils/getPosts';
-import BaseLayout from '../../components/BaseLayout/BaseLayout.astro';
 import PostInfo from '../../components/Post/PostInfo.astro';
 import RelatedPosts from './RelatedPosts.astro';
 import TagsList from '../../components/Post/TagsList.astro';
@@ -13,42 +12,40 @@ type Props = {
 const { related } = Astro.props;
 const {
 	readingTime,
-	data: { title, description, date, tags },
+	data: { title, date, tags },
 } = Astro.props.post;
 ---
 
-<BaseLayout meta={{ title, description }}>
-	<main>
-		<article class="post">
-			<div class="head">
-				<h1>{title}</h1>
+<main>
+	<article class="post">
+		<div class="head">
+			<h1>{title}</h1>
 
-				<div class="meta">
-					<PostInfo date={date} readingTime={readingTime} />
+			<div class="meta">
+				<PostInfo date={date} readingTime={readingTime} />
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="body">
+			<slot />
+		</div>
+
+		<hr />
+
+		{
+			tags.length > 0 && (
+				<div>
+					<span>Tags: </span>
+					<TagsList tags={tags} />
 				</div>
-			</div>
+			)
+		}
+	</article>
 
-			<hr />
-
-			<div class="body">
-				<slot />
-			</div>
-
-			<hr />
-
-			{
-				tags.length > 0 && (
-					<div>
-						<span>Tags: </span>
-						<TagsList tags={tags}/>
-					</div>
-				)
-			}
-		</article>
-
-		{related.length > 0 && <RelatedPosts posts={related} />}
-	</main>
-</BaseLayout>
+	{related.length > 0 && <RelatedPosts posts={related} />}
+</main>
 
 <style>
 	main {
