@@ -1,6 +1,8 @@
 ---
 import type { BlogPost } from '../../utils/getPosts';
+import { getBlogPostLink } from '../../utils/links';
 import PostInfo from '../BlogPost/PostInfo.astro';
+import Notice from './Notice.astro';
 
 type Props = {
 	tag?: {
@@ -16,39 +18,35 @@ const { posts, tag } = Astro.props;
 	<section>
 		{
 			tag && (
-				<>
-					<div class="info">
-						Posts with tag <b>{tag.name}</b>
-					</div>
-				</>
+				<Notice>
+					Posts with tag <b>{tag.name}</b>
+				</Notice>
 			)
 		}
+
 		<ul>
 			{
 				posts.map((post) => (
 					<li>
 						<div class="head">
 							<h4 class="title">
-								<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+								<a href={getBlogPostLink(post.id)}>{post.data.title}</a>
 							</h4>
 
 							<div class="meta">
-						<PostInfo date={post.data.date} readingTime={post.readingTime} />
-					</div>
+								<PostInfo
+									date={post.data.date}
+									readingTime={post.readingTime}
+								/>
+							</div>
 						</div>
 
 						<div class="body">
-							{/* <img
-									width={720}
-									height={360}
-									src={post.data.image.src}
-									alt=""
-								/> */}
 							<span class="description">{post.previewText}</span>
 						</div>
 
 						<div class="links">
-							<a href={`/blog/${post.id}/`}>Read More</a>
+							<a href={getBlogPostLink(post.id)}>Read More</a>
 						</div>
 					</li>
 				))
@@ -97,8 +95,8 @@ const { posts, tag } = Astro.props;
 	}
 
 	.links a {
-		font-size: .9em;
-  color: gray;
+		font-size: 0.9em;
+		color: gray;
 	}
 
 	.meta {
@@ -117,12 +115,5 @@ const { posts, tag } = Astro.props;
 		border-radius: 0;
 		height: fit-content;
 		object-fit: cover;
-	}
-
-	.info {
-		padding: 1rem;
-		border-radius: 8px;
-		background-color: #f3fdff;
-		border: 1px solid #d4efff;
 	}
 </style>
