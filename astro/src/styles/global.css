@@ -41,12 +41,13 @@ h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
+	font-family: Lora,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
 }
 h1 {
-	font-size: 3.052em;
+	font-size: 2.3em;
 }
 h2 {
-	font-size: 2.441em;
+	font-size: 2em;
 }
 h3 {
 	font-size: 1.953em;
@@ -64,7 +65,7 @@ h3:not(:first-child),
 h4:not(:first-child),
 h5:not(:first-child),
 h6:not(:first-child) {
-	margin-top: 5rem;
+	margin-top: 3rem;
 }
 
 strong,
