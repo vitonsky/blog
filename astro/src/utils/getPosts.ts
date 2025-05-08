@@ -52,7 +52,7 @@ export const getBlogPosts = async ({ tag }: { tag?: string } = {}): Promise<Blog
 export const getRelatedBlogPosts = async (sourcePost: CollectionEntry<'blog'>, limit = 10): Promise<BlogPost[]> => {
 	const { tags } = sourcePost.data;
 
-	const collection = await getCollection('blog').then((collection) => collection.filter((item) => item.id !== sourcePost.id && item.data.heroImage));
+	const collection = await getCollection('blog').then((collection) => collection.filter((item) => item.id !== sourcePost.id && item.data.image));
 
 	if (!tags || tags.length === 0) {
 		// Sort in random order if can't found related

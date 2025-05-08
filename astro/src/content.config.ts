@@ -16,7 +16,7 @@ const blog = defineCollection({
 			return date;
 		}),
 		description: z.string().optional(),
-		heroImage: image().optional(),
+		image: image().optional(),
 		tags: z.string().array().nullish().transform((list) => list ?? []),
 		keywords: z.string().array().nullish().transform((list) => list ?? []),
 	}),

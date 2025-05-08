@@ -84,8 +84,8 @@ const { title, description, date, related, readingTime, tags } = Astro.props;
 										href={getBlogPostLink(post.id)}
 										class="related-post"
 									>
-										{post.data.heroImage && (
-											<img {...post.data.heroImage} />
+										{post.data.image && (
+											<img {...post.data.image} />
 										)}
 										<div class="related-postBody">
 											<h4>{post.data.title}</h4>
