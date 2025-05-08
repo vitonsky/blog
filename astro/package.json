@@ -17,6 +17,7 @@
     "@iconify/json": "^2.2.335",
     "astro": "^5.7.11",
     "astro-icon": "^1.1.5",
+    "date-and-time": "^3.6.0",
     "i": "^0.3.7",
     "mdast-util-from-markdown": "^2.0.2",
     "npm": "^11.3.0",

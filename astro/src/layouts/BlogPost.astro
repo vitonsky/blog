@@ -11,7 +11,7 @@ type Props = CollectionEntry<'blog'>['data'] & {
 	related: BlogPost[];
 };
 
-const { title, description, pubDate, related, readingTime, tags } = Astro.props;
+const { title, description, date, related, readingTime, tags } = Astro.props;
 ---
 
 <BaseLayout meta={{ title, description }}>
@@ -24,7 +24,7 @@ const { title, description, pubDate, related, readingTime, tags } = Astro.props;
 					<div class="meta">
 						<span class="inline-container">
 							<Icon name="fa6-solid:calendar" />
-							<FormattedDate date={pubDate} />
+							<FormattedDate date={date} />
 						</span>
 
 						<span class="inline-container">

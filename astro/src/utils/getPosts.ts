@@ -44,7 +44,7 @@ export const getBlogPosts = async ({ tag }: { tag?: string } = {}): Promise<Blog
 			: (undefined as never),
 	)
 
-	return collection.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	return collection.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 		.map(enrichPostData);
 }
 

@@ -1,5 +1,6 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
+import { parseCustomDate } from './utils/date';
 
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
@@ -10,7 +11,12 @@ const blog = defineCollection({
 		title: z.string(),
 		description: z.string().optional().default(""),
 		// Transform string to Date object
-		pubDate: z.coerce.date().optional().default(new Date),
+		date: z.string().transform((rawDate) => {
+			const date = parseCustomDate(rawDate);
+			if (date === null) throw new Error(`Can't parse date ${rawDate}`);
+
+			return date;
+		}),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: image().optional(),
 		tags: z.string().array().optional(),
