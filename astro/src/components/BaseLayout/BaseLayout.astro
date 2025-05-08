@@ -2,7 +2,6 @@
 import BaseHead, { type Props as HeadProps } from './BaseHead.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import links from '../../links';
-import { getTagLink } from '../../utils/links';
 
 type Props = {
 	meta?: HeadProps;
@@ -15,41 +14,6 @@ const { meta } = Astro.props;
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} {...meta} />
-
-		<style>
-			.main {
-				max-width: 900px;
-				min-height: 100vh;
-				margin: auto;
-
-				display: flex;
-				flex-direction: column;
-				gap: 1rem;
-			}
-
-			.head {
-				padding: 1em;
-				display: flex;
-				flex-direction: column;
-				gap: 1rem;
-			}
-
-			.footer {
-				margin-top: auto;
-			}
-
-			.head-row {
-				display: flex;
-				flex-direction: row;
-				gap: 1rem;
-				justify-content: center;
-				flex-wrap: wrap;
-			}
-
-			.body {
-				padding: 1em;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -71,16 +35,92 @@ const { meta } = Astro.props;
 			</div>
 
 			<div class="head footer">
-				<div class="head-row">
+				<div class="footerLinks"> 
 					{
-						links.socials.map((link) => (
-							<a href={link.url} target={link.target} title={link.title}>
-								{link.text}
-							</a>
-						))
+						links.footer.map(({ title, description, links }) => {
+							return (
+								<div class="footerLinks-container">
+									<div class="footerLinks-title">{title}</div>
+									<div class="footerLinks-description">{description}</div>
+									<div class="footerLinks-items">
+										{links.map((link) => (
+											<a
+												href={link.url}
+												target={link.target}
+												title={link.title}
+											>
+												{link.text}
+											</a>
+										))}
+									</div>
+								</div>
+							);
+						})
 					}
 				</div>
 			</div>
 		</div>
 	</body>
 </html>
+
+<style>
+	.main {
+		max-width: 900px;
+		min-height: 100vh;
+		margin: auto;
+
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.head {
+		padding: 1em;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.footer {
+		margin-top: auto;
+	}
+
+	.head-row {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.body {
+		padding: 1em;
+	}
+
+	.footer {
+		border-top: 1px solid #eee;
+	}
+
+	.footerLinks {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 1rem;
+	}
+	.footerLinks-title {
+		font-weight: bold;
+	}
+	.footerLinks-description {
+		font-size: 0.8em;
+		color: gray;
+	}
+	.footerLinks-items {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2em;
+	}
+	.footerLinks-container {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2em;
+	}
+</style>
