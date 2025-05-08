@@ -59,7 +59,9 @@ const { posts, tag } = Astro.props;
 							<span class="description">{post.previewText}</span>
 						</div>
 
-						<a href={`/blog/${post.id}/`}>Read post</a>
+						<div class="links">
+							<a href={`/blog/${post.id}/`}>Read More</a>
+						</div>
 					</li>
 				))
 			}
@@ -95,6 +97,20 @@ const { posts, tag } = Astro.props;
 		display: flex;
 		flex-direction: column;
 		gap: 0.2rem;
+	}
+
+	.title a {
+		color: #333;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.links a {
+		font-size: .9em;
+  color: gray;
 	}
 
 	.meta {
