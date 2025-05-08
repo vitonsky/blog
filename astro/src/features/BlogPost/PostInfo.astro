@@ -1,0 +1,46 @@
+---
+import type { ReadTimeResults } from 'reading-time';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	date: Date;
+	readingTime?: ReadTimeResults;
+}
+
+const { date, readingTime } = Astro.props;
+---
+
+<div class="meta">
+	<span class="inline-container">
+		<Icon name="fa6-solid:calendar" />
+		<FormattedDate date={date} />
+	</span>
+
+	{
+		readingTime && (
+			<span class="inline-container" title={`${readingTime.words} words`}>
+				<Icon name="fa6-solid:stopwatch" />
+				<span>
+					{readingTime.minutes > 1
+						? `${Math.ceil(readingTime.minutes)} minutes to read`
+						: 'about minute'}
+				</span>
+			</span>
+		)
+	}
+</div>
+
+<style>
+	.meta {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+	}
+
+	.inline-container {
+		display: inline-flex;
+		gap: 0.5em;
+		align-items: baseline;
+	}
+</style>

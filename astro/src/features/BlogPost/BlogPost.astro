@@ -1,10 +1,8 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { type BlogPost } from '../../utils/getPosts';
-import FormattedDate from '../../components/FormattedDate.astro';
-import { Icon } from 'astro-icon/components';
 import BaseLayout from '../../components/BaseLayout/BaseLayout.astro';
 import { getBlogPostLink } from '../../utils/links';
+import PostInfo from './PostInfo.astro';
 
 type Props = {
 	post: BlogPost;
@@ -12,7 +10,10 @@ type Props = {
 };
 
 const { related } = Astro.props;
-const { readingTime, data: { title, description, date, tags }} = Astro.props.post;
+const {
+	readingTime,
+	data: { title, description, date, tags },
+} = Astro.props.post;
 ---
 
 <BaseLayout meta={{ title, description }}>
@@ -23,17 +24,7 @@ const { readingTime, data: { title, description, date, tags }} = Astro.props.pos
 					<h1>{title}</h1>
 
 					<div class="meta">
-						<span class="inline-container">
-							<Icon name="fa6-solid:calendar" />
-							<FormattedDate date={date} />
-						</span>
-
-						<span class="inline-container">
-							<Icon name="fa6-solid:stopwatch" />
-							<span>
-								{Math.round(readingTime.minutes)} minutes to read
-							</span>
-						</span>
+						<PostInfo date={date} readingTime={readingTime} />
 					</div>
 				</div>
 
@@ -85,12 +76,12 @@ const { readingTime, data: { title, description, date, tags }} = Astro.props.pos
 										href={getBlogPostLink(post.id)}
 										class="related-post"
 									>
-										{post.data.image && (
-											<img {...post.data.image} />
-										)}
+										{post.data.image && <img {...post.data.image} />}
 										<div class="related-postBody">
 											<h4>{post.data.title}</h4>
-											<div class="related-postText">{post.previewText}</div>
+											<div class="related-postText">
+												{post.previewText}
+											</div>
 										</div>
 									</a>
 								</li>
@@ -117,18 +108,8 @@ const { readingTime, data: { title, description, date, tags }} = Astro.props.pos
 	}
 
 	.meta {
-		display: flex;
-		flex-direction: row;
-		gap: 1rem;
-
 		font-size: 0.8em;
 		color: #616768;
-	}
-
-	.inline-container {
-		display: inline-flex;
-		gap: 0.5em;
-		align-items: baseline;
 	}
 
 	.tag {
@@ -138,7 +119,7 @@ const { readingTime, data: { title, description, date, tags }} = Astro.props.pos
 		vertical-align: bottom;
 
 		&:before {
-			content: "#"
+			content: '#';
 		}
 	}
 

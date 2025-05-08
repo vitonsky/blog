@@ -1,7 +1,6 @@
 ---
-import FormattedDate from '../../components/FormattedDate.astro';
-import { Icon } from 'astro-icon/components';
 import type { BlogPost } from '../../utils/getPosts';
+import PostInfo from '../BlogPost/PostInfo.astro';
 
 type Props = {
 	tag?: {
@@ -34,19 +33,8 @@ const { posts, tag } = Astro.props;
 							</h4>
 
 							<div class="meta">
-								<span class="inline-container">
-									<Icon name="fa6-solid:calendar" />
-									<FormattedDate date={post.data.date} />
-								</span>
-
-								<span class="inline-container">
-									<Icon name="fa6-solid:stopwatch" />
-									<span>
-										{Math.round(post.readingTime.minutes)} minutes to
-										read ({post.readingTime.words} words)
-									</span>
-								</span>
-							</div>
+						<PostInfo date={post.data.date} readingTime={post.readingTime} />
+					</div>
 						</div>
 
 						<div class="body">
@@ -114,10 +102,6 @@ const { posts, tag } = Astro.props;
 	}
 
 	.meta {
-		display: flex;
-		flex-direction: row;
-		gap: 1rem;
-
 		font-size: 0.8em;
 		color: #626262;
 	}
