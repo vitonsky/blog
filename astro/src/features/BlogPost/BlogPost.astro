@@ -1,9 +1,9 @@
 ---
 import { type BlogPost } from '../../utils/getPosts';
 import BaseLayout from '../../components/BaseLayout/BaseLayout.astro';
-import { getBlogPostLink } from '../../utils/links';
 import PostInfo from './PostInfo.astro';
 import RelatedPosts from './RelatedPosts.astro';
+import TagsList from './TagsList.astro';
 
 type Props = {
 	post: BlogPost;
@@ -18,54 +18,45 @@ const {
 ---
 
 <BaseLayout meta={{ title, description }}>
-	<body>
-		<main>
-			<article class="post">
-				<div class="head">
-					<h1>{title}</h1>
+	<main>
+		<article class="post">
+			<div class="head">
+				<h1>{title}</h1>
 
-					<div class="meta">
-						<PostInfo date={date} readingTime={readingTime} />
-					</div>
+				<div class="meta">
+					<PostInfo date={date} readingTime={readingTime} />
 				</div>
+			</div>
 
-				<hr />
+			<hr />
 
-				<div class="body">
-					<slot />
-				</div>
+			<div class="body">
+				<slot />
+			</div>
 
-				<hr />
-
-				{
-					tags && (
-						<>
-							<div class="body">
-								<span>Tags: </span>
-								{tags.map((tag, index) => (
-									<>
-										{index > 0 && ', '}
-										{
-											<a href={`/blog/tag/${tag}`} class="tag">
-												{tag}
-											</a>
-										}
-									</>
-								))}
-							</div>
-						</>
-					)
-				}
-			</article>
+			<hr />
 
 			{
-				related.length > 0 && <RelatedPosts posts={related}/>
+				tags.length > 0 && (
+					<div>
+						<span>Tags: </span>
+						<TagsList tags={tags}/>
+					</div>
+				)
 			}
-		</main>
-	</body>
+		</article>
+
+		{related.length > 0 && <RelatedPosts posts={related} />}
+	</main>
 </BaseLayout>
 
 <style>
+	main {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
 	.post {
 		display: flex;
 		flex-direction: column;
@@ -81,26 +72,5 @@ const {
 	.meta {
 		font-size: 0.8em;
 		color: #616768;
-	}
-
-	.tag {
-		display: inline-flex;
-		gap: 1px;
-		align-items: center;
-		vertical-align: bottom;
-
-		&:before {
-			content: '#';
-		}
-	}
-
-	.body > p:first-child {
-		margin-top: 0;
-	}
-
-	main {
-		display: flex;
-		flex-direction: column;
-		gap: 3rem;
 	}
 </style>

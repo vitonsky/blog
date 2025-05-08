@@ -1,0 +1,32 @@
+---
+type Props = {
+	tags: string[];
+}
+
+const {tags} = Astro.props;
+---
+
+{tags.map((tag, index) => (
+	<>
+		{index > 0 && ', '}
+		{
+			<a href={`/blog/tag/${tag}`} class="tag">
+				{tag}
+			</a>
+		}
+	</>
+))}
+
+
+<style>
+	.tag {
+		display: inline-flex;
+		gap: 1px;
+		align-items: center;
+		vertical-align: bottom;
+
+		&:before {
+			content: '#';
+		}
+	}
+</style>
