@@ -127,24 +127,6 @@ const setupPlausible = () => {
 			for (const node of event.composedPath()) {
 				if (!(node instanceof HTMLAnchorElement)) continue;
 
-				// We should not try to capture click in dev mode,
-				// since Plausible will never call a callback,
-				// and link will never be clicked
-				const isProduction = location.origin === SITE_ORIGIN;
-
-				// We have to capture external clicks manually,
-				// since plausible SDK ignores `target` property of anchor,
-				// see issue: https://github.com/plausible/plausible-tracker/issues/12
-				const shouldInterceptClick =
-					isProduction &&
-					node.href &&
-					isExternalUrl(node.href) &&
-					node.target != '_blank';
-
-				if (shouldInterceptClick) {
-					event.preventDefault();
-				}
-
 				const rawText = node.innerText.trim();
 				const textLimit = 120;
 				const text =
@@ -152,21 +134,14 @@ const setupPlausible = () => {
 						? rawText
 						: rawText.slice(0, textLimit) + '...';
 
-				plausible
-					.trackEvent('linkClick', {
-						props: {
-							// Current location
-							location: location.toString(),
-							url: node.href,
-							text,
-						},
-					})
-					.finally(() => {
-						if (!shouldInterceptClick) return;
-
-						// Go to url after delay
-						window.location.href = node.href;
-					});
+				plausible.trackEvent('linkClick', {
+					props: {
+						// Current location
+						location: location.toString(),
+						url: node.href,
+						text,
+					},
+				});
 			}
 		},
 		{ capture: true },
