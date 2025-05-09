@@ -1,5 +1,6 @@
 import Plausible from 'plausible-tracker';
 
+import { SITE_ORIGIN } from '../../../consts';
 import { isExternalUrl } from '../../../utils/links';
 
 const setupPlausible = () => {
@@ -18,11 +19,19 @@ const setupPlausible = () => {
 			for (const node of event.composedPath()) {
 				if (!(node instanceof HTMLAnchorElement)) continue;
 
+				// We should not try to capture click in dev mode,
+				// since Plausible will never call a callback,
+				// and link will never be clicked
+				const isProduction = location.origin === SITE_ORIGIN;
+
 				// We have to capture external clicks manually,
 				// since plausible SDK ignores `target` property of anchor,
 				// see issue: https://github.com/plausible/plausible-tracker/issues/12
 				const shouldInterceptClick =
-					node.href && isExternalUrl(node.href) && node.target != '_blank';
+					isProduction &&
+					node.href &&
+					isExternalUrl(node.href) &&
+					node.target != '_blank';
 
 				if (shouldInterceptClick) {
 					event.preventDefault();
