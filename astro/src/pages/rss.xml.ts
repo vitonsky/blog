@@ -1,9 +1,10 @@
-import rss from '@astrojs/rss';
+import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getBlogPostLink } from '../utils/links';
-import type { APIContext } from "astro";
+import rss from '@astrojs/rss';
+
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getBlogPosts } from '../utils/getPosts';
+import { getBlogPostLink } from '../utils/links';
 
 export async function GET(context: APIContext) {
 	const posts = await getBlogPosts();
@@ -16,11 +17,13 @@ export async function GET(context: APIContext) {
 			link: getBlogPostLink(post.id),
 			categories: post.data.tags,
 			pubDate: post.data.date,
-			enclosure: post.data.image ? {
-				type: 'image',
-				url: post.data.image.src,
-				length: 0,
-			} : undefined,
+			enclosure: post.data.image
+				? {
+						type: 'image',
+						url: post.data.image.src,
+						length: 0,
+					}
+				: undefined,
 			...(post.previewText ? { description: post.previewText } : {}),
 		})),
 	});
