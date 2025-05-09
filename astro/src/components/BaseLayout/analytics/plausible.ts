@@ -7,7 +7,6 @@ const setupPlausible = () => {
 	});
 
 	plausible.enableAutoPageviews();
-	plausible.enableAutoOutboundTracking();
 
 	document.body.addEventListener(
 		'click',
