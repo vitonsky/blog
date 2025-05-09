@@ -1,0 +1,5 @@
+Sitemap: https://vitonsky.net/sitemap.xml
+
+User-agent: *
+Disallow: /blog/p/
+Disallow: /404.html
