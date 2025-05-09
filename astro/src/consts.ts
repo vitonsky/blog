@@ -1,3 +1,5 @@
+export const SITE_ORIGIN = 'https://vitonsky.net';
+
 export const SITE_TITLE = 'Robert Vitonsky | Software engineering insights';
 export const SITE_DESCRIPTION =
 	"Tech-savvy's notes and insights in software engineering: practices, findings, and advice";
