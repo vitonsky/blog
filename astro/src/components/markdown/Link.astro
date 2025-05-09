@@ -1,12 +1,12 @@
 ---
 import { type HTMLAttributes } from 'astro/types';
-import { isExternalUrl } from '../../utils/links';
+import { isNoFollowUrl } from '../../utils/links';
 type Props = HTMLAttributes<'a'>;
 
 const { href, ...props } = Astro.props;
 
 const rel =
-	href && isExternalUrl(typeof href === 'string' ? href : href.toString())
+	href && isNoFollowUrl(typeof href === 'string' ? href : href.toString())
 		? 'nofollow'
 		: undefined;
 ---

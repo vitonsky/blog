@@ -1,5 +1,7 @@
 import Plausible from 'plausible-tracker';
 
+import { isExternalUrl } from '../../../utils/links';
+
 const setupPlausible = () => {
 	const plausible = Plausible({
 		domain: 'vitonsky.net',
@@ -13,10 +15,20 @@ const setupPlausible = () => {
 		(event) => {
 			// Iterate over all targets to find Anchor element and take its text
 			// We do it instead of handle target, since click may appear on nested element
-			for (const target of event.composedPath()) {
-				if (!(target instanceof HTMLAnchorElement)) continue;
+			for (const node of event.composedPath()) {
+				if (!(node instanceof HTMLAnchorElement)) continue;
 
-				const rawText = target.innerText.trim();
+				// We have to capture external clicks manually,
+				// since plausible SDK ignores `target` property of anchor,
+				// see issue: https://github.com/plausible/plausible-tracker/issues/12
+				const shouldInterceptClick =
+					node.href && isExternalUrl(node.href) && node.target != '_blank';
+
+				if (shouldInterceptClick) {
+					event.preventDefault();
+				}
+
+				const rawText = node.innerText.trim();
 				const textLimit = 120;
 				const text =
 					rawText.length <= textLimit
@@ -24,10 +36,16 @@ const setupPlausible = () => {
 						: rawText.slice(0, textLimit) + '...';
 
 				plausible.trackEvent('linkClick', {
+					callback() {
+						if (!shouldInterceptClick) return;
+
+						// Go to url after delay
+						window.location.href = node.href;
+					},
 					props: {
 						// Current location
 						location: location.toString(),
-						url: target.href,
+						url: node.href,
 						text,
 					},
 				});
