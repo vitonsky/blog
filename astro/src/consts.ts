@@ -11,3 +11,8 @@ export const SITE_KEYWORDS = [
 	'frontend',
 	'open source',
 ];
+
+/**
+ * Hosts that will not be marked as external
+ */
+export const TRUSTED_HOSTS = ['https://vitonsky.net', 'http://vitonsky.net'];
