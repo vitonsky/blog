@@ -1,5 +1,5 @@
-export const SITE_TITLE = 'Blog about computers';
-export const SITE_DESCRIPTION = 'Personal blog about computers and technologies';
+export const SITE_TITLE = 'Robert Vitonsky | Software engineering insights';
+export const SITE_DESCRIPTION = "Tech-savvy's notes and insights in software engineering: practices, findings, and advice";
 export const SITE_IMAGE = 'https://raw.githubusercontent.com/vitonsky/resume/refs/heads/master/face.jpeg';
 export const SITE_KEYWORDS = [
 	'programming',
