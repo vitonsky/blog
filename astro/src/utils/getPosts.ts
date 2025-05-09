@@ -1,5 +1,4 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
-import { undefined } from 'astro:schema';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import getReadingTime, { type ReadTimeResults } from 'reading-time';
 import { visit } from 'unist-util-visit';
@@ -42,7 +41,7 @@ export const getBlogPosts = async ({ tag }: { tag?: string } = {}): Promise<
 		'blog',
 		tag
 			? (item) => (item.data.tags ?? []).some((postTag) => postTag === tag)
-			: (undefined as never),
+			: undefined,
 	);
 
 	return collection
