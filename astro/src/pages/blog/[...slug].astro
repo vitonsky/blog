@@ -3,6 +3,7 @@ import Post from '../../features/BlogPost/BlogPost.astro';
 import { render } from 'astro:content';
 import { getBlogPosts, getRelatedBlogPosts, type BlogPost } from '../../utils/getPosts';
 import BaseLayout from '../../components/BaseLayout/BaseLayout.astro';
+import MDXComponents from '../../components/markdown/MDXComponents';
 
 export async function getStaticPaths() {
 	const posts = await getBlogPosts();
@@ -31,6 +32,6 @@ const related = await getRelatedBlogPosts(post, 3);
 	}}
 >
 	<Post post={post} related={related}>
-		<Content />
+		<Content components={MDXComponents}/>
 	</Post>
 </BaseLayout>

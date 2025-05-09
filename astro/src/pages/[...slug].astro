@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../components/BaseLayout/BaseLayout.astro';
-import Link from '../components/markdown/Link.astro';
+import MDXComponents from '../components/markdown/MDXComponents';
 
 export async function getStaticPaths() {
 	const collection = await getCollection('pages');
@@ -26,7 +26,5 @@ const { Content } = await render(page);
 		...(image ? { image } : {}),
 	}}
 >
-	<Content components={{
-		a: Link
-	}}/>
+	<Content components={MDXComponents}/>
 </BaseLayout>
