@@ -14,8 +14,7 @@
 		"configure": "husky install && yarn run browserslist:update"
 	},
 	"workspaces": [
-		"server",
-		"site"
+		"astro"
 	],
 	"devDependencies": {
 		"@commitlint/cli": "^19.2.1",
