@@ -4,8 +4,8 @@
 	"private": true,
 	"scripts": {
 		"addPost": "node ./scripts/addPost.js",
-		"dev": "concurrently \"cd server && yarn run api:dev\" \"cd site && yarn run next:dev\"",
-		"build": "concurrently \"cd server && NODE_ENV=production yarn run api:build\" && concurrently -ks first \"sleep 3 && cd site && yarn run next:build\" \"cd server && yarn run api:start\"",
+		"dev": "cd astro && npm run dev",
+		"build": "cd astro && npm run build",
 		"test": "jest",
 		"prettify": "prettier --write \"{*,**/*}.{ts,tsx,js,jsx}\" && eslint --fix \"{*,**/*}.{ts,tsx,js,jsx}\" && stylelint --fix \"{*,**/*}.css\"",
 		"lint": "prettier \"{*,**/*}.{ts,tsx,js,jsx}\" --check && eslint --max-warnings 0 \"{*,**/*}.{ts,tsx,js,jsx}\" && stylelint \"{*,**/*}.css\"",
