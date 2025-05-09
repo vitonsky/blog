@@ -1,4 +1,4 @@
-Sitemap: https://vitonsky.net/sitemap.xml
+Sitemap: https://vitonsky.net/sitemap-index.xml
 
 User-agent: *
 Disallow: /blog/p/
