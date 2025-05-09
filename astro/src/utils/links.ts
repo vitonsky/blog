@@ -7,6 +7,8 @@ export const isExternalUrl = (url: string) => {
 	if (url.startsWith('/') || url.startsWith('.') || url.startsWith(SITE_ORIGIN))
 		return false;
 
+	if (globalThis.location && url.startsWith(globalThis.location.origin)) return false;
+
 	return true;
 };
 
