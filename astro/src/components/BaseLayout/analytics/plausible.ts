@@ -39,6 +39,7 @@ type EventProps = {
 };
 
 class Plausible {
+	// eslint-disable-next-line prettier/prettier
 	constructor(private readonly config: PlausibleInitOptions) { }
 
 	public trackEvent(eventName: string, data?: Pick<EventProps, 'props'>) {
