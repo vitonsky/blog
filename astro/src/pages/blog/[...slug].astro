@@ -16,12 +16,20 @@ type Props = {
 };
 
 const { post } = Astro.props;
+const { description = post.previewText } = post.data;
+const image = post.data.image?.src;
 const { Content } = await render(post);
 
 const related = await getRelatedBlogPosts(post, 3);
 ---
 
-<BaseLayout meta={{ title: post.data.title, description: post.data.description }}>
+<BaseLayout
+	meta={{
+		title: post.data.title,
+		...(description ? { description } : {}),
+		...(image ? { image } : {}),
+	}}
+>
 	<Post post={post} related={related}>
 		<Content />
 	</Post>

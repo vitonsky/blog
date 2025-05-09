@@ -1,6 +1,6 @@
 ---
 import BaseHead, { type Props as HeadProps } from './BaseHead.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { SITE_DESCRIPTION, SITE_KEYWORDS, SITE_TITLE } from '../../consts';
 import links from '../../links';
 
 type Props = {
@@ -13,7 +13,7 @@ const { meta } = Astro.props;
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} {...meta} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} keywords={SITE_KEYWORDS} {...meta} />
 	</head>
 
 	<body>
