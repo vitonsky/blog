@@ -13,12 +13,7 @@ export interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const {
-	title,
-	description,
-	keywords,
-	image = SITE_IMAGE,
-} = Astro.props;
+const { title, description, keywords, image = SITE_IMAGE } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -36,7 +31,11 @@ const {
 <meta name="generator" content={Astro.generator} />
 
 <!-- Analytics -->
-<script async src="https://pulse2.vitonsky.net/js/script.js"></script>
+<script>
+	import {getPlausible} from './analytics/plausible';
+	getPlausible();
+</script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2XWNMW56"></script>
 <script>
 	// @ts-nocheck
