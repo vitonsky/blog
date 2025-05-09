@@ -4,7 +4,7 @@ import { SITE_DESCRIPTION, SITE_KEYWORDS, SITE_TITLE } from '../../consts';
 import links from '../../links';
 
 type Props = {
-	meta?: HeadProps; 
+	meta?: HeadProps;
 };
 
 const { meta } = Astro.props;
@@ -13,7 +13,12 @@ const { meta } = Astro.props;
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} keywords={SITE_KEYWORDS} {...meta} />
+		<BaseHead
+			title={SITE_TITLE}
+			description={SITE_DESCRIPTION}
+			keywords={SITE_KEYWORDS}
+			{...meta}
+		/>
 	</head>
 
 	<body>
@@ -35,13 +40,15 @@ const { meta } = Astro.props;
 			</div>
 
 			<div class="head footer">
-				<div class="footerLinks"> 
+				<div class="footerLinks">
 					{
 						links.footer.map(({ title, description, links }) => {
 							return (
 								<div class="footerLinks-container">
 									<div class="footerLinks-title">{title}</div>
-									<div class="footerLinks-description">{description}</div>
+									<div class="footerLinks-description">
+										{description}
+									</div>
 									<div class="footerLinks-items">
 										{links.map((link) => (
 											<a
@@ -62,6 +69,27 @@ const { meta } = Astro.props;
 		</div>
 	</body>
 </html>
+
+<script>
+	import { getPlausible } from '../../components/BaseLayout/analytics/plausible';
+
+	document.addEventListener(
+		'click',
+		(element) => {
+			const target = element.target as Element;
+			if (!target?.matches('.head.footer a')) return;
+
+			const text = target instanceof HTMLElement ? target.innerText : null;
+			getPlausible().trackEvent('Use Feature', {
+				props: {
+					feature: 'Footer links',
+					...(text ? { text } : {}),
+				},
+			});
+		},
+		{ capture: true },
+	);
+</script>
 
 <style>
 	.main {
