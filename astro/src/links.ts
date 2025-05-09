@@ -18,12 +18,12 @@ export default {
 			url: getTagLink('project'),
 		},
 		{
-			text: "About me",
-			url: "https://latexonline.cc/compile?git=https://github.com/vitonsky/resume&target=resume.tex&command=pdflatex",
+			text: "About",
+			url: "/about",
 		},
 		{
-			text: "RSS",
-			url: "/rss.xml",
+			text: "Subscribe",
+			url: "/about#subscribe",
 		},
 	],
 	footer: [
@@ -40,9 +40,10 @@ export default {
 				},
 				{
 					text: "About me",
-					url: "https://latexonline.cc/compile?git=https://github.com/vitonsky/resume&target=resume.tex&command=pdflatex",
+					url: "/about#about-me",
 				},
-				{ text: "Email", url: 'mailto:rob@vitonsky.net' },
+				{ text: "Contact with me", url: '/about#contact' },
+
 			]
 		},
 		{
@@ -51,6 +52,10 @@ export default {
 			links: [
 				{ text: "Twitter", url: 'https://twitter.com/rvitonsky', target: '_blank' },
 				{ text: "Mastodon", url: 'https://mastodon.social/@vitonsky', target: '_blank' },
+				{
+					text: "RSS",
+					url: "/rss.xml",
+				},
 			]
 		},
 		{
