@@ -8,7 +8,7 @@ const setupPlausible = () => {
 
 	plausible.enableAutoPageviews();
 
-	document.body.addEventListener(
+	document.addEventListener(
 		'click',
 		({ target }) => {
 			if (!(target instanceof HTMLAnchorElement)) return;
