@@ -10,16 +10,28 @@ const setupPlausible = () => {
 
 	document.addEventListener(
 		'click',
-		({ target }) => {
-			if (!(target instanceof HTMLAnchorElement)) return;
-			plausible.trackEvent('linkClick', {
-				props: {
-					// Current location
-					location: location.toString(),
-					url: target.href,
-					text: target.innerText,
-				},
-			});
+		(event) => {
+			// Iterate over all targets to find Anchor element and take its text
+			// We do it instead of handle target, since click may appear on nested element
+			for (const target of event.composedPath()) {
+				if (!(target instanceof HTMLAnchorElement)) continue;
+
+				const rawText = target.innerText.trim();
+				const textLimit = 120;
+				const text =
+					rawText.length <= textLimit
+						? rawText
+						: rawText.slice(0, textLimit) + '...';
+
+				plausible.trackEvent('linkClick', {
+					props: {
+						// Current location
+						location: location.toString(),
+						url: target.href,
+						text,
+					},
+				});
+			}
 		},
 		{ capture: true },
 	);
