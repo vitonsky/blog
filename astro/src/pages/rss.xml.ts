@@ -1,5 +1,4 @@
 import type { APIContext } from 'astro';
-import { getCollection } from 'astro:content';
 import rss from '@astrojs/rss';
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
@@ -19,10 +18,10 @@ export async function GET(context: APIContext) {
 			pubDate: post.data.date,
 			enclosure: post.data.image
 				? {
-						type: 'image',
-						url: post.data.image.src,
-						length: 0,
-					}
+					type: 'image',
+					url: post.data.image.src,
+					length: 0,
+				}
 				: undefined,
 			...(post.previewText ? { description: post.previewText } : {}),
 		})),
