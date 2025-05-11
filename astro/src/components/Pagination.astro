@@ -1,0 +1,30 @@
+---
+import type { Page } from 'astro';
+
+type Props = Page;
+
+const pagination = Astro.props;
+---
+
+{
+	pagination.lastPage > 1 && (
+		<div class="pagination">
+			{pagination.url.prev && (
+				<a href={pagination.url.prev}>« Newer</a>
+			)}
+			<span>Page {pagination.currentPage} of {pagination.lastPage}</span>
+			{pagination.url.next && (
+				<a href={pagination.url.next}>Older »</a>
+			)}
+		</div>
+	)
+}
+
+<style>
+	.pagination {
+		display: flex;
+		flex-direction: row;
+		gap: .5rem;
+		justify-content: center;
+	}
+</style>
