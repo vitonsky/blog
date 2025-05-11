@@ -2,6 +2,7 @@ import dateUtils from 'date-and-time';
 
 export function parseCustomDate(input: string): Date | null {
 	const formats = [
+		'DD/MM/YYYY, HH:mm',
 		'D MMM YYYY HH:mm',
 		'YYYY/MM/D HH:mm',
 		'YYYY/MM/D H:mm',
