@@ -18,10 +18,10 @@ export async function GET(context: APIContext) {
 			pubDate: post.data.date,
 			enclosure: post.data.image
 				? {
-					type: 'image',
-					url: post.data.image.src,
-					length: 0,
-				}
+						type: 'image',
+						url: post.data.image.src,
+						length: 0,
+					}
 				: undefined,
 			...(post.previewText ? { description: post.previewText } : {}),
 		})),
