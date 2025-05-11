@@ -4,10 +4,32 @@ import {
 	Plausible,
 } from 'plausible-client';
 
+import { isExternalUrl } from '../../../utils/links';
+
 const setupPlausible = () => {
 	const plausible = new Plausible({
 		domain: 'vitonsky.net',
 		apiHost: 'https://pulse2.vitonsky.net',
+		filter(event, eventName) {
+			// Skip all events while development
+			if (location.hostname === 'localhost') {
+				console.warn('Analytics event is skipped, since run on localhost', event);
+				return false;
+			}
+
+			// Skip all events for users who don't want to be tracked
+			if (window.localStorage.plausible_ignore === 'true') return false;
+
+			// Skip internal links
+			if (eventName === 'Outbound Link: Click') {
+				const url = event.props?.url;
+
+				if (typeof url !== 'string' || !isExternalUrl(url)) return false;
+			}
+
+			// Pass all events otherwise
+			return true;
+		},
 	});
 
 	enableAutoPageviews(plausible);
