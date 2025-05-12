@@ -1,0 +1,73 @@
+---
+import { type BlogPost } from '../../utils/getPosts';
+import PostInfo from '../../components/Post/PostInfo.astro';
+import RelatedPosts from './RelatedPosts.astro';
+import TagsList from '../../components/Post/TagsList.astro';
+
+type Props = {
+	post: BlogPost;
+	related: BlogPost[];
+};
+
+const { related } = Astro.props;
+const {
+	readingTime,
+	data: { title, date, tags },
+} = Astro.props.post;
+---
+
+<main>
+	<article class="post">
+		<div class="head">
+			<h1>{title}</h1>
+
+			<div class="meta">
+				<PostInfo date={date} readingTime={readingTime} />
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="body">
+			<slot />
+		</div>
+
+		<hr />
+
+		{
+			tags.length > 0 && (
+				<div>
+					<span>Tags: </span>
+					<TagsList tags={tags} />
+				</div>
+			)
+		}
+	</article>
+
+	{related.length > 0 && <RelatedPosts posts={related} />}
+</main>
+
+<style>
+	main {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	.post {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.head {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.meta {
+		font-size: 0.8em;
+		color: #616768;
+	}
+</style>

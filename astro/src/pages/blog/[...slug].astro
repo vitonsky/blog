@@ -1,0 +1,37 @@
+---
+import Post from '../../features/BlogPost/BlogPost.astro';
+import { render } from 'astro:content';
+import { getBlogPosts, getRelatedBlogPosts, type BlogPost } from '../../utils/getPosts';
+import BaseLayout from '../../components/BaseLayout/BaseLayout.astro';
+import MDXComponents from '../../components/markdown/MDXComponents';
+
+export async function getStaticPaths() {
+	const posts = await getBlogPosts();
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+type Props = {
+	post: BlogPost;
+};
+
+const { post } = Astro.props;
+const { description = post.previewText } = post.data;
+const image = post.data.image?.src;
+const { Content } = await render(post);
+
+const related = await getRelatedBlogPosts(post, 3);
+---
+
+<BaseLayout
+	meta={{
+		title: post.data.title,
+		...(description ? { description } : {}),
+		...(image ? { image } : {}),
+	}}
+>
+	<Post post={post} related={related}>
+		<Content components={MDXComponents}/>
+	</Post>
+</BaseLayout>

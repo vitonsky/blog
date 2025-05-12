@@ -9,7 +9,7 @@ on:
     branches: [master]
     paths:
       - "posts/**"
-      - "site/public/**"
+      - "astro/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -30,17 +30,17 @@ jobs:
           node-version: "20"
 
       - name: Install deps
-        run: yarn install
+        run: npm install
 
       - name: Build
-        run: yarn run build
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
-          build_dir: site/out
+          build_dir: astro/dist
           keep_history: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

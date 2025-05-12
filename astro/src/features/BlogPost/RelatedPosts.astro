@@ -1,0 +1,24 @@
+---
+import { type BlogPost } from '../../utils/getPosts';
+import PostCardsList from './PostCardsList.astro';
+
+type Props = {
+	posts: BlogPost[];
+};
+
+const { posts } = Astro.props;
+---
+
+<div class="related">
+	<h3>Continue reading</h3>
+
+	<PostCardsList posts={posts}/>
+</div>
+
+<style>
+	.related {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+</style>

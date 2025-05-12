@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import BaseLayout from '../../../components/BaseLayout/BaseLayout.astro';
+import BlogPostsList from '../../../features/BlogPostsList/BlogPostsList.astro';
+import { getBlogPosts, type BlogPost } from '../../../utils/getPosts';
+import Pagination from '../../../components/Pagination.astro';
+
+export type Props = { page: Page<BlogPost> };
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+	const posts = await getBlogPosts();
+
+	return paginate(posts, { pageSize: 10 });
+};
+
+const { page: {data} } = Astro.props;
+---
+
+<BaseLayout>
+	<BlogPostsList posts={data}>
+		<Pagination {...Astro.props.page} slot="pagination"/>
+	</BlogPostsList>
+</BaseLayout>

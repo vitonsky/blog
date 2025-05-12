@@ -1,0 +1,121 @@
+---
+import type { BlogPost } from '../../utils/getPosts';
+import { getBlogPostLink } from '../../utils/links';
+import PostInfo from '../../components/Post/PostInfo.astro';
+import Notice from '../../components/Notice.astro';
+
+type Props = {
+	tag?: {
+		name: string;
+	};
+	posts: BlogPost[];
+};
+
+const { posts, tag } = Astro.props;
+---
+
+<main>
+	<section>
+		{
+			tag && (
+				<Notice>
+					Posts with tag <b>{tag.name}</b>
+				</Notice>
+			)
+		}
+
+		<ul>
+			{
+				posts.map((post) => (
+					<li>
+						<div class="head">
+							<h4 class="title">
+								<a href={getBlogPostLink(post.id)}>{post.data.title}</a>
+							</h4>
+
+							<div class="meta">
+								<PostInfo
+									date={post.data.date}
+									readingTime={post.readingTime}
+								/>
+							</div>
+						</div>
+
+						<div class="body">
+							<span class="description">{post.previewText}</span>
+						</div>
+
+						<div class="links">
+							<a href={getBlogPostLink(post.id)}>Read More</a>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+
+		<slot name="pagination"/>
+	</section>
+</main>
+
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.head {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+
+	.title a {
+		color: #333;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.links a {
+		font-size: 0.9em;
+		color: gray;
+	}
+
+	.meta {
+		font-size: 0.8em;
+		color: #626262;
+	}
+
+	.body {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+	}
+
+	.body img {
+		max-width: 200px;
+		border-radius: 0;
+		height: fit-content;
+		object-fit: cover;
+	}
+</style>

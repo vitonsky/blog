@@ -1,0 +1,93 @@
+---
+import { type BlogPost } from '../../utils/getPosts';
+import { getBlogPostLink } from '../../utils/links';
+
+type Props = {
+	posts: BlogPost[];
+};
+
+const { posts } = Astro.props;
+---
+
+<ul>
+	{posts.map((post) => (
+		<li>
+			<a
+				href={getBlogPostLink(post.id)}
+				class="postLink"
+			>
+				{post.data.image && <img {...post.data.image} />}
+
+				<div class="postBody">
+					<h4 class="postTitle">{post.data.title}</h4>
+
+					<div class="postText">
+						{post.previewText}
+					</div>
+				</div>
+			</a>
+		</li>
+	))}
+</ul>
+
+<style>
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+
+		margin: 0;
+		padding: 0;
+	}
+
+	ul > li {
+		list-style: none;
+	}
+
+	.postLink {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		border: 1px solid;
+		border-radius: 8px;
+		padding: 1rem;
+		background-color: #e6f9ff;
+		border: 1px solid #b8e4ff;
+
+		background-color: #f3fdff;
+		border: 1px solid #d4efff;
+
+		font-size: 16px;
+		color: #000;
+
+		@media (max-width: 600px) {
+			flex-direction: column;
+		}
+	}
+
+	.postLink img {
+		width: 200px;
+		height: fit-content;
+		border-radius: 4px;
+		aspect-ratio: 5/3;
+		object-fit: cover;
+		order: 1;
+		flex-shrink: 0;
+		background: #000;
+
+		@media (max-width: 600px) {
+			width: 100%;
+			order: unset;
+		}
+	}
+
+	.postLink,
+	.postLink:hover,
+	.postBody {
+		text-decoration: none;
+	}
+
+	.postLink:hover .postTitle {
+		text-decoration: underline solid;
+	}
+</style>

@@ -1,0 +1,28 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = {
+	tag: string;
+} & HTMLAttributes<'h1'>;
+
+const { tag: Tag, ...props } = Astro.props;
+---
+
+<Tag {...props}>
+	{
+		props.id ? (
+			<a href={'#' + props.id} class="heading-link">
+				<slot />
+			</a>
+		) : (
+			<slot />
+		)
+	}
+</Tag>
+
+<style>
+	.heading-link {
+		color: inherit;
+		text-decoration: inherit;
+	}
+</style>
