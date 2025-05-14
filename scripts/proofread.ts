@@ -1,21 +1,18 @@
 import 'dotenv/config';
 
+import { Command } from 'commander';
 import OpenAI from 'openai';
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
+import path from 'path';
+import { z } from 'zod';
 
 import { readFile, writeFile } from 'fs/promises';
-
-interface Args {
-	file: string;
-	write: boolean;
-}
 
 async function proofread(content: string): Promise<string> {
 	const openai = new OpenAI({
 		baseURL: 'https://cryptotalks.ai/v1',
 		apiKey: process.env.LLM_TOKEN,
 	});
+
 	const resp = await openai.chat.completions.create({
 		model: 'openai/gpt-4o-mini',
 		messages: [
@@ -31,7 +28,7 @@ async function proofread(content: string): Promise<string> {
 
 					You must never change the tone of text. If text is a bit aggressive, you must leave this style.
 					You must never up promises. If text promises "to make great", you must never replace it to something like "to ensure great".
-					
+
 					You must not never move a dot inside quotemark like that \`"foo bar."\` as fix for \`"foo bar".\`
 					`,
 			},
@@ -39,45 +36,43 @@ async function proofread(content: string): Promise<string> {
 		],
 		temperature: 0,
 	});
+
 	return resp.choices[0].message?.content ?? content;
 }
 
-async function main(): Promise<void> {
-	const { file, write } = yargs(hideBin(process.argv))
-		.options({
-			file: {
-				type: 'string',
-				demandOption: true,
-				alias: 'f',
-				desc: 'Markdown file path',
-			},
-			write: {
-				type: 'boolean',
-				alias: 'w',
-				default: false,
-				desc: 'Pass to write fixes at file',
-			},
-		})
-		.parseSync() as Args;
+const program = new Command();
 
-	const original = await readFile(file, 'utf-8');
-	const fixed = await proofread(original);
+program
+	.description('Proofread for Markdown posts')
+	.argument('<file>', 'Markdown file path')
+	.option('-w, --write', 'Write output to file', false)
+	.action(async (...args) => {
+		const [file, opts] = z
+			.tuple([
+				z.string().min(1),
+				z.object({
+					write: z.boolean(),
+				}),
+			])
+			.rest(z.any())
+			.parse(args);
 
-	if (fixed.trim() === original.trim()) {
-		console.log('No changes needed.');
-		return;
-	}
+		const fullPath = path.resolve(file);
+		const original = await readFile(fullPath, 'utf-8');
+		const fixed = await proofread(original);
 
-	console.log('--- Proofread Output ---\n');
-	console.log(fixed);
+		if (fixed.trim() === original.trim()) {
+			console.log('No changes needed.');
+			return;
+		}
 
-	if (write) {
-		await writeFile(file, fixed, 'utf-8');
-		console.log(`File updated: ${file}`);
-	}
-}
+		console.log('--- Proofread Output ---\n');
+		console.log(fixed);
 
-main().catch((err) => {
-	console.error(err);
-	process.exit(1);
-});
+		if (opts.write) {
+			await writeFile(fullPath, fixed, 'utf-8');
+			console.log(`File updated: ${fullPath}`);
+		}
+	});
+
+program.parse();
