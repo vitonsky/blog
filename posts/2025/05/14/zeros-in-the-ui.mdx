@@ -1,0 +1,66 @@
+---
+title: "Don't show zero values in UI"
+date: '14/05/2025, 17:07'
+image: elevator-panel.jpeg
+tags:
+  - ux-tips
+  - frontend
+  - ui
+keywords:
+---
+
+User interface became slightly too generic nowadays, since it must be efficient in maintenance and release time terms. Although that is not a reason to make a pointless and bad UX. Let's talk about what to do with zero values in UI and how to make UX a meaningful.
+
+![](./elevator-panel.jpeg)
+
+The rule of thumb in UX design is "everything should make sense".
+
+When user is don't understand how something does work, user will just not use the product, or even will make mistake that may be harm for other people, that is quite possible for case with an elevator panel above.
+
+That is a product's problem, not user.
+
+## Don't make me guess
+
+Look at next example:
+
+![](./stars-rating.jpeg)
+
+That is quite generic UI that is tell us "I don't care. We are here to make money on you. Buy or go off".
+
+How to make this UI is better? Strip away everything pointless.
+
+User don't needed in your computer language, so round the numbers.
+
+Instead of `5.0 / 5`it's better to show `5 of 5`. But that's still is not ideal, because you make user guess what this formula does mean.
+
+Be more explicit and replace it to something like `Rating is 5 stars`.
+
+The same about list with stars. Nobody interesting in your computer data, so it's fine to just remove a whole list with stars distribution that is just fluff a page and pretend a site have a lot of content.
+
+If you make sure there must be a list with stars, think about to show only meaningful information. For example do not show stars that have no votes. And, of course, align the text and fix a progress indicator that does not match a ratio of score and filled for 60% for item `5/5` that is actually mean 100%.
+
+## Watch for meaningfulness
+
+Another one example:
+
+> ![](./heart-rate.jpeg)
+>
+> Great! It look's I died.
+
+or even this one
+
+> ![](./0-stats.jpeg)
+>
+> Are you sure this is something to brag about?
+
+The problem of both cases is developers did not implemented yet another condition to handle edge case, in result there are pointless state reached by user.
+
+The solution is obvious - don't show a pointless messages to user.
+
+Check if all data is have sense and if not - just do not show a message or component.
+
+If you need to fill a screen with something - show something really useful.
+
+If there no reviews yet - call user to action, ask them to write a new review to be first.
+
+In case with heart rate monitor, call to emergency service if user looks unhealthy, or explain to user what happens. It could looks like spinner to signal user the data is loading now, or it may be a message with status like "it looks your sensor is broken, since we can't measure your heart rate".
