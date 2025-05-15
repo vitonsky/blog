@@ -3,6 +3,7 @@ import type { BlogPost } from '../../utils/getPosts';
 import { getBlogPostLink } from '../../utils/links';
 import PostInfo from '../../components/Post/PostInfo.astro';
 import Notice from '../../components/Notice.astro';
+import { tags } from '../../definitions';
 
 type Props = {
 	tag?: {
@@ -19,7 +20,8 @@ const { posts, tag } = Astro.props;
 		{
 			tag && (
 				<Notice>
-					Posts with tag <b>{tag.name}</b>
+					Posts with tag <b>{tag.name}</b>{' '}
+					{tags[tag.name] ? `- ${tags[tag.name]}` : ''}
 				</Notice>
 			)
 		}
@@ -53,7 +55,7 @@ const { posts, tag } = Astro.props;
 			}
 		</ul>
 
-		<slot name="pagination"/>
+		<slot name="pagination" />
 	</section>
 </main>
 
