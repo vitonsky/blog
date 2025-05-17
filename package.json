@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"post:add": "node ./scripts/addPost.js",
-		"post:proofread": "git diff --name-only -z master...HEAD -- '*.mdx' | xargs -0 tsx scripts/proofread.ts",
+		"post:proofread": "git diff --name-only -z master...HEAD -- '*.mdx' | xargs -0 tsx scripts/proofread.ts -w",
 		"post:review": "git diff --name-only -z master...HEAD -- '*.mdx' | xargs -0 tsx scripts/reviewer.ts",
 		"dev": "cd astro && npm run dev",
 		"build": "cd astro && npm run build",
