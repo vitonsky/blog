@@ -1,0 +1,49 @@
+---
+title: "Don't Guess My Language"
+date: '17/05/2025, 14:55'
+image: the-dreamers-2003.jpg
+tags:
+  - ux-tips
+keywords:
+---
+
+If you’re still using IP geolocation to decide what language to show, stop screwing around. It’s a broken assumption dressed up as a feature.
+
+![](./the-dreamers-2003.jpg)
+
+IP tells you where the request comes from. That’s it. It doesn’t tell you what language the user wants, speaks, or even understands. It fails all the time — VPNs, travel, people living abroad, countries with multiple official languages. You’re not being smart. You’re being annoying.
+
+## Country is Not Language
+
+There’s no 1:1 mapping. Belgium has three official languages. Switzerland has four. India has 22. Canada is officially bilingual and unofficially multilingual. Users could live in these places, travel through them, or have nothing to do with them besides routing traffic through there. So what are you doing forcing the UI into one language just because some geo-IP database told you what country the IP’s from?
+
+You're making assumptions on bad data. That's not clever engineering. That’s laziness pretending to be UX.
+
+No, "but the big websites do it" doesn’t make it right. You’re not a cargo cult. Do it right or don’t do it at all.
+
+Personally I'm an active user of VPN, and every time I go to Google with enabled VPN, I can't understand nothing since there are a random language used, just because of IP rotation by my VPN provider.
+
+## You Already Have the Right Tool
+
+Every browser sends an `Accept-Language` header. It tells you what language the user prefers. Not based on location. Not based on IP. Based on their OS or browser config. And yes, users can tweak it if they care enough.
+
+It looks like this: `Accept-Language: en-US,en;q=0.9,de;q=0.8`
+
+That’s your signal. Use it. It’s accurate. It’s free. It’s already there. No licensing, no guesswork, no maintenance.
+
+You don’t override screen resolution or color scheme with your own guess — so why do it with language?
+
+## And When You Don’t Listen?
+
+You serve English to a French user in Germany. You give Dutch to someone in Brussels who reads French. You give Chinese to someone using a Hong Kong VPN who doesn’t speak a word of it. Users get annoyed. Some leave. Some dig through the UI to fix your mess.
+
+All of this because you trusted a sketchy IP database over the browser’s own header.
+
+## Here’s the Only Reasonable Approach
+
+* Read `Accept-Language`.
+* Respect it.
+* Let the user change it if needed (and remember that choice with a cookie or URL param).
+* If you want to use GeoIP, fine — but only for currency, shipping, legal stuff. Never for language.
+
+If you’re building software for actual people, you don’t get to second-guess their preferences.
