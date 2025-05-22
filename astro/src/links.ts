@@ -56,7 +56,7 @@ export default {
 					target: '_blank',
 				},
 				{
-					text: 'BlueSky',
+					text: 'Bluesky',
 					url: 'https://bsky.app/profile/vitonsky.bsky.social',
 					target: '_blank',
 				},
