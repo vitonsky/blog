@@ -56,6 +56,11 @@ export default {
 					target: '_blank',
 				},
 				{
+					text: 'BlueSky',
+					url: 'https://bsky.app/profile/vitonsky.bsky.social',
+					target: '_blank',
+				},
+				{
 					text: 'Mastodon',
 					url: 'https://mastodon.social/@vitonsky',
 					target: '_blank',
