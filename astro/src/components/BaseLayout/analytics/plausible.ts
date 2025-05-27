@@ -9,7 +9,7 @@ import { isExternalUrl } from '../../../utils/links';
 const setupPlausible = () => {
 	const plausible = new Plausible({
 		domain: 'vitonsky.net',
-		apiHost: 'https://pulse2.vitonsky.net',
+		apiHost: 'https://uxt.vitonsky.net',
 		filter(event, eventName) {
 			// Skip all events while development
 			if (location.hostname === 'localhost') {
