@@ -21,7 +21,7 @@ const { description = post.previewText } = post.data;
 const image = post.data.image?.src;
 const { Content } = await render(post);
 
-const related = await getRelatedBlogPosts(post, 3);
+const related = await getRelatedBlogPosts(post, 5);
 ---
 
 <BaseLayout
