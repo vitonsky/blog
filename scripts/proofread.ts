@@ -6,15 +6,18 @@ import path from 'path';
 import { z } from 'zod';
 
 import { readFile, writeFile } from 'fs/promises';
+import { getLLMConfig } from './getLLMConfig';
 
 async function proofread(content: string): Promise<string> {
+	const llm = getLLMConfig();
+
 	const openai = new OpenAI({
 		baseURL: 'https://cryptotalks.ai/v1',
-		apiKey: process.env.LLM_TOKEN,
+		apiKey: llm.token,
 	});
 
 	const resp = await openai.chat.completions.create({
-		model: 'openai/gpt-4o-mini',
+		model: llm.model,
 		messages: [
 			{
 				role: 'system',
