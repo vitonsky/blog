@@ -1,0 +1,86 @@
+---
+title: "Languages stats with ISO codes, speakers count, countries list and its population "
+date: '15/07/2025, 13:42'
+image: top-languages.png
+tags:
+  - project
+  - opensource
+  - npm
+  - announce
+links:
+  - label: GitHub
+    url: https://github.com/translate-tools/langstats
+  - label: NPM
+    url: https://www.npmjs.com/package/langstats
+---
+
+When I work on multi-lingual projects it's always takes a lot of time to estimate and prioritize localization process. Even in case you use machine translation, you can't just translate all languages in the world, since it takes long time, and LLM will spend all your money on garbage generations like chars "aa" repeated thousands times in row. I built NPM package [langstats](https://github.com/translate-tools/langstats) to solve this problem.
+
+Now you may just hit `npm i langstats` and fetch top used languages, optionally filter out languages by target countries where your app is present, then leave top N languages and have a list of languages for translation.
+
+Simple demo that is just draw stats of top 20 spoken languages:
+
+```
+Top languages:
+#1 Chinese (zh,zho)
+- Total speakers: 1299877520
+#2 English (en,eng)
+- Total speakers: 1132366680
+- Top 10 countries where used: India, United States, Pakistan, Nigeria, Philippines, United Kingdom, South Africa, Tanzania, Kenya, Uganda
+#3 Chinese (cmn)
+- Total speakers: 897071810
+#4 Spanish (es,spa)
+- Total speakers: 485000000
+- Top 10 countries where used: Mexico, Colombia, Spain, Argentina, Venezuela, Chile, Guatemala, Ecuador, Bolivia, Honduras
+#5 Arabic (ar,ara)
+- Total speakers: 422000000
+- Top 10 countries where used: Egypt, Algeria, Afghanistan, Sudan, Iraq, Morocco, Morocco, Saudi Arabia, Yemen, Syria
+#6 Bangla (bn,ben)
+- Total speakers: 300000000
+- Top 10 countries where used: Bangladesh
+#7 Portuguese (pt,por)
+- Total speakers: 254300000
+- Top 10 countries where used: Brazil, Angola, Portugal, Timor-Leste, Cape Verde, São Tomé & Príncipe
+#8 French (fr,fra)
+- Total speakers: 208157220
+- Top 10 countries where used: Congo - Kinshasa, France, Canada, Côte d’Ivoire, Cameroon, Chad, Senegal, Rwanda, Benin, Burundi
+#9 Indonesian (id,ind)
+- Total speakers: 198996550
+- Top 10 countries where used: Indonesia
+#10 Russian (ru,rus)
+- Total speakers: 171428900
+- Top 10 countries where used: Russia, Kazakhstan, Tajikistan, Belarus
+#11 Japanese (ja,jpn)
+- Total speakers: 128000000
+- Top 10 countries where used: Japan, Palau
+#12 Punjabi (pa,pan)
+- Total speakers: 125000000
+#13 German (de,deu)
+- Total speakers: 105000000
+- Top 10 countries where used: Germany, Belgium, Austria, Switzerland, Luxembourg, Liechtenstein
+#14 Egyptian Arabic (arz)
+- Total speakers: 100542400
+#15 Javanese (jv,jav)
+- Total speakers: 84308740
+#16 Marathi (mr,mar)
+- Total speakers: 83100000
+#17 Swahili (swh)
+- Total speakers: 82300000
+#18 Turkish (tr,tur)
+- Total speakers: 82231620
+- Top 10 countries where used: Türkiye, Cyprus
+#19 Telugu (te,tel)
+- Total speakers: 82000000
+#20 Wu Chinese (wuu)
+- Total speakers: 81400000
+```
+
+There are stats about over 1600 languages and over 180 countries.
+
+As you can see at example above, some data may be missed, for example no countries for Chinese language is listed. That's because it is hard to find authentic data about languages. Data will be updated and enriched in future updates.
+
+Sure, I could add some data manually, but the purpose of this package is to provide real data, not a random numbers how i feel. This approach is distinguish `langstats` of many others datasets where a random generated data is present.
+
+By the fact, that is a dataset I maintain for my projects, so you can start use it too, and cut off your headache around data mining and verification.
+
+If you know where to find a data about languages usage, [create an issue](https://github.com/translate-tools/langstats) at GitHub repo and share it there, to improve a stats precision.
