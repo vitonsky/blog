@@ -1,5 +1,5 @@
 ---
-title: "Languages stats with ISO codes, speakers count, countries list and its population "
+title: "Languages stats with ISO codes, speakers count, countries list and its population"
 date: '15/07/2025, 13:42'
 image: top-languages.png
 tags:
@@ -14,11 +14,11 @@ links:
     url: https://www.npmjs.com/package/langstats
 ---
 
-When I work on multi-lingual projects it's always takes a lot of time to estimate and prioritize localization process. Even in case you use machine translation, you can't just translate all languages in the world, since it takes long time, and LLM will spend all your money on garbage generations like chars "aa" repeated thousands times in row. I built NPM package [langstats](https://github.com/translate-tools/langstats) to solve this problem.
+When I work on multi-lingual projects, it always takes a lot of time to estimate and prioritize the localization process. Even if you use machine translation, you can't just translate all languages in the world, since it takes a long time, and LLM will spend all your money on garbage generations like chars "aa" repeated thousands of times in a row. I built the NPM package [langstats](https://github.com/translate-tools/langstats) to solve this problem.
 
-Now you may just hit `npm i langstats` and fetch top used languages, optionally filter out languages by target countries where your app is present, then leave top N languages and have a list of languages for translation.
+Now you may just hit `npm i langstats` and fetch the top used languages, optionally filter out languages by target countries where your app is present, then leave the top N languages and have a list of languages for translation.
 
-Simple demo that is just draw stats of top 20 spoken languages:
+Simple demo that just draws stats of the top 20 spoken languages:
 
 ```
 Top languages:
@@ -77,10 +77,10 @@ Top languages:
 
 There are stats about over 1600 languages and over 180 countries.
 
-As you can see at example above, some data may be missed, for example no countries for Chinese language is listed. That's because it is hard to find authentic data about languages. Data will be updated and enriched in future updates.
+As you can see in the example above, some data may be missing, for example, no countries for the Chinese language are listed. That's because it is hard to find authentic data about languages. Data will be updated and enriched in future updates.
 
-Sure, I could add some data manually, but the purpose of this package is to provide real data, not a random numbers how i feel. This approach is distinguish `langstats` of many others datasets where a random generated data is present.
+Of course, I could add some data manually, but the purpose of this package is to provide real data, not random numbers based on how I feel. This approach distinguishes `langstats` from many other datasets where random generated data is present.
 
-By the fact, that is a dataset I maintain for my projects, so you can start use it too, and cut off your headache around data mining and verification.
+By the fact, that this is a dataset I maintain for my projects, you can start using it too, and cut off your headache around data mining and verification.
 
-If you know where to find a data about languages usage, [create an issue](https://github.com/translate-tools/langstats) at GitHub repo and share it there, to improve a stats precision.
+If you know where to find data about language usage, [create an issue](https://github.com/translate-tools/langstats) at the GitHub repo and share it there, to improve the stats precision.
