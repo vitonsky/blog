@@ -29,6 +29,9 @@ const blog = defineCollection({
 				.array()
 				.nullish()
 				.transform((list) => list ?? []),
+			links: z
+				.array(z.object({ url: z.string().url(), label: z.string() }))
+				.nullish(),
 		}),
 });
 

@@ -4,6 +4,7 @@ import { getBlogPostLink } from '../../utils/links';
 import PostInfo from '../../components/Post/PostInfo.astro';
 import Notice from '../../components/Notice.astro';
 import { tags } from '../../definitions';
+import { labelsMap, type Labels } from '../../components/Post';
 
 type Props = {
 	tag?: {
@@ -39,6 +40,12 @@ const { posts, tag } = Astro.props;
 								<PostInfo
 									date={post.data.date}
 									readingTime={post.readingTime}
+									labels={
+										post.data.tags.filter(
+											(tag) => tag in labelsMap,
+										) as Labels[]
+									}
+									links={post.data.links ?? []}
 								/>
 							</div>
 						</div>

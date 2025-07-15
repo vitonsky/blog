@@ -3,6 +3,7 @@ import { type BlogPost } from '../../utils/getPosts';
 import PostInfo from '../../components/Post/PostInfo.astro';
 import RelatedPosts from './RelatedPosts.astro';
 import TagsList from '../../components/Post/TagsList.astro';
+import { labelsMap, type Labels } from '../../components/Post';
 
 type Props = {
 	post: BlogPost;
@@ -12,7 +13,7 @@ type Props = {
 const { related } = Astro.props;
 const {
 	readingTime,
-	data: { title, date, tags },
+	data: { title, date, tags, links },
 } = Astro.props.post;
 ---
 
@@ -22,7 +23,12 @@ const {
 			<h1>{title}</h1>
 
 			<div class="meta">
-				<PostInfo date={date} readingTime={readingTime} />
+				<PostInfo
+					date={date}
+					readingTime={readingTime}
+					labels={tags.filter((tag) => tag in labelsMap) as Labels[]}
+					links={links ?? []}
+				/>
 			</div>
 		</div>
 

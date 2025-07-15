@@ -2,45 +2,111 @@
 import type { ReadTimeResults } from 'reading-time';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { Icon } from 'astro-icon/components';
+import { labelsMap, type Labels } from '.';
 
 interface Props {
 	date: Date;
 	readingTime?: ReadTimeResults;
+	labels?: Labels[];
+	links?: { url: string; label: string }[];
 }
 
-const { date, readingTime } = Astro.props;
+const { date, readingTime, labels = [], links = [] } = Astro.props;
 ---
 
-<div class="meta">
-	<span class="inline-container">
-		<Icon name="fa6-solid:calendar" />
-		<FormattedDate date={date} />
-	</span>
+<div class="post-info">
+	<div class="meta">
+		<span class="inline-container">
+			<Icon name="fa6-solid:calendar" />
+			<FormattedDate date={date} />
+		</span>
+
+		{
+			readingTime && (
+				<span class="inline-container" title={`${readingTime.words} words`}>
+					<Icon name="fa6-solid:stopwatch" />
+					<span>
+						{readingTime.minutes > 1
+							? `${Math.ceil(readingTime.minutes)} minutes to read`
+							: 'about minute to read'}
+					</span>
+				</span>
+			)
+		}
+	</div>
 
 	{
-		readingTime && (
-			<span class="inline-container" title={`${readingTime.words} words`}>
-				<Icon name="fa6-solid:stopwatch" />
-				<span>
-					{readingTime.minutes > 1
-						? `${Math.ceil(readingTime.minutes)} minutes to read`
-						: 'about minute to read'}
-				</span>
-			</span>
+		(links.length > 0 || labels.length > 0) && (
+			<div class="meta">
+				{labels.length > 0 && (
+					<>
+						{labels.map((label) => {
+							const labelInfo = labelsMap[label];
+							if (!labelInfo) return;
+
+							const { text, icon } = labelInfo;
+							return (
+								<span class:list={['inline-container', `label-${label}`]}>
+									{icon && <Icon name={icon} />}
+									<span>{text}</span>
+								</span>
+							);
+						})}
+					</>
+				)}
+				{links.length > 0 && (
+					<div class="links-container">
+						<span class="inline-container">
+							<Icon name="fa6-solid:link" />
+							<span>Links:</span>
+						</span>
+
+						{links.map((link) => (
+							<a href={link.url} target="_blank" class="inline-container">
+								<span>{link.label}</span>
+							</a>
+						))}
+					</div>
+				)}
+			</div>
 		)
 	}
 </div>
 
 <style>
+	.post-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
 	.meta {
 		display: flex;
 		flex-direction: row;
-		gap: 1rem;
+		gap: 0.5rem 1rem;
+		flex-wrap: wrap;
 	}
 
 	.inline-container {
 		display: inline-flex;
 		gap: 0.5em;
 		align-items: baseline;
+	}
+	a.inline-container {
+		gap: 0.3em;
+	}
+
+	.links-container {
+		display: inline-flex;
+		gap: .8rem;
+		align-items: baseline;
+		flex-wrap: wrap;
+	}
+
+	.label-project {
+		color: #9501e8;
+	}
+	.label-announce {
+		color: #453c82;
 	}
 </style>
