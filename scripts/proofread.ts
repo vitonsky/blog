@@ -12,7 +12,7 @@ async function proofread(content: string): Promise<string> {
 	const llm = getLLMConfig();
 
 	const openai = new OpenAI({
-		baseURL: 'https://cryptotalks.ai/v1',
+		baseURL: llm.baseUrl,
 		apiKey: llm.token,
 	});
 
