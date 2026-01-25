@@ -142,7 +142,7 @@ INSERT INTO movies (title,release_year,rating) VALUES ($1, $2, $3), ($4, $5, $6)
 
 Feel free to play with [nano-queries](https://nano-queries.js.org/) + [PGLite](https://pglite.dev/) in a [StackBlitz playground](https://stackblitz.com/edit/stackblitz-starters-rxhqvgfr?file=pglite.js).
 
-<iframe src="https://stackblitz.com/edit/stackblitz-starters-rxhqvgfr?embed=1&file=pglite.js&theme=light&view=editor" style="height: 800px"/>
+<iframe src="https://stackblitz.com/edit/stackblitz-starters-rxhqvgfr?embed=1&file=pglite.js&theme=light&ctl=1&view=editor" style="height: 800px"/>
 
 ---
 
@@ -152,8 +152,35 @@ We have used this solution in production since 2023 and [open-sourced](https://g
 
 Nano Queries works well with any database - SQLite, Postgres, MySQL, Oracle, GraphQL, PGLite, DuckDB, etc. Actually, you can build any queries that can be compiled to a string.
 
-[Try it](https://github.com/vitonsky/nano-queries), star it, give feedback. 
+[Try it](https://npmjs.com/package/nano-queries), [star it](https://github.com/vitonsky/nano-queries), [give feedback](https://github.com/vitonsky/nano-queries/issues/new). 
 
 You are not the only one who dislikes an ORM. Now we have a choice on the JavaScript platform too.
 
 Share it with others, tell them about an alternative that makes your database interaction faster and more efficient.
+
+If your app are local-first and you use some database on client side instead of indexedDB, you may build queries right in browser right now. No drivers needed.
+
+If you have a backend on nodejs, now you have an option to write the performant SQL queries with no suffer with a raw strings. Nano queries stores raw SQL and values in boxes, so it will never be mixed.
+
+With Nano Queries you will never have to write anything like this:
+
+```js
+const values = [];
+const getPlaceholder = (value) => {
+  values.push(value);
+  return `$${values.length}`;
+};
+
+const where = [];
+if (year) {
+  where.push(`release_year = ${getPlaceholder(year)}`);
+}
+if (rating) {
+  where.push(`rating >= ${getPlaceholder(rating)}`);
+}
+
+db.query(
+  `SELECT title FROM movies ${where.length ? 'WHERE ' + where.join(' AND ') : ''} LIMIT 100`,
+  values,
+);
+```
