@@ -1,0 +1,186 @@
+---
+slug: '2026/01/24/nano-queries'
+title: "Nano Queries, a state of the art Query Builder"
+date: '24/01/2026, 21:15'
+image:
+tags:
+  - project
+  - announce
+  - opensource
+keywords:
+links:
+  - label: Site
+    url: https://nano-queries.js.org/
+  - label: GitHub
+    url: https://github.com/vitonsky/nano-queries
+  - label: NPM
+    url: https://npmjs.com/package/nano-queries
+---
+
+In June 2023, I found myself in an awkward situation. We used a custom database on a project, and I needed a simple query builder to create complex queries dynamically and ensure security against user input. I discovered that there were no solutions to that problem on the JavaScript platform at all. I built a solution and now open-sourced it.
+
+![The "Uncut Gems" movie (2019)](./uncut-gems-2019.jpg)
+
+I conducted research and found that all packages for building queries on the JavaScript platform had at least one of the fundamental problems below (usually most of them):
+
+- They are built for a specific database or a few, requiring "drivers", "compilers", etc that do not exist for our database
+- They are designed to be ORM or anything but a simple query builder
+- They work only on the Node platform, not in the browser, Deno, etc
+
+We had a custom database that runs in the browser, and we had no need for ORM because it's slow by design <sup>[[1]](https://medium.com/%40jholt1055/stop-using-orms-for-reporting-queries-theyre-100x-slower-than-raw-sql-db330f205828), [[2]](https://www.geldata.com/blog/why-orms-are-slow-and-getting-slower)</sup> and complicates any performance tuning.
+
+Meanwhile, the most popular tools for working with databases in JavaScript are ORMs: [Prisma](https://www.prisma.io/), [Kysely](https://kysely.dev/), [Drizzle](https://orm.drizzle.team/), [TypeORM](https://typeorm.io/), [Objection](https://www.npmjs.com/package/objection).
+
+It seems *JavaScript programmers don't care about performance* and like to over-engineer simple things, right?
+
+## Definition of a Query Builder
+
+The purpose of a **query builder** is to simplify the creation of complex queries and ensure their safety. That's all.
+
+You write code in SQL or any other language that is native to your database. You have no surprises, and you can run `EXPLAIN ANALYZE` or its equivalent against your queries to tune their performance specifically for the needs of your project configuration.
+
+## Nano Queries is a solution
+
+That's why I created a [`nano-queries`](https://github.com/vitonsky/nano-queries).
+
+Nano Queries is a query builder that consists of 3 primitives - a `Raw` segment that represents raw code, `Value` that represents any user input, and a `Query` that represents a sequence of any of these three.
+
+This simple design allows for safely representing a query of any complexity.
+
+To make it applicable in real-world projects, Nano Queries provides helpers to compose these primitives via templated strings like this
+
+```js
+sql`SELECT title FROM movies WHERE release_year = ${2007}`;
+```
+
+This code builds a `Query` segment that has 2 other segments, so an abstract data structure that represents the query above looks like
+
+```
+Query[Raw["SELECT title FROM movies WHERE release_year = "], Value[2007]]
+```
+
+The queries are lazy, the SQL string and bindings will be built once the user compiles a query, and the compiler will call a `getSegments` method of `Query`
+
+```js
+compile(sql`SELECT title FROM movies WHERE release_year = ${2007}`);
+
+// Returns query with placeholders and array with bindings equal to
+// {
+//   sql: "SELECT title FROM movies WHERE release_year = $1",
+//   bindings: [2007],
+// }
+```
+
+This design means you can embed one `Query` into another and modify queries conditionally after composing to implement conditional query building.
+
+```js
+const userInput = {
+  year: 2007,
+  rating: 4.1,
+};
+
+// You may nest one query into another
+// A `where` returns an instance of a class that extends `Query` and provides `and` & `or` methods,
+const filter = where();
+const query = sql`SELECT title FROM movies ${filter} LIMIT 100`;
+
+// A query segment can be extended any time before compiling
+filter.and(sql`release_year = ${userInput.year}`);
+
+// That's useful for building complex conditional queries
+if (userInput.rating > 0) {
+  filter.and(sql`rating >= ${userInput.rating}`);
+}
+
+compile(query);
+// {
+//   sql: 'SELECT title FROM movies WHERE release_year = $1 AND rating >= $2 LIMIT 100',
+//   bindings: [2007, 4.1],
+// }
+```
+
+The query we compile here may be represented as a data structure
+
+```
+Query[
+  Raw["SELECT title FROM movies "],
+  WhereClause[
+    Query[Raw["release_year = "], Value[2007]],
+    Query[Raw["rating >= "], Value[4.1]],
+  ],
+  Raw[" LIMIT 100"]
+]
+```
+
+Notice the `WhereClause` that extends `Query` has no keywords `WHERE` & `AND`. Its method `getSegments` will insert all necessary segments depending on state and semantics.
+
+In case no single query is added to a `filter`, its method `getSegments` will return an empty list, and the query will remain valid:
+
+```sql
+SELECT title FROM movies LIMIT 100
+```
+
+This design allows for implementing query segments with any semantics by adding a new class based on `Query`. These segments may implement any SQL dialect, or even NoSQL like a GraphQL.
+
+If you frequently use some SQL features, just introduce a new query segment that implements it.
+
+Let's say you want to insert many values into the DB. It would be nice to have something like `set` that would receive a list of `Query` and compile it to a SQL set:
+
+```js
+sql`INSERT INTO movies (title,release_year,rating) VALUES ${set(
+  movies.map(
+    (movie) => sql`(${movie.title}, ${movie.release}, ${movie.rating})`
+  )
+)}`
+```
+
+The result will be
+
+```sql
+INSERT INTO movies (title,release_year,rating) VALUES ($1, $2, $3), ($4, $5, $6)
+```
+
+Feel free to play with [nano-queries](https://nano-queries.js.org/) + [PGLite](https://pglite.dev/) in a [StackBlitz playground](https://stackblitz.com/edit/stackblitz-starters-rxhqvgfr?file=pglite.js).
+
+<iframe src="https://stackblitz.com/edit/stackblitz-starters-rxhqvgfr?embed=1&file=pglite.js&theme=light&ctl=1&view=editor" style="height: 800px"/>
+
+---
+
+## Try it on your project
+
+We have used this solution in production since 2023 and [open-sourced](https://github.com/vitonsky/nano-queries) it for the community.
+
+Nano Queries works well with any database - SQLite, Postgres, MySQL, Oracle, GraphQL, PGLite, DuckDB, etc. Actually, you can build any queries that can be compiled to a string.
+
+[Try it](https://npmjs.com/package/nano-queries), [star it](https://github.com/vitonsky/nano-queries), [give feedback](https://github.com/vitonsky/nano-queries/issues/new). 
+
+You are not the only one who dislikes an ORM. Now we have a choice on the JavaScript platform too.
+
+Share it with others, tell them about an alternative that makes your database interaction faster and more efficient.
+
+If your app is local-first and you use some database on the client side instead of indexedDB, you may build queries right in the browser right now. No "drivers" needed.
+
+If you have a backend on Node.js, now you have an option to write performant SQL queries without suffering with raw strings. Nano Queries stores raw SQL and values in different boxes, so they will never be mixed.
+
+With Nano Queries you will never have to write anything like this:
+
+```js
+const values = [];
+const getPlaceholder = (value) => {
+  values.push(value);
+  return `$${values.length}`;
+};
+
+const where = [];
+if (year) {
+  where.push(`release_year = ${getPlaceholder(year)}`);
+}
+if (rating) {
+  where.push(`rating >= ${getPlaceholder(rating)}`);
+}
+
+db.query(
+  `SELECT title FROM movies ${where.length ? 'WHERE ' + where.join(' AND ') : ''} LIMIT 100`,
+  values,
+);
+```
