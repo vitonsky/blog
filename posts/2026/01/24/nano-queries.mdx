@@ -17,49 +17,49 @@ links:
     url: https://npmjs.com/package/nano-queries
 ---
 
-In June of 2023, I found myself in a picante situation. We used a custom database on a project, and I needed in a simple query builder to build complex queries dynamically and ensure security against user input. I found that there were no solutions to that problem on the JavaScript platform at all. I've built a solution and now open source it.
+In June 2023, I found myself in an awkward situation. We used a custom database on a project, and I needed a simple query builder to create complex queries dynamically and ensure security against user input. I discovered that there were no solutions to that problem on the JavaScript platform at all. I built a solution and now open-sourced it.
 
 ![](./uncut-gems-2019.jpg)
 
-I've run a research and found that all packages to build queries on JavaScript platform had at least one of the fundamental problems below (usually most of them):
+I conducted research and found that all packages for building queries on the JavaScript platform had at least one of the fundamental problems below (usually most of them):
 
-- They are built for a specific database or a few. They require "drivers", "compilers", etc that do not exist for our database
-- They are designed to be ORM or anything but not just a query builder
-- They work only on the Node platform, but not in the browser, Deno, etc
+- They are built for a specific database or a few, requiring "drivers", "compilers", etc that do not exist for our database
+- They are designed to be ORM or anything but a simple query builder
+- They work only on the Node platform, not in the browser, Deno, etc
 
-We had a custom database that run in browser, and we no need in ORM because it's slow by design [[1](https://medium.com/%40jholt1055/stop-using-orms-for-reporting-queries-theyre-100x-slower-than-raw-sql-db330f205828), [2](https://www.geldata.com/blog/why-orms-are-slow-and-getting-slower)] and makes difficult any performance tuning.
+We had a custom database that runs in the browser, and we had no need for ORM because it's slow by design <sup>[[1]](https://medium.com/%40jholt1055/stop-using-orms-for-reporting-queries-theyre-100x-slower-than-raw-sql-db330f205828), [[2]](https://www.geldata.com/blog/why-orms-are-slow-and-getting-slower)</sup> and complicates any performance tuning.
 
-Meanwhile the most popular tools to work with a databases on JavaScript are ORMs: [Prisma](https://www.prisma.io/), [Kysely](https://kysely.dev/), [Drizzle](https://orm.drizzle.team/), [TypeORM](https://typeorm.io/), [Objection](https://www.npmjs.com/package/objection).
+Meanwhile, the most popular tools for working with databases in JavaScript are ORMs: [Prisma](https://www.prisma.io/), [Kysely](https://kysely.dev/), [Drizzle](https://orm.drizzle.team/), [TypeORM](https://typeorm.io/), [Objection](https://www.npmjs.com/package/objection).
 
-It seems a JavaScript programmers don't care about performance, and like to over engineer a simple things right?
+It seems *JavaScript programmers don't care about performance* and like to over-engineer simple things, right?
 
 ## Definition of a Query Builder
 
-The purpose of a **query builder** is to simplify the building of complex queries and ensure its safety. That's all.
+The purpose of a **query builder** is to simplify the creation of complex queries and ensure their safety. That's all.
 
-You write a code in SQL or any other language that are native for your database. You have no surprises, and you can run `EXPLAIN ANALYZE` or equivalent against your queries to tune its performance specifically for needs of your project configuration.
+You write code in SQL or any other language that is native to your database. You have no surprises, and you can run `EXPLAIN ANALYZE` or its equivalent against your queries to tune their performance specifically for the needs of your project configuration.
 
 ## Nano Queries is a solution
 
-That's why I have create a [`nano-queries`](https://github.com/vitonsky/nano-queries).
+That's why I created a [`nano-queries`](https://github.com/vitonsky/nano-queries).
 
-Nano queries is a query builder that consists of 3 primitives - a `Raw` segment that represent a raw code, `Value` that represent any user input, and a `Query` that represent a sequence of any of this three.
+Nano Queries is a query builder that consists of 3 primitives - a `Raw` segment that represents raw code, `Value` that represents any user input, and a `Query` that represents a sequence of any of these three.
 
-This simple design let represent safely a query of any complexity.
+This simple design allows for safely representing a query of any complexity.
 
-To make it applicable in real world projects, a Nano Queries provides helpers to compose these primitives via templated strings like that
+To make it applicable in real-world projects, Nano Queries provides helpers to compose these primitives via templated strings like this
 
 ```js
 sql`SELECT title FROM movies WHERE release_year = ${2007}`;
 ```
 
-This code build a `Query` segment that have 2 other segments, so an abstract data structure that represent a query above is looks like
+This code builds a `Query` segment that has 2 other segments, so an abstract data structure that represents the query above looks like
 
 ```
 Query[Raw["SELECT title FROM movies WHERE release_year = "], Value[2007]]
 ```
 
-The queries are lazy, the SQL string and bindings will be build once user will compile a query and compiler will call a `getSegments` method of `Query`
+The queries are lazy, the SQL string and bindings will be built once the user compiles a query, and the compiler will call a `getSegments` method of `Query`
 
 ```js
 compile(sql`SELECT title FROM movies WHERE release_year = ${2007}`);
@@ -71,7 +71,7 @@ compile(sql`SELECT title FROM movies WHERE release_year = ${2007}`);
 // }
 ```
 
-This design does mean you can embed one `Query` into another, and modify queries conditionally after composing to implement a conditional query building.
+This design means you can embed one `Query` into another and modify queries conditionally after composing to implement conditional query building.
 
 ```js
 const userInput = {
@@ -80,14 +80,14 @@ const userInput = {
 };
 
 // You may nest one query into another
-// A `where` returns an instance of class that extends `Query` and provide `and` & `or` methods,
+// A `where` returns an instance of a class that extends `Query` and provides `and` & `or` methods,
 const filter = where();
 const query = sql`SELECT title FROM movies ${filter} LIMIT 100`;
 
 // A query segment can be extended any time before compiling
 filter.and(sql`release_year = ${userInput.year}`);
 
-// That's useful to build a complex conditional queries
+// That's useful for building complex conditional queries
 if (userInput.rating > 0) {
   filter.and(sql`rating >= ${userInput.rating}`);
 }
@@ -99,7 +99,7 @@ compile(query);
 // }
 ```
 
-The query that we compile here may be represented as a data structure
+The query we compile here may be represented as a data structure
 
 ```
 Query[
@@ -112,19 +112,19 @@ Query[
 ]
 ```
 
-Notice the `WhereClause` that extends `Query` have no keywords `WHERE` & `AND`. Its method `getSegments` will insert all necessary segments depends on state and semantic.
+Notice the `WhereClause` that extends `Query` has no keywords `WHERE` & `AND`. Its method `getSegments` will insert all necessary segments depending on state and semantics.
 
-In case no single query will be added to a `filter`, its method `getSegments` will return empty list and query will remain valid:
+In case no single query is added to a `filter`, its method `getSegments` will return an empty list, and the query will remain valid:
 
 ```sql
 SELECT title FROM movies LIMIT 100
 ```
 
-This design allow to implement a query segments with any semantic via add a new class based on `Query`. These segments may implement any SQL dialect, or even NoSQL.
+This design allows for implementing query segments with any semantics by adding a new class based on `Query`. These segments may implement any SQL dialect, or even NoSQL like a GraphQL.
 
-If you frequently use some SQL features - just introduce a new query segment that implements it.
+If you frequently use some SQL features, just introduce a new query segment that implements it.
 
-Let's say you want to insert many values into DB. It would be nice to have something like `set` that would receive a list of `Query` and would compile it to a SQL set:
+Let's say you want to insert many values into the DB. It would be nice to have something like `set` that would receive a list of `Query` and compile it to a SQL set:
 
 ```js
 sql`INSERT INTO movies (title,release_year,rating) VALUES ${set(
@@ -134,13 +134,13 @@ sql`INSERT INTO movies (title,release_year,rating) VALUES ${set(
 )}`
 ```
 
-the result will be
+The result will be
 
 ```sql
 INSERT INTO movies (title,release_year,rating) VALUES ($1, $2, $3), ($4, $5, $6)
 ```
 
-Feel free to play with it in a [StackBlitz sandbox](https://stackblitz.com/edit/stackblitz-starters-rxhqvgfr?file=pglite.js).
+Feel free to play with [nano-queries](https://nano-queries.js.org/) + [PGLite](https://pglite.dev/) in a [StackBlitz playground](https://stackblitz.com/edit/stackblitz-starters-rxhqvgfr?file=pglite.js).
 
 <iframe src="https://stackblitz.com/edit/stackblitz-starters-rxhqvgfr?embed=1&file=pglite.js&theme=light&view=editor" style="height: 800px"/>
 
@@ -150,8 +150,10 @@ Feel free to play with it in a [StackBlitz sandbox](https://stackblitz.com/edit/
 
 We have used this solution in production since 2023 and [open-sourced](https://github.com/vitonsky/nano-queries) it for the community.
 
-Nano queries work well with any database - SQLite, Postgres, MySQL, Oracle, GraphQL, PGLite, DuckDB, etc. Actually, you may build any queries that can be compiled to a string.
+Nano Queries works well with any database - SQLite, Postgres, MySQL, Oracle, GraphQL, PGLite, DuckDB, etc. Actually, you can build any queries that can be compiled to a string.
 
-[Try it](https://github.com/vitonsky/nano-queries), star it, give a feedback. You are not the single one who dislike an ORM.
+[Try it](https://github.com/vitonsky/nano-queries), star it, give feedback. 
 
-Share it with people, tell them about alternative that makes your database interaction faster and efficiently.
+You are not the only one who dislikes an ORM. Now we have a choice on the JavaScript platform too.
+
+Share it with others, tell them about an alternative that makes your database interaction faster and more efficient.
