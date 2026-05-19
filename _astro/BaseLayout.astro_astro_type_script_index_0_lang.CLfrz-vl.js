@@ -1,0 +1,1 @@
+import{g as n}from"./plausible.CMNmX66r.js";document.addEventListener("click",r=>{const e=r.target;if(!e?.matches(".head.footer a"))return;const t=e instanceof HTMLElement?e.innerText:null;n().trackEvent("Use Feature",{props:{feature:"Footer links",...t?{text:t}:{}}})},{capture:!0});
