@@ -52,6 +52,19 @@ const { posts, tag } = Astro.props;
 
 						<div class="body">
 							<span class="description">{post.previewText}</span>
+							{post.data.image && (
+								<a
+									href={getBlogPostLink(post.id)}
+									title="Click to read more"
+									class="cover-image"
+								>
+									<img
+										src={post.data.image.src}
+										width={post.data.image.width}
+										height={post.data.image.height}
+									/>
+								</a>
+							)}
 						</div>
 
 						<div class="links">
@@ -117,14 +130,30 @@ const { posts, tag } = Astro.props;
 
 	.body {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		gap: 1rem;
 	}
 
-	.body img {
-		max-width: 200px;
-		border-radius: 0;
+	.cover-image {
+		display: flex;
+		width: 100%;
 		height: fit-content;
-		object-fit: cover;
+		border-radius: 8px;
+		overflow: hidden;
+		flex-shrink: 0;
+
+		img {
+			height: fit-content;
+			object-fit: cover;
+		}
+	}
+
+	@media (width >= 800px) {
+		.body {
+			flex-direction: row;
+		}
+		.cover-image {
+			width: 30%;
+		}
 	}
 </style>
