@@ -30,9 +30,19 @@ const { title, description, keywords, image = SITE_IMAGE } = Astro.props;
 />
 <meta name="generator" content={Astro.generator} />
 
+<!-- Preload used fonts -->
+<link rel="preload" href="/fonts/roboto.woff2" as="font" type="font/woff2" crossorigin />
+<link
+	rel="preload"
+	href="/fonts/source-serif-4.woff2"
+	as="font"
+	type="font/woff2"
+	crossorigin
+/>
+
 <!-- Analytics -->
 <script>
-	import {getPlausible} from './analytics/plausible';
+	import { getPlausible } from './analytics/plausible';
 	getPlausible();
 </script>
 
@@ -48,13 +58,6 @@ const { title, description, keywords, image = SITE_IMAGE } = Astro.props;
 
 	gtag('config', 'G-9C2XWNMW56');
 </script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
-	rel="stylesheet"
-/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
