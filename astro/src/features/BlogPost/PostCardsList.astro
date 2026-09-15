@@ -10,24 +10,21 @@ const { posts } = Astro.props;
 ---
 
 <ul>
-	{posts.map((post) => (
-		<li>
-			<a
-				href={getBlogPostLink(post.id)}
-				class="postLink"
-			>
-				{post.data.image && <img {...post.data.image} />}
+	{
+		posts.map((post) => (
+			<li>
+				<a href={getBlogPostLink(post.id)} class="postLink">
+					{post.data.image && <img {...post.data.image} />}
 
-				<div class="postBody">
-					<h4 class="postTitle">{post.data.title}</h4>
+					<div class="postBody">
+						<h4 class="postTitle">{post.data.title}</h4>
 
-					<div class="postText">
-						{post.previewText}
+						<div class="postText">{post.previewText}</div>
 					</div>
-				</div>
-			</a>
-		</li>
-	))}
+				</a>
+			</li>
+		))
+	}
 </ul>
 
 <style>
@@ -52,14 +49,12 @@ const { posts } = Astro.props;
 		border: 1px solid;
 		border-radius: 8px;
 		padding: 1rem;
-		background-color: #e6f9ff;
-		border: 1px solid #b8e4ff;
-
-		background-color: #f3fdff;
-		border: 1px solid #d4efff;
+		background-color: #fffdfb;
+		border: 1px solid #bab2ae;
 
 		font-size: 16px;
 		color: #000;
+		text-decoration: none;
 
 		@media (max-width: 600px) {
 			flex-direction: column;
@@ -69,7 +64,8 @@ const { posts } = Astro.props;
 	.postLink img {
 		width: 200px;
 		height: fit-content;
-		border-radius: 4px;
+		border-radius: 8px;
+		overflow: hidden;
 		aspect-ratio: 5/3;
 		object-fit: cover;
 		order: 1;
@@ -82,13 +78,14 @@ const { posts } = Astro.props;
 		}
 	}
 
+	.postTitle,
+	.postText,
 	.postLink,
-	.postLink:hover,
 	.postBody {
 		text-decoration: none;
-	}
-
-	.postLink:hover .postTitle {
-		text-decoration: underline solid;
+		&:hover,
+		&:focus-visible {
+			text-decoration: none;
+		}
 	}
 </style>
