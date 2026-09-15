@@ -99,10 +99,6 @@ p {
 	margin-bottom: 1em;
 }
 
-.prose p {
-	margin-bottom: 2em;
-}
-
 textarea {
 	width: 100%;
 	font-size: 16px;
@@ -159,6 +155,28 @@ hr {
 
 ul {
 	padding-left: 1.5rem;
+}
+
+figure {
+	margin: 0;
+	position: relative;
+
+	& > p {
+		margin: 0;
+		display: flex;
+	}
+
+	& > figcaption {
+		position: absolute;
+		bottom: 0;
+		background: #ffffffd9;
+		padding: 0.2rem;
+		font-size: 0.8em;
+	}
+}
+
+.prose p {
+	margin-bottom: 2em;
 }
 
 @media (max-width: 720px) {
