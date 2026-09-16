@@ -122,13 +122,21 @@ When you use UI kit on large project with rich visual design, you can wish to us
 </Button>
 ```
 
-That's incorrect. You use `view` concept but you try to change a details of component with inline styles.
+Here we use `view` **and** inline styles to patch the component style details.
 
-The variant does not define a final view of component anymore, so it breaks everything and returns us back to the Tailwind example.
+That's incorrect. *The variant does not define a final view of component anymore*, so it breaks everything and returns us back to the Tailwind example.
 
-You can implement a **variant modifiers** to keep it manageable.
+The inlined styles may don't match or even conflict with the view styles in case we will update this view later or will introduce another theme/color scheme.
 
-For example you can make modifier `size` that will be used in variant definition, so variant will define its details.
+If we need to introduce some invariant for a view, we can implement a **modifiers** to keep it manageable.
+
+The modifier is an API provided by component to let us change its view or behavior. The modifier must be implemented in the same high level as view.
+
+For example we can use `view` to set visual style of button and add modifier `size` to control its geometry.
+
+```html
+<Button variant="primary" size="xl">Buy</Button>
+```
 
 The implementation example in vanilla CSS with BEM-style modifier:
 
@@ -186,7 +194,7 @@ export default defineConfig({
 });
 ```
 
-*If you need to apply many modifiers it is signal you should introduce another variant*:
+*If we need to apply many modifiers it is signal to introduce another variant*:
 
 ```html
 <Button variant="fancy-primary" size="xl">Buy</Button>
