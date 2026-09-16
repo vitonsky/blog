@@ -65,20 +65,22 @@ You can do the same thing with pure HTML too
 
 The problem I point here is a **style inlining**.
 
-Aside from the obvious technical issues of page size and lack of caching, there are a few important foundational problems:
+Aside from the obvious technical issues of large page size and lack of caching, there are a few important foundational problems:
 
-1. you cannot ensure any visual consistency, even in scope of single file
+1. you cannot ensure visual consistency, even in scope of single file
 2. such code have no semantic so you can't understand what it does mean
-3. such code is difficult to maintain, even with LLM you have to wait long time to make changes
+3. such code is difficult to maintain
+
+Even with LLM you will wait long time to make changes, because this error-prone design requires many iterations to correct the result.
 
 
 ## Use variants
 
 To address these problems you should use **variants**.
 
-With this approach you define some style that describe the component view and assign a semantic name on this style.
+Define the self-contained style that completely describes all the visual aspects of component, and assign a semantic name on this style.
 
-Then you use your variant like that
+Then you can use a variant like that
 
 ```html
 <Button variant="primary">Save changes</Button>
@@ -88,21 +90,21 @@ Then you use your variant like that
 In pure HTML with use BEM methodology it would look like that:
 
 ```html
-<button className="button__view_primary">Save changes</button>
-<button className="button__view_secondary">Cancel</button>
+<button class="Button Button__view_primary">Save changes</button>
+<button class="Button Button__view_secondary">Cancel</button>
 ```
 
-The key difference is that your variant must contain all details of visual implementation for component.
+The key difference is that a variant must contain all details of visual implementation for component.
 
 Variant must not to expect the styles will be supplemented by any external dependency like "global reset CSS", some in-place styles like `font-family` or anything like this.
 
 The variant definition must include everything to describe the final visual of component including colors, typography, indentations, etc.
 
-Variant defines the semantic unit of user interface so it makes your design system observable.
+Variant defines the semantic unit of user interface so it makes design system observable.
 
 With variants you can consistently update design.
 
-You can see how much different buttons you use on project so it is possible to test all combinations of components. It may be useful for example if you want to implement visual tests or storybook dashboard for all your color schemes to make sure every button variant looks good on every panel variant.
+You can see how much different buttons you use on project so it is possible to test all combinations of components. It may be useful for example if you want to implement visual tests or storybook dashboard for all color schemes to make sure every button variant looks good on every panel variant.
 
 ## Use modifiers
 
