@@ -1,0 +1,158 @@
+---
+slug: '2026/09/16/self-contained'
+title: "Don't inline the style"
+date: '16/09/2026, 12:23'
+# image:
+# tags:
+# keywords:
+---
+
+The mainstream technologies to build user interface does not limit programmer how to implement design, so it is simple to build unmaintainable system that won't scale.
+
+Look at this button built with Tailwind for example:
+
+```html
+<button
+  className="
+    inline-flex items-center justify-center gap-2
+    whitespace-nowrap rounded-md text-sm font-medium
+    ring-offset-background transition-colors
+    focus-visible:outline-none focus-visible:ring-2
+    focus-visible:ring-ring focus-visible:ring-offset-2
+    disabled:pointer-events-none disabled:opacity-50
+    bg-primary text-primary-foreground
+    hover:bg-primary/90
+    h-10 px-4 py-2
+    dark:bg-primary dark:text-primary-foreground
+    dark:hover:bg-primary/90
+    sm:h-9 sm:px-3
+    md:h-10 md:px-4
+    lg:text-base
+    [&_svg]:pointer-events-none
+    [&_svg]:size-4
+    [&_svg]:shrink-0
+  "
+>
+  Save changes
+</button>
+```
+
+You can do the same thing with pure HTML too
+
+```html
+<button
+  style="
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    transition: color 150ms, background-color 150ms, border-color 150ms,
+      text-decoration-color 150ms, fill 150ms, stroke 150ms;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+  "
+>
+  Save changes
+</button>
+```
+
+The problem I point here is a **style inlining**.
+
+Aside from the obvious technical issues of page size and lack of caching, there are a few important foundational problems:
+
+1. you cannot ensure any visual consistency, even in scope of single file
+2. such code have no semantic so you can't understand what it does mean
+3. such code is difficult to maintain, even with LLM you have to wait long time to make changes
+
+
+## Use variants
+
+To address these problems you should use **variants**.
+
+With this approach you define some style that describe the component view and assign a semantic name on this style.
+
+Then you use your variant like that
+
+```html
+<Button variant="primary">Save changes</Button>
+<Button variant="secondary">Cancel</Button>
+```
+
+In pure HTML with use BEM methodology it would look like that:
+
+```html
+<button className="button__view_primary">Save changes</button>
+<button className="button__view_secondary">Cancel</button>
+```
+
+The key difference is that your variant must contain all details of visual implementation for component.
+
+Variant must not to expect the styles will be supplemented by any external dependency like "global reset CSS", some in-place styles like `font-family` or anything like this.
+
+The variant definition must include everything to describe the final visual of component including colors, typography, indentations, etc.
+
+Variant defines the semantic unit of user interface so it makes your design system observable.
+
+With variants you can consistently update design.
+
+You can see how much different buttons you use on project so it is possible to test all combinations of components. It may be useful for example if you want to implement visual tests or storybook dashboard for all your color schemes to make sure every button variant looks good on every panel variant.
+
+## Use modifiers
+
+When you use UI kit on large project with rich visual design, you can wish to use something like this
+
+```html
+<Button
+	variant="primary"
+	radius="xl"
+	fontSize="xl"
+	fontWeight={500}
+	fontFamily="fancy"
+>
+	Buy
+</Button>
+```
+
+That's incorrect. You use `view` concept but you try to change a details of component with inline styles.
+
+The variant does not define a final view of component anymore, so it breaks everything and returns us back to the Tailwind example.
+
+You can implement a **variant modifiers** to keep it manageable.
+
+For example you can make modifier `size` that will be used in variant definition, so variant will define its details.
+
+The example in style of BEM modifier:
+
+```css
+.button__size_xl {
+	border-radius: 12px;
+	font-size: 3rem;
+	font-weight: 500;
+	/* ... */
+}
+```
+
+The example in style of Mantine UI:
+```css
+.root {
+	&[data-size="xl"] {
+		border-radius: 12px;
+		font-size: 3rem;
+		font-weight: 500;
+		/* ... */
+	}
+}
+```
+
+*If you need to apply many modifiers it is signal you should introduce another variant*:
+
+```html
+<Button variant="fancy-primary" size="xl">Buy</Button>
+```
