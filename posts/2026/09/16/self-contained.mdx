@@ -128,7 +128,7 @@ You can implement a **variant modifiers** to keep it manageable.
 
 For example you can make modifier `size` that will be used in variant definition, so variant will define its details.
 
-The example in style of BEM modifier:
+The implementation example in vanilla CSS with BEM-style modifier:
 
 ```css
 .button__size_xl {
@@ -139,7 +139,8 @@ The example in style of BEM modifier:
 }
 ```
 
-The example in style of Mantine UI:
+CSS modules for Mantine UI:
+
 ```css
 .root {
 	&[data-size="xl"] {
@@ -149,6 +150,38 @@ The example in style of Mantine UI:
 		/* ... */
 	}
 }
+```
+
+ChakraUI theme:
+
+```tsx
+export default defineConfig({
+	theme: {
+		semanticTokens: {
+			colors: {
+				// ...
+			},
+		},
+		recipes: {
+			button: defineRecipe({
+				variants: {
+					size: {
+						xl: {
+							borderRadius: "12px",
+							fontSize: "3rem",
+							fontWeight: "500",
+						},
+					},
+					variant: {
+						accent: {
+							// ...
+						},
+					},
+				},
+			}),
+		},
+	},
+});
 ```
 
 *If you need to apply many modifiers it is signal you should introduce another variant*:
