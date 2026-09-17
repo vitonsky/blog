@@ -11,7 +11,7 @@ tags:
 # keywords:
 ---
 
-The mainstream technologies to build user interface does not limit programmer in a ways to implement design, so it is simple to build inconsistent and unmaintainable code base that won't scale. One of the popular ways to do it is to use in-place styling.
+The mainstream technologies to build user interfaces do not limit the programmer in how design is implemented, so it is easy to build an inconsistent, unmaintainable code base that won't scale. One of the popular ways to do it is to use in-place styling.
 
 <figure>
 	![](the-red-circle-1970.webp)
@@ -72,52 +72,41 @@ You can do the same thing with pure HTML too
 </button>
 ```
 
-The problem I point here is a **style inlining**.
+Both examples do the same thing: the style is decided at the call site, instance by instance, instead of being named once and reused. That's what I mean by **inlining** - the mechanism doesn't matter, whether it's a `style` attribute or a wall of utility classes.
 
-Aside from the obvious technical issues of large page size and lack of caching, there are a few important foundational problems:
+Aside from the obvious technical issues of page size and caching, there are a few more important foundational problems:
 
-1. you cannot ensure visual consistency, even in scope of single file
-2. such code have no semantic so you can't understand what it does mean
-3. such code is difficult to maintain
-
-Even with LLM you will wait long time to make changes, because this error-prone design requires many iterations to correct the result.
-
+1. you cannot ensure visual consistency, even within a single file
+2. such code has no semantics, so you can't tell what it means
+3. such code is difficult to maintain - even with an LLM you'll wait a long time, because this error-prone style requires many iterations to correct
 
 ## Use variants
 
-To address these problems you should use **variants**.
+To address these problems, use **variants**.
 
-Define the self-contained style that completely describes all the visual aspects of component, and assign a semantic name on this style.
+Define the self-contained style that completely describes all the visual aspects of a component, and give this style a semantic name.
 
-Then you can use a variant like that
+Then you can use a variant like this:
 
 ```html
 <Button variant="primary">Save changes</Button>
 <Button variant="secondary">Cancel</Button>
 ```
 
-In pure HTML with use BEM methodology it would look like that:
+In pure HTML with BEM methodology, it would look like this:
 
 ```html
-<button class="Button Button__view_primary">Save changes</button>
-<button class="Button Button__view_secondary">Cancel</button>
+<button class="Button Button__variant_primary">Save changes</button>
+<button class="Button Button__variant_secondary">Cancel</button>
 ```
 
-*The variant must contain all implementation details for visual.*
+A variant must contain all implementation details of the visual - inner geometry, colors, typography, everything. It must not expect its styles to be supplemented by anything external, whether that's a global reset, a stray `font-family`, or any other in-place styling.
 
-Variant must not to expect the styles will be supplemented by any external dependency like "global reset CSS", any in-place styles like `font-family` or anything like this.
-
-The variant definition must include everything to describe the final visual of component including inner geometry, colors and typography.
-
-Variant defines the semantic unit of user interface so it makes design system observable.
-
-With variants you can consistently update design.
-
-You can see how much different buttons you use on project so it is possible to test all combinations of components. It may be useful for example if you want to implement visual tests or demo-stand in storybook for all color schemes to make sure every button variant looks good on every panel variant.
+A variant defines the semantic unit of the user interface. That's what makes a design system observable: you can see exactly which variants of a component exist and consistently update all of them at once.
 
 ## Use modifiers
 
-When you use UI kit on large project with rich visual design, you can wish to use something like this
+When you use a UI kit on a large project with a rich visual design, you may be tempted to write something like this:
 
 ```html
 <Button
@@ -131,23 +120,25 @@ When you use UI kit on large project with rich visual design, you can wish to us
 </Button>
 ```
 
-Here we use `view` **and** inline styles to patch the component style details.
+This is the same call-site styling problem again, just typed. The variant no longer defines the final view of the component - these props patch it from outside, and they may not match, or may even conflict with, the variant's own styles once it's updated or a new color scheme is introduced.
 
-That's incorrect. *The variant does not define a final view of component anymore*, so it breaks everything and returns us back to the Tailwind example.
+If we need a variation of a view, we can implement a **modifier** instead, to keep things manageable. A modifier is part of the component's API, at the same level as the variant - not an escape hatch around it.
 
-The inlined styles may don't match or even conflict with the view styles in case we will update this view later or will introduce another theme/color scheme.
-
-If we need to introduce some invariant for a view, we can implement a **modifiers** to keep it manageable.
-
-The modifier is an API provided by component to let us change its view or behavior. The modifier must be implemented in the same high level as view.
-
-For example we can use `view` to set visual style of button and add modifier `size` to control its geometry.
+For example, we can use `variant` to set the visual style of a button and add a modifier `size` to control its geometry:
 
 ```html
 <Button variant="primary" size="xl">Buy</Button>
 ```
 
-The implementation example in vanilla CSS with BEM-style modifier:
+*If we find ourselves applying many modifiers at once, that's a signal to introduce another variant instead:*
+
+```html
+<Button variant="fancy-primary" size="xl">Buy</Button>
+```
+
+This is the core discipline: variants and modifiers aren't just two features of a UI kit, they're a rule for where a styling decision is allowed to live, and when a recurring combination of modifiers has earned its own name.
+
+The implementation example in vanilla CSS with a BEM-style modifier:
 
 ```css
 .button__size_xl {
@@ -203,14 +194,10 @@ export default defineConfig({
 });
 ```
 
-*If we need to apply many modifiers it is signal to introduce another variant*:
-
-```html
-<Button variant="fancy-primary" size="xl">Buy</Button>
-```
+Same rule, three different technologies - variants and modifiers work regardless of the tools you use.
 
 ## Design the system
 
-This approach can be applied to most of the UI kits that have not been designed to suffer.
+This approach can be applied to almost any UI kit, even one that wasn't designed with this discipline in mind.
 
-If you follow this approach you eventually build the design system even if you did not have the one before. You will naturally be forced to infer a reused units of the interface.
+If you follow it, you'll eventually end up with a design system even if you didn't set out to build one - you'll naturally be forced to identify the reusable units of your interface. Your code will stop being a pile of one-off styling decisions and start being a system again.
