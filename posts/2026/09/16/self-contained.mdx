@@ -1,6 +1,6 @@
 ---
 slug: '2026/09/16/self-contained'
-title: "Don't inline the style"
+title: "Props Are Not a Design System"
 date: '16/09/2026, 12:23'
 image: the-red-circle-1970.webp
 tags:
@@ -11,7 +11,7 @@ tags:
 # keywords:
 ---
 
-The mainstream technologies to build user interfaces do not limit the programmer in how design is implemented, so it is easy to build an inconsistent, unmaintainable code base that won't scale. One of the popular ways to do it is to use in-place styling.
+Most UI kits let you pass any style as a prop — radius, size, color, or a wall of Tailwind classes, whatever you need. That flexibility is exactly the problem: it turns every component call into a one-off styling decision, and no two buttons end up the same. Let's talk about practices that help you avoid building an inconsistent, unmaintainable code base that won't scale.
 
 <figure>
 	![](the-red-circle-1970.webp)
