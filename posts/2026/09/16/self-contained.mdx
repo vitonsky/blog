@@ -80,9 +80,11 @@ Aside from the obvious technical issues of page size and caching, there are a fe
 2. such code has no semantics, so you can't tell what it means
 3. such code is difficult to maintain - even with an LLM you'll wait a long time, because this error-prone style requires many iterations to correct
 
-## Use variants
+To address these problems, we need to stop deciding style at the call site and start defining it once, as a reusable, named unit of the interface.
 
-To address these problems, use **variants**.
+The implementation depends on the stack, but most projects today build on component-based UI kits, so that's what the examples below will use. Each component will be built from **variants** and **modifiers**.
+
+## Use variants
 
 Define the self-contained style that completely describes all the visual aspects of a component, and give this style a semantic name.
 
