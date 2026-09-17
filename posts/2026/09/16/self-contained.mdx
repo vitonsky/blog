@@ -86,9 +86,9 @@ The implementation depends on the stack, but most projects today build on compon
 
 ## Use variants
 
-Define the self-contained style that completely describes all the visual aspects of a component, and give this style a semantic name.
+A variant is the self-contained style that completely describes all the visual aspects of a component, given a semantic name.
 
-Then you can use a variant like this:
+You can use a variant like this:
 
 ```html
 <Button variant="primary">Save changes</Button>
@@ -122,7 +122,7 @@ When you use a UI kit on a large project with a rich visual design, you may be t
 </Button>
 ```
 
-This is the same call-site styling problem again, just typed. The variant no longer defines the final view of the component - these props patch it from outside, and they may not match, or may even conflict with, the variant's own styles once it's updated or a new color scheme is introduced.
+This is the same call-site styling problem again, just typed: the props override the variant from outside, so it no longer defines the button's final look. Worse, those overrides don't track the variant — update the variant or introduce a new color scheme, and they silently fall out of sync.
 
 If we need a variation of a view, we can implement a **modifier** instead, to keep things manageable. A modifier is part of the component's API, at the same level as the variant - not an escape hatch around it.
 
@@ -202,4 +202,4 @@ Same rule, three different technologies - variants and modifiers work regardless
 
 This approach can be applied to almost any UI kit, even one that wasn't designed with this discipline in mind.
 
-If you follow it, you'll eventually end up with a design system even if you didn't set out to build one - you'll naturally be forced to identify the reusable units of your interface. Your code will stop being a pile of one-off styling decisions and start being a system again.
+If you follow it, you'll eventually end up with a design system even if you didn't set out to build one - you'll naturally be forced to identify the reusable units of your interface. Your code will stop being a pile of one-off styling decisions and start being a system.
