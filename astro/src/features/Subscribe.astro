@@ -1,7 +1,12 @@
+---
+
+---
+
 <form
 	action="https://buttondown.com/api/emails/embed-subscribe/vitonsky"
 	method="post"
 	class="embeddable-buttondown-form"
+	id="newsletter-form"
 >
 	<label class="input">
 		<div>Enter your email</div>
@@ -9,6 +14,18 @@
 	</label>
 	<input type="submit" value="Subscribe" />
 </form>
+
+<script>
+	import { getPlausible } from '../components/BaseLayout/analytics/plausible';
+
+	const emailInput = document.querySelector('#newsletter-form input[type="email"]');
+	console.log({ emailInput });
+	if (emailInput && emailInput instanceof HTMLElement) {
+		emailInput.addEventListener('focus', () => {
+			getPlausible().trackEvent('Subscribe form action');
+		});
+	}
+</script>
 
 <style>
 	form {
