@@ -63,11 +63,11 @@ h1 {
 }
 
 h2 {
-	font-size: 2em;
+	font-size: 1.953em;
 }
 
 h3 {
-	font-size: 1.953em;
+	font-size: 1.75em;
 }
 
 h4 {
@@ -204,4 +204,8 @@ figure {
 .astro-code.github-light-high-contrast {
 	font-size: 14px;
 	border: 1px solid #dfdfdf;
+}
+
+.astro-code {
+	tab-size: 2;
 }
