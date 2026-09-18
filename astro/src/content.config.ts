@@ -2,6 +2,7 @@ import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 
 import { parseCustomDate } from './utils/date';
+import { normalizeTagName } from './utils/getPosts';
 
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
@@ -23,7 +24,7 @@ const blog = defineCollection({
 				.string()
 				.array()
 				.nullish()
-				.transform((list) => list ?? []),
+				.transform((list) => (list ?? []).map(normalizeTagName)),
 			keywords: z
 				.string()
 				.array()

@@ -3,6 +3,13 @@ import { fromMarkdown } from 'mdast-util-from-markdown';
 import getReadingTime, { type ReadTimeResults } from 'reading-time';
 import { visit } from 'unist-util-visit';
 
+export function normalizeTagName(tag: string) {
+	return tag
+		.toLowerCase()
+		.replace(/[^\p{L}\p{N}\s]+/gu, '')
+		.replace(/^-+|-+$/g, '');
+}
+
 export const getPostPreviewText = (text: string) => {
 	const tree = fromMarkdown(text);
 
