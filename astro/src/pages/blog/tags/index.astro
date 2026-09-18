@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../../components/BaseLayout/BaseLayout.astro';
+import { getTagLink } from '../../../utils/links';
+import { getBlogTags } from '../../../utils/getPosts';
+
+const tags = await getBlogTags();
+---
+
+<BaseLayout
+	meta={{
+		title: 'Tags',
+		description: 'Browse all blog posts by tag.',
+	}}
+>
+	<main>
+		<h1>Tags</h1>
+
+		<ul class="tags">
+			{
+				tags.map(({ name, count }) => (
+					<li>
+						<a href={getTagLink(name)}>
+							<span class="name">#{name}</span>
+							<span class="count" aria-label={`${count} ${count === 1 ? 'post' : 'posts'}`}>
+								{count} {count === 1 ? 'post' : 'posts'}
+							</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</main>
+</BaseLayout>
+
+<style>
+	main {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	h1 {
+		margin: 0;
+	}
+
+	.tags {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem;
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		list-style: none;
+	}
+
+	a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		color: #5d3822;
+		text-decoration: none;
+
+		&:hover,
+		&:focus-visible {
+			color: #973b0f;
+			text-decoration: underline solid;
+		}
+	}
+
+	.name {
+		font-size: 1.15em;
+	}
+
+	.count {
+		flex-shrink: 0;
+		font-family: Roboto, sans-serif;
+		font-size: 0.75em;
+		color: #626262;
+	}
+</style>

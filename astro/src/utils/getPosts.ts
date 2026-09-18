@@ -49,6 +49,26 @@ export const getBlogPosts = async ({ tag }: { tag?: string } = {}): Promise<
 		.map(enrichPostData);
 };
 
+export type BlogTag = {
+	name: string;
+	count: number;
+};
+
+export const getBlogTags = async (): Promise<BlogTag[]> => {
+	const posts = await getBlogPosts();
+	const tagCounts = new Map<string, number>();
+
+	for (const post of posts) {
+		for (const tag of new Set(post.data.tags)) {
+			tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+		}
+	}
+
+	return [...tagCounts]
+		.map(([name, count]) => ({ name, count }))
+		.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+};
+
 // TODO: infer text embeddings and consider similarity search score
 export const getRelatedBlogPosts = async (
 	sourcePost: CollectionEntry<'blog'>,
