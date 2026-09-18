@@ -1,0 +1,1 @@
+import{g as t}from"./plausible.CMNmX66r.js";const e=document.querySelector('#newsletter-form input[type="email"]');console.log({emailInput:e});e&&e instanceof HTMLElement&&e.addEventListener("focus",()=>{t().trackEvent("Subscribe form action")});
