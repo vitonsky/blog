@@ -7,7 +7,7 @@ export function normalizeTagName(tag: string) {
 	return tag
 		.toLowerCase()
 		.replace(/[^\p{L}\p{N}\s]+/gu, '')
-		.replace(/^-+|-+$/g, '');
+		.trim();
 }
 
 export const getPostPreviewText = (text: string) => {
