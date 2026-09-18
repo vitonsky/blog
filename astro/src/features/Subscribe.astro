@@ -1,0 +1,78 @@
+---
+
+---
+
+<form
+	action="https://buttondown.com/api/emails/embed-subscribe/vitonsky"
+	method="post"
+	class="embeddable-buttondown-form"
+	id="newsletter-form"
+>
+	<label class="input">
+		<div>Enter your email</div>
+		<input type="email" name="email" />
+	</label>
+	<input type="submit" value="Subscribe" />
+</form>
+
+<script>
+	import { getPlausible } from '../components/BaseLayout/analytics/plausible';
+
+	const emailInput = document.querySelector('#newsletter-form input[type="email"]');
+	console.log({ emailInput });
+	if (emailInput && emailInput instanceof HTMLElement) {
+		emailInput.addEventListener('focus', () => {
+			getPlausible().trackEvent('Subscribe form action');
+		});
+	}
+</script>
+
+<style>
+	form {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		gap: 0.8rem;
+
+		& *:focus-visible {
+			outline-color: #973b0f;
+			outline-style: solid;
+		}
+	}
+
+	.input {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	input[type='email'] {
+		padding: 0.5rem 0.8rem;
+		border: 1px solid #eee;
+		border-radius: 8px;
+		width: 100%;
+		box-sizing: border-box;
+
+		&:focus-visible {
+			outline-width: 2px;
+		}
+	}
+	input[type='submit'] {
+		padding: 0.5rem 0.8rem;
+		border: 1px solid #eee;
+		border-radius: 8px;
+		background: #000;
+		color: #fff;
+		&:is(:hover, :focus) {
+			background: #403732;
+		}
+	}
+
+	@media (width >= 600px) {
+		form {
+			width: min-content;
+			min-width: 400px;
+		}
+	}
+</style>

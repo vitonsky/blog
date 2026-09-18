@@ -18,6 +18,10 @@ export default {
 			url: getTagLink('project'),
 		},
 		{
+			text: 'Tags',
+			url: '/blog/tags/',
+		},
+		{
 			text: 'About',
 			url: '/about',
 		},
@@ -37,6 +41,10 @@ export default {
 				{
 					text: 'My projects',
 					url: getTagLink('project'),
+				},
+				{
+					text: 'Tags',
+					url: '/blog/tags/',
 				},
 				{
 					text: 'About me',

@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../../components/BaseLayout/BaseLayout.astro';
+import { getTagLink } from '../../../utils/links';
+import { getBlogTags } from '../../../utils/getPosts';
+
+const tags = await getBlogTags();
+---
+
+<BaseLayout
+	meta={{
+		title: 'Tags',
+		description: 'Browse all blog posts by tag.',
+	}}
+>
+	<main>
+		<div class="header">
+			<h1 class="header-title">Tags</h1>
+
+			<p class="header-description">
+				Stuck on something? Chances are I got stuck on it first. Pick a tag.
+			</p>
+		</div>
+
+		<ul class="tags">
+			{
+				tags.map(({ name, count }) => (
+					<li>
+						<a href={getTagLink(name)}>
+							<span class="name">#{name}</span>{' '}
+							<span
+								class="count"
+								aria-label={`${count} ${count === 1 ? 'post' : 'posts'}`}
+							>
+								({count})
+							</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</main>
+</BaseLayout>
+
+<style>
+	main {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+	h1 {
+		margin: 0 0 1.5rem;
+	}
+
+	.header {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.header-title {
+		margin: 0;
+	}
+
+	.header-description {
+		margin: 0;
+		color: var(--color-typo-secondary);
+	}
+
+	.tags {
+		margin: 0;
+		padding: 0;
+		line-height: 1.8;
+		gap: 0.5rem;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	li {
+		display: inline;
+		list-style: none;
+	}
+
+	a {
+		display: inline;
+		text-decoration: none;
+
+		padding: 0 0.5rem;
+		border-radius: 6px;
+		display: inline-block;
+		font-size: 0.9em;
+
+		&:hover,
+		&:focus-visible {
+			text-decoration: underline solid;
+		}
+	}
+
+	.name {
+		font-size: 1.05em;
+	}
+
+	.count {
+		font-family: Roboto, sans-serif;
+		font-size: 0.8em;
+		color: #626262;
+	}
+</style>
