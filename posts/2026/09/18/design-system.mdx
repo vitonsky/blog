@@ -17,7 +17,7 @@ Most UI kits let you pass any style as a prop — radius, size, color, or a wall
 	<figcaption><cite>The Red Circle</cite> (1970)</figcaption>
 </figure>
 
-Look at this button built with Tailwind for example:
+Look at this button built [with Tailwind](https://tailwindcss.com/docs/styling-with-utility-classes) for example:
 
 ```html
 <button
@@ -45,7 +45,7 @@ Look at this button built with Tailwind for example:
 </button>
 ```
 
-You can do the same thing with pure HTML too
+You can do the same thing [with pure HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/style) too:
 
 ```html
 <button
@@ -71,15 +71,15 @@ You can do the same thing with pure HTML too
 </button>
 ```
 
-Both examples do the same thing: the style is decided at the call site, instance by instance, instead of being named once and reused. That's what I mean by **inlining** - the mechanism doesn't matter, whether it's a `style` attribute or a wall of utility classes.
+Both examples do the same thing: *the style is decided at the call site*, instance by instance, instead of being named once and reused. That's what I mean by **inlining** - *the mechanism doesn't matter*, whether it's a `style` attribute, [style props](https://chakra-ui.com/docs/styling/overview#style-props), or a [wall of utility classes](https://tailwindcss.com/docs/styling-with-utility-classes).
 
 Aside from the obvious technical issues of page size and caching, there are a few more important foundational problems:
 
 1. you cannot ensure visual consistency, even within a single file
 2. such code has no semantics, so you can't tell what it means
-3. such code is difficult to maintain - even with an LLM you'll wait a long time, because this error-prone style requires many iterations to correct
+3. such code has [no system behind it](/blog/2024/10/11/system-approach/), so it is difficult to maintain - even with an LLM you'll wait a long time, because this error-prone style requires many iterations to correct
 
-To address these problems, we need to stop deciding style at the call site and start defining it once, as a reusable, named unit of the interface.
+To address these problems, we need to stop deciding style at the call site and start defining it once, as a [reusable](/blog/2023/08/16/bem-is-not-about-css/), named unit of the interface.
 
 The implementation depends on the stack, but most projects today build on component-based UI kits, so that's what the examples below will use. Each component will be built from **variants** and **modifiers**.
 
@@ -94,14 +94,14 @@ You can use a variant like this:
 <Button variant="secondary">Cancel</Button>
 ```
 
-In pure HTML with BEM methodology, it would look like this:
+In pure HTML with [BEM methodology](https://bem.info/en/methodology/quick-start/), it would look like this:
 
 ```html
 <button class="Button Button__variant_primary">Save changes</button>
 <button class="Button Button__variant_secondary">Cancel</button>
 ```
 
-A variant must contain all implementation details of the visual - inner geometry, colors, typography, everything. It must not expect its styles to be supplemented by anything external, whether that's a global reset, a stray `font-family`, or any other in-place styling.
+A variant must contain all implementation details of the visual - inner geometry, colors, typography, everything. It must not expect its styles to be supplemented by anything external, whether that's a [global reset](https://meiert.com/blog/stop-using-resets/), a stray `font-family`, or any other in-place styling.
 
 A variant defines the semantic unit of the user interface. That's what makes a design system observable: you can see exactly which variants of a component exist and consistently update all of them at once.
 
@@ -139,7 +139,7 @@ For example, we can use `variant` to set the visual style of a button and add a 
 
 This is the core discipline: variants and modifiers aren't just two features of a UI kit, they're a rule for where a styling decision is allowed to live, and when a recurring combination of modifiers has earned its own name.
 
-The implementation example in vanilla CSS with a BEM-style modifier:
+The implementation example in vanilla CSS with a [BEM-style](https://bem.info/en/methodology/css/) [modifier](https://bem.info/en/methodology/key-concepts/#modifier):
 
 ```css
 .button__size_xl {
@@ -150,7 +150,7 @@ The implementation example in vanilla CSS with a BEM-style modifier:
 }
 ```
 
-CSS modules for Mantine UI:
+CSS modules for [Mantine UI](https://mantine.dev/styles/styles-overview/#css-modules):
 
 ```css
 .root {
@@ -163,7 +163,7 @@ CSS modules for Mantine UI:
 }
 ```
 
-ChakraUI theme:
+[ChakraUI theme](https://chakra-ui.com/docs/theming/overview):
 
 ```tsx
 export default defineConfig({
@@ -201,4 +201,4 @@ Same rule, three different technologies - variants and modifiers work regardless
 
 This approach can be applied to almost any UI kit, even one that wasn't designed with this discipline in mind.
 
-If you follow it, you'll eventually end up with a design system even if you didn't set out to build one - you'll naturally be forced to identify the reusable units of your interface. Your code will stop being a pile of one-off styling decisions and start being a system.
+If you follow it, you'll [eventually end up with a design system](/blog/2024/10/11/system-approach/) even if you didn't set out to build one - you'll naturally be forced to identify the reusable units of your interface. Your code will stop being a pile of one-off styling decisions and start being a system.
